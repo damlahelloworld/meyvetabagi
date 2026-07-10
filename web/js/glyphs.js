@@ -1,4 +1,4 @@
-// meyvetabagi — ambient twinkling glyph field (character, à la vibecodedflopware).
+// meyvetabagi - ambient twinkling glyph field (character, à la vibecodedflopware).
 // Deterministic seeded positions (no layout jump), fruit-toned, drifts + twinkles, behind everything.
 // Honours prefers-reduced-motion. Pure decoration; zero effect on content or state.
 const GLYPHS = ['✦', '✧', '·', '◦', '⋆', '✵', '✷', '˖', '⁺'];

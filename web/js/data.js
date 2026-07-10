@@ -1,4 +1,4 @@
-// meyvetabagi — MEB kazanım DB (official 2026 YKS PDF parse) + lookups. Read-only master list.
+// meyvetabagi - MEB kazanım DB (official 2026 YKS PDF parse) + lookups. Read-only master list.
 // IMPORTANT: raw MEB codes are per-ders and COLLIDE across dersler (367/955 duplicates,
 // e.g. Matematik 9.1.1.1 vs Fizik 9.1.1.1). The canonical key everywhere is the UID
 // 'slug:code' (e.g. 'mat:9.1.1.1'); bare codes are display-only.
@@ -38,7 +38,7 @@ export function sorularFor(uid) { return _sorular[uid] || []; }
 export function soruSayisi() { return Object.values(_sorular).reduce((a, b) => a + b.length, 0); }
 export function terimlerFor(uid) { return _terimler[uid] || []; }
 
-// giriş sayaçları — hepsi gerçek, corpus büyüdükçe büyür (Damla: göz boya, portfolyo gibi)
+// giriş sayaçları - hepsi gerçek, corpus büyüdükçe büyür (Damla: göz boya, portfolyo gibi)
 export function corpusStats() {
   const kaz = allKaz().length;
   const uniq = new Set();
@@ -53,7 +53,7 @@ export function allKaz() {
   _map = {}; _kaz.forEach(z => _map[z.uid] = z);
   return _kaz;
 }
-// resolves a UID; falls back to bare legacy codes (last ders wins — mirrors the old buggy map)
+// resolves a UID; falls back to bare legacy codes (last ders wins - mirrors the old buggy map)
 export function findKaz(key) {
   allKaz();
   if (_map[key]) return _map[key];
@@ -73,7 +73,7 @@ export function totals() {
   return { ...c, total: all.length, greenPct: Math.round(c.green / all.length * 100) };
 }
 
-// one-time migration: old state used bare codes as keys (collision bug) — remap to UIDs
+// one-time migration: old state used bare codes as keys (collision bug) - remap to UIDs
 // using last-ders-wins, which is exactly what the old lookup displayed.
 function migrateToUid() {
   if (S._uidMig) return;

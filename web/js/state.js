@@ -1,4 +1,4 @@
-// meyvetabagi — localStorage state: load/save, migrations, activity, streak, theme.
+// meyvetabagi - localStorage state: load/save, migrations, activity, streak, theme.
 const KEY = 'meyvetabagi.v1';
 
 export let S = load();
@@ -12,7 +12,7 @@ export function wipeLocal() { try { localStorage.removeItem(KEY); } catch { /* i
 
 export function save() {
   try { localStorage.setItem(KEY, JSON.stringify(S)); }
-  catch { /* storage full or blocked (Safari private mode) — keep running in-memory */ }
+  catch { /* storage full or blocked (Safari private mode) - keep running in-memory */ }
   if (_onSave) _onSave();
 }
 
@@ -31,9 +31,9 @@ if (!S._themeReset) { S.theme = 'light'; S._themeReset = true; }  // one-time re
 S.user = S.user || null;          // {name, email, target, grade, hours}
 S.activity = S.activity || {};    // 'YYYY-MM-DD' -> completed count
 S.randevu = S.randevu || [];      // [{id, date, time}] booked coach appointments
-S.dailyKaz = S.dailyKaz || null;  // {date, code} — the day's kazanım to explain
+S.dailyKaz = S.dailyKaz || null;  // {date, code} - the day's kazanım to explain
 S.dailyGraded = S.dailyGraded || ''; // 'YYYY-MM-DD' the daily explain was graded
-S.messages = S.messages || [{ from: 'coach', text: 'Merhaba! Takıldığın yeri buraya yazabilirsin — Damla bağlandığında burada görecek.' }];
+S.messages = S.messages || [{ from: 'coach', text: 'Merhaba! Takıldığın yeri buraya yazabilirsin - Damla bağlandığında burada görecek.' }];
 if (S.events && S.events[0] && S.events[0].date === undefined) S.events = [];  // migrate old weekday model
 S.events = (S.events || []).filter(e => !/^e[0-4]$/.test(e.id));               // migrate: drop old fabricated seed events
 S.denemeler = (S.denemeler || []).filter(d => !(d.date === '2026-06-15' && d.net === 78.5)); // migrate: drop fabricated seed deneme

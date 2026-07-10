@@ -1,4 +1,4 @@
-// Ayarlar — own page (moved out of Profil on Damla's order, 2026-07-10): isim, alan, tema, çıkış, hesap silme.
+// Ayarlar - own page (moved out of Profil on Damla's order, 2026-07-10): isim, alan, tema, çıkış, hesap silme.
 import { S, save, applyTheme, wipeLocal } from '../state.js';
 import { el, page } from '../ui.js';
 import { refresh } from '../router.js';
@@ -29,7 +29,7 @@ export function ayarlar() {
   lo.onclick = async () => { if (confirm('Çıkış yapılsın mı?')) { await signOut(); S.user = null; save(); location.hash = '#/bugun'; onboard(); } };
   r4.appendChild(lo); set.appendChild(r4);
   if (online() && currentUser()) {  // KVKK: permanent one-tap deletion, account + all rows
-    const r5 = el('div', 'setrow'); r5.innerHTML = `<div class="lbl"><b>Hesabı kalıcı sil</b><span>hesabın ve tüm verilerin — geri alınamaz</span></div>`;
+    const r5 = el('div', 'setrow'); r5.innerHTML = `<div class="lbl"><b>Hesabı kalıcı sil</b><span>hesabın ve tüm verilerin - geri alınamaz</span></div>`;
     const del = el('button', 'btn ghost danger', 'Hesabı sil');
     del.onclick = async () => {
       if (prompt('Bu işlem geri alınamaz: hesabın ve tüm verilerin kalıcı olarak silinir.\nOnaylamak için SİL yaz:') !== 'SİL') return;

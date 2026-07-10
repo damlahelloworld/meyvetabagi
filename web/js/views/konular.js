@@ -1,4 +1,4 @@
-// Konular — MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
+// Konular - MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
 import { S, save, saveSoon, bump, addRep, dstr } from '../state.js';
 import { DB, allKaz, findKaz, unitProgress, kuid, sorularFor, terimlerFor } from '../data.js';
 import { el, esc, norm, ICON, page, dersColor } from '../ui.js';
@@ -32,7 +32,7 @@ export function konular() {
   const pct = Math.round(green / total * 100);
   tools.innerHTML = `
     <div class="search${FILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
-      <input placeholder="Kazanım ara — “türev”, “9.1.1.1”…" value="${esc(FILT.q)}">
+      <input placeholder="Kazanım ara - “türev”, “9.1.1.1”…" value="${esc(FILT.q)}">
       <span class="clr">×</span></div>
     <div class="donerow"><span class="donepct">%${pct} tamamlandı · ${green}/${total} kazanım</span></div>
     <div class="chips gap-top" data-grp="sinif">
@@ -132,7 +132,7 @@ export function konular() {
   const reset = el('button', 'resetkaz', 'kazanımları sıfırla');
   reset.onclick = () => {
     if (!confirm('Emin misin? Tüm kırmızı/sarı/yeşil işaretlerin silinecek.')) return;
-    if (!confirm('Gerçekten? Bu geri alınamaz — sıfırdan başlıyorsun.')) return;
+    if (!confirm('Gerçekten? Bu geri alınamaz - sıfırdan başlıyorsun.')) return;
     S.status = {}; S.reps = {}; S.repDay = {}; save(); konular();
   };
   d.appendChild(reset);
@@ -190,7 +190,7 @@ function kazDetail(sel) {
 
   if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>bu konuda MEB ne demiş?</b>${esc(z.aciklama)}`));
 
-  // anahtar terimler — kitaptan; calicocat gibi akan renkli küçük harf, tıkla → ekran ortasında açılır
+  // anahtar terimler - kitaptan; calicocat gibi akan renkli küçük harf, tıkla → ekran ortasında açılır
   const terms = terimlerFor(z.uid);
   if (terms.length) {
     right.appendChild(el('div', 'seclabel', `anahtar kelimeler · ${terms.length} (kitaptan)`));
@@ -204,17 +204,17 @@ function kazDetail(sel) {
     right.appendChild(wrap);
   } else {
     right.appendChild(el('div', 'seclabel', 'anahtar kelimeler'));
-    right.appendChild(el('div', 'untaranmadi', 'bu konu henüz taranmadı — kitap eklendikçe anahtar kelimeler burada belirecek.'));
+    right.appendChild(el('div', 'untaranmadi', 'bu konu henüz taranmadı - kitap eklendikçe anahtar kelimeler burada belirecek.'));
   }
 
   const ta = el('textarea', 'note');
-  ta.placeholder = 'Kendi notun — formül, sık yaptığın hata, ipucu…';
+  ta.placeholder = 'Kendi notun - formül, sık yaptığın hata, ipucu…';
   ta.value = S.notes[z.uid] || '';
   ta.oninput = () => { S.notes[z.uid] = ta.value; saveSoon(); };
   d.appendChild(ta);
   d.appendChild(el('div', 'hint', 'Notun otomatik kaydedilir.'));
 
-  // bu kazanımdan sorular — statik, kitap kaynaklı, kaynaklı (Damla: birsürü soru)
+  // bu kazanımdan sorular - statik, kitap kaynaklı, kaynaklı (Damla: birsürü soru)
   const qs = sorularFor(z.uid);
   if (qs.length) {
     d.appendChild(el('div', 'seclabel', `BU KAZANIMDAN ${qs.length} SORU`));

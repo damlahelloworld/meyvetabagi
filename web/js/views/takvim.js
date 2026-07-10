@@ -1,4 +1,4 @@
-// Takvim — real MONTH grid + konu havuzu sidebar (iwantmymtv referansı, Damla 2026-07-10).
+// Takvim - real MONTH grid + konu havuzu sidebar (iwantmymtv referansı, Damla 2026-07-10).
 // Havuzdan kazanımı bir güne SÜRÜKLE ya da güne tıklayıp havuzdan dokun ile koy. Gün kartındaki
 // kazanıma tıkla = yapıldı, × = kaldır. Kazanım güne konur (saat kavramı yok).
 import { S, save, bump, unbump, dstr } from '../state.js';
@@ -7,7 +7,7 @@ import { el, esc, norm, ICON, WD_SHORT, MON_LONG, page, dersColor } from '../ui.
 import { refresh } from '../router.js';
 
 const POOLFILT = { q: '', ders: 'all', sinif: 'all' };
-let VIEW = null;   // {y, m} — görüntülenen ay
+let VIEW = null;   // {y, m} - görüntülenen ay
 let SEL_DAY = null;
 
 function addToDay(code, ds) {
@@ -69,7 +69,7 @@ export function takvim() {
   const parts = SEL_DAY.split('-').map(Number);
   const selLbl = `${parts[2]} ${MON_LONG[parts[1] - 1]}`;
 
-  // seçili günün konuları — güne tıklayınca yanda görünür
+  // seçili günün konuları - güne tıklayınca yanda görünür
   const selEvs = dayEvents(SEL_DAY);
   const box = el('div', 'seldaybox');
   box.appendChild(el('h4', null, `${esc(selLbl)}${SEL_DAY === tstr ? ' · bugün' : ''}`));

@@ -1,4 +1,4 @@
-// Profil — identity + stats + activity heatmap ONLY (Damla, 2026-07-10: randevu comes later
+// Profil - identity + stats + activity heatmap ONLY (Damla, 2026-07-10: randevu comes later
 // somewhere else; mesajlar & ayarlar live on their own pages).
 import { S, streak, dstr } from '../state.js';
 import { totals } from '../data.js';

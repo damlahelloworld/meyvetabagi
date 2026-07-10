@@ -1,4 +1,4 @@
-// Bugün — lean home for the public-service tool (Damla, 2026-07-10: no coach organs).
+// Bugün - lean home for the public-service tool (Damla, 2026-07-10: no coach organs).
 // Sadece: kimlik + büyüyen corpus sayaçları + bugünün takvim konuları + iki kapı (konular/takvim).
 import { S, save, bump, unbump, dstr } from '../state.js';
 import { totals, findKaz, corpusStats } from '../data.js';
@@ -27,9 +27,9 @@ export function bugun() {
 
   const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('h1', null, nm ? `merhaba ${esc(nm.toLocaleLowerCase('tr'))}` : 'merhaba'));
-  d.appendChild(el('p', 'meta', `resmi MEB kazanımları ve ders kitaplarından çıkarılan anahtar kelimeler — tek yerde, ücretsiz. sınava ${days} gün.`));
+  d.appendChild(el('p', 'meta', `resmi MEB kazanımları ve ders kitaplarından çıkarılan anahtar kelimeler - tek yerde, ücretsiz. sınava ${days} gün.`));
 
-  // büyüyen corpus sayaçları — animasyonlu sayım (cnt) + explicit hex renk (+text-fill ezmeye karşı)
+  // büyüyen corpus sayaçları - animasyonlu sayım (cnt) + explicit hex renk (+text-fill ezmeye karşı)
   const cstat = (c, val, lbl, href) => `<${href ? 'a' : 'div'} class="hstat"${href ? ` href="${href}"` : ''}><b style="color:${c};-webkit-text-fill-color:${c}">${cnt(val)}</b><span>${lbl}</span></${href ? 'a' : 'div'}>`;
   const feed = el('div', 'homefeed');
   feed.innerHTML =

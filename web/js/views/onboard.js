@@ -1,4 +1,4 @@
-// Onboarding — welcome → sign up → alan/sınıf/saat → ready. Answers FEED the çilek engine
+// Onboarding - welcome → sign up → alan/sınıf/saat → ready. Answers FEED the çilek engine
 // (alan → ders priority, saat → plan pacing). Local-only until the backend brings real accounts.
 import { S, save } from '../state.js';
 import { el, esc } from '../ui.js';
@@ -33,7 +33,7 @@ export function onboard() {
         if (!online()) { const nm = prompt('İsmin:'); if (nm && nm.trim()) { S.user = { name: nm.trim(), target: 'Sayısal' }; save(); ov.remove(); refresh(); } return; }
         box.className = 'onbox';
         box.innerHTML = `<button class="onback">‹</button>
-          <h2>Giriş yap</h2><p>Hesabınla devam et — verilerin her cihazda seninle.</p>
+          <h2>Giriş yap</h2><p>Hesabınla devam et - verilerin her cihazda seninle.</p>
           <label>E-posta</label><input id="em" type="email" placeholder="ornek@mail.com">
           <label>Şifre</label><input id="pw" type="password" placeholder="••••••••">
           <p id="err" class="hint"></p>
@@ -50,7 +50,7 @@ export function onboard() {
           const em = box.querySelector('#em').value.trim(), errEl = box.querySelector('#err');
           if (!em) { errEl.textContent = 'Önce e-postanı yaz, sonra tekrar tıkla.'; box.querySelector('#em').focus(); return; }
           errEl.textContent = 'Gönderiliyor…';
-          try { await resetPassword(em); errEl.textContent = 'Sıfırlama bağlantısı gönderildi — gelen kutunu kontrol et.'; }
+          try { await resetPassword(em); errEl.textContent = 'Sıfırlama bağlantısı gönderildi - gelen kutunu kontrol et.'; }
           catch (e) { errEl.textContent = authErrMsg(e); }
         };
       };
@@ -87,7 +87,7 @@ export function onboard() {
         save();
         if (online()) {
           try { await signUp(data.email, data.pass, { name: data.name, target: data.target, grade: data.grade, hours: data.hours }); }
-          catch (e) { box.querySelector('.dots').insertAdjacentHTML('afterend', `<p class="hint">Hesap açılamadı: ${esc(authErrMsg(e))} — verilerin bu tarayıcıda güvende, sonra tekrar dene.</p>`); }
+          catch (e) { box.querySelector('.dots').insertAdjacentHTML('afterend', `<p class="hint">Hesap açılamadı: ${esc(authErrMsg(e))} - verilerin bu tarayıcıda güvende, sonra tekrar dene.</p>`); }
         }
         ov.remove(); refresh();
       };

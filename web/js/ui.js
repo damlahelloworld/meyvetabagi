@@ -1,4 +1,4 @@
-// meyvetabagi — DOM helpers, icons, date/label constants. No app state here.
+// meyvetabagi - DOM helpers, icons, date/label constants. No app state here.
 export const $ = (s, r = document) => r.querySelector(s);
 export const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 export const esc = s => (s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
@@ -33,7 +33,7 @@ export const ICON = {
   logout: SVG('<path d="M16 17l5-5-5-5M21 12H9M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>'),
 };
 
-// ders renk kimliği — 9 ders, 9 renk (kırmızı/sarı durum renkleriyle çakışmaz)
+// ders renk kimliği - 9 ders, 9 renk (kırmızı/sarı durum renkleriyle çakışmaz)
 const DERS_COLOR = {
   'Matematik': 'pink', 'Fizik': 'blue', 'Kimya': 'orange', 'Biyoloji': 'green',
   'Türk Dili ve Edebiyatı': 'purple', 'Tarih': 'yellow', 'Coğrafya': 'teal',
@@ -47,19 +47,19 @@ export const WD_SHORT = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
 export const WD_LONG = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
 export const MON_SHORT = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 export const MON_LONG = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık'];
-export const HOURS = Array.from({ length: 15 }, (_, i) => i + 8);  // 08:00–22:00
+export const HOURS = Array.from({ length: 15 }, (_, i) => i + 8);  // 08:00 - 22:00
 
 export function mondayOf(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; }
 export function weekDates(offset) { const m = mondayOf(new Date()); m.setDate(m.getDate() + offset * 7); return WD_SHORT.map((_, i) => { const d = new Date(m); d.setDate(m.getDate() + i); return d; }); }
 
-// single full-width page container (topbar shell) — views build their own layout inside
+// single full-width page container (topbar shell) - views build their own layout inside
 export function page(wide) {
   const p = $('#page'); p.innerHTML = '';
   p.className = 'page' + (wide ? ' wide' : '');
   return p;
 }
 
-// contextual chips slot in the topbar — the current view owns it, cleared on every render
+// contextual chips slot in the topbar - the current view owns it, cleared on every render
 export function setChips(node) {
   const c = $('#pagechips'); c.innerHTML = '';
   if (node) c.appendChild(node);

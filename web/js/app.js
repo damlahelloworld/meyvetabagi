@@ -1,4 +1,4 @@
-// meyvetabagi — boot + topbar shell render. Views live in views/, logic in engine.js, state in state.js.
+// meyvetabagi - boot + topbar shell render. Views live in views/, logic in engine.js, state in state.js.
 import { S, save, applyTheme, dstr } from './state.js';
 import { loadDB, totals } from './data.js';
 import { rebalance } from './engine.js';
@@ -15,8 +15,8 @@ import { ayarlar } from './views/ayarlar.js';
 import { kaynakca } from './views/kaynakca.js';
 import { onboard } from './views/onboard.js';
 
-// deneme mechanic REMOVED from UI (Damla, 2026-07-10: "konuşmadık henüz") — data stays in state/DB
-// amme hizmeti aracı (gymgyme/calicocat gibi) — yarış/sıralama YOK (Damla, 2026-07-10)
+// deneme mechanic REMOVED from UI (Damla, 2026-07-10: "konuşmadık henüz") - data stays in state/DB
+// amme hizmeti aracı (gymgyme/calicocat gibi) - yarış/sıralama YOK (Damla, 2026-07-10)
 const NAV = [
   { id: 'bugun', label: 'bugün' },
   { id: 'konular', label: 'konular' },

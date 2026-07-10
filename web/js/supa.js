@@ -1,4 +1,4 @@
-// meyvetabagi — Supabase layer: auth + two-way sync.
+// meyvetabagi - Supabase layer: auth + two-way sync.
 // Inactive when config.js is empty (app stays local). Server wins on login;
 // guest data migrates to the account on signUp. Debounced push after every save().
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
@@ -18,13 +18,13 @@ function setSync(st) { if (syncState !== st) { syncState = st; window.dispatchEv
 export function authErrMsg(e) {
   const m = (e && e.message) || '';
   if (/invalid login credentials/i.test(m)) return 'E-posta ya da şifre hatalı';
-  if (/email not confirmed/i.test(m)) return 'E-postanı doğrulaman gerekiyor — gelen kutunu kontrol et';
-  if (/already registered/i.test(m)) return 'Bu e-postayla zaten hesap var — giriş yapmayı dene';
-  if (/rate limit|too many/i.test(m)) return 'Çok fazla deneme — biraz bekleyip tekrar dene';
-  if (/failed to fetch|network|load failed|fetch failed/i.test(m)) return 'Bağlantı kurulamadı — internetini kontrol et';
+  if (/email not confirmed/i.test(m)) return 'E-postanı doğrulaman gerekiyor - gelen kutunu kontrol et';
+  if (/already registered/i.test(m)) return 'Bu e-postayla zaten hesap var - giriş yapmayı dene';
+  if (/rate limit|too many/i.test(m)) return 'Çok fazla deneme - biraz bekleyip tekrar dene';
+  if (/failed to fetch|network|load failed|fetch failed/i.test(m)) return 'Bağlantı kurulamadı - internetini kontrol et';
   if (/password should be|at least 6/i.test(m)) return 'Şifre en az 6 karakter olmalı';
   if (/invalid.*email|unable to validate email/i.test(m)) return 'E-posta adresi geçersiz görünüyor';
-  return m || 'Bir şeyler ters gitti — tekrar dene';
+  return m || 'Bir şeyler ters gitti - tekrar dene';
 }
 
 export async function initSupa() {
@@ -50,7 +50,7 @@ export async function signUp(email, password, prof) {
   if (error) throw error;
   if (!data.session) {                   // email confirmation is ON: try direct sign-in, else surface it
     const s2 = await client.auth.signInWithPassword({ email, password });
-    if (s2.error) throw new Error('E-posta doğrulaması gerekiyor — gelen kutunu kontrol et');
+    if (s2.error) throw new Error('E-posta doğrulaması gerekiyor - gelen kutunu kontrol et');
     user = s2.data.user;
   } else {
     user = data.user;
@@ -81,7 +81,7 @@ export async function resetPassword(email) {
   if (error) throw error;
 }
 
-// KVKK: permanent in-app deletion — delete_me() RPC removes auth.users row, FKs cascade everything
+// KVKK: permanent in-app deletion - delete_me() RPC removes auth.users row, FKs cascade everything
 export async function deleteAccount() {
   const { error } = await client.rpc('delete_me');
   if (error) throw error;
