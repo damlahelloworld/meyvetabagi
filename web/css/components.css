@@ -10,9 +10,9 @@
 .mini:hover { color: var(--ink); }
 
 /* search + filter chips — plain text, active is simply bigger */
-.tools { margin: 4px 0 10px; }
+.tools { margin: 2px 0 6px; }
 .tools.flat { max-width: 640px; }
-.search { position: relative; margin-bottom: 12px; max-width: 320px; }
+.search { position: relative; margin-bottom: 8px; max-width: 320px; }
 .search input { width: 100%; padding: 8px 30px 8px 30px; border: none; border-radius: var(--radius);
   background: var(--panel); font-size: 13px; color: var(--ink); }
 .search input:focus { outline: none; background: var(--line-soft); }
@@ -45,15 +45,15 @@
 .row .npreview { font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .row .ex { color: var(--muted); cursor: pointer; padding: 2px 5px; line-height: 1; }
 .row .ex:hover { color: var(--red); }
-.dersrow { padding: 24px 0 2px; font-size: 19px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
-.unitrow { padding: 12px 0 4px; font-size: 11px; letter-spacing: .04em; color: var(--muted);
+.dersrow { padding: 16px 0 0; font-size: 17px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.unitrow { padding: 8px 0 2px; font-size: 11px; letter-spacing: .04em; color: var(--muted);
   text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
 .unitrow .bar { flex: 1; max-width: 140px; height: 3px; background: var(--panel); overflow: hidden; }
 .unitrow .bar i { display: block; height: 100%; background: var(--green); transition: width .3s; }
 .unitrow .pct { color: var(--muted); font-variant-numeric: tabular-nums; }
 
 /* status choice (kazanım detail) — text buttons, chosen one is bigger + colored */
-.segs { display: inline-flex; gap: 18px; margin-bottom: 22px; }
+.segs { display: inline-flex; gap: 16px; margin-bottom: 14px; }
 .segs button { padding: 0; font-size: 13px; color: var(--accent-ink); text-decoration: underline; background: none; border: none; cursor: pointer; }
 .segs button.on { font-size: 16px; text-decoration: none; color: var(--ink); }
 .segs button.on.red { color: var(--red); } .segs button.on.amber { color: var(--amber); } .segs button.on.green { color: var(--green); }
@@ -62,12 +62,12 @@
 .repminus:hover { color: var(--ink); }
 
 /* notes & MEB text */
-.note { width: 100%; min-height: 200px; border: none; border-radius: var(--radius); padding: 14px 16px;
+.note { width: 100%; min-height: 160px; border: none; border-radius: var(--radius); padding: 14px 16px;
   font-size: 14px; line-height: 1.7; color: var(--ink); background: var(--panel); resize: vertical; }
-.note.short { min-height: 88px; }
+.note.short { min-height: 64px; }
 .note:focus { outline: none; background: var(--line-soft); }
 .note::placeholder { color: var(--muted); }
-.aciklama { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 22px; line-height: 1.65; max-width: 640px; }
+.aciklama { font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.65; max-width: 640px; }
 .aciklama b { color: var(--muted); font-weight: 400; display: block; margin-bottom: 3px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; }
 
 /* ders color dots */
@@ -78,16 +78,16 @@
 .dd-yellow { background: var(--yellow); } .dd-brown { background: var(--brown); } .dd-amber { background: var(--amber); }
 
 /* bugün: stacked plain stats — the number IS the design */
-.statlines { margin: 4px 0 30px; display: flex; flex-direction: column; gap: 6px; }
+.statlines { margin: 2px 0 16px; display: flex; flex-direction: column; gap: 2px; }
 .statline { display: flex; align-items: baseline; gap: 10px; }
-.statline .v { font-size: 36px; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.statline .v { font-size: 26px; line-height: 1.15; font-variant-numeric: tabular-nums; letter-spacing: -.02em; min-width: 86px; }
 .statline .k { font-size: 13px; color: var(--muted); }
 
 /* profil stat cards -> plain lines too */
-.grid { display: flex; flex-direction: column; gap: 6px; margin: 4px 0 26px; }
+.grid { display: flex; flex-direction: column; gap: 2px; margin: 2px 0 14px; }
 .card { padding: 0; display: flex; align-items: baseline; gap: 10px; }
 .card .k { font-size: 13px; color: var(--muted); order: 2; text-transform: lowercase; letter-spacing: 0; }
-.card .v { font-size: 30px; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -.02em; }
+.card .v { font-size: 24px; font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -.02em; }
 .card .v small { font-size: 13px; color: var(--muted); }
 .card.c-pink .v { color: var(--pink); } .card.c-purple .v { color: var(--purple); } .card.c-teal .v { color: var(--teal); }
 .card.c-blue .v { color: var(--blue); } .card.c-orange .v { color: var(--orange); }
@@ -105,8 +105,8 @@
 .task .who.coach { color: var(--accent-ink); }
 
 /* çilek / daily boxes -> plain sections */
-.coachbox { padding: 0; margin-bottom: 32px; max-width: 680px; }
-.coachbox .h { font-size: 19px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.coachbox { padding: 0; margin-bottom: 18px; max-width: 680px; }
+.coachbox .h { font-size: 16px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; }
 .coachbox .h .av { display: none; }
 .coachbox p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
 .coachbox p.tight { margin-bottom: 10px; }
@@ -122,12 +122,12 @@
 .btn.danger { color: var(--red); }
 
 /* ---- takvim: clean week, no boxes (gymgyme calendar spirit) ---- */
-.calbar { display: flex; align-items: baseline; gap: 16px; margin: 2px 0 20px; }
+.calbar { display: flex; align-items: baseline; gap: 14px; margin: 0 0 10px; }
 .calbar .wk { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .wkbtn { border: none; background: none; padding: 0 2px; font-size: 14px; color: var(--accent-ink); text-decoration: underline; cursor: pointer; }
 .wkbtn:hover { color: var(--ink); }
-.board { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 18px; margin-bottom: 30px; }
-.dayc { display: flex; flex-direction: column; min-height: 120px; }
+.board { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.dayc { display: flex; flex-direction: column; min-height: 64px; }
 .dayc .dh { width: 100%; text-align: left; padding: 0 0 6px; background: none; border: none; display: flex; align-items: baseline; gap: 6px; cursor: pointer; }
 .dayc .dh b { font-size: 13px; }
 .dayc.today .dh b { color: var(--accent); }
@@ -148,7 +148,7 @@
 .tsk .tx { color: var(--muted); padding: 0 1px; line-height: 1; cursor: pointer; }
 .tsk .tx:hover { color: var(--red); }
 .tsk:active { cursor: grabbing; }
-.daypanel { margin: 0 0 30px; max-width: 680px; }
+.daypanel { margin: 0 0 16px; max-width: 680px; }
 .daypanel h1.sec { margin: 2px 0 10px; font-size: 19px; }
 .prow { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
 .hsel { border: none; background: var(--panel); color: var(--muted); border-radius: var(--radius); padding: 3px 5px; font-size: 12px; }
@@ -169,8 +169,8 @@
 .pool .grip { color: var(--faint); font-size: 13px; margin-top: 2px; letter-spacing: -2px; }
 
 /* est (sıra puanı total) — big number, no box */
-.est { margin-top: 24px; display: flex; align-items: baseline; gap: 12px; }
-.est .r { font-size: 40px; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--accent-ink); }
+.est { margin-top: 14px; display: flex; align-items: baseline; gap: 12px; }
+.est .r { font-size: 32px; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--accent-ink); }
 .est .l { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
 .est .l.gap { margin-top: 0; }
 
@@ -218,12 +218,12 @@
 .usermenu .sep { height: 1px; background: var(--hair); margin: 4px 0; }
 
 /* profil */
-.profhead { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
-.profhead .bigava { width: 58px; height: 58px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 24px; flex: none; }
+.profhead { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.profhead .bigava { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 24px; flex: none; }
 .profhead h1 { margin: 0; }
-.setcard { margin-bottom: 24px; max-width: 560px; }
+.setcard { margin-bottom: 14px; max-width: 560px; }
 .setcard.gap-top { margin-top: 18px; }
-.setrow { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; }
+.setrow { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; }
 .setrow .lbl b { display: block; font-size: 14px; }
 .setrow .lbl span { font-size: 12px; color: var(--muted); }
 .setrow input { padding: 8px 10px; border: none; border-radius: var(--radius); background: var(--panel); color: var(--ink); font-size: 13.5px; min-width: 180px; }
@@ -232,7 +232,7 @@
 .setrow .danger { color: var(--red); }
 
 /* activity heatmap — circles, tight */
-.heatwrap { margin-bottom: 24px; overflow-x: auto; }
+.heatwrap { margin-bottom: 14px; overflow-x: auto; }
 .heatwrap .ht { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
 .heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 3px; justify-content: start; }
 .heat i { width: 13px; height: 13px; border-radius: 50%; background: var(--panel); }
@@ -242,7 +242,7 @@
 .heatleg i.l0 { background: var(--panel); } .heatleg i.l1 { background: var(--h1); } .heatleg i.l2 { background: var(--h2); } .heatleg i.l3 { background: var(--h3); } .heatleg i.l4 { background: var(--h4); }
 
 /* chat (mesajlar) */
-.chat { margin-bottom: 24px; max-width: 640px; }
+.chat { margin-bottom: 14px; max-width: 640px; }
 .thread { max-height: 340px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding: 4px 0 14px; }
 .msg { display: flex; }
 .msg.coach { justify-content: flex-start; } .msg.student { justify-content: flex-end; }
