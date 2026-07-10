@@ -299,3 +299,17 @@
 .gcol { min-width: 0; }
 .ghead { font-size: 14px; font-weight: bold; margin: 6px 0 2px; }
 .ublock { break-inside: avoid; margin-bottom: 8px; }
+
+/* çilek evaluation + MLA kaynakça */
+.kaynakca { background: var(--panel); border-radius: var(--radius); padding: 12px 14px; margin: 8px 0 12px; max-width: 640px; }
+.kaynakca b { font-size: 10.5px; letter-spacing: .06em; color: var(--muted); font-weight: 400; display: block; margin-bottom: 6px; }
+.kaynakca .cite { font-size: 12.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 22px; text-indent: -22px; }
+.kaynakca .citenote { font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-top: 8px; }
+.cilekres { display: flex; gap: 14px; align-items: flex-start; margin: 12px 0; }
+.cilekres .score { font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; flex: none; }
+.score.sc-green { color: var(--green); } .score.sc-amber { color: var(--amber); } .score.sc-red { color: var(--red); }
+.cilekres .rdet { min-width: 0; }
+.cilekres .okline { font-size: 12.5px; color: var(--green); margin-bottom: 2px; }
+.cilekres .missline { font-size: 12.5px; color: var(--red); margin-bottom: 2px; }
+.cilekres .srcline { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+.coachbox .h .mini { margin-left: 8px; }

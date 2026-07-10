@@ -180,6 +180,33 @@ export function rebalance() {
   return missed.length;
 }
 
+// ---- çilek explain-evaluation (Damla: "oha" tool, zero API) ----
+// HONEST METHOD, heavily sourced: rule-based concept-coverage against the OFFICIAL MEB açıklama
+// of the kazanım — no LLM, no fabrication. Key concepts = content words of the MEB text;
+// coverage = does the student's text mention them (Turkish-suffix-tolerant stem match).
+const STOP = new Set(('ve veya ile için gibi göre kadar sonra önce üzerinde arasında bu şu o bir iki üç dört beş her tüm bazı diğer aynı farklı olan olarak olduğu olduğunu vurgulanır belirtilir verilir yapılır sağlanır edilir ele alınır alır değinilir üzerinde durulur kısaca ayrıca örneklerle örnekler açıklanır açıklar ilişkin ilgili genel özel konusunda hakkında yer alan almaz').split(' '));
+const stem = w => { const n = (w || '').toLocaleLowerCase('tr').replace(/[^a-zçğıöşü]/g, ''); return n.slice(0, Math.max(4, Math.min(6, n.length))); };
+const contentWords = t => (t || '').split(/[\s,;.:()'"—–-]+/).map(w => w.toLocaleLowerCase('tr')).filter(w => w.length > 3 && !STOP.has(w));
+
+export function cilekEvaluate(studentText, kaz) {
+  const src = (kaz.aciklama || kaz.title || '');
+  const terms = [...new Map(contentWords(src).map(w => [stem(w), w])).values()].slice(0, 18);
+  const studentStems = new Set(contentWords(studentText).map(stem));
+  const found = terms.filter(t => studentStems.has(stem(t)));
+  const missing = terms.filter(t => !studentStems.has(stem(t)));
+  const score = terms.length ? Math.round(found.length / terms.length * 100) : 0;
+  return {
+    score, found, missing,
+    verdict: score >= 70 ? 'green' : score >= 35 ? 'amber' : 'red',
+    // sources actually used for THIS evaluation — shown to the user, always
+    sources: [
+      { name: `MEB kazanım ${kaz.code} açıklaması`, detail: src || '(bu kazanımın ek açıklaması yok — başlık esas alındı)' },
+      { name: 'TTKB "2026 YKS\'ye esas konu ve kazanımlar" (resmî PDF)', detail: 'ttkb.meb.gov.tr — projedeki kopya: data/kazanimlar/2026_yks_kazanimlar.pdf' },
+    ],
+    method: 'Kural tabanlı kavram kapsama analizi: resmî MEB açıklamasındaki içerik kelimeleri çıkarılır, senin metninde geçip geçmediğine bakılır (ek toleranslı kök eşleme). Yapay zekâ modeli KULLANILMAZ; internete hiçbir şey gönderilmez, her şey tarayıcında hesaplanır.',
+  };
+}
+
 export function siraPuani() {
   const t = totals();
   const lastTyt = S.denemeler.filter(d => d.type === 'TYT').slice(-1)[0];
