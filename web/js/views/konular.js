@@ -152,10 +152,10 @@ function openTerim(t, z) {
 
 function kazDetail(sel) {
   const z = findKaz(sel);
-  const d = el('div', 'pagein'); page().appendChild(d);
+  const d = el('div', 'pagein widepage'); page(true).appendChild(d);
   if (!z) { d.appendChild(el('div', 'empty', 'Kazanım bulunamadı')); return; }
+  const right = d;  // tek sütun, tam genişlik (Damla: kolona açma, geniş geniş sürsün)
   const back = el('a', 'backlink', '‹ konular'); back.href = '#/konular'; d.appendChild(back);
-
   d.appendChild(el('div', 'crumb', `${esc(z.ders.ders.toUpperCase())}${z.unit.grade ? ' · ' + z.unit.grade + '. SINIF' : ''} · ${esc((z.unit.name || '').toUpperCase())}`));
   d.appendChild(el('h1', null, esc(z.title)));
   d.appendChild(el('p', 'meta', `Kazanım ${z.code}`));
@@ -181,10 +181,10 @@ function kazDetail(sel) {
 
   if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>MEB açıklaması</b>${esc(z.aciklama)}`));
 
-  // anahtar terimler — kitaptan; calicocat gibi akan renkli küçük harf liste, tıkla → açılır (Damla, 2026-07-10)
+  // anahtar terimler — sağ kolon; calicocat gibi akan renkli küçük harf, tıkla → ekran ortasında açılır
   const terms = terimlerFor(z.uid);
   if (terms.length) {
-    d.appendChild(el('div', 'seclabel', `anahtar terimler · ${terms.length} (kitaptan)`));
+    right.appendChild(el('div', 'seclabel', `anahtar terimler · ${terms.length} (kitaptan)`));
     const wrap = el('div', 'terimler');
     const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
     terms.forEach((t, ti) => {
@@ -192,7 +192,7 @@ function kazDetail(sel) {
       tm.onclick = () => openTerim(t, z);
       wrap.appendChild(tm);
     });
-    d.appendChild(wrap);
+    right.appendChild(wrap);
   }
 
   const ta = el('textarea', 'note');
