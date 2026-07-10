@@ -203,7 +203,7 @@ Rules kept for you: zero inline styles anywhere, no colored borders, no single-s
 65. ⏸ Monetization model (saat mi randevu mu çilek aboneliği mi) → sonra: TR payment rails (İyzico vs Stripe), entitlements, paywall, gerçek "ilk 400" sayacı, B2B dershane seats.
 66. ☐ Observability: Sentry (free) before real users; sync error rates visible.
 67. ☐ Data ops calendar: 2027 sezonu = yeni sınav tarihi config; **2028 = Maarif Modeli** yeni PDF + yeni parse; blocked subjects OCR (Mantık/Sosyoloji/Psikoloji/İnkılap ≈200 kazanım) master listeye eklenir.
-68. ☐ Parity backlog + polish: kronometre/study-time, optik form, seviye tespit, resizable columns, accessibility pass (kontrast/klavye), konular listesi virtualization if phones lag, Deneme Kulübü.
+68. ☐ Parity backlog + polish: kronometre/study-time, optik form, seviye tespit, accessibility pass (kontrast/klavye), konular listesi virtualization if phones lag, Deneme Kulübü, events.hour `drop not null` migration (kill the 0 sentinel), old-CSS sweep after Damla's design pass.
 
 ### LEARNING MAP — what Damla learns per block (application-layer depth; career is in product, not GPU)
 Working mode: Claude writes the code, Damla makes the architecture calls — every block, Claude opens the design (schema / prompt contract / trade-off) and explains WHY before building; a one-paragraph "what we learned" note goes to Damla's Obsidian roadmap at each block's end.
@@ -223,6 +223,14 @@ Working mode: Claude writes the code, Damla makes the architecture calls — eve
 
 ### DAMLA'S OPEN DECISIONS (gate stages: 6, 24, 45, 54, 60, 65)
 1. meyvetabagi wordmark/görsel yön (stage 6) · 2. landing metinleri + founder sözü (24) · 3. çilek'in sesi (45) · 4. sosyal mekanik tasarımı (54) · 5. sıralama verisi göster/gizle (60) · 6. para modeli (65).
+
+## Status 2026-07-10 dawn (Damla's design directives — SHIPPED same night)
+
+- **Shell rebuilt:** 3-column layout dead ("screenleri üçe sığdırmayalım"). Topbar: logo left, page-contextual chips next to it, nav links right (Bugün · Konular · Takvim · Denemeler · Sıra Puanı), avatar chip rightmost (Profil + theme + logout menu). Every view is its own full-width page; Konular/Takvim keep an internal 2-pane split.
+- **Takvim redesigned (her spec):** kazanım drops onto a DAY (never an hour); board = 7 day cards; task chips GREY — no ders color, no author color, color ONLY = done/not-done (green); click a day → GÜNLÜK PROGRAM panel where hours live (optional per-task saat select). Pool: search + ders + unstudied filters, tap = add to selected day. Week nav = topbar chips.
+- **Engine day-based:** generatePlan/rebalance fill days (perDay cap), h=null. DB events.hour stays NOT NULL → **sentinel 0 = "no hour"** (mapped in supa.js both ways); proper `drop not null` migration queued in stage 68 backlog.
+- **Rank estimate PARKED** (Damla: "sıralama mekaniğini düşünmedim"): denemeler shows net only, estimateRank dormant in engine, Sıra Puanı page untouched (she loves it — it's a bar link now).
+- Verified: node --check clean ×15, no stale #mid/#detail/setMid refs. Visual pass = Damla in dev.
 
 ## Status 2026-07-10 (rebrand session)
 

@@ -1,26 +1,17 @@
-// Denemeler — TYT/AYT entry with real question limits, net = D − Y/4 (negative allowed), honest ranking.
-// AYT shows net only: we have no sourced AYT ranking table and we don't invent one.
+// Denemeler — TYT/AYT entry with real question limits, net = D − Y/4 (negative allowed).
+// Rank estimate is PARKED (Damla, 2026-07-10): mechanic undesigned + no sourced ÖSYM table. Net only.
 import { S, save, todayKey } from '../state.js';
-import { DENEME, estimateRank } from '../engine.js';
-import { $, el, fmt, setMid } from '../ui.js';
+import { DENEME } from '../engine.js';
+import { el, page } from '../ui.js';
 import { refresh } from '../router.js';
 
 let TYPE = 'TYT';
 
 export function denemeler() {
-  const list = setMid('Denemeler', 'D/Y gir → net → tahmini sıralama');
-  S.denemeler.forEach((dn, i) => {
-    const r = el('div', 'row');
-    r.innerHTML = `<div class="rtext"><div class="title">${dn.type} · net ${dn.net}</div><div class="code">${dn.date}</div></div><span class="ex" title="Sil">×</span>`;
-    r.querySelector('.ex').onclick = e => { e.stopPropagation(); S.denemeler.splice(i, 1); save(); refresh(); };
-    list.prepend(r);  // newest first
-  });
-  if (!S.denemeler.length) list.appendChild(el('div', 'empty', 'Henüz deneme girmedin'));
-
-  const d = $('#detail'); d.innerHTML = '';
-  d.appendChild(el('div', 'crumb', 'DENEME EKLE'));
+  const d = el('div', 'pagein'); page().appendChild(d);
+  d.appendChild(el('div', 'crumb', 'DENEMELER'));
   d.appendChild(el('h1', null, 'Yeni deneme'));
-  d.appendChild(el('p', 'meta', 'net = D − Y/4 · boşlar otomatik · sıralama tahmindir'));
+  d.appendChild(el('p', 'meta', 'net = D − Y/4 · boşlar otomatik'));
 
   // TYT / AYT selector
   const segs = el('div', 'segs');
@@ -49,7 +40,7 @@ export function denemeler() {
   });
   d.appendChild(wrap);
 
-  const est = el('div', 'est'); est.innerHTML = `<div class="l">Toplam net</div><div class="r" id="tnet">0</div><div class="l gap">Tahmini sıralama</div><div class="r" id="trank">—</div>`;
+  const est = el('div', 'est'); est.innerHTML = `<div class="l">Toplam net</div><div class="r" id="tnet">0</div>`;
   d.appendChild(est);
 
   function totalNet() {
@@ -65,16 +56,7 @@ export function denemeler() {
     });
     return tot;
   }
-  function recalc() {
-    const tot = totalNet();
-    $('#tnet').textContent = tot.toFixed(1);
-    if (TYPE === 'TYT' && tot > 0) {
-      const [lo, hi] = estimateRank(tot);
-      $('#trank').textContent = `~${fmt(lo)} – ${fmt(hi)}`;
-    } else {
-      $('#trank').textContent = '—';
-    }
-  }
+  function recalc() { d.querySelector('#tnet').textContent = totalNet().toFixed(1); }
   const btnRow = el('div', 'mt18');
   const btn = el('button', 'btn', 'Denemeyi kaydet');
   btn.onclick = () => {
@@ -84,7 +66,17 @@ export function denemeler() {
   };
   btnRow.appendChild(btn);
   d.appendChild(btnRow);
-  d.appendChild(el('div', 'hint', TYPE === 'AYT'
-    ? 'AYT sıralaması için kaynaklı ÖSYM tablosu gerekiyor — uydurma tahmin göstermiyoruz, net kaydedilir.'
-    : 'Detaylı modda yanlışını kazanıma bağlayınca o kazanım kırmızıya döner (v1 sonrası).'));
+  d.appendChild(el('div', 'hint', 'Detaylı modda yanlışını kazanıma bağlayınca o kazanım kırmızıya döner (v1 sonrası).'));
+
+  d.appendChild(el('div', 'seclabel gap-top', 'Geçmiş denemeler'));
+  const hist = el('div', 'setcard');
+  if (!S.denemeler.length) hist.appendChild(el('div', 'empty', 'Henüz deneme girmedin'));
+  S.denemeler.slice().reverse().forEach(dn => {
+    const row = el('div', 'setrow');
+    row.innerHTML = `<div class="lbl"><b>${dn.type} · net ${dn.net}</b><span>${dn.date}</span></div>`;
+    const x = el('button', 'repminus', 'Sil');
+    x.onclick = () => { S.denemeler = S.denemeler.filter(q => q.id !== dn.id); save(); refresh(); };
+    row.appendChild(x); hist.appendChild(row);
+  });
+  d.appendChild(hist);
 }

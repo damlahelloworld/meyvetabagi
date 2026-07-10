@@ -1,7 +1,7 @@
 // Profil — account card, stats, activity heatmap, Damla ile birebir (randevu + mesaj), settings.
 import { S, save, applyTheme, streak, dstr, wipeLocal } from '../state.js';
 import { totals } from '../data.js';
-import { $, el, esc, setMid, WD_SHORT, MON_SHORT } from '../ui.js';
+import { el, esc, page, WD_SHORT, MON_SHORT } from '../ui.js';
 import { refresh } from '../router.js';
 import { onboard } from './onboard.js';
 import { signOut, online, currentUser, deleteAccount, authErrMsg } from '../supa.js';
@@ -31,10 +31,8 @@ function heatmap() {
 export function profil() {
   const u = S.user || { name: 'Misafir', target: 'Sayısal' };
   const initial = (u.name || '?').trim().charAt(0).toLocaleUpperCase('tr');
-  const list = setMid('Hesap', 'profil, aktivite & ayarlar');
-  list.appendChild(el('div', 'empty', 'Ayarların sağda'));
   const t = totals();
-  const d = $('#detail'); d.innerHTML = '';
+  const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('div', 'crumb', 'HESAP'));
   const head = el('div', 'profhead');
   head.innerHTML = `<div class="bigava">${esc(initial)}</div><div><h1>${esc(u.name)}</h1>

@@ -1,12 +1,10 @@
-// Sıralama — multi-parameter Sıra Puanı from the student's own data. Real multi-user board needs backend.
+// Sıra Puanı — multi-parameter score from the student's own data. Real multi-user board needs backend.
 import { siraPuani } from '../engine.js';
-import { $, el, cnt, ICON, setMid } from '../ui.js';
+import { el, cnt, ICON, page } from '../ui.js';
 
 export function siralama() {
   const sp = siraPuani();
-  const list = setMid('Sıralama', 'çok-parametreli Sıra Puanı');
-  list.appendChild(el('div', 'empty', 'Puanın sağda'));
-  const d = $('#detail'); d.innerHTML = '';
+  const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('div', 'crumb', 'SIRA PUANI'));
   d.appendChild(el('h1', null, 'Senin Sıra Puanın'));
   d.appendChild(el('p', 'meta', 'Tek metrik değil — dört eksenin ağırlıklı toplamı. Hepsi kendi gerçek verinden.'));

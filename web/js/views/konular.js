@@ -1,7 +1,7 @@
 // Konular — MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
 import { S, save, saveSoon, bump, addRep } from '../state.js';
 import { DB, allKaz, findKaz, unitProgress, kuid } from '../data.js';
-import { $, el, esc, norm, ICON, setMid, dersDot } from '../ui.js';
+import { el, esc, norm, ICON, page, dersDot } from '../ui.js';
 import { refresh, param } from '../router.js';
 
 const FILT = { q: '', status: 'all', ders: 'all' };
@@ -19,11 +19,11 @@ function matchKaz(z, dersName) {
 }
 
 export function konular() {
-  const mid = $('#mid');
-  mid.querySelector('.head').innerHTML = `<h2>Konular</h2><p>${allKaz().length} MEB kazanımı · ara, filtrele, işaretle</p>`;
-  // build toolbar once
-  let tools = mid.querySelector('.tools');
-  if (!tools) { tools = el('div', 'tools'); mid.insertBefore(tools, mid.querySelector('.list')); }
+  const split = el('div', 'split'); page(true).appendChild(split);
+  const lpane = el('div', 'lpane'); split.appendChild(lpane);
+  lpane.innerHTML = `<div class="head"><h2>Konular</h2><p>${allKaz().length} MEB kazanımı · ara, filtrele, işaretle</p></div>`;
+  const tools = el('div', 'tools'); lpane.appendChild(tools);
+  lpane.appendChild(el('div', 'list'));
   const counts = { all: 0, red: 0, amber: 0, green: 0, none: 0 };
   allKaz().forEach(z => { counts.all++; counts[S.status[z.uid] || 'none']++; });
   tools.innerHTML = `
@@ -47,7 +47,7 @@ export function konular() {
   tools.querySelectorAll('.chips').forEach(grp => grp.querySelectorAll('.chip').forEach(c =>
     c.onclick = () => { FILT[grp.dataset.grp] = c.dataset.v; konular(); }));
 
-  const list = mid.querySelector('.list'); list.className = 'list';
+  const list = lpane.querySelector('.list');
   function paintList() {
     const sel = param();
     list.innerHTML = '';
@@ -91,7 +91,7 @@ export function konular() {
 
   const sel = param();
   const z = sel ? findKaz(sel) : null;
-  const d = $('#detail'); d.innerHTML = '';
+  const d = el('div', 'rpane'); split.appendChild(d);
   if (!z) { d.appendChild(el('div', 'empty', 'Soldan bir kazanım seç')); return; }
 
   d.appendChild(el('div', 'crumb', `${esc(z.ders.ders.toUpperCase())}${z.unit.grade ? ' · ' + z.unit.grade + '. SINIF' : ''} · ${esc((z.unit.name || '').toUpperCase())}`));

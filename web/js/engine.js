@@ -8,7 +8,8 @@ export const EXAM = new Date('2026-06-20'); // YKS 2026 TYT date; becomes per-se
 // Kept only so the prototype flow works; UI always labels the output "tahmini".
 const RANK_ANCHORS = [[0, 2400000], [20, 1200000], [40, 650000], [60, 300000], [80, 120000], [100, 35000], [110, 12000], [120, 3000]];
 
-// TYT-only: we have no AYT anchors, so AYT shows net without a made-up ranking.
+// PARKED (Damla, 2026-07-10): rank mechanic undesigned — no view calls this until she designs it
+// (and RANK_ANCHORS must be replaced with a sourced ÖSYM table before it ever renders again).
 export function estimateRank(net) {
   net = Math.max(0, Math.min(120, net));
   for (let i = 0; i < RANK_ANCHORS.length - 1; i++) {
@@ -69,46 +70,39 @@ export function dailyKaz() {
   return pick;
 }
 
-// schedule from NOW forward: never into past days or past hours, paced by declared daily hours
-export function generatePlan(kazList) {
-  const n = perDay(), now = new Date();
-  const busy = new Set(S.events.map(e => e.date + '@' + e.h));
-  const slots = [];
-  for (let d = 0; slots.length < kazList.length && d < 60; d++) {
+// day-based scheduling (takvim is day-level; hours are optional and picked in the daily program).
+// Fills days from today forward, at most perDay() tasks per day counting what's already there.
+function daydSlots(count, startBusy) {
+  const load = { ...startBusy };
+  const n = perDay(), out = [];
+  for (let d = 0; out.length < count && d < 90; d++) {
     const dt = new Date(); dt.setHours(0, 0, 0, 0); dt.setDate(dt.getDate() + d);
     const ds = dstr(dt);
-    for (let k = 0; k < n && slots.length < kazList.length; k++) {
-      const h = 9 + k * 2;
-      if (d === 0 && h <= now.getHours()) continue;   // never schedule into today's past hours
-      if (busy.has(ds + '@' + h)) continue;           // never stack onto an occupied cell
-      slots.push({ date: ds, h });
-    }
+    while ((load[ds] || 0) < n && out.length < count) { load[ds] = (load[ds] || 0) + 1; out.push(ds); }
   }
+  return out;
+}
+function dayLoad(fromDate) {
+  const load = {};
+  S.events.forEach(e => { if (e.date >= fromDate) load[e.date] = (load[e.date] || 0) + 1; });
+  return load;
+}
+
+export function generatePlan(kazList) {
+  const slots = daydSlots(kazList.length, dayLoad(todayKey()));
   kazList.slice(0, slots.length).forEach((z, i) => {
-    S.events.push({ id: 'e' + Date.now() + i, date: slots[i].date, h: slots[i].h, code: z.uid, author: 'coach', done: false });
+    S.events.push({ id: 'e' + Date.now() + i, date: slots[i], h: null, code: z.uid, author: 'coach', done: false });
   });
   save();
 }
 
-// missed-day rebalance: undone past tasks move forward into free slots starting today
+// missed-day rebalance: undone past tasks move forward into open days starting today
 export function rebalance() {
-  const today = todayKey(), now = new Date();
+  const today = todayKey();
   const missed = S.events.filter(e => !e.done && e.date < today);
   if (!missed.length) return 0;
-  const n = perDay();
-  const busy = new Set(S.events.filter(e => e.date >= today).map(e => e.date + '@' + e.h));
-  const slots = [];
-  for (let d = 0; slots.length < missed.length && d < 90; d++) {
-    const dt = new Date(); dt.setHours(0, 0, 0, 0); dt.setDate(dt.getDate() + d);
-    const ds = dstr(dt);
-    for (let k = 0; k < n && slots.length < missed.length; k++) {
-      const h = 9 + k * 2;
-      if (d === 0 && h <= now.getHours()) continue;
-      if (busy.has(ds + '@' + h)) continue;
-      slots.push({ date: ds, h });
-    }
-  }
-  missed.forEach((e, i) => { if (slots[i]) { e.date = slots[i].date; e.h = slots[i].h; } });
+  const slots = daydSlots(missed.length, dayLoad(today));
+  missed.forEach((e, i) => { if (slots[i]) { e.date = slots[i]; e.h = null; } });
   S.rebalanced = { date: today, n: missed.length };  // user informed once on the Bugün screen
   save();
   return missed.length;

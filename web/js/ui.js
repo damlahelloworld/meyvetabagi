@@ -52,10 +52,15 @@ export const HOURS = Array.from({ length: 15 }, (_, i) => i + 8);  // 08:00–22
 export function mondayOf(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; }
 export function weekDates(offset) { const m = mondayOf(new Date()); m.setDate(m.getDate() + offset * 7); return WD_SHORT.map((_, i) => { const d = new Date(m); d.setDate(m.getDate() + i); return d; }); }
 
-// mid-column header + cleared list
-export function setMid(title, sub) {
-  const m = $('#mid'); const t = m.querySelector('.tools'); if (t) t.remove();
-  m.querySelector('.head').innerHTML = `<h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}`;
-  const list = m.querySelector('.list'); list.className = 'list'; list.innerHTML = '';
-  return list;
+// single full-width page container (topbar shell) — views build their own layout inside
+export function page(wide) {
+  const p = $('#page'); p.innerHTML = '';
+  p.className = 'page' + (wide ? ' wide' : '');
+  return p;
+}
+
+// contextual chips slot in the topbar — the current view owns it, cleared on every render
+export function setChips(node) {
+  const c = $('#pagechips'); c.innerHTML = '';
+  if (node) c.appendChild(node);
 }

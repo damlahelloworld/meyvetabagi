@@ -106,7 +106,8 @@ async function pullAll() {
   S.status = {}; S.reps = {}; S.repDay = {};
   (sts.data || []).forEach(r => { S.status[r.code] = r.status; if (r.reps) S.reps[r.code] = r.reps; if (r.rep_day) S.repDay[r.code] = r.rep_day; });
   S.notes = {}; (nts.data || []).forEach(r => { S.notes[r.code] = r.body; });
-  S.events = (evs.data || []).map(r => ({ id: r.id, date: r.date, h: r.hour, code: r.code, author: r.author, done: r.done }));
+  // hour 0 is the DB sentinel for "day-level, no hour" (column is NOT NULL 0-23; 0 is never a real study hour)
+  S.events = (evs.data || []).map(r => ({ id: r.id, date: r.date, h: r.hour === 0 ? null : r.hour, code: r.code, author: r.author, done: r.done }));
   S.denemeler = (dns.data || []).map(r => ({ id: r.id, date: r.date, type: r.type, net: +r.net }));
   S.activity = {}; (act.data || []).forEach(r => { S.activity[r.day] = r.count; });
   const d0 = (dly.data || [])[0];
@@ -135,7 +136,7 @@ async function doPush() {
     user_id: uid, code, status: S.status[code], reps: S.reps[code] || 0, rep_day: S.repDay[code] || null,
   }));
   const ntRows = Object.entries(S.notes).filter(([, b]) => b && b.trim()).map(([code, body]) => ({ user_id: uid, code, body }));
-  const evRows = S.events.map(e => ({ id: e.id, user_id: uid, code: e.code, date: e.date, hour: e.h, author: e.author, done: e.done }));
+  const evRows = S.events.map(e => ({ id: e.id, user_id: uid, code: e.code, date: e.date, hour: e.h == null ? 0 : e.h, author: e.author, done: e.done }));
   const dnRows = S.denemeler.map(d => ({ id: d.id, user_id: uid, date: d.date, type: d.type, net: d.net }));
   const acRows = Object.entries(S.activity).map(([day, count]) => ({ user_id: uid, day, count }));
   const ops = [

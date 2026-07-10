@@ -134,40 +134,54 @@
 .rank .metric{font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
 
 /* ---- drag-drop week calendar (Google Calendar-like) ---- */
-.calbar{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.calbar h1{margin:0 0 0 6px;font-size:22px}
-.calbar .wk{font-size:12.5px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
-.wkbtn{min-width:32px;height:32px;padding:0 10px;border:1px solid var(--line);border-radius:2px;background:var(--card);color:var(--ink-soft);font-size:16px;font-weight:600;display:grid;place-items:center}
-.wkbtn:hover{background:var(--panel);color:var(--ink)}
-#today{font-size:12.5px;font-weight:600}
-.cal{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
-.calhead{display:grid;grid-template-columns:46px repeat(7,minmax(0,1fr));border-bottom:1px solid var(--line);background:var(--panel-2)}
-.calhead .gh{border-right:1px solid var(--hair)}
-.calhead .dh{padding:9px 6px;text-align:center;border-right:1px solid var(--hair)}
-.calhead .dh:last-child{border-right:none}
-.calhead .dh b{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
-.calhead .dh span{display:block;font-size:16px;font-weight:600;margin-top:2px;font-variant-numeric:tabular-nums}
-.calhead .dh.today b,.calhead .dh.today span{color:var(--accent)}
-.calscroll{max-height:calc(100vh - 210px);overflow-y:auto}
-.calmatrix{display:grid;grid-template-columns:46px repeat(7,minmax(0,1fr));grid-auto-rows:minmax(48px,auto)}
-.calmatrix .hr{border-right:1px solid var(--hair);border-bottom:1px solid var(--line-soft);font-size:10.5px;color:var(--faint);
-  text-align:right;padding:2px 6px 0 0;font-variant-numeric:tabular-nums}
-.cell{border-right:1px solid var(--hair);border-bottom:1px solid var(--line-soft);padding:2px;position:relative;transition:background .1s}
-.cell.today{background:var(--panel-2)}
-.cell.over{background:var(--accent-soft)}
-.evt{background:var(--panel);border-radius:2px;padding:3px 6px;margin-bottom:2px;cursor:grab;
-  font-size:11px;line-height:1.3;display:flex;gap:5px;align-items:center}
-.evt .edot{width:11px;height:11px;border-radius:50%;flex:none;border:1.5px solid var(--muted);display:grid;place-items:center}
-.evt .edot svg{width:8px;height:8px;color:#fff}
-.evt.coach{background:var(--accent-soft)}.evt.coach .edot{border-color:var(--accent)}
-.evt.student{background:var(--green-bg)}.evt.student .edot{border-color:var(--green)}
-.evt.done .edot{background:var(--green);border-color:var(--green)}
-.evt.done.coach .edot{background:var(--accent);border-color:var(--accent)}
-.evt.done{opacity:.62}.evt.done .et{text-decoration:line-through;color:var(--muted)}
-.evt .et{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.evt .ex{color:var(--faint);font-weight:700;cursor:pointer;padding:0 1px;line-height:1}
-.evt .ex:hover{color:var(--accent)}
-.evt:active{cursor:grabbing}
+/* ---- takvim: day-based week board (grey cards, color = state only) ---- */
+.split.pool-narrow{grid-template-columns:340px 1fr}
+.rpane.cal{display:flex;flex-direction:column;gap:16px;padding:24px 26px}
+.board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.dayc{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);display:flex;flex-direction:column;min-height:150px;transition:background .1s}
+.dayc.today .dh b{color:var(--accent)}
+.dayc.sel{box-shadow:0 0 0 1.5px var(--ink)}
+.dayc.over{background:var(--accent-soft)}
+.dayc .dh{width:100%;text-align:left;padding:8px 9px;border-bottom:1px solid var(--hair);display:flex;align-items:baseline;gap:6px;cursor:pointer}
+.dayc .dh b{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.dayc .dh span{font-size:11px;color:var(--muted)}
+.dayc .dh i{margin-left:auto;font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.dbody{padding:6px;display:flex;flex-direction:column;gap:4px;flex:1}
+.dempty{color:var(--faint);font-size:11px;text-align:center;padding:14px 0}
+.tsk{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);border-radius:2px;padding:4px 6px;font-size:11.5px;cursor:grab;color:var(--ink-soft)}
+.tsk .tdot{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--faint);flex:none;display:grid;place-items:center}
+.tsk .tdot svg{width:8px;height:8px;color:#fff}
+.tsk.done{border-color:var(--green);background:var(--green-bg);opacity:.85}
+.tsk.done .tdot{background:var(--green);border-color:var(--green)}
+.tsk.done .tt{text-decoration:line-through;color:var(--muted)}
+.tsk .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsk .tx{color:var(--faint);font-weight:700;padding:0 1px;line-height:1;cursor:pointer}
+.tsk .tx:hover{color:var(--red)}
+.tsk:active{cursor:grabbing}
+/* daily program panel */
+.daypanel{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:18px 20px}
+.daypanel h1.sec{margin:2px 0 12px;font-size:17px;font-weight:600}
+.prow{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid var(--hair)}
+.prow:last-child{border-bottom:none}
+.hsel{border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:2px;padding:4px 6px;font-size:12px;font-family:var(--mono)}
+.pcheck{width:20px;height:20px;border:1.5px solid var(--faint);border-radius:50%;display:grid;place-items:center;flex:none}
+.pcheck svg{width:11px;height:11px;color:transparent}
+.prow.done .pcheck{background:var(--green);border-color:var(--green)}
+.prow.done .pcheck svg{color:#fff}
+.prow .ptext{flex:1;min-width:0;cursor:pointer}
+.prow .ptext .title{font-size:13.5px}
+.prow.done .ptext .title{text-decoration:line-through;color:var(--muted)}
+.prow .ptext .code{font-size:10.5px;color:var(--faint)}
+.prow .px{color:var(--faint);font-weight:700;font-size:15px}
+.prow .px:hover{color:var(--red)}
+/* topbar page chips */
+.pagechips .chip{border:1px solid var(--line);background:var(--card)}
+.pagechips .wk{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:860px){
+  .board{display:flex;overflow-x:auto;padding-bottom:4px}
+  .dayc{min-width:150px;flex:none}
+  .rpane.cal{padding:14px 12px}
+}
 
 /* pool (mid column, draggable kazanım source) */
 .poolhint{font-size:11.5px;color:var(--faint);padding:4px 6px 8px}
@@ -209,14 +223,14 @@
 .onback{position:absolute;top:-6px;left:-6px;width:32px;height:32px;border-radius:2px;color:var(--muted);font-size:22px;display:grid;place-items:center}
 .onback:hover{background:var(--line-soft);color:var(--ink)}
 
-.userchip{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:2px;cursor:pointer;width:100%;margin-bottom:2px}
+.userchip{display:flex;align-items:center;gap:9px;padding:5px 8px;border-radius:2px;cursor:pointer}
 .userchip:hover{background:var(--line-soft)}
 .userchip .ava{width:29px;height:29px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
 .userchip .ui{min-width:0;flex:1;text-align:left}
-.userchip .ui b{font-size:13.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.userchip .ui b{font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;max-width:130px}
 .userchip .ui span{font-size:11px;color:var(--muted)}
 .userchip .cog{color:var(--faint)}.userchip .cog svg{width:15px;height:15px}
-.usermenu{position:absolute;bottom:64px;left:12px;right:12px;background:var(--card);border:1px solid var(--line);border-radius:2px;padding:5px;box-shadow:0 14px 44px rgba(0,0,0,.4);z-index:60}
+.usermenu{position:absolute;top:46px;right:0;width:200px;background:var(--card);border:1px solid var(--line);border-radius:2px;padding:5px;box-shadow:0 14px 44px rgba(0,0,0,.18);z-index:60}
 .usermenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 11px;border-radius:2px;font-size:13.5px;color:var(--ink-soft);text-align:left}
 .usermenu button:hover{background:var(--line-soft);color:var(--ink)}
 .usermenu button svg{width:15px;height:15px;color:var(--muted)}
@@ -268,3 +282,4 @@
 
 /* sync indicator (userchip subtitle) — error state only tints, no layout shift */
 .userchip .ui .syncsub.err{color:var(--red)}
+.userchip.active{background:var(--accent-soft)}

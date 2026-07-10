@@ -1,33 +1,47 @@
-// Takvim — drag-drop week calendar (real dates, prev/next week) + kazanım pool.
+// Takvim — day-based week board (Damla, 2026-07-10): kazanım drops onto a DAY, not an hour.
+// Cards are grey; the ONLY color is state (done / not done). Click a day → detailed daily program,
+// hours live there (optional per task). Pool: search + ders + unstudied filters, tap adds to selected day.
 import { S, save, bump, unbump, dstr } from '../state.js';
 import { DB, allKaz, findKaz } from '../data.js';
-import { $, el, esc, norm, ICON, WD_SHORT, MON_SHORT, HOURS, weekDates, setMid, dersDot } from '../ui.js';
+import { el, esc, norm, ICON, WD_SHORT, WD_LONG, MON_SHORT, HOURS, weekDates, page, setChips, dersDot } from '../ui.js';
 import { refresh } from '../router.js';
 
 const POOLFILT = { q: '', ders: 'all', only: false };
 let WEEK_OFFSET = 0;
+let SEL_DAY = null;  // dstr — day whose program is open; defaults to today
 
-// add to first free slot (today onward, 9-21, past hours skipped)
-function addToNextSlot(code) {
-  const now = new Date();
-  const busy = new Set(S.events.map(e => e.date + '@' + e.h));
-  for (let d = 0; d < 60; d++) {
-    const dt = new Date(); dt.setHours(0, 0, 0, 0); dt.setDate(dt.getDate() + d);
-    const ds = dstr(dt);
-    for (let h = 9; h <= 21; h += 2) {
-      if (d === 0 && h <= now.getHours()) continue;
-      if (busy.has(ds + '@' + h)) continue;
-      S.events.push({ id: 'e' + Date.now(), date: ds, h, code, author: 'student', done: false });
-      save(); refresh();
-      return;
-    }
-  }
+function addToDay(code, ds) {
+  S.events.push({ id: 'e' + Date.now() + Math.floor(Math.random() * 999), date: ds, h: null, code, author: 'student', done: false });
+  save(); refresh();
+}
+
+function dayEvents(ds) {
+  // houred tasks first (by hour), then day-level ones in insertion order
+  return S.events.filter(x => x.date === ds)
+    .sort((a, b) => (a.h == null) - (b.h == null) || (a.h || 0) - (b.h || 0));
 }
 
 export function takvim() {
-  const mid = $('#mid');
-  const t = mid.querySelector('.tools'); if (t) t.remove();
-  mid.querySelector('.head').innerHTML = `<h2>Kazanım havuzu</h2><p>Sürükleyip takvime bırak</p>`;
+  const tstr = dstr(new Date());
+  if (!SEL_DAY) SEL_DAY = tstr;
+  const dates = weekDates(WEEK_OFFSET);
+
+  // ---- topbar chips: week navigation lives with the page ----
+  const chips = el('div', 'chips');
+  const label = WEEK_OFFSET === 0 ? 'Bu hafta' : WEEK_OFFSET === -1 ? 'Geçen hafta' : WEEK_OFFSET === 1 ? 'Gelecek hafta' : `${WEEK_OFFSET > 0 ? '+' : ''}${WEEK_OFFSET} hafta`;
+  chips.innerHTML = `<button class="chip" id="wprev">‹</button>
+    <button class="chip" id="wtoday">Bugün</button>
+    <button class="chip" id="wnext">›</button>
+    <span class="wk">${label} · ${dates[0].getDate()} ${MON_SHORT[dates[0].getMonth()]} – ${dates[6].getDate()} ${MON_SHORT[dates[6].getMonth()]}</span>`;
+  chips.querySelector('#wprev').onclick = () => { WEEK_OFFSET--; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
+  chips.querySelector('#wnext').onclick = () => { WEEK_OFFSET++; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
+  chips.querySelector('#wtoday').onclick = () => { WEEK_OFFSET = 0; SEL_DAY = tstr; refresh(); };
+  setChips(chips);
+
+  // ---- layout: pool (left) + board & day program (right) ----
+  const split = el('div', 'split pool-narrow'); page(true).appendChild(split);
+  const lpane = el('div', 'lpane'); split.appendChild(lpane);
+  lpane.innerHTML = `<div class="head"><h2>Kazanım havuzu</h2><p>Sürükle ya da dokun — seçili güne eklenir</p></div>`;
   const tools = el('div', 'tools');
   tools.innerHTML = `<div class="search${POOLFILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
     <input placeholder="Havuzda ara…" value="${esc(POOLFILT.q)}"><span class="clr">×</span></div>
@@ -38,8 +52,8 @@ export function takvim() {
     <div class="chips gap-top">
       <button class="chip${POOLFILT.only ? ' on' : ''}" id="onlyred">Sadece çalışılmamış</button>
     </div>`;
-  mid.insertBefore(tools, mid.querySelector('.list'));
-  const list = mid.querySelector('.list'); list.className = 'list pool';
+  lpane.appendChild(tools);
+  const list = el('div', 'list pool'); lpane.appendChild(list);
   function paintPool() {
     list.innerHTML = '';
     let n = 0, total = 0;
@@ -55,67 +69,84 @@ export function takvim() {
         <div class="rtext"><div class="code">${z.code} · ${esc(z.ders.ders.split(' ')[0])}</div><div class="title">${esc(z.title)}</div></div>`;
       row.ondragstart = e => { e.dataTransfer.setData('text/plain', 'pool:' + z.uid); e.dataTransfer.effectAllowed = 'copy'; row.classList.add('dragging'); };
       row.ondragend = () => row.classList.remove('dragging');
-      // HTML5 drag doesn't exist on touch: tap → first free slot (desktop shortcut too)
-      row.onclick = () => { addToNextSlot(z.uid); };
+      row.onclick = () => addToDay(z.uid, SEL_DAY);   // touch has no HTML5 drag: tap → selected day
       list.appendChild(row);
     });
     if (total > 150) list.appendChild(el('div', 'hint', `${total} kazanım · ilk 150 gösteriliyor, aramayla daralt`));
     if (!total) list.appendChild(el('div', 'empty', 'Eşleşen kazanım yok'));
   }
   tools.querySelector('input').oninput = e => { POOLFILT.q = e.target.value; tools.querySelector('.search').classList.toggle('has', !!POOLFILT.q); paintPool(); };
-  tools.querySelector('.clr').onclick = () => { POOLFILT.q = ''; takvim(); };
-  tools.querySelector('#onlyred').onclick = () => { POOLFILT.only = !POOLFILT.only; takvim(); };
-  tools.querySelector('[data-grp="ders"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.ders = c.dataset.v; takvim(); });
+  tools.querySelector('.clr').onclick = () => { POOLFILT.q = ''; refresh(); };
+  tools.querySelector('#onlyred').onclick = () => { POOLFILT.only = !POOLFILT.only; refresh(); };
+  tools.querySelector('[data-grp="ders"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.ders = c.dataset.v; refresh(); });
   paintPool();
 
-  const dates = weekDates(WEEK_OFFSET), tstr = dstr(new Date());
-  const d = $('#detail'); d.classList.add('wide'); d.innerHTML = '';
-  const bar = el('div', 'calbar');
-  const label = WEEK_OFFSET === 0 ? 'Bu hafta' : WEEK_OFFSET === -1 ? 'Geçen hafta' : WEEK_OFFSET === 1 ? 'Gelecek hafta' : `${WEEK_OFFSET > 0 ? '+' : ''}${WEEK_OFFSET} hafta`;
-  bar.innerHTML = `<button class="wkbtn" id="prev">‹</button><button class="wkbtn" id="today">Bugün</button><button class="wkbtn" id="next">›</button>
-    <h1>${label}</h1>
-    <span class="wk">${dates[0].getDate()} ${MON_SHORT[dates[0].getMonth()]} – ${dates[6].getDate()} ${MON_SHORT[dates[6].getMonth()]} ${dates[6].getFullYear()}</span>`;
-  bar.querySelector('#prev').onclick = () => { WEEK_OFFSET--; takvim(); };
-  bar.querySelector('#next').onclick = () => { WEEK_OFFSET++; takvim(); };
-  bar.querySelector('#today').onclick = () => { WEEK_OFFSET = 0; takvim(); };
-  d.appendChild(bar);
+  const rpane = el('div', 'rpane cal'); split.appendChild(rpane);
 
-  const cal = el('div', 'cal');
-  const head = el('div', 'calhead');
-  head.appendChild(el('div', 'gh'));
-  dates.forEach((dt, i) => head.appendChild(el('div', 'dh' + (dstr(dt) === tstr ? ' today' : ''), `<b>${WD_SHORT[i]}</b><span>${dt.getDate()}</span>`)));
-  cal.appendChild(head);
-
-  const scroll = el('div', 'calscroll');
-  const matrix = el('div', 'calmatrix');
-  HOURS.forEach(h => {
-    matrix.appendChild(el('div', 'hr', `${h}:00`));
-    dates.forEach(dt => {
-      const ds = dstr(dt);
-      const cell = el('div', 'cell' + (ds === tstr ? ' today' : ''));
-      cell.dataset.date = ds; cell.dataset.h = h;
-      cell.ondragover = e => { e.preventDefault(); cell.classList.add('over'); };
-      cell.ondragleave = () => cell.classList.remove('over');
-      cell.ondrop = e => {
-        e.preventDefault(); cell.classList.remove('over');
-        const data = e.dataTransfer.getData('text/plain');
-        if (data.startsWith('pool:')) S.events.push({ id: 'e' + Date.now() + Math.floor(Math.random() * 999), date: ds, h, code: data.slice(5), author: 'student', done: false });
-        else if (data.startsWith('move:')) { const ev = S.events.find(x => x.id === data.slice(5)); if (ev) { ev.date = ds; ev.h = h; } }
-        save(); refresh();
-      };
-      S.events.filter(x => x.date === ds && x.h === h).forEach(ev => {
-        const z = findKaz(ev.code);
-        const card = el('div', 'evt ' + ev.author + (ev.done ? ' done' : '')); card.draggable = true;
-        card.innerHTML = `<span class="edot">${ev.done ? ICON.check : ''}</span><span class="et">${esc(z ? z.title : ev.code)}</span><span class="ex">×</span>`;
-        card.title = (z ? z.title : ev.code) + '  ·  ' + (ev.author === 'coach' ? 'çilek ekledi' : 'sen ekledin') + (ev.done ? ' · yapıldı' : ' · bekliyor');
-        card.ondragstart = e => { e.dataTransfer.setData('text/plain', 'move:' + ev.id); e.dataTransfer.effectAllowed = 'move'; };
-        card.onclick = e => { if (e.target.closest('.ex')) return; ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
-        card.querySelector('.ex').onclick = e => { e.stopPropagation(); S.events = S.events.filter(x => x.id !== ev.id); save(); refresh(); };
-        cell.appendChild(card);
-      });
-      matrix.appendChild(cell);
-    });
+  // ---- week board: 7 day cards, whole card is the drop target ----
+  const board = el('div', 'board');
+  dates.forEach((dt, i) => {
+    const ds = dstr(dt);
+    const evs = dayEvents(ds);
+    const card = el('div', 'dayc' + (ds === tstr ? ' today' : '') + (ds === SEL_DAY ? ' sel' : ''));
+    const head = el('button', 'dh', `<b>${WD_SHORT[i]}</b><span>${dt.getDate()} ${MON_SHORT[dt.getMonth()]}</span>${evs.length ? `<i>${evs.filter(e => e.done).length}/${evs.length}</i>` : ''}`);
+    head.onclick = () => { SEL_DAY = ds; refresh(); };
+    card.appendChild(head);
+    const body = el('div', 'dbody');
+    evs.forEach(ev => body.appendChild(tsk(ev)));
+    if (!evs.length) body.appendChild(el('div', 'dempty', 'boş'));
+    card.appendChild(body);
+    card.ondragover = e => { e.preventDefault(); card.classList.add('over'); };
+    card.ondragleave = () => card.classList.remove('over');
+    card.ondrop = e => {
+      e.preventDefault(); card.classList.remove('over');
+      const data = e.dataTransfer.getData('text/plain');
+      if (data.startsWith('pool:')) { SEL_DAY = ds; addToDay(data.slice(5), ds); return; }
+      if (data.startsWith('move:')) { const ev = S.events.find(x => x.id === data.slice(5)); if (ev && ev.date !== ds) { ev.date = ds; ev.h = null; save(); } refresh(); }
+    };
+    board.appendChild(card);
   });
-  scroll.appendChild(matrix); cal.appendChild(scroll); d.appendChild(cal);
-  d.appendChild(el('div', 'hint', 'Havuzdan sürükle ya da dokun (ilk boş saate eklenir) · kartı taşı · kart tıkla = ✓ yapıldı · × = kaldır. Pembe = çilek, yeşil = sen.'));
+  rpane.appendChild(board);
+
+  // ---- daily program: the selected day in detail, hours live HERE ----
+  const [sy, sm, sday] = SEL_DAY.split('-').map(Number);
+  const sd = new Date(sy, sm - 1, sday);  // local-time parse; new Date('YYYY-MM-DD') would be UTC
+  const sevs = dayEvents(SEL_DAY);
+  const panel = el('div', 'daypanel');
+  panel.appendChild(el('div', 'seclabel', 'GÜNLÜK PROGRAM'));
+  panel.appendChild(el('h1', 'sec', `${WD_LONG[(sd.getDay() + 6) % 7]} · ${sd.getDate()} ${MON_SHORT[sd.getMonth()]}`));
+  if (!sevs.length) panel.appendChild(el('div', 'empty', 'Bu güne henüz kazanım eklemedin — havuzdan seç.'));
+  sevs.forEach(ev => {
+    const z = findKaz(ev.code);
+    const row = el('div', 'prow' + (ev.done ? ' done' : ''));
+    const sel = el('select', 'hsel');
+    sel.innerHTML = `<option value="">saatsiz</option>` + HOURS.map(h => `<option value="${h}"${ev.h === h ? ' selected' : ''}>${String(h).padStart(2, '0')}:00</option>`).join('');
+    sel.onchange = () => { ev.h = sel.value === '' ? null : +sel.value; save(); refresh(); };
+    row.appendChild(sel);
+    const cb = el('button', 'pcheck', ICON.check);
+    cb.onclick = () => { ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
+    row.appendChild(cb);
+    const txt = el('div', 'ptext');
+    txt.innerHTML = `<div class="title">${esc(z ? z.title : ev.code)}</div><div class="code">${z ? z.code + ' · ' + esc(z.ders.ders.split(' ')[0]) : ''}${ev.author === 'coach' ? ' · çilek ekledi' : ''}</div>`;
+    if (z) txt.onclick = () => { location.hash = '#/konular/' + z.uid; };
+    row.appendChild(txt);
+    const x = el('button', 'px', '×');
+    x.onclick = () => { S.events = S.events.filter(q => q.id !== ev.id); save(); refresh(); };
+    row.appendChild(x);
+    panel.appendChild(row);
+  });
+  rpane.appendChild(panel);
+  rpane.appendChild(el('div', 'hint', 'Kazanım güne eklenir; saat istersen günlük programda seçilir. Kart sürükle = gün değiştir · ✓ = yapıldı · × = kaldır.'));
+}
+
+// grey task chip on the board — color only means state (done / pending)
+function tsk(ev) {
+  const z = findKaz(ev.code);
+  const card = el('div', 'tsk' + (ev.done ? ' done' : '')); card.draggable = true;
+  card.innerHTML = `<span class="tdot">${ev.done ? ICON.check : ''}</span><span class="tt">${esc(z ? z.title : ev.code)}</span><span class="tx">×</span>`;
+  card.title = (z ? z.title : ev.code) + '  ·  ' + (ev.author === 'coach' ? 'çilek ekledi' : 'sen ekledin') + (ev.done ? ' · yapıldı' : ' · bekliyor');
+  card.ondragstart = e => { e.dataTransfer.setData('text/plain', 'move:' + ev.id); e.dataTransfer.effectAllowed = 'move'; };
+  card.onclick = e => { if (e.target.closest('.tx')) return; ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
+  card.querySelector('.tx').onclick = e => { e.stopPropagation(); S.events = S.events.filter(x => x.id !== ev.id); save(); refresh(); };
+  return card;
 }

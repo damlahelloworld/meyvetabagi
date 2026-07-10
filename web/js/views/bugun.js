@@ -2,7 +2,7 @@
 import { S, save, bump, unbump, addRep, dstr } from '../state.js';
 import { totals, findKaz } from '../data.js';
 import { EXAM, analyzeWeak, dailyKaz, generatePlan } from '../engine.js';
-import { $, el, esc, cnt, ICON, WD_LONG, setMid } from '../ui.js';
+import { el, esc, cnt, ICON, page } from '../ui.js';
 import { refresh } from '../router.js';
 
 export function taskRow(x, big) {
@@ -19,14 +19,11 @@ export function taskRow(x, big) {
 export function bugun() {
   const t = totals();
   const ts = dstr(new Date());
-  const list = setMid('Bugün', WD_LONG[(new Date().getDay() + 6) % 7] + ' · takvimdeki bugünkü kazanımlar');
-  const today = S.events.filter(x => x.date === ts).sort((a, b) => a.h - b.h);
-  if (!today.length) list.appendChild(el('div', 'empty', 'Bugün için görev yok'));
-  today.forEach(x => list.appendChild(taskRow(x)));
+  const today = S.events.filter(x => x.date === ts).sort((a, b) => (a.h == null) - (b.h == null) || (a.h || 0) - (b.h || 0));
 
   const days = EXAM > new Date() ? Math.ceil((EXAM - new Date()) / 864e5) : 0;
   const last = S.denemeler[S.denemeler.length - 1];
-  const d = $('#detail'); d.innerHTML = '';
+  const d = el('div', 'pagein'); page().appendChild(d);
   const nm = (S.user && S.user.name || '').trim().split(' ')[0];
   d.appendChild(el('div', 'crumb', 'ANA SAYFA'));
   d.appendChild(el('h1', null, nm ? `Merhaba ${esc(nm)}, devam edelim` : 'Merhaba, devam edelim'));
