@@ -37,7 +37,7 @@ svg{display:block}
 .nav.active{border-bottom-color:var(--accent)}
 .nav:hover{border-bottom-color:var(--line-soft)}
 .nav .count{margin-left:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;-webkit-text-fill-color:var(--muted)}
-#userslot{position:relative;flex:none}
+#userslot{position:relative;flex:none;align-self:flex-start}
 
 /* page — real app column: centered, comfortable measure (not full-bleed left-jammed) */
 .page{flex:1;overflow-y:auto;background:var(--bg)}

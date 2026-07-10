@@ -52,21 +52,18 @@ function renderBar() {
   const u = S.user || { name: 'Misafir' };
   const initial = (u.name || '?').trim().charAt(0).toLocaleUpperCase('tr');
   const chip = el('div', 'userchip' + (route() === 'profil' ? ' active' : ''));
-  chip.innerHTML = `<div class="ui"><b>${esc((u.name || '').toLocaleLowerCase('tr'))}</b><span class="syncsub">${syncLabel()}</span></div>`;
+  chip.innerHTML = `<div class="ui"><b class="uname">${esc((u.name || '').toLocaleLowerCase('tr'))}</b></div>`;
   slot.appendChild(chip);
   chip.onclick = () => {
     const old = slot.querySelector('.usermenu');
     if (old) { old.remove(); return; }
     const menu = el('div', 'usermenu');
+    // mesajlaşma yok → Mesajlar & Çıkış menüden kalktı (Damla). Çıkış Ayarlar'da.
     menu.innerHTML = `<button data-a="profil">${ICON.user}Profil</button>
-      <button data-a="mesajlar">${ICON.spark}Mesajlar</button>
-      <button data-a="ayarlar">${ICON.cog}Ayarlar</button>
-      <div class="sep"></div><button data-a="logout">${ICON.logout}Çıkış yap</button>`;
+      <button data-a="ayarlar">${ICON.cog}Ayarlar</button>`;
     slot.appendChild(menu);
     menu.querySelector('[data-a="profil"]').onclick = () => { menu.remove(); location.hash = '#/profil'; };
-    menu.querySelector('[data-a="mesajlar"]').onclick = () => { menu.remove(); location.hash = '#/mesajlar'; };
     menu.querySelector('[data-a="ayarlar"]').onclick = () => { menu.remove(); location.hash = '#/ayarlar'; };
-    menu.querySelector('[data-a="logout"]').onclick = async () => { menu.remove(); if (confirm(online() ? 'Çıkış yapılsın mı? Verilerin hesabında güvende.' : 'Çıkış yapılsın mı? Verilerin bu tarayıcıda kalır.')) { await signOut(); S.user = null; save(); onboard(); } };
     const close = e => { if (!menu.contains(e.target) && !chip.contains(e.target)) { menu.remove(); document.removeEventListener('click', close); } };
     setTimeout(() => document.addEventListener('click', close), 0);
   };

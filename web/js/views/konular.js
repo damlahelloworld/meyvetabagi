@@ -83,15 +83,19 @@ export function konular() {
       const dersGreen = allDers.filter(z => S.status[kuid(ders.ders, z.code)] === 'green').length;
       const dersPct = allDers.length ? Math.round(dersGreen / allDers.length * 100) : 0;
       list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), `${esc(ders.ders)} <span class="dpct">%${dersPct}</span>`));
-      list.appendChild(el('div', 'dersbar', `<i class="db-${dersColor(ders.ders)}" style="width:${dersPct}%"></i>`));
       const grades = [...new Set(visUnits.map(u => u.grade).filter(Boolean))].sort((a, b) => Number(a) - Number(b));
       if (grades.length) {
-        // columns ARE the grades: 9 | 10 | 11 | 12 (Damla, 2026-07-10)
+        // her sınıf başlığı = sınıf + o sınıfın tamamlanma oranı yan yana (Damla)
+        const gradePct = g => {
+          const gk = ders.units.filter(u => u.grade === g).flatMap(u => u.konular.flatMap(k => k.kazanimlar));
+          const gg2 = gk.filter(z => S.status[kuid(ders.ders, z.code)] === 'green').length;
+          return gk.length ? Math.round(gg2 / gk.length * 100) : 0;
+        };
         const gg = el('div', 'gradegrid');
         gg.style.gridTemplateColumns = `repeat(${grades.length}, minmax(0,1fr))`;
         grades.forEach(g => {
           const col = el('div', 'gcol');
-          col.appendChild(el('div', 'ghead', g + '. sınıf'));
+          col.appendChild(el('div', 'ghead', `${g}. sınıf <span class="ghpct">%${gradePct(g)}</span>`));
           ders.units.filter(u => u.grade === g).forEach(u => {
             const b = unitBlock(ders, u, false); if (b) col.appendChild(b);
           });
@@ -124,6 +128,14 @@ export function konular() {
   }
   paintList();
 
+  // en altta: tur atmak isteyen deliler için sıfırla (çift onay)
+  const reset = el('button', 'resetkaz', 'kazanımları sıfırla');
+  reset.onclick = () => {
+    if (!confirm('Emin misin? Tüm kırmızı/sarı/yeşil işaretlerin silinecek.')) return;
+    if (!confirm('Gerçekten? Bu geri alınamaz — sıfırdan başlıyorsun.')) return;
+    S.status = {}; S.reps = {}; S.repDay = {}; save(); konular();
+  };
+  d.appendChild(reset);
 }
 
 // terim detayını ekranın ortasında bir kutuda aç (Damla: altında değil, message on screen)
@@ -162,23 +174,19 @@ function kazDetail(sel) {
   d.appendChild(el('p', 'meta', `Kazanım ${z.code}`));
 
   const st = S.status[z.uid] || 'none';  // unmarked = none: no segment pre-selected (data and display agree)
-  const n = S.reps[z.uid] || 0;
   const segwrap = el('div', 'segwrap');
   const segs = el('div', 'segs');
   STATUS.forEach(v => {
-    const label = v === 'green' ? (n > 0 ? `Öğrendim · ${n}×` : 'Öğrendim') : STAT_LBL[v];
-    const b = el('button', v === st ? 'on ' + v : '', label);
+    const b = el('button', v === st ? 'on ' + v : '', STAT_LBL[v]);
     b.onclick = () => {
       S.status[z.uid] = v;
-      if (v === 'green' && addRep(z.uid)) bump();  // at most one rep per day counts
+      if (v === 'green' && addRep(z.uid)) bump();  // günde en fazla bir tekrar sayılır
       save(); refresh();
     };
     segs.appendChild(b);
   });
   segwrap.appendChild(segs);
-  if (n > 0) { const m = el('button', 'repminus', '− tekrar'); m.onclick = () => { S.reps[z.uid] = Math.max(0, n - 1); save(); refresh(); }; segwrap.appendChild(m); }
   d.appendChild(segwrap);
-  d.appendChild(el('div', 'hint seg', 'Öğrendim tekrar sayacı işletir — aynı kazanım günde en fazla bir tekrar sayılır, yarın yine çalışabilirsin.'));
 
   if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>bu konuda MEB ne demiş?</b>${esc(z.aciklama)}`));
 
