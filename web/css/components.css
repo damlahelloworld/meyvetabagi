@@ -327,3 +327,5 @@
 .kaynaklink { font-size: 12px; color: var(--accent-ink); text-decoration: underline; }
 .kaynaklink:hover { color: var(--ink); }
 .kaynakca.wide { max-width: 760px; }
+
+.kaynakca .badge { font-size: 10.5px; color: var(--amber); margin-left: 4px; }
