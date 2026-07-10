@@ -15,8 +15,7 @@ svg{display:block}
 
 /* ---- shell: topbar + single page ---- */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-.topbar{display:flex;align-items:center;gap:18px;padding:0 26px;height:58px;flex:none;
-  border-bottom:1px solid var(--line);background:var(--bg)}
+.topbar{display:flex;align-items:center;gap:18px;padding:0 16px;height:76px;flex:none;background:var(--bg)}
 .brand{display:flex;align-items:center;flex:none}
 .brand b{font-size:17px;font-weight:400;letter-spacing:.01em;line-height:1;color:var(--accent-ink)}
 .pagechips{display:flex;align-items:center;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}

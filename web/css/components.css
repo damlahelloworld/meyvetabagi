@@ -139,12 +139,15 @@
 /* ---- takvim: day-based week board (grey cards, color = state only) ---- */
 .split.pool-narrow{grid-template-columns:340px 1fr}
 .rpane.cal{display:flex;flex-direction:column;gap:16px;padding:24px 26px}
-.board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
-.dayc{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);display:flex;flex-direction:column;min-height:150px;transition:background .1s}
+.board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+.dayc{border-right:1px solid var(--line-soft);background:var(--card);display:flex;flex-direction:column;min-height:240px;transition:background .1s}
+.dayc:last-child{border-right:none}
 .dayc.today .dh b{color:var(--accent)}
-.dayc.sel{border-color:var(--ink);border-width:1.5px}
+.dayc.sel{background:var(--panel-2)}
+.dayc.sel .dh{background:var(--ink)}
+.dayc.sel .dh b,.dayc.sel .dh span,.dayc.sel .dh i{color:var(--bg)}
 .dayc.over{background:var(--accent-soft)}
-.dayc .dh{width:100%;text-align:left;padding:8px 9px;border-bottom:1px solid var(--hair);display:flex;align-items:baseline;gap:6px;cursor:pointer}
+.dayc .dh{width:100%;text-align:left;padding:10px 10px;background:var(--panel);border-bottom:1px solid var(--line-soft);display:flex;align-items:baseline;gap:6px;cursor:pointer}
 .dayc .dh b{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:400}
 .dayc .dh span{font-size:11px;color:var(--muted)}
 .dayc .dh i{margin-left:auto;font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -253,8 +256,8 @@
 
 .heatwrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:24px;overflow-x:auto}
 .heatwrap .ht{font-size:13px;color:var(--muted);margin-bottom:14px}
-.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,14px);gap:2px}
-.heat i{width:14px;height:14px;border-radius:3px;background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--line-soft)}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,14px);gap:3px;justify-content:start}
+.heat i{width:14px;height:14px;border-radius:50%;background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--line-soft)}
 .heat i.l1{background:var(--h1);box-shadow:none}.heat i.l2{background:var(--h2);box-shadow:none}.heat i.l3{background:var(--h3);box-shadow:none}.heat i.l4{background:var(--h4);box-shadow:none}
 .heatleg{display:flex;align-items:center;gap:5px;justify-content:flex-end;margin-top:12px;font-size:11px;color:var(--faint)}
 .heatleg i{width:11px;height:11px;border-radius:50%}
@@ -285,3 +288,8 @@
 /* sync indicator (userchip subtitle) — error state only tints, no layout shift */
 .userchip .ui .syncsub.err{color:var(--red)}
 .userchip.active{background:var(--accent-soft)}
+
+/* konular single page: flat tools + backlink */
+.tools.flat{padding:0 0 8px;max-width:640px}
+.backlink{display:inline-block;font-size:13px;color:var(--muted);margin-bottom:14px}
+.backlink:hover{color:var(--ink)}

@@ -8,19 +8,20 @@ import { route, setRender } from './router.js';
 import { bugun } from './views/bugun.js';
 import { konular } from './views/konular.js';
 import { takvim } from './views/takvim.js';
-import { denemeler } from './views/denemeler.js';
 import { siralama } from './views/siralama.js';
 import { profil } from './views/profil.js';
+import { mesajlar } from './views/mesajlar.js';
+import { ayarlar } from './views/ayarlar.js';
 import { onboard } from './views/onboard.js';
 
+// deneme mechanic REMOVED from UI (Damla, 2026-07-10: "konuşmadık henüz") — data stays in state/DB
 const NAV = [
   { id: 'bugun', label: 'bugün' },
   { id: 'konular', label: 'konular' },
   { id: 'takvim', label: 'takvim' },
-  { id: 'denemeler', label: 'denemeler' },
   { id: 'siralama', label: 'sıra puanı' },
 ];
-const VIEWS = { bugun, konular, takvim, denemeler, siralama, profil };
+const VIEWS = { bugun, konular, takvim, siralama, profil, mesajlar, ayarlar };
 
 // sync indicator: local mode says Öğrenci; with an account it reflects push state
 function syncLabel() {
@@ -57,11 +58,13 @@ function renderBar() {
     if (old) { old.remove(); return; }
     const menu = el('div', 'usermenu');
     menu.innerHTML = `<button data-a="profil">${ICON.user}Profil</button>
-      <button data-a="theme">${S.theme === 'dark' ? ICON.sun : ICON.moon}${S.theme === 'dark' ? 'Açık tema' : 'Koyu tema'}</button>
+      <button data-a="mesajlar">${ICON.spark}Mesajlar</button>
+      <button data-a="ayarlar">${ICON.cog}Ayarlar</button>
       <div class="sep"></div><button data-a="logout">${ICON.logout}Çıkış yap</button>`;
     slot.appendChild(menu);
     menu.querySelector('[data-a="profil"]').onclick = () => { menu.remove(); location.hash = '#/profil'; };
-    menu.querySelector('[data-a="theme"]').onclick = () => { S.theme = S.theme === 'dark' ? 'light' : 'dark'; save(); applyTheme(); menu.remove(); };
+    menu.querySelector('[data-a="mesajlar"]').onclick = () => { menu.remove(); location.hash = '#/mesajlar'; };
+    menu.querySelector('[data-a="ayarlar"]').onclick = () => { menu.remove(); location.hash = '#/ayarlar'; };
     menu.querySelector('[data-a="logout"]').onclick = async () => { menu.remove(); if (confirm(online() ? 'Çıkış yapılsın mı? Verilerin hesabında güvende.' : 'Çıkış yapılsın mı? Verilerin bu tarayıcıda kalır.')) { await signOut(); S.user = null; save(); onboard(); } };
     const close = e => { if (!menu.contains(e.target) && !chip.contains(e.target)) { menu.remove(); document.removeEventListener('click', close); } };
     setTimeout(() => document.addEventListener('click', close), 0);

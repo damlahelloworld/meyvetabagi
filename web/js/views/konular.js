@@ -19,10 +19,13 @@ function matchKaz(z, dersName) {
 }
 
 export function konular() {
-  const split = el('div', 'split'); page(true).appendChild(split);
-  const lpane = el('div', 'lpane'); split.appendChild(lpane);
-  lpane.innerHTML = `<div class="head"><h2>Konular</h2><p>${allKaz().length} MEB kazanımı · ara, filtrele, işaretle</p></div>`;
-  const tools = el('div', 'tools'); lpane.appendChild(tools);
+  // single full-width page (Damla: "columnlu tasarımı bırak"): list page ↔ detail page via hash param
+  const sel0 = param();
+  if (sel0) return kazDetail(sel0);
+  const d = el('div', 'pagein'); page().appendChild(d);
+  d.innerHTML = `<div class="crumb">KONULAR</div><h1>Konular</h1><p class="meta">${allKaz().length} MEB kazanımı · ara, filtrele, işaretle</p>`;
+  const lpane = d;
+  const tools = el('div', 'tools flat'); lpane.appendChild(tools);
   lpane.appendChild(el('div', 'list'));
   const counts = { all: 0, red: 0, amber: 0, green: 0, none: 0 };
   allKaz().forEach(z => { counts.all++; counts[S.status[z.uid] || 'none']++; });
@@ -89,10 +92,13 @@ export function konular() {
   }
   paintList();
 
-  const sel = param();
-  const z = sel ? findKaz(sel) : null;
-  const d = el('div', 'rpane'); split.appendChild(d);
-  if (!z) { d.appendChild(el('div', 'empty', 'Soldan bir kazanım seç')); return; }
+}
+
+function kazDetail(sel) {
+  const z = findKaz(sel);
+  const d = el('div', 'pagein'); page().appendChild(d);
+  if (!z) { d.appendChild(el('div', 'empty', 'Kazanım bulunamadı')); return; }
+  const back = el('a', 'backlink', '‹ konular'); back.href = '#/konular'; d.appendChild(back);
 
   d.appendChild(el('div', 'crumb', `${esc(z.ders.ders.toUpperCase())}${z.unit.grade ? ' · ' + z.unit.grade + '. SINIF' : ''} · ${esc((z.unit.name || '').toUpperCase())}`));
   d.appendChild(el('h1', null, esc(z.title)));

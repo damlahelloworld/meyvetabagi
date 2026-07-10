@@ -119,7 +119,17 @@ Rules kept for you: zero inline styles anywhere, no colored borders, no single-s
 - Damla owns design direction and will redesign (Figma or manual CSS) — that's WHY styles are separated. Big redesigns need a concrete reference from her first. Landing needs a distinctive pass (still generic).
 - Expected-pattern floor (feels wrong without): home = countdown + last net + add-CTA; onboarding = target → days left → hours → level → first plan. Both exist.
 
-> **NEXT SESSION STARTS HERE:** design language settled after 3 passes (2026-07-10 morning): **Arial + muted fruit palette + no bold + 3px corners** (Damla bumped 2→3px "modernleştir") + white ground, ink hairlines. Damla rejected literal-stitchu costume ("bomboş… ilham alman yeterliydi"): NO dashed stitch lines, NO over-flattening — filled accent buttons/avatars/logos, soft tinted stat cards, accent-soft active nav are BACK (all in muted tones). stitchu = inspiration only, never costume. Damla checks http://localhost:8083/web/app.html (fresh port per CSS change; 8080-8083 used). Open: her verdict → landing structural pass → BLOK C rest (deploy gated on ship-check + live test).
+> **NEXT SESSION STARTS HERE:** Damla's screenshot-by-screenshot directives SHIPPED (2026-07-10 ~06:30):
+> VIVID palette back (she rejected muted/"gül kurusu" — vivid pink #E8619A accent, no pale tones; Arial + no-bold + 3px stay);
+> topbar taller (76px), small side padding, NO bottom border (stitchu header proportions, no costume);
+> Konular = single full-width page (list ↔ detail via #/konular/<uid>, backlink; "columnlu tasarım" dead);
+> Takvim board = real-calendar look (collapsed borders, panel header strip, selected day = ink header);
+> **Denemeler REMOVED from UI entirely** ("mekaniği konuşmadık henüz") — engine/DB data stays, view deleted;
+> Profil = identity + stat cards + heatmap only (heatmap dots now CIRCLES, columns tight);
+> randevu PARKED (add later, NOT profil); Mesajlar + Ayarlar = own pages via avatar menu (#/mesajlar, #/ayarlar).
+> All 8 routes smoke-tested green in happy-dom (real boot errors now surface on-page since the dailyKaz crash lesson).
+> Damla checks http://localhost:8084/web/app.html — fresh port per CSS change (Safari module cache; 8080-8084 used).
+> Open: her verdict → landing pass with vivid palette → BLOK C rest (deploy gated on ship-check + live test).
 > Previous pointer: repo is LIVE at github.com/damlahelloworld/meyvetabagi (private) — push there from now on; home-dir repo is history. BLOK C remaining: deploy (GATED on rank data + ship-check + live test), domain (Damla buys), OG image + service worker. Previous note: BLOK B done incl. Damla's dashboard steps (2026-07-10 04:30: migration 0003 ran, redirect URL allowed, Resend SMTP configured — sender onboarding@resend.dev, test mode: only mails Damla's own address until domain verified). Stage 7 live two-device test SKIPPED by Damla ("olmuştur büyük ihtimalle") — UNVERIFIED, run it before anything public. Next: stage 16 quick rate-limit look → BLOK C (repo + deploy + domain; at deploy add real domain to redirect URLs + verify domain in Resend). Supabase LIVE; DB password only with Damla.
 
 ## ROADMAP — 68 AŞAMA (ordered; work top to bottom; ☐ open · ☑ done · ⏸ waits on Damla)

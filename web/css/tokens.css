@@ -1,48 +1,43 @@
-/* meyvetabagi — design tokens. THE file to touch for theming (colors, type, radii).
-   Language (Damla, 2026-07-10, stitchu reference): paper white + ink + MUTED fruit palette,
-   Arial only, weight 400 only (bold is banned), 2px corners, 1px ink hairlines,
-   dashed "seam" dividers. Flat — no tinted panel fills, no shadows.
-   DEFAULT = white (:root). Dark theme = body.dark. */
+/* meyvetabagi — design tokens. THE file to touch for theming.
+   Language (Damla, 2026-07-10): white ground + ink, VIVID fruit palette (no pale tones, no dusty rose),
+   Arial only, no bold anywhere, 3px corners. */
 :root{
   /* paper & ink */
   --bg:#FFFFFF; --panel:#F6F6F6; --panel-2:#FAFAFA; --card:#FFFFFF;
   --ink:#111111; --ink-soft:#333333; --muted:#8A8A8A; --faint:#D9D9D9;
   --line:#111111; --line-soft:#E4E4E4; --hair:#ECECEC;
 
-  /* fruit palette — muted, never loud (kırmızı pembe turuncu sarı yeşil mavi) */
-  --cilek:#B6524A;                 /* kırmızı — çilek */
-  --pink:#C4767B;  --pink-ink:#A55E63;  --pink-soft:#F7EDEE;
-  --orange:#C08552; --yellow:#B8963E; --green:#7A8450; --blue:#3E5C76;
-  --red:#B6524A; --amber:#B8963E;
-  --red-bg:#F6EAE9; --amber-bg:#F4EFE0; --green-bg:#EDEFE6;
-  --purple:#7E5A75; --teal:#4E8A83; --brown:#8A6F52;   /* ders palette fillers, same mute */
-  --purple-soft:#F1EBEF; --blue-soft:#E9EDF1; --orange-soft:#F5EDE4; --yellow-soft:#F4F0E0; --teal-soft:#E7F0EE; --brown-soft:#F0EBE4;
+  /* fruit palette — VIVID (Damla: no pale tones) */
+  --cilek:#D9463A;
+  --pink:#E8619A; --pink-ink:#C24C82; --pink-soft:#FDF2F7;
+  --orange:#E07A3E; --yellow:#C9A21E; --green:#4C9A46; --blue:#3B7FC4;
+  --red:#D9463A; --amber:#CC8A18;
+  --red-bg:#FBEBE9; --amber-bg:#FAF1DF; --green-bg:#EAF2E9;
+  --purple:#7C5CD6; --teal:#2AA79B; --brown:#A97B50;
+  --purple-soft:#EFEAFB; --blue-soft:#E7F0FA; --orange-soft:#FBEEE2; --yellow-soft:#FAF3DA; --teal-soft:#E2F4F1; --brown-soft:#F4EBE2;
 
-  /* accent = pembe (çilek'in yumuşak hali) */
-  --accent:#C4767B; --accent-ink:#A55E63; --accent-soft:#F7EDEE; --on-accent:#FFFFFF;
+  --accent:#E8619A; --accent-ink:#C24C82; --accent-soft:#FDF2F7; --on-accent:#FFFFFF;
 
-  /* heatmap ramp (activity) */
-  --h1:#F2E3E4; --h2:#E3BFC2; --h3:#D49BA0; --h4:#C4767B;
+  --h1:#F8CFE1; --h2:#F2A6C6; --h3:#EC7DAB; --h4:#E8619A;
 
   --radius:3px;
-  --seam:1px dashed var(--ink);
   --sans:Arial,Helvetica,sans-serif;
   --mono:Arial,Helvetica,sans-serif;
 }
 body.dark{
-  --bg:#151515; --panel:#1E1E1E; --panel-2:#1A1A1A; --card:#151515;
-  --ink:#ECECEC; --ink-soft:#CFCFCF; --muted:#8F8F8F; --faint:#4A4A4A;
-  --line:#ECECEC; --line-soft:#2C2C2C; --hair:#242424;
+  --bg:#1A1917; --panel:#232220; --panel-2:#1F1E1C; --card:#232220;
+  --ink:#F1EEE9; --ink-soft:#C7C3BC; --muted:#918D87; --faint:#6A665F;
+  --line:#4E4B45; --line-soft:#2E2D2A; --hair:rgba(255,255,255,.07);
 
-  --cilek:#CE7A73;
-  --pink:#D49BA0; --pink-ink:#D49BA0; --pink-soft:#2C2224;
-  --orange:#CFA077; --yellow:#C9AC64; --green:#9AA47A; --blue:#7A93AB;
-  --red:#CE7A73; --amber:#C9AC64;
-  --red-bg:#2C221F; --amber-bg:#2A2718; --green-bg:#232619;
-  --purple:#A88AA0; --teal:#7FAAA3; --brown:#AB9377;
-  --purple-soft:#262126; --blue-soft:#20242A; --orange-soft:#2A241D; --yellow-soft:#2A2719; --teal-soft:#1E2826; --brown-soft:#282318;
+  --cilek:#E2705F;
+  --pink:#EE85B0; --pink-ink:#EE85B0; --pink-soft:#352730;
+  --orange:#E8975E; --yellow:#D6BC5A; --green:#71B06E; --blue:#6FA8DC;
+  --red:#E2705F; --amber:#D6A24F;
+  --red-bg:#3A2A28; --amber-bg:#332F1F; --green-bg:#25322A;
+  --purple:#A78BE8; --teal:#5BBFB4; --brown:#C29A73;
+  --purple-soft:#2C2735; --blue-soft:#242B33; --orange-soft:#33291F; --yellow-soft:#322E1E; --teal-soft:#1F312E; --brown-soft:#332B22;
 
-  --accent:#D49BA0; --accent-ink:#D49BA0; --accent-soft:#2C2224; --on-accent:#151515;
+  --accent:#EE85B0; --accent-ink:#EE85B0; --accent-soft:#352730; --on-accent:#1A1917;
 
-  --h1:#2C2224; --h2:#553C3F; --h3:#8A5F63; --h4:#D49BA0;
+  --h1:#3E2A34; --h2:#5E3247; --h3:#9B4E74; --h4:#EE85B0;
 }
