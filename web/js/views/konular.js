@@ -113,7 +113,7 @@ export function konular() {
       }
     });
     if (!shown) list.appendChild(el('div', 'empty', 'Eşleşen kazanım yok'));
-    tools.querySelector('.res').textContent = shown === counts.all ? '' : `${shown} kazanım gösteriliyor`;
+    tools.querySelector('.res').textContent = shown === allKaz().length ? '' : `${shown} kazanım gösteriliyor`;
   }
   function hl(t) {
     if (!FILT.q) return esc(t);
