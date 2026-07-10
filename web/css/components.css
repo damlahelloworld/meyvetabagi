@@ -12,7 +12,7 @@
 /* search + filter chips — plain text, active is simply bigger */
 .tools { margin: 2px 0 6px; }
 .tools.flat { max-width: 640px; }
-.search { position: relative; margin-bottom: 8px; max-width: 320px; }
+.search { position: relative; margin-bottom: 8px; max-width: 380px; }
 .search input { width: 100%; padding: 8px 30px 8px 30px; border: none; border-radius: var(--radius);
   background: var(--panel); font-size: 13px; color: var(--ink); }
 .search input:focus { outline: none; background: var(--line-soft); }
@@ -21,15 +21,15 @@
 .search .clr { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 19px; height: 19px;
   display: none; place-items: center; font-size: 15px; line-height: 1; cursor: pointer; }
 .search.has .clr { display: grid; }
-.chips { display: flex; flex-wrap: wrap; gap: 2px 14px; line-height: 1.9; }
+.chips { display: block; line-height: 2.15; margin: 2px 0; }
 .chips.gap-top { margin-top: 2px; }
-.chip { display: inline-flex; align-items: center; gap: 5px; padding: 0; border: none; background: none;
-  font-size: 12.5px; color: var(--accent-ink); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: none; background: none;
+  font-size: 13.5px; color: var(--accent-ink); margin-right: 16px; cursor: pointer; }
 .chip:hover { color: var(--ink); }
-.chip.on { font-size: 15px; color: var(--ink); }
-.chip .d { width: 7px; height: 7px; border-radius: 50%; }
+.chip.on { font-size: 17px; color: var(--ink); }
+.chip .d { width: 8px; height: 8px; border-radius: 50%; }
 .chip .d.red { background: var(--red); } .chip .d.amber { background: var(--amber); } .chip .d.green { background: var(--green); }
-.chip .c { font-variant-numeric: tabular-nums; opacity: .6; font-size: 11px; }
+.chip .c { font-variant-numeric: tabular-nums; opacity: .65; font-size: 11.5px; }
 .tools .res { font-size: 11.5px; color: var(--muted); padding: 6px 0 0; }
 
 /* list rows — dense text lines */
