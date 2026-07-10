@@ -34,7 +34,7 @@ export function konular() {
     <div class="search${FILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
       <input placeholder="Kazanım ara — “türev”, “9.1.1.1”…" value="${esc(FILT.q)}">
       <span class="clr">×</span></div>
-    <div class="donerow"><span class="donebar"><i style="width:${pct}%"></i></span><span class="donepct">%${pct} tamamlandı · ${green}/${total}</span></div>
+    <div class="donerow"><span class="donepct">%${pct} tamamlandı · ${green}/${total} kazanım</span></div>
     <div class="chips gap-top" data-grp="sinif">
       <button class="chip${FILT.sinif === 'all' ? ' on' : ''}" data-v="all">tüm sınıflar</button>
       ${['9', '10', '11', '12'].map(g => `<button class="chip${FILT.sinif === g ? ' on' : ''}" data-v="${g}">${g}. sınıf</button>`).join('')}
