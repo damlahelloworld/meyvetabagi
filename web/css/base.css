@@ -30,8 +30,8 @@ svg{display:block}
 
 /* page — one centered dense column, gymgyme measure */
 .page{flex:1;overflow-y:auto;background:var(--bg)}
-.pagein{max-width:820px;margin:0 auto;padding:10px 20px 50px}
-.page.wide .pagein{max-width:1080px}
+.pagein{max-width:none;margin:0;padding:10px 26px 50px}
+.page.wide .pagein{max-width:none}
 .crumb{display:none}
 .pagein h1{font-size:28px;line-height:1.2;margin:2px 0 2px;letter-spacing:-.01em}
 .pagein h1.sec{font-size:17px;margin-top:16px}
