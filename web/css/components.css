@@ -411,3 +411,8 @@ a.hstat:hover b{text-decoration:underline}
 .ghead .ghpct{color:var(--muted);font-weight:400;margin-left:4px}
 .resetkaz{margin-top:40px;font-size:12.5px;color:var(--muted);background:none;border:none;text-decoration:underline;cursor:pointer}
 .resetkaz:hover{color:var(--red)}
+
+/* profil: başardığın kazanımlar - düz akan renkli kelimeler (rainbow döngü) */
+.basari{display:flex;flex-wrap:wrap;gap:6px 16px;max-width:940px;line-height:1.7;margin-top:2px}
+.basarikelime{font-size:15px;font-weight:bold}
+.basarikelime:hover{text-decoration:underline}

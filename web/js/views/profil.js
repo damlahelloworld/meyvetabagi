@@ -1,8 +1,23 @@
 // Profil - identity + stats + activity heatmap ONLY (Damla, 2026-07-10: randevu comes later
 // somewhere else; mesajlar & ayarlar live on their own pages).
 import { S, streak, dstr } from '../state.js';
-import { totals } from '../data.js';
+import { totals, allKaz } from '../data.js';
 import { el, esc, page } from '../ui.js';
+
+// bitirdiğin kazanımlar - editoryal, dans eden renkli duvar (Damla: spiral mi dans mı süsle)
+function basardiklarim() {
+  const done = allKaz().filter(z => S.status[z.uid] === 'green');
+  const wrap = el('div', 'basari');
+  if (!done.length) { wrap.appendChild(el('div', 'empty', 'daha yeşile boyadığın kazanım yok - ilk yeşilin burada dans edecek ✿')); return wrap; }
+  const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
+  done.forEach((z, i) => {
+    const w = el('a', 'basarikelime ' + PAL[i % PAL.length]);   // düz akış, eğik değil; renk = rainbow döngüsü
+    w.href = '#/konular/' + z.uid;
+    w.textContent = z.title.toLocaleLowerCase('tr');
+    wrap.appendChild(w);
+  });
+  return wrap;
+}
 
 function heatmap() {
   const wrap = el('div', 'heatwrap');
@@ -45,4 +60,7 @@ export function profil() {
 
   d.appendChild(el('div', 'seclabel', 'aktivite'));
   d.appendChild(heatmap());
+
+  d.appendChild(el('div', 'seclabel', 'başardığın kazanımlar'));
+  d.appendChild(basardiklarim());
 }
