@@ -13,19 +13,20 @@ svg{display:block}
 /* Throxy signature: mono uppercase micro-labels */
 .crumb,.seclabel,.card .k,.est .l,.tools .res,.row .code,.unitrow,.who,.dayc .dh{font-family:var(--mono);letter-spacing:.03em}
 
-/* ---- shell: topbar + single page ---- */
+/* ---- shell: topbar + single page (stitchu header language) ---- */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-.topbar{display:flex;align-items:center;gap:14px;padding:0 22px;height:54px;flex:none;
-  border-bottom:1px solid var(--line);background:var(--panel)}
-.brand{display:flex;align-items:center;gap:9px;flex:none}
-.brand .dot{width:22px;height:22px;border-radius:2px;background:var(--accent);display:grid;place-items:center;color:var(--on-accent);font-weight:400;font-size:12px}
-.brand b{font-size:15.5px;font-weight:400;letter-spacing:-.01em}
+.topbar{display:flex;align-items:center;gap:18px;padding:0 26px;height:58px;flex:none;
+  border-bottom:1px solid var(--line);background:var(--bg)}
+.brand{display:flex;flex-direction:column;gap:3px;flex:none}
+.brand b{font-size:17px;font-weight:400;letter-spacing:.01em;line-height:1}
+.brand .stitch{display:block}
 .pagechips{display:flex;align-items:center;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
 .pagechips::-webkit-scrollbar{display:none}
-#nav{display:flex;align-items:center;gap:2px;margin-left:auto;flex:none}
-.nav{padding:6px 11px;border-radius:2px;color:var(--ink-soft);font-size:14px;font-weight:400;white-space:nowrap;transition:background .1s}
-.nav:hover{background:var(--line-soft)}
-.nav.active{background:var(--accent-soft);color:var(--ink);font-weight:400}
+#nav{display:flex;align-items:center;gap:18px;margin-left:auto;flex:none}
+.nav{padding:4px 0;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;
+  border-bottom:1px dashed transparent;transition:color .1s}
+.nav:hover{color:var(--ink)}
+.nav.active{color:var(--ink);border-bottom-color:var(--accent)}
 .nav .count{margin-left:6px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 #userslot{position:relative;flex:none}
 

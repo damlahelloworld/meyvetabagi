@@ -14,11 +14,11 @@ import { profil } from './views/profil.js';
 import { onboard } from './views/onboard.js';
 
 const NAV = [
-  { id: 'bugun', label: 'Bugün' },
-  { id: 'konular', label: 'Konular' },
-  { id: 'takvim', label: 'Takvim' },
-  { id: 'denemeler', label: 'Denemeler' },
-  { id: 'siralama', label: 'Sıra Puanı' },
+  { id: 'bugun', label: 'bugün' },
+  { id: 'konular', label: 'konular' },
+  { id: 'takvim', label: 'takvim' },
+  { id: 'denemeler', label: 'denemeler' },
+  { id: 'siralama', label: 'sıra puanı' },
 ];
 const VIEWS = { bugun, konular, takvim, denemeler, siralama, profil };
 
