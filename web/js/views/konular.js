@@ -54,7 +54,7 @@ export function konular() {
   tools.querySelectorAll('.chips').forEach(grp => grp.querySelectorAll('.chip').forEach(c =>
     c.onclick = () => { FILT[grp.dataset.grp] = c.dataset.v; konular(); }));
 
-  const list = lpane.querySelector('.list');
+  const list = lpane.querySelector('.list'); list.className = 'list kzcols';
   function paintList() {
     const sel = param();
     list.innerHTML = '';
@@ -63,14 +63,18 @@ export function konular() {
       const dersKaz = ders.units.filter(u => FILT.sinif === 'all' || String(u.grade) === FILT.sinif)
         .flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
       if (!dersKaz.length) return;
-      list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), esc(ders.ders)));
+      const allDers = ders.units.flatMap(u => u.konular.flatMap(k => k.kazanimlar));
+      const dersGreen = allDers.filter(z => S.status[kuid(ders.ders, z.code)] === 'green').length;
+      const dersPct = allDers.length ? Math.round(dersGreen / allDers.length * 100) : 0;
+      list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), `${esc(ders.ders)} <span class="dpct">%${dersPct}</span>`));
+      list.appendChild(el('div', 'dersbar', `<i class="db-${dersColor(ders.ders)}" style="width:${dersPct}%"></i>`));
       ders.units.forEach(u => {
         if (FILT.sinif !== 'all' && String(u.grade) !== FILT.sinif) return;
         const kz = u.konular.flatMap(k => k.kazanimlar).filter(z => matchKaz(z, ders.ders));
         if (!kz.length) return;
         const pct = unitProgress(u, ders.ders);
         const ur = el('div', 'unitrow');
-        ur.innerHTML = `<span>${u.grade ? u.grade + '. sınıf · ' : ''}${esc(u.name)}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="pct">%${pct}</span>`;
+        ur.innerHTML = `<span>${u.grade ? u.grade + '. sınıf · ' : ''}${esc(u.name)}</span><span class="pct">%${pct}</span>`;
         list.appendChild(ur);
         kz.forEach(z => {
           shown++;
