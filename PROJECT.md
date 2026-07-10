@@ -1,7 +1,13 @@
-# YKS Coaching App — PROJECT
+# meyvetabagi — PROJECT
 
-Working name: **Sıra Sende** (NOT locked — name decision deferred).
-Status: planning. This doc captures everything discussed 2026-07-08/09 so Damla can redesign and re-explain in a later session.
+Name: **meyvetabagi** (locked). Amme-hizmeti YKS tool, ücretsiz, no coaching/ranking/paywall.
+Status: **CANLI YAYINDA** https://damlahelloworld.github.io/meyvetabagi/ (2026-07-10). Design style law + product shape + content pipeline all shipped — see CLAUDE.md "NEXT SESSION STARTS HERE" for current state and open items.
+
+Last session (2026-07-10, marathon): rebrand meyvetabagi, coaching removed, Blok B backend hardened, own public repo, 23 MEB books + 448 key terms, month-grid takvim, full-width konular, design language settled (white+vivid+Arial+rainbow+sparkle, NO purple), SEO (meta/JSON-LD/sitemap), security pass clean, DEPLOYED live to GitHub Pages, fresh landing page.
+Open: live 2-device test, Search Console sitemap submit, sozel ders book terms, deeper per-kazanim SEO + question bank (parked).
+
+---
+## Original planning doc (2026-07-08/09, working name was "Sıra Sende", NOT locked then)
 
 ---
 
