@@ -4,125 +4,88 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>meyvetabagi - YKS kazanım takibi, MEB kazanımları ve anahtar kelimeler, ücretsiz</title>
-<meta name="description" content="Tüm YKS derslerinin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, ücretsiz. Matematik, Fizik, Kimya, Biyoloji, Türkçe, Tarih, Coğrafya, Din, Felsefe.">
-<meta name="keywords" content="YKS, TYT, AYT, MEB kazanımları, kazanım takibi, konu takibi, YKS çalışma programı, anahtar kelimeler, ücretsiz YKS uygulaması">
+<meta name="description" content="Tüm YKS derslerinin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, ücretsiz.">
+<meta name="keywords" content="YKS, TYT, AYT, MEB kazanımları, kazanım takibi, konu takibi, anahtar kelimeler, ücretsiz YKS uygulaması">
 <meta property="og:type" content="website">
 <meta property="og:title" content="meyvetabagi - YKS kazanım takibi, ücretsiz">
 <meta property="og:description" content="Resmi MEB kazanımları + ders kitaplarından anahtar kelimeler + çalışma takvimi. Ücretsiz.">
 <meta property="og:image" content="icon-512.png">
 <link rel="canonical" href="https://damlahelloworld.github.io/meyvetabagi/web/index.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#E8619A">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"meyvetabagi","url":"https://damlahelloworld.github.io/meyvetabagi/web/app.html","applicationCategory":"EducationApplication","operatingSystem":"Web","inLanguage":"tr-TR","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"description":"YKS MEB kazanımları, anahtar kelimeler ve çalışma takvimi. Ücretsiz.","creator":{"@type":"Person","name":"Damla","url":"https://github.com/damlahelloworld"}}
+</script>
 <style>
-:root{--bg:#fff;--ink:#111;--muted:#565656;--red:#D9463A;--pink:#E8619A;--orange:#E07A3E;--yellow:#C9A21E;--green:#4C9A46;--blue:#3B7FC4}
+:root{--bg:#fff;--ink:#111;--muted:#565656;
+ --pink:#E8619A;--blue:#3B7FC4;--orange:#E07A3E;--green:#4C9A46;--terra:#C0603E;--yellow:#C9A21E;--teal:#2AA79B;--brown:#A97B50;--red:#D9463A}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.wrap{max-width:940px;margin:0 auto;padding:0 26px}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1000px;margin:0 auto;padding:0 26px}
 a{color:inherit;text-decoration:none}
 #sparks{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .spk{position:absolute;top:-6vh;opacity:.5;animation:drift var(--f,60s) linear infinite;animation-delay:var(--d,0s)}
 .spk i{display:inline-block;animation:tw var(--t,7s) ease-in-out infinite;font-style:normal}
 @keyframes drift{to{transform:translateY(118vh)}}
 @keyframes tw{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:.2;transform:scale(.7)}}
-main{position:relative;z-index:1}
-.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px}
-.logo{font-size:22px;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
-.top a.enter{font-size:14px;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.hero{padding:48px 0 30px}
-.hero h1{font-size:44px;line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
-.hero h1 u{text-decoration:none}
-.hero p{font-size:18px;color:var(--muted);max-width:600px;margin-bottom:26px}
-.cta{display:inline-block;background:var(--pink);color:#fff;font-size:16px;padding:14px 28px;border-radius:3px}
-.cta:hover{background:#c24c82}
-.note{font-size:13px;color:var(--muted);margin-top:12px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px;margin:44px 0}
-.stat b{display:block;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-size:13px;color:var(--muted)}
-.s1 b{color:var(--orange)}.s2 b{color:var(--green)}.s3 b{color:var(--blue)}.s4 b{color:var(--pink)}
-.how{margin:40px 0}.how h2{font-size:24px;margin-bottom:16px;display:inline-block;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
-.step .n{font-size:13px;color:var(--muted)}.step h3{font-size:16px;margin:4px 0}.step p{font-size:14px;color:var(--muted)}
-.trust{margin:40px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
-.trust b{display:block;margin-bottom:3px}.trust span{font-size:14px;color:var(--muted)}
-.foot{border-top:1px solid #eee;margin-top:20px;padding:22px 0 40px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.foot a{color:var(--pink)}
+main{position:relative;z-index:1;padding-bottom:60px}
 .rb{background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-@media(max-width:640px){.hero h1{font-size:32px}}
+.top{display:flex;align-items:baseline;justify-content:space-between;padding:20px 0 6px}
+.logo{font-size:22px}
+.enter{font-size:15px}
+.lede{font-size:20px;line-height:1.45;max-width:640px;margin:26px 0 8px}
+.sub{font-size:14px;color:var(--muted);max-width:600px;margin-bottom:22px}
+.sub b{font-weight:bold}
+.cta{display:inline-block;background:var(--pink);color:#fff;font-size:16px;padding:13px 26px;border-radius:3px}
+.cta:hover{filter:brightness(.94)}
+/* the content IS the interface: dense colored ders wall, size = kazanım count */
+.wall{margin:40px 0 10px;line-height:1.35}
+.dw{font-weight:bold;margin-right:18px;white-space:nowrap;display:inline-block}
+.dw small{font-weight:normal;opacity:.6;font-size:.55em}
+.c-pink{color:var(--pink)}.c-blue{color:var(--blue)}.c-orange{color:var(--orange)}.c-green{color:var(--green)}
+.c-terra{color:var(--terra)}.c-yellow{color:var(--yellow)}.c-teal{color:var(--teal)}.c-brown{color:var(--brown)}.c-red{color:var(--red)}
+.wallnote{font-size:13px;color:var(--muted);margin-top:14px;max-width:640px}
+.foot{margin-top:44px;font-size:13px;color:var(--muted)}
+.foot a{color:var(--pink)}
 </style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"meyvetabagi",
-  "url":"https://damlahelloworld.github.io/meyvetabagi/web/app.html",
-  "applicationCategory":"EducationApplication",
-  "operatingSystem":"Web",
-  "inLanguage":"tr-TR",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},
-  "description":"Tüm YKS derslerinin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi. Ücretsiz.",
-  "creator":{"@type":"Person","name":"Damla","url":"https://github.com/damlahelloworld"},
-  "about":["YKS","TYT","AYT","MEB kazanımları"]
-}
-</script>
 </head>
 <body>
 <div id="sparks"></div>
-<main>
-<div class="wrap">
+<main><div class="wrap">
   <div class="top">
-    <span class="logo">meyvetabagi</span>
-    <a class="enter" href="app.html">kullanmaya başla →</a>
+    <span class="logo rb">meyvetabagi</span>
+    <a class="enter rb" href="app.html">kullanmaya başla &rarr;</a>
   </div>
-  <section class="hero">
-    <h1>YKS'de her gün <span class="rb">ne çalışacağını</span> bilerek uyan.</h1>
-    <p>Tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, tamamen ücretsiz.</p>
-    <a class="cta" href="app.html">kullanmaya başla</a>
-    <p class="note">Kayıt gerekmez, reklam yok, ücret yok. Verin senin cihazında.</p>
-  </section>
-  <section class="stats">
-    <div class="stat s1"><b>954</b><span>resmi MEB kazanımı</span></div>
-    <div class="stat s2"><b>4.537</b><span>ders kitabı sayfası tarandı</span></div>
-    <div class="stat s3"><b>448</b><span>anahtar kelime çıkarıldı</span></div>
-    <div class="stat s4"><b>9</b><span>ders · 9-12. sınıf</span></div>
-  </section>
-  <section class="how">
-    <h2>nasıl çalışır</h2>
-    <div class="steps">
-      <div class="step"><div class="n">01</div><h3>konularını gör</h3><p>Tüm derslerin kazanımları tek listede. Ara, filtrele, kırmızı/sarı/yeşil işaretle.</p></div>
-      <div class="step"><div class="n">02</div><h3>anahtar kelimeleri öğren</h3><p>Her kazanımın altında, MEB ders kitabından çıkarılmış anahtar kelimeler ve tanımları - kaynağıyla.</p></div>
-      <div class="step"><div class="n">03</div><h3>takvime yerleştir</h3><p>Çalışacağın konuları günlere koy, ilerlemeni takip et.</p></div>
-    </div>
-  </section>
-  <section class="trust">
-    <div><b class="rb">uydurma yok</b><span>Kazanımlar resmi MEB belgesinden, anahtar kelimeler resmi ders kitaplarından. Her şey kaynaklı.</span></div>
-    <div><b class="rb">doğru müfredat</b><span>2026 & 2027 için geçerli eski program. Yanlış yılın konusuyla vakit harcatmaz.</span></div>
-    <div><b class="rb">ücretsiz, hep</b><span>Reklam yok, izleme yok, ücret yok. Amme hizmeti.</span></div>
-  </section>
-  <section style="text-align:center;padding:56px 0 20px">
-    <h2 style="font-size:34px;margin-bottom:10px;display:inline-block;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent">bu sene ne çalışacağını bil.</h2>
-    <p style="color:var(--muted);font-size:16px;margin-bottom:22px">954 kazanım, kaynaklı anahtar kelimeler, çalışma takvimi. ücretsiz.</p>
-    <a class="cta" style="font-size:18px;padding:16px 34px" href="app.html">kullanmaya başla</a>
-  </section>
+
+  <p class="lede">YKS'de her gün ne çalışacağını bilerek uyan. tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler, çalışma takvimi &mdash; tek yerde, ücretsiz.</p>
+  <p class="sub"><b>954</b> resmi MEB kazanımı · <b>4.537</b> ders kitabı sayfası tarandı · <b>448</b> anahtar kelime çıkarıldı · hepsi kaynaklı, uydurma yok.</p>
+  <a class="cta" href="app.html">kullanmaya başla</a>
+
+  <div class="wall" id="wall">
+    <span class="dw c-pink" style="font-size:41px">matematik <small>130</small></span>
+    <span class="dw c-blue" style="font-size:52px">fizik <small>212</small></span>
+    <span class="dw c-orange" style="font-size:40px">kimya <small>125</small></span>
+    <span class="dw c-green" style="font-size:33px">biyoloji <small>90</small></span>
+    <span class="dw c-terra" style="font-size:32px">türk dili ve edebiyatı <small>83</small></span>
+    <span class="dw c-yellow" style="font-size:30px">tarih <small>75</small></span>
+    <span class="dw c-teal" style="font-size:37px">coğrafya <small>113</small></span>
+    <span class="dw c-brown" style="font-size:32px">din kültürü <small>87</small></span>
+    <span class="dw c-red" style="font-size:24px">felsefe <small>39</small></span>
+  </div>
+  <p class="wallnote">her ders o kadar kazanım. tıkla, filtrele, işaretle; her kazanımın altında MEB ders kitabından çıkarılmış anahtar kelimeler ve tanımları &mdash; kaynağıyla. sonra çalışacaklarını takvime koy. kayıt gerekmez, reklam yok, ücret yok.</p>
+
   <div class="foot">
-    <span>© 2026 meyvetabagi · <a href="https://github.com/damlahelloworld">@damlahelloworld</a></span>
-    <span><a href="gizlilik.html">gizlilik</a> · <a href="app.html">uygulamaya git</a></span>
+    <a class="cta" style="font-size:15px;padding:11px 22px;margin:8px 0 20px" href="app.html">hadi başla</a><br>
+    &copy; 2026 meyvetabagi · <a href="https://github.com/damlahelloworld">@damlahelloworld</a> · <a href="gizlilik.html">gizlilik</a> · <a href="app.html">uygulamaya git</a>
   </div>
-</div>
-</main>
+</div></main>
 <script>
-(function(){
-  var G=['✦','✧','·','⋆','✵','˖'],C=['#E9B84A','#E8619A','#E07A3E','#C9A21E','#D9463A'];
-  var s=20260710>>>0,f=document.getElementById('sparks');
-  function r(){s=(s*1664525+1013904223)>>>0;return s/4294967296;}
-  for(var i=0;i<14;i++){var g=document.createElement('span');g.className='spk';
-    g.style.left=(r()*100).toFixed(1)+'vw';g.style.fontSize=(8+r()*8).toFixed(0)+'px';
-    g.style.setProperty('--f',(40+r()*40).toFixed(0)+'s');g.style.setProperty('--d',(-r()*60).toFixed(0)+'s');
-    g.style.setProperty('--t',(5+r()*4).toFixed(0)+'s');
-    var ic=document.createElement('i');ic.textContent=G[Math.floor(r()*G.length)];ic.style.color=C[Math.floor(r()*C.length)];
-    ic.style.setProperty('--t',g.style.getPropertyValue('--t'));g.appendChild(ic);f.appendChild(g);}
-})();
+(function(){var G=['✦','✧','·','⋆','✵','˖'],C=['#E9B84A','#E8619A','#E07A3E','#C9A21E','#D9463A'];
+var s=20260710>>>0,f=document.getElementById('sparks');function r(){s=(s*1664525+1013904223)>>>0;return s/4294967296;}
+for(var i=0;i<12;i++){var g=document.createElement('span');g.className='spk';g.style.left=(r()*100).toFixed(1)+'vw';
+g.style.fontSize=(8+r()*8).toFixed(0)+'px';g.style.setProperty('--f',(40+r()*40).toFixed(0)+'s');g.style.setProperty('--d',(-r()*60).toFixed(0)+'s');
+g.style.setProperty('--t',(5+r()*4).toFixed(0)+'s');var ic=document.createElement('i');ic.textContent=G[Math.floor(r()*G.length)];
+ic.style.color=C[Math.floor(r()*C.length)];ic.style.setProperty('--t',g.style.getPropertyValue('--t'));g.appendChild(ic);f.appendChild(g);}})();
 </script>
 </body>
 </html>
