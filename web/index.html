@@ -3,201 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>meyvetabagi - YKS'de her sabah ne çalışacağını bilerek uyan</title>
-<meta name="description" content="Resmi MEB kazanımları, günlük plan, deneme takibi ve dürüst tahmini sıralama - hepsi tek yerde.">
-<meta property="og:title" content="meyvetabagi - YKS'de her sabah ne çalışacağını bilerek uyan">
-<meta property="og:description" content="Resmi MEB kazanımları, günlük plan, deneme takibi ve dürüst tahmini sıralama - hepsi tek yerde.">
+<title>meyvetabagi - YKS kazanım takibi, MEB kazanımları ve anahtar kelimeler, ücretsiz</title>
+<meta name="description" content="Tüm YKS derslerinin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, ücretsiz. Matematik, Fizik, Kimya, Biyoloji, Türkçe, Tarih, Coğrafya, Din, Felsefe.">
+<meta name="keywords" content="YKS, TYT, AYT, MEB kazanımları, kazanım takibi, konu takibi, YKS çalışma programı, anahtar kelimeler, ücretsiz YKS uygulaması">
 <meta property="og:type" content="website">
+<meta property="og:title" content="meyvetabagi - YKS kazanım takibi, ücretsiz">
+<meta property="og:description" content="Resmi MEB kazanımları + ders kitaplarından anahtar kelimeler + çalışma takvimi. Ücretsiz.">
+<meta property="og:image" content="icon-512.png">
+<link rel="canonical" href="https://damlahelloworld.github.io/meyvetabagi/web/index.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E8619A">
-
-<link rel="stylesheet" href="css/landing.css">
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#565656;--red:#D9463A;--pink:#E8619A;--orange:#E07A3E;--yellow:#C9A21E;--green:#4C9A46;--blue:#3B7FC4}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:940px;margin:0 auto;padding:0 26px}
+a{color:inherit;text-decoration:none}
+#sparks{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.spk{position:absolute;top:-6vh;opacity:.5;animation:drift var(--f,60s) linear infinite;animation-delay:var(--d,0s)}
+.spk i{display:inline-block;animation:tw var(--t,7s) ease-in-out infinite;font-style:normal}
+@keyframes drift{to{transform:translateY(118vh)}}
+@keyframes tw{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:.2;transform:scale(.7)}}
+main{position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px}
+.logo{font-size:22px;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.top a.enter{font-size:14px;color:var(--pink);text-decoration:underline}
+.hero{padding:48px 0 30px}
+.hero h1{font-size:44px;line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
+.hero h1 u{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:5px}
+.hero p{font-size:18px;color:var(--muted);max-width:600px;margin-bottom:26px}
+.cta{display:inline-block;background:var(--pink);color:#fff;font-size:16px;padding:14px 28px;border-radius:3px}
+.cta:hover{background:#c24c82}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px;margin:44px 0}
+.stat b{display:block;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.s1 b{color:var(--orange)}.s2 b{color:var(--green)}.s3 b{color:var(--blue)}.s4 b{color:var(--pink)}
+.how{margin:40px 0}.how h2{font-size:24px;margin-bottom:16px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
+.step .n{font-size:13px;color:var(--muted)}.step h3{font-size:16px;margin:4px 0}.step p{font-size:14px;color:var(--muted)}
+.trust{margin:40px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.trust b{display:block;margin-bottom:3px}.trust span{font-size:14px;color:var(--muted)}
+.foot{border-top:1px solid #eee;margin-top:50px;padding:22px 0 40px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot a{color:var(--pink)}
+@media(max-width:640px){.hero h1{font-size:32px}}
+</style>
 </head>
 <body>
-<div class="top"><div class="wrap topin">
-  <span class="logo">meyve<u>tabagi</u></span>
-  <div class="links"><a href="#nasil">Nasıl çalışır</a><a href="#ozellik">Özellikler</a><a href="#hikaye">Hikaye</a><a href="#sss">SSS</a><a href="app.html">Giriş</a></div>
-  <a class="btn pink" href="app.html">Ücretsiz başla</a>
-</div></div>
-
-<header class="hero"><div class="wrap">
-  <span class="tag">YKS 2026 · 2027</span>
-  <h1>Her sabah <u>ne çalışacağını</u> bilerek uyan.</h1>
-  <p>Resmi MEB kazanımları tek listede. İşaretle, notunu al, planını kur, denemeni gir, sıralamanı gör. Dağınık değil - hepsi bir yerde, hepsi gerçek.</p>
-  <div class="cta">
-    <a class="btn pink lg" href="app.html">Ücretsiz başla</a>
-    <a class="btn lg" href="#nasil">Nasıl çalışır?</a>
+<div id="sparks"></div>
+<main>
+<div class="wrap">
+  <div class="top">
+    <span class="logo">meyvetabagi</span>
+    <a class="enter" href="app.html">kullanmaya başla →</a>
   </div>
-  <p class="note">Kart yok, taahhüt yok. İlk 400 öğrenci tamamen ücretsiz.</p>
-
-  <div class="demo" id="demo">
-    <span class="dchip red"><span class="d"></span>Türev</span>
-    <span class="dchip amber"><span class="d"></span>Limit</span>
-    <span class="dchip green"><span class="d"></span>Önermeler</span>
-    <span class="dchip red"><span class="d"></span>Paragraf</span>
-    <span class="dchip amber"><span class="d"></span>Kuvvet</span>
-    <span class="dchip green"><span class="d"></span>Periyodik sistem</span>
-    <span class="dchip red"><span class="d"></span>Hücre</span>
-  </div>
-</div></header>
-
-<section class="mani"><div class="wrap">
-  <p>YKS bir bilgi sınavı değil, bir <u>takip</u> sınavı. <span class="soft">Neyi bildiğini, neyi unuttuğunu, neye kaç kez döndüğünü bilmeden</span> bir yıl karanlıkta çalışıyorsun. meyvetabagi o karanlığı kapatır.</p>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <span class="eyebrow">Eski yol / meyvetabagi</span>
-  <h2>Onlarca defter, uygulama, ekran şipşak yerine bir tane.</h2>
-  <div class="vs">
-    <div class="col old">
-      <h4>Eskiden</h4>
-      <ul>
-        <li><span class="m">×</span>Konu listesi bir defterde, notlar başka yerde</li>
-        <li><span class="m">×</span>Hangi konuya kaç kez döndüğünü hatırlamıyorsun</li>
-        <li><span class="m">×</span>Deneme netini elle hesaplıyorsun</li>
-        <li><span class="m">×</span>Sıralama tahmini için forum forum geziyorsun</li>
-        <li><span class="m">×</span>Bu hafta ne çalışacağına her sabah sıfırdan karar</li>
-      </ul>
+  <section class="hero">
+    <h1>YKS'de her gün <u>ne çalışacağını</u> bilerek uyan.</h1>
+    <p>Tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, tamamen ücretsiz.</p>
+    <a class="cta" href="app.html">kullanmaya başla</a>
+    <p class="note">Kayıt gerekmez, reklam yok, ücret yok. Verin senin cihazında.</p>
+  </section>
+  <section class="stats">
+    <div class="stat s1"><b>954</b><span>resmi MEB kazanımı</span></div>
+    <div class="stat s2"><b>4.537</b><span>ders kitabı sayfası tarandı</span></div>
+    <div class="stat s3"><b>448</b><span>anahtar kelime çıkarıldı</span></div>
+    <div class="stat s4"><b>9</b><span>ders · 9-12. sınıf</span></div>
+  </section>
+  <section class="how">
+    <h2>nasıl çalışır</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>konularını gör</h3><p>Tüm derslerin kazanımları tek listede. Ara, filtrele, kırmızı/sarı/yeşil işaretle.</p></div>
+      <div class="step"><div class="n">02</div><h3>anahtar kelimeleri öğren</h3><p>Her kazanımın altında, MEB ders kitabından çıkarılmış anahtar kelimeler ve tanımları - kaynağıyla.</p></div>
+      <div class="step"><div class="n">03</div><h3>takvime yerleştir</h3><p>Çalışacağın konuları günlere koy, ilerlemeni takip et.</p></div>
     </div>
-    <div class="col new">
-      <h4>meyvetabagi'yle</h4>
-      <ul>
-        <li><span class="m">✓</span>955 kazanım + notların tek yerde</li>
-        <li><span class="m">✓</span>Her tekrar sayılır, ilerlemen ısı haritasında</li>
-        <li><span class="m">✓</span>D/Y gir, net anında çıksın</li>
-        <li><span class="m">✓</span>Dürüst, aralıklı sıralama tahmini</li>
-        <li><span class="m">✓</span>Zayıfına göre hazır haftalık plan</li>
-      </ul>
-    </div>
+  </section>
+  <section class="trust">
+    <div><b>uydurma yok</b><span>Kazanımlar resmi MEB belgesinden, anahtar kelimeler resmi ders kitaplarından. Her şey kaynaklı.</span></div>
+    <div><b>doğru müfredat</b><span>2026 & 2027 için geçerli eski program. Yanlış yılın konusuyla vakit harcatmaz.</span></div>
+    <div><b>ücretsiz, hep</b><span>Reklam yok, izleme yok, ücret yok. Amme hizmeti.</span></div>
+  </section>
+  <div class="foot">
+    <span>© 2026 meyvetabagi · <a href="https://github.com/damlahelloworld">@damlahelloworld</a></span>
+    <span><a href="gizlilik.html">gizlilik</a> · <a href="app.html">uygulamaya git</a></span>
   </div>
-</div></section>
-
-<section class="sec" id="nasil"><div class="wrap">
-  <span class="eyebrow">Tek omurga</span>
-  <h2>Her şey resmi MEB kazanım listesine bağlı.</h2>
-  <p class="lead">Dört ayrı uygulama değil - tek bir liste, dört işe yarıyor. O yüzden hem tutarlı hem güvenilir: uydurma konu yok, her şey resmi kaynaktan.</p>
-  <div class="nums" id="nums">
-    <div class="num accent"><div class="v" data-to="955">0</div><div class="k">MEB kazanımı</div></div>
-    <div class="num"><div class="v" data-to="9">0</div><div class="k">ders</div></div>
-    <div class="num"><div class="v">TYT+AYT</div><div class="k">tek yerde</div></div>
-    <div class="num"><div class="v" data-to="100" data-suf="%">0</div><div class="k">resmi kaynak</div></div>
-  </div>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <span class="eyebrow">Günlük döngü</span>
-  <h2>Sabah aç, akşam kapat. Arada dört adım.</h2>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h4>Bak</h4><p>Bugün ne çalışacağın hazır: sınava kalan gün, son netin, bugünkü görevlerin.</p></div>
-    <div class="step"><div class="n">02</div><h4>Anlat</h4><p>Günün kazanımını kendi cümlelerinle yaz, resmi açıklamayla karşılaştır.</p></div>
-    <div class="step"><div class="n">03</div><h4>İşaretle</h4><p>Kırmızı / sarı / yeşil. Her tekrar sayılır, ısı haritan dolar.</p></div>
-    <div class="step"><div class="n">04</div><h4>Ölç</h4><p>Denemeni gir, netini ve tahmini sıralamanı gör. Yarın plan buna göre.</p></div>
-  </div>
-</div></section>
-
-<section class="sec" id="ozellik"><div class="wrap">
-  <span class="eyebrow">Özellikler</span>
-  <h2>Dağınık defterleri, onlarca uygulamayı bırak.</h2>
-  <div class="feats">
-    <div class="feat"><div class="fn">01</div><h3>Konu takibi</h3><p>Her kazanımı kırmızı / sarı / yeşil işaretle. İlerlemen tek bakışta görünür, altında kendi notun durur.</p></div>
-    <div class="feat"><div class="fn">02</div><h3>Günün kazanımı</h3><p>Her gün bir kazanımı kendi cümlelerinle anlat, resmi MEB açıklamasıyla karşılaştır. Aktif hatırlama, ezber değil.</p></div>
-    <div class="feat"><div class="fn">03</div><h3>Takvim & plan</h3><p>Kazanımları günlere sürükle. Zayıf dersine göre haftalık plan çıkar, temposu senin çalışma saatine göre.</p></div>
-    <div class="feat"><div class="fn">04</div><h3>Deneme & sıralama</h3><p>D/Y gir, netin anında çıksın. Geçmiş ÖSYM verisine dayalı, dürüst bir aralıkla tahmini sıralaman.</p></div>
-  </div>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <span class="eyebrow">Neden güvenilir</span>
-  <h2>Sana doğruyu söyleyen tek yer.</h2>
-  <div class="trust">
-    <div class="t"><b>Uydurma yok</b><span>Kazanımlar resmi MEB belgesinden. İnternetteki yapay listeler değil.</span></div>
-    <div class="t"><b>Dürüst sıralama</b><span>Sonuç hep "tahmini" ve bir aralık - sahte kesinlik yok.</span></div>
-    <div class="t"><b>Doğru müfredat</b><span>2026 & 2027 için geçerli müfredat. Yanlış yılın konusuyla vaktini harcamazsın.</span></div>
-  </div>
-</div></section>
-
-<section class="sec" id="hikaye"><div class="wrap">
-  <span class="eyebrow">Hikaye</span>
-  <h2>Bu sistemi, sınava iki kez giren biri kurdu.</h2>
-  <div class="founder">
-    <div class="fava">D</div>
-    <div>
-      <blockquote>"Ben de bu karmaşayı yaşadım. Ne çalıştığımı değil, ne çalışmam gerektiğini bilmek istiyordum. meyvetabagi, keşke o zaman elimde olsun dediğim şey."</blockquote>
-      <p class="by"><b>Damla</b> - kurucu · Bilkent Bilgisayar Mühendisliği</p>
-    </div>
-  </div>
-</div></section>
-
-<section class="sec" id="sss"><div class="wrap">
-  <span class="eyebrow">Sık sorulanlar</span>
-  <h2>Aklına takılanlar.</h2>
-  <div class="faq" id="faq">
-    <div class="qa"><button class="q">Kazanımlar gerçekten resmi mi?<span class="pm">+</span></button><div class="a"><p>Evet. Tümü MEB'in yayımladığı resmi "2026 YKS konu ve kazanımlar" belgesinden alındı. İnternette dolaşan yapay zekâ üretimi listeleri kullanmıyoruz - onlar hatalı ve güveni bitiriyor.</p></div></div>
-    <div class="qa"><button class="q">Sıralama tahmini ne kadar doğru?<span class="pm">+</span></button><div class="a"><p>Geçmiş ÖSYM verisine dayanır ve her zaman bir aralık olarak, "tahmini" etiketiyle gösterilir. Sana sahte bir kesinlik ("42.318. olacaksın") vermeyiz - dürüst bir bant veririz.</p></div></div>
-        <div class="qa"><button class="q">Telefonda da var mı?<span class="pm">+</span></button><div class="a"><p>Web, iOS ve Android - aynı hesap, her yerde senkron. Sabah telefonda bak, akşam bilgisayarda plan yap.</p></div></div>
-    <div class="qa"><button class="q">Verilerim güvende mi?<span class="pm">+</span></button><div class="a"><p>KVKK'ya uygun. Verini sadece sana daha iyi bir çalışma deneyimi sunmak için kullanırız, istediğin an silebilirsin.</p></div></div>
-  </div>
-</div></section>
-
-<section class="band"><div class="wrap">
-  <h2>Bu sene <u>bilerek</u> çalış.</h2>
-  <p>Dağınıklığı bırak, ilk günden ne çalışacağını bil.</p>
-  <a class="btn pink lg" href="app.html">Ücretsiz başla</a>
-</div></section>
-
-<footer class="foot"><div class="wrap">
-  <div class="footgrid">
-    <div>
-      <div class="logo">meyve<u>tabagi</u></div>
-      <p>YKS çalışma alanı. Resmi MEB kazanımları, dürüst sıralama, kişisel plan - tek yerde.</p>
-    </div>
-    <div class="footcol"><h5>Ürün</h5><a href="#ozellik">Özellikler</a><a href="#nasil">Nasıl çalışır</a><a href="app.html">Giriş</a></div>
-    <div class="footcol"><h5>Şirket</h5><a href="#hikaye">Hikaye</a><a href="mailto:damummyphus@gmail.com">İletişim</a></div>
-    <div class="footcol"><h5>Yasal</h5><a href="gizlilik.html">Gizlilik</a><a href="gizlilik.html">KVKK</a></div>
-  </div>
-  <div class="footbot">
-    <span>© 2026 meyvetabagi · damlahelloworld</span>
-    <span>Türkiye'de tasarlandı ve kodlandı</span>
-  </div>
-</div></footer>
+</div>
+</main>
 <script>
-// sayaç - bölüm her görünür olduğunda baştan saysın (kaydırınca tekrar oynar)
-const nums=document.getElementById('nums');
-function runCount(){
-  document.querySelectorAll('#nums .v[data-to]').forEach(el=>{
-    const to=+el.dataset.to, suf=el.dataset.suf||'', dur=1100; let s=null;
-    function step(t){if(!s)s=t;const p=Math.min((t-s)/dur,1);const e=1-Math.pow(1-p,3);
-      el.textContent=suf+Math.round(to*e);if(p<1)requestAnimationFrame(step);else el.textContent=suf+to;}
-    requestAnimationFrame(step);
-  });
-}
-new IntersectionObserver((es)=>{es.forEach(e=>{
-  if(e.isIntersecting)runCount();
-  else document.querySelectorAll('#nums .v[data-to]').forEach(el=>el.textContent=(el.dataset.suf||'')+'0');
-})},{threshold:.5}).observe(nums);
-
-// oynayan chipler - kırmızı→sarı→yeşil döngüsü, sırayla
-const chips=[...document.querySelectorAll('#demo .dchip')];
-const order=['red','amber','green'];
-let ci=0;
-setInterval(()=>{
-  const chip=chips[ci%chips.length];
-  const cur=order.findIndex(o=>chip.classList.contains(o));
-  const next=order[(cur+1)%3];
-  order.forEach(o=>chip.classList.remove(o)); chip.classList.add(next);
-  ci++;
-},900);
-
-// FAQ akordeon
-document.querySelectorAll('#faq .qa').forEach(qa=>{
-  qa.querySelector('.q').onclick=()=>{
-    const open=qa.classList.contains('open');
-    document.querySelectorAll('#faq .qa').forEach(x=>{x.classList.remove('open');x.querySelector('.a').style.maxHeight=null;});
-    if(!open){qa.classList.add('open');const a=qa.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px';}
-  };
-});
+(function(){
+  var G=['✦','✧','·','⋆','✵','˖'],C=['#E9B84A','#E8619A','#E07A3E','#C9A21E','#D9463A'];
+  var s=20260710>>>0,f=document.getElementById('sparks');
+  function r(){s=(s*1664525+1013904223)>>>0;return s/4294967296;}
+  for(var i=0;i<14;i++){var g=document.createElement('span');g.className='spk';
+    g.style.left=(r()*100).toFixed(1)+'vw';g.style.fontSize=(8+r()*8).toFixed(0)+'px';
+    g.style.setProperty('--f',(40+r()*40).toFixed(0)+'s');g.style.setProperty('--d',(-r()*60).toFixed(0)+'s');
+    g.style.setProperty('--t',(5+r()*4).toFixed(0)+'s');
+    var ic=document.createElement('i');ic.textContent=G[Math.floor(r()*G.length)];ic.style.color=C[Math.floor(r()*C.length)];
+    ic.style.setProperty('--t',g.style.getPropertyValue('--t'));g.appendChild(ic);f.appendChild(g);}
+})();
 </script>
 </body>
 </html>
