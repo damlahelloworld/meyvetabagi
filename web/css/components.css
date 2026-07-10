@@ -11,8 +11,8 @@
 
 /* search + filter chips — plain text, active is simply bigger */
 .tools { margin: 2px 0 6px; }
-.tools.flat { max-width: 640px; }
-.search { position: relative; margin-bottom: 8px; max-width: 380px; }
+.tools.flat { max-width: none; }
+.search { position: relative; margin-bottom: 8px; max-width: 640px; }
 .search input { width: 100%; padding: 8px 30px 8px 30px; border: none; border-radius: var(--radius);
   background: var(--panel); font-size: 13px; color: var(--ink); }
 .search input:focus { outline: none; background: var(--line-soft); }
