@@ -77,9 +77,9 @@ export function takvim() {
   selEvs.forEach(ev => {
     const z = findKaz(ev.code);
     const row = el('div', 'seldayrow' + (ev.done ? ' done' : ''));
-    row.innerHTML = `<span class="st2">${esc(z ? z.title : ev.code)}</span><button class="dn">${ev.done ? '↺' : '✓'}</button><button class="dx">×</button>`;
+    row.innerHTML = `<button class="dchk">${ev.done ? '✓' : ''}</button><span class="st2">${esc(z ? z.title : ev.code)}</span><button class="dx">×</button>`;
+    row.querySelector('.dchk').onclick = () => { ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
     row.querySelector('.st2').onclick = () => { if (z) location.hash = '#/konular/' + z.uid; };
-    row.querySelector('.dn').onclick = () => { ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
     row.querySelector('.dx').onclick = () => { S.events = S.events.filter(x => x.id !== ev.id); save(); refresh(); };
     box.appendChild(row);
   });
