@@ -54,41 +54,62 @@ export function konular() {
   tools.querySelectorAll('.chips').forEach(grp => grp.querySelectorAll('.chip').forEach(c =>
     c.onclick = () => { FILT[grp.dataset.grp] = c.dataset.v; konular(); }));
 
-  const list = lpane.querySelector('.list'); list.className = 'list kzcols';
+  const list = lpane.querySelector('.list'); list.className = 'list';
   function paintList() {
     const sel = param();
     list.innerHTML = '';
     let shown = 0;
+    const kazRow = (ders, z) => {
+      shown++;
+      const uid = kuid(ders.ders, z.code);
+      const st = S.status[uid] || 'none';
+      const row = el('div', 'row' + (uid === sel ? ' active' : ''));
+      row.innerHTML = `<span class="stat ${st === 'none' ? '' : st}"></span>
+        <div class="rtext"><div class="code">${z.code}</div><div class="title">${hl(z.title)}</div></div>`;
+      row.onclick = () => { location.hash = '#/konular/' + uid; };
+      return row;
+    };
+    const unitBlock = (ders, u, showGrade) => {
+      const kz = u.konular.flatMap(k => k.kazanimlar).filter(z => matchKaz(z, ders.ders));
+      if (!kz.length) return null;
+      const wrap = el('div', 'ublock');
+      const ur = el('div', 'unitrow');
+      ur.innerHTML = `<span>${showGrade && u.grade ? u.grade + '. sınıf · ' : ''}${esc(u.name)}</span><span class="pct">%${unitProgress(u, ders.ders)}</span>`;
+      wrap.appendChild(ur);
+      kz.forEach(z => wrap.appendChild(kazRow(ders, z)));
+      return wrap;
+    };
     DB.dersler.forEach(ders => {
-      const dersKaz = ders.units.filter(u => FILT.sinif === 'all' || String(u.grade) === FILT.sinif)
-        .flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
+      const visUnits = ders.units.filter(u => FILT.sinif === 'all' || String(u.grade) === FILT.sinif);
+      const dersKaz = visUnits.flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
       if (!dersKaz.length) return;
       const allDers = ders.units.flatMap(u => u.konular.flatMap(k => k.kazanimlar));
       const dersGreen = allDers.filter(z => S.status[kuid(ders.ders, z.code)] === 'green').length;
       const dersPct = allDers.length ? Math.round(dersGreen / allDers.length * 100) : 0;
       list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), `${esc(ders.ders)} <span class="dpct">%${dersPct}</span>`));
       list.appendChild(el('div', 'dersbar', `<i class="db-${dersColor(ders.ders)}" style="width:${dersPct}%"></i>`));
-      ders.units.forEach(u => {
-        if (FILT.sinif !== 'all' && String(u.grade) !== FILT.sinif) return;
-        const kz = u.konular.flatMap(k => k.kazanimlar).filter(z => matchKaz(z, ders.ders));
-        if (!kz.length) return;
-        const pct = unitProgress(u, ders.ders);
-        const ur = el('div', 'unitrow');
-        ur.innerHTML = `<span>${u.grade ? u.grade + '. sınıf · ' : ''}${esc(u.name)}</span><span class="pct">%${pct}</span>`;
-        list.appendChild(ur);
-        kz.forEach(z => {
-          shown++;
-          const uid = kuid(ders.ders, z.code);
-          const st = S.status[uid] || 'none';
-          const row = el('div', 'row' + (uid === sel ? ' active' : ''));
-          const note = S.notes[uid];
-          row.innerHTML = `<span class="stat ${st === 'none' ? '' : st}"></span>
-            <div class="rtext"><div class="code">${z.code}</div><div class="title">${hl(z.title)}</div>
-            ${note ? `<div class="npreview">${esc(note)}</div>` : ''}</div>`;
-          row.onclick = () => { location.hash = '#/konular/' + uid; };
-          list.appendChild(row);
+      const grades = [...new Set(visUnits.map(u => u.grade).filter(Boolean))].sort();
+      if (grades.length) {
+        // columns ARE the grades: 9 | 10 | 11 | 12 (Damla, 2026-07-10)
+        const gg = el('div', 'gradegrid');
+        gg.style.gridTemplateColumns = `repeat(${grades.length}, minmax(0,1fr))`;
+        grades.forEach(g => {
+          const col = el('div', 'gcol');
+          col.appendChild(el('div', 'ghead', g + '. sınıf'));
+          ders.units.filter(u => u.grade === g).forEach(u => {
+            const b = unitBlock(ders, u, false); if (b) col.appendChild(b);
+          });
+          gg.appendChild(col);
         });
-      });
+        list.appendChild(gg);
+        // gradeless leftovers of a graded ders (rare) flow full width below
+        visUnits.filter(u => !u.grade).forEach(u => { const b = unitBlock(ders, u, false); if (b) list.appendChild(b); });
+      } else {
+        // ders without grades (Türk Dili A.x codes): flowing dense columns
+        const flow = el('div', 'kzcols');
+        visUnits.forEach(u => { const b = unitBlock(ders, u, false); if (b) flow.appendChild(b); });
+        list.appendChild(flow);
+      }
     });
     if (!shown) list.appendChild(el('div', 'empty', 'Eşleşen kazanım yok'));
     tools.querySelector('.res').textContent = shown === counts.all ? '' : `${shown} kazanım gösteriliyor`;
