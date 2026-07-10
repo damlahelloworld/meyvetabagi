@@ -1,6 +1,6 @@
 // Bugün — daily home: countdown, last net, daily kazanım explain (active recall), çilek suggestion, today's tasks.
 import { S, save, bump, unbump, addRep, dstr } from '../state.js';
-import { totals, findKaz } from '../data.js';
+import { totals, findKaz, corpusStats } from '../data.js';
 import { EXAM, analyzeWeak, dailyKaz, generatePlan, cilekEvaluate } from '../engine.js';
 import { el, esc, cnt, ICON, page } from '../ui.js';
 import { refresh } from '../router.js';
@@ -31,13 +31,23 @@ export function bugun() {
   if (S.rebalanced && S.rebalanced.date === ts && S.rebalanced.n > 0)
     d.appendChild(el('div', 'hint', `Kaçan ${S.rebalanced.n} görev bugünden itibaren yeniden dağıtıldı.`));
 
-  // plain Arial, stacked, chromatic values like the wordmark — no boxes (Damla, 2026-07-10)
+  // plain mono, stacked, chromatic values like the wordmark — no boxes (Damla, 2026-07-10)
   const stats = el('div', 'statlines');
   stats.innerHTML = `
     <div class="statline"><span class="v" style="color:var(--pink)">${cnt(days)} gün</span><span class="k">sınava kalan</span></div>
     <div class="statline"><span class="v" style="color:var(--purple)">${last ? cnt(last.net) : '—'}</span><span class="k">son net${last ? ' (' + last.type + ')' : ''}</span></div>
     <div class="statline"><span class="v" style="color:var(--teal)">%${cnt(t.greenPct)}</span><span class="k">yeşil kazanım · ${t.green}/${t.total}</span></div>`;
   d.appendChild(stats);
+
+  // corpus sayaçları — göz boya, gerçek, büyüyen (Damla: portfolyo gibi)
+  const cs = corpusStats();
+  const feed = el('div', 'corpusbar');
+  feed.innerHTML = `
+    <span class="cb"><b style="color:var(--orange)">${cnt(cs.kazanim)}</b> MEB kazanımı</span>
+    <span class="cb"><b style="color:var(--green)">${cnt(cs.sayfa)}</b> kitap sayfası tarandı</span>
+    <span class="cb"><b style="color:var(--blue)">${cnt(cs.terim)}</b> anahtar kelime çıkarıldı</span>
+    <span class="cb"><b style="color:var(--pink)">${cnt(cs.taranan)}</b> konu işlendi · sürekli artıyor</span>`;
+  d.appendChild(feed);
 
   // günün kazanımı — anlat bakalım: çilek kural-tabanlı değerlendirir, HER ŞEY kaynaklı (MLA)
   const dz = dailyKaz();

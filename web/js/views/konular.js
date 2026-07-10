@@ -179,12 +179,12 @@ function kazDetail(sel) {
   d.appendChild(segwrap);
   d.appendChild(el('div', 'hint seg', 'Öğrendim tekrar sayacı işletir — aynı kazanım günde en fazla bir tekrar sayılır, yarın yine çalışabilirsin.'));
 
-  if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>MEB açıklaması</b>${esc(z.aciklama)}`));
+  if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>bu konuda MEB ne demiş?</b>${esc(z.aciklama)}`));
 
-  // anahtar terimler — sağ kolon; calicocat gibi akan renkli küçük harf, tıkla → ekran ortasında açılır
+  // anahtar terimler — kitaptan; calicocat gibi akan renkli küçük harf, tıkla → ekran ortasında açılır
   const terms = terimlerFor(z.uid);
   if (terms.length) {
-    right.appendChild(el('div', 'seclabel', `anahtar terimler · ${terms.length} (kitaptan)`));
+    right.appendChild(el('div', 'seclabel', `anahtar kelimeler · ${terms.length} (kitaptan)`));
     const wrap = el('div', 'terimler');
     const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
     terms.forEach((t, ti) => {
@@ -193,6 +193,9 @@ function kazDetail(sel) {
       wrap.appendChild(tm);
     });
     right.appendChild(wrap);
+  } else {
+    right.appendChild(el('div', 'seclabel', 'anahtar kelimeler'));
+    right.appendChild(el('div', 'untaranmadi', 'bu konu henüz taranmadı — kitap eklendikçe anahtar kelimeler burada belirecek.'));
   }
 
   const ta = el('textarea', 'note');

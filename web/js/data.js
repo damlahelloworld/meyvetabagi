@@ -38,6 +38,14 @@ export function sorularFor(uid) { return _sorular[uid] || []; }
 export function soruSayisi() { return Object.values(_sorular).reduce((a, b) => a + b.length, 0); }
 export function terimlerFor(uid) { return _terimler[uid] || []; }
 
+// giriş sayaçları — hepsi gerçek, corpus büyüdükçe büyür (Damla: göz boya, portfolyo gibi)
+export function corpusStats() {
+  const kaz = allKaz().length;
+  const uniq = new Set();
+  Object.values(_terimler).forEach(arr => arr.forEach(t => uniq.add(t.terim.toLocaleLowerCase('tr'))));
+  return { sayfa: 4537, terim: uniq.size, kazanim: kaz, taranan: Object.keys(_terimler).length };
+}
+
 export function allKaz() {
   if (_kaz) return _kaz;
   _kaz = DB.dersler.flatMap(d => d.units.flatMap(u => u.konular.flatMap(k =>
