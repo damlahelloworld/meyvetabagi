@@ -210,8 +210,7 @@
 .userchip .ui b { font-size: 12.5px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px; }
 .userchip .ui span { font-size: 10.5px; color: var(--muted); }
 .userchip .ui .syncsub.err { color: var(--red); }
-.usermenu { position: absolute; top: 44px; right: 0; width: 180px; background: var(--bg); border-radius: var(--radius); padding: 8px 12px; z-index: 60;
-  box-shadow: 0 4px 24px rgba(0,0,0,.13); }
+.usermenu { position: absolute; top: 44px; right: 0; width: 180px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 12px; z-index: 60; }
 .usermenu button { display: flex; align-items: center; gap: 9px; width: 100%; padding: 7px 0; font-size: 13px; color: var(--accent-ink); text-align: left; background: none; border: none; cursor: pointer; }
 .usermenu button:hover { color: var(--ink); }
 .usermenu button svg { width: 14px; height: 14px; color: var(--muted); }
@@ -356,7 +355,7 @@
 .t-purple { color: var(--purple); } .t-teal { color: var(--teal); } .t-brown { color: var(--brown); }
 /* terim detayı — ekran ortasında kutu (message on screen), kapatılabilir */
 .termov { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: grid; place-items: center; z-index: 9998; padding: 20px; }
-.termbox { position: relative; background: var(--bg); border-radius: var(--radius); padding: 24px 26px; max-width: 460px; width: 100%; box-shadow: 0 12px 48px rgba(0,0,0,.25); }
+.termbox { position: relative; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; max-width: 460px; width: 100%; }
 .termbox h3 { font-size: 22px; margin-bottom: 12px; }
 .termx { position: absolute; top: 12px; right: 14px; font-size: 22px; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; }
 .termx:hover { color: var(--ink); }
