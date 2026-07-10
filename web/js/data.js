@@ -13,14 +13,24 @@ export const kuid = (dersName, code) => (DERS_SLUG[dersName] || 'x') + ':' + cod
 
 export let DB = null;
 let _kaz = null, _map = null;
+let _sorular = {};  // uid -> [question objects]
 
 export async function loadDB() {
   const r = await fetch('data/kazanimlar.json');
   DB = await r.json();
   _kaz = null; _map = null;
   migrateToUid();
+  try {
+    const sr = await fetch('data/sorular.json');
+    const sj = await sr.json();
+    _sorular = {};
+    (sj.sorular || []).forEach(q => { (_sorular[q.uid] = _sorular[q.uid] || []).push(q); });
+  } catch { _sorular = {}; }
   return DB;
 }
+
+export function sorularFor(uid) { return _sorular[uid] || []; }
+export function soruSayisi() { return Object.values(_sorular).reduce((a, b) => a + b.length, 0); }
 
 export function allKaz() {
   if (_kaz) return _kaz;

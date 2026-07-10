@@ -1,0 +1,85 @@
+{
+  "_note": "Sorular Claude tarafından resmî MEB kitap pasajlarına (data/kitaplar/corpus.json) dayanarak yazıldı ve cevapları pasajla teyit edildi. Runtime AI yok — statik, küratörlü havuz. Kaynak her soruda belirtilir.",
+  "sorular": [
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Çevresel sinir sisteminin bir parçası olan 10. beyin siniri (vagus), aşağıdaki organlardan hangisine giden sinirlerle ilişkilidir?",
+      "choices": ["Kalp ve akciğer", "Göz merceği", "Diz eklemi", "Saç kökleri"],
+      "answer": 0,
+      "explanation": "Kitaba göre 10. beyin siniri olan vagus siniri; karın ve göğüs boşluğundaki kalp, akciğer, pankreas, bağırsak ve mide gibi organlara gider.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.20"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Beyinden çıkan beyin sinirleri kaç çifttir?",
+      "choices": ["8 çift", "10 çift", "12 çift", "31 çift"],
+      "answer": 2,
+      "explanation": "Kitapta beyinden çıkan sinirler 'on iki çift beyin siniri' olarak belirtilir. (31 çift olan omurilik sinirleridir.)",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.20"
+    },
+    {
+      "uid": "biy:11.1.1.3",
+      "stem": "Aşağıdakilerden hangisi bir sinir sistemi rahatsızlığı DEĞİLDİR?",
+      "choices": ["Multiple skleroz (MS)", "Alzheimer", "Parkinson", "Katarakt"],
+      "answer": 3,
+      "explanation": "Kitapta sinir sistemi rahatsızlıklarına örnek olarak MS, Alzheimer, Parkinson ve epilepsi verilir. Katarakt ise bir göz merceği rahatsızlığıdır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.32"
+    },
+    {
+      "uid": "biy:11.1.1.5",
+      "stem": "Problem çözme, karar verme ve konuşma yapabilme gibi işlevler beynin hangi lobuyla ilişkilidir?",
+      "choices": ["Ön lob (frontal)", "Yan lob (parietal)", "Şakak lobu", "Arka lob"],
+      "answer": 0,
+      "explanation": "Kitapta ön lob (frontal lob) için problem çözme, karar verme, davranış kontrolü, planlama ve konuşma yapabilme işlevleri sıralanır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.16"
+    },
+    {
+      "uid": "biy:11.1.1.6",
+      "stem": "Göz merceği ya da korneadaki pürüzlü yüzey nedeniyle ışınların retinada birden fazla yerde odaklandığı, silindirik mercekle düzeltilen göz kusuru hangisidir?",
+      "choices": ["Miyopluk", "Astigmatizm", "Presbitlik", "Renk körlüğü"],
+      "answer": 1,
+      "explanation": "Kitaba göre astigmatizmde ışınlar retinada birden fazla yerde odaklanır; kişi hem uzağı hem yakını bulanık görür ve kusur silindirik mercekle düzeltilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.42"
+    },
+    {
+      "uid": "biy:11.1.1.6",
+      "stem": "Yaşa bağlı olarak göz merceğinin esnekliğini kaybetmesiyle ortaya çıkan göz kusuru aşağıdakilerden hangisidir?",
+      "choices": ["Astigmatizm", "Miyopluk", "Presbitlik", "Hipermetropluk"],
+      "answer": 2,
+      "explanation": "Kitapta presbitlik, yaşa bağlı olarak göz merceğinin esnekliğini kaybetmesi ve gözün uyum yeteneğinin azalmasıyla ortaya çıkan kusur olarak tanımlanır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.42"
+    },
+    {
+      "uid": "biy:11.1.2.1",
+      "stem": "Destek ve hareket sistemini oluşturan dokular arasında aşağıdakilerden hangisi YOKTUR?",
+      "choices": ["Kemik", "Kıkırdak", "Kas", "Sinir"],
+      "answer": 3,
+      "explanation": "Kitaba göre destek ve hareket sistemi kemik, kıkırdak, kas ve bağ dokularından oluşur. Sinir dokusu bu sistemin yapı taşları arasında sayılmaz.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.54"
+    },
+    {
+      "uid": "biy:11.1.2.1",
+      "stem": "Aşağıdakilerden hangisi destek ve hareket sisteminin görevlerinden biri DEĞİLDİR?",
+      "choices": ["Vücudun ihtiyacı olan mineralleri depolama", "Kan hücrelerini üretme", "Besinlerin sindirilmesi", "İç organları koruma"],
+      "answer": 2,
+      "explanation": "Kitapta destek ve hareket sisteminin görevleri arasında mineral depolama, kan hücrelerini üretme, iç organları koruma ve desteklik sayılır. Besinlerin sindirilmesi sindirim sisteminin görevidir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.54"
+    },
+    {
+      "uid": "biy:11.1.2.2",
+      "stem": "Çarpma, düşme veya vurma gibi darbeler sonucu kemik bütünlüğünün bozulması aşağıdakilerden hangisidir?",
+      "choices": ["Çıkık", "Burkulma", "Kırık", "Menisküs"],
+      "answer": 2,
+      "explanation": "Kitaba göre kırık; çarpma, düşme, vurma gibi darbeler sonucu kemik bütünlüğünün bozulmasıdır; bölgede şişme ve ağrı oluşur.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.69"
+    },
+    {
+      "uid": "biy:11.1.2.2",
+      "stem": "Kemiklerin kırılganlığını artıran durumlardan biri aşağıdakilerden hangisidir?",
+      "choices": ["Kemik yoğunluğunun azalması", "Kas kütlesinin artması", "Düzenli kalsiyum alımı", "Genç yaşta olma"],
+      "answer": 0,
+      "explanation": "Kitapta yaşlanma ve kemik yoğunluğunun azalması gibi durumların kemiklerin kırılganlığını artırdığı belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.69"
+    }
+  ]
+}

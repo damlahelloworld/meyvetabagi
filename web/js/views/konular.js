@@ -1,6 +1,6 @@
 // Konular — MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
 import { S, save, saveSoon, bump, addRep } from '../state.js';
-import { DB, allKaz, findKaz, unitProgress, kuid } from '../data.js';
+import { DB, allKaz, findKaz, unitProgress, kuid, sorularFor } from '../data.js';
 import { el, esc, norm, ICON, page, dersColor } from '../ui.js';
 import { refresh, param } from '../router.js';
 
@@ -162,4 +162,33 @@ function kazDetail(sel) {
   ta.oninput = () => { S.notes[z.uid] = ta.value; saveSoon(); };
   d.appendChild(ta);
   d.appendChild(el('div', 'hint', 'Notun otomatik kaydedilir.'));
+
+  // bu kazanımdan sorular — statik, kitap kaynaklı, kaynaklı (Damla: birsürü soru)
+  const qs = sorularFor(z.uid);
+  if (qs.length) {
+    d.appendChild(el('div', 'seclabel', `BU KAZANIMDAN ${qs.length} SORU`));
+    qs.forEach((q, qi) => {
+      const box = el('div', 'soru');
+      box.innerHTML = `<div class="qstem"><b>${qi + 1}.</b> ${esc(q.stem)}</div>`;
+      const opts = el('div', 'qopts');
+      q.choices.forEach((ch, ci) => {
+        const b = el('button', 'qopt', `${String.fromCharCode(65 + ci)}) ${esc(ch)}`);
+        b.onclick = () => {
+          if (box.classList.contains('answered')) return;
+          box.classList.add('answered');
+          opts.querySelectorAll('.qopt').forEach((o, oi) => {
+            if (oi === q.answer) o.classList.add('correct');
+            else if (oi === ci) o.classList.add('wrong');
+          });
+          if (ci !== q.answer && S.status[z.uid] !== 'red') { S.status[z.uid] = 'amber'; save(); }  // yanlış → sarı
+          const ex = el('div', 'qexp');
+          ex.innerHTML = `<div class="qexpl">${esc(q.explanation)}</div><div class="qsrc">Kaynak: ${esc(q.source)}</div>`;
+          box.appendChild(ex);
+        };
+        opts.appendChild(b);
+      });
+      box.appendChild(opts);
+      d.appendChild(box);
+    });
+  }
 }
