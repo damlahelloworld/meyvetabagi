@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://damlahelloworld.github.io/meyvetabagi/web/sitemap.xml

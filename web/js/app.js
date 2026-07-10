@@ -1,10 +1,10 @@
 // meyvetabagi - boot + topbar shell render. Views live in views/, logic in engine.js, state in state.js.
 import { S, save, applyTheme, dstr } from './state.js';
-import { loadDB, totals } from './data.js';
+import { loadDB, totals, findKaz } from './data.js';
 import { rebalance } from './engine.js';
 import { initSupa, signOut, online, currentUser, syncStatus } from './supa.js';
 import { $, el, esc, ICON, animateCounts, setChips } from './ui.js';
-import { route, setRender } from './router.js';
+import { route, setRender, param } from './router.js';
 import { initGlyphs } from './glyphs.js';
 import { bugun } from './views/bugun.js';
 import { konular } from './views/konular.js';
@@ -69,9 +69,22 @@ function renderBar() {
   };
 }
 
+// SEO: her sayfa/kazanım için anlamlı <title> (paylaşım + tarayıcı geçmişi + arama)
+function seoTitle() {
+  const r = route(), p = param();
+  if (r === 'konular' && p) {
+    const z = findKazSeo(p);
+    if (z) return `${z.title} - ${z.ders.ders} ${z.code} - meyvetabagi`;
+  }
+  const map = { bugun: 'Bugün', konular: 'Konular - 954 MEB kazanımı', takvim: 'Takvim', profil: 'Profil', ayarlar: 'Ayarlar', kaynakca: 'Kaynakça' };
+  return `${map[r] || 'meyvetabagi'} - meyvetabagi`;
+}
+function findKazSeo(uid) { try { return findKaz(uid); } catch { return null; } }
+
 function render() {
   applyTheme(); renderBar(); setChips(null);
   (VIEWS[route()] || bugun)();
+  document.title = seoTitle();
 }
 setRender(render);
 
