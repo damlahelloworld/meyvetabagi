@@ -78,5 +78,8 @@ setRender(render);
 applyTheme();
 Promise.all([loadDB(), initSupa().catch(() => null)])
   .then(() => { rebalance(); render(); animateCounts(); if (!S.user) onboard(); })
-  .catch(() => { $('#page').innerHTML = '<div class="empty">Veri yüklenemedi — kökten servis et: scripts/serve.sh</div>'; });
+  .catch(err => {
+    console.error('boot error:', err);
+    $('#page').innerHTML = `<div class="empty">Bir şeyler ters gitti: ${(err && err.message) || err}</div>`;
+  });
 window.addEventListener('hashchange', () => { render(); animateCounts(); });

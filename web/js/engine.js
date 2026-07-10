@@ -67,7 +67,7 @@ export function dailyKaz() {
   const w = analyzeWeak();
   const pick = w.plan[0] || allKaz().find(z => (S.status[z.uid] || 'none') !== 'green') || allKaz()[0];
   S.dailyKaz = { date: today, code: pick.uid }; save();
-  return pick;
+  return findKaz(pick.uid) || pick;  // plan items are raw (no .ders); findKaz returns the enriched record
 }
 
 // day-based scheduling (takvim is day-level; hours are optional and picked in the daily program).
