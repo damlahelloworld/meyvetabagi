@@ -29,9 +29,8 @@ export function bugun() {
   d.appendChild(el('h1', null, nm ? `merhaba ${esc(nm.toLocaleLowerCase('tr'))}` : 'merhaba'));
   d.appendChild(el('p', 'meta', `resmi MEB kazanımları ve ders kitaplarından çıkarılan anahtar kelimeler — tek yerde, ücretsiz. sınava ${days} gün.`));
 
-  // büyüyen corpus sayaçları — ürünün kalbi, hepsi gerçek. renk explicit hex + text-fill (var/inherit ezmesine karşı)
-  const nn = v => v.toLocaleString('tr-TR');
-  const cstat = (c, val, lbl, href) => `<${href ? 'a' : 'div'} class="hstat"${href ? ` href="${href}"` : ''}><b style="color:${c};-webkit-text-fill-color:${c}">${nn(val)}</b><span>${lbl}</span></${href ? 'a' : 'div'}>`;
+  // büyüyen corpus sayaçları — animasyonlu sayım (cnt) + explicit hex renk (+text-fill ezmeye karşı)
+  const cstat = (c, val, lbl, href) => `<${href ? 'a' : 'div'} class="hstat"${href ? ` href="${href}"` : ''}><b style="color:${c};-webkit-text-fill-color:${c}">${cnt(val)}</b><span>${lbl}</span></${href ? 'a' : 'div'}>`;
   const feed = el('div', 'homefeed');
   feed.innerHTML =
     cstat('#E07A3E', cs.kazanim, 'MEB kazanımı', '#/konular') +

@@ -24,8 +24,10 @@ svg{display:block}
 .brandsub{display:flex;gap:12px;margin-top:2px;align-items:baseline}
 .kaynaklink{font-size:12px;color:var(--accent-ink);text-decoration:underline}
 .kaynaklink:hover{color:var(--ink)}
-.sig{position:fixed;left:14px;bottom:10px;font-size:12px;color:var(--muted);z-index:40}
-.sig:hover{color:var(--accent-ink)}
+.sig{position:fixed;left:14px;bottom:10px;font-size:12.5px;z-index:40;
+  background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.sig:hover{filter:brightness(1.15)}
 .pagechips{display:none}
 #nav{display:flex;align-items:baseline;gap:16px;margin-left:auto;flex:none}
 /* nav links: all same size, rainbow gradient like the wordmark */
