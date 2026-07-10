@@ -10,7 +10,7 @@ export function taskRow(x, big) {
   const title = z ? z.title : x.code;
   const r = el('div', 'task' + (x.done ? ' done' : ''));
   r.innerHTML = `<div class="cb">${ICON.check}</div><div class="tt">${esc(title)}${z ? ` <span class="pill">${z.code}</span>` : ''}</div>
-    <div class="who ${x.author}">${x.author === 'coach' ? 'çilek' : 'Sen'}</div>`;
+    <div class="who ${x.author}">${x.author === 'coach' ? 'program' : 'sen'}</div>`;
   r.querySelector('.cb').onclick = e => { e.stopPropagation(); x.done = !x.done; x.done ? bump() : unbump(); save(); refresh(); };
   if (big) r.querySelector('.tt').onclick = () => { if (z) location.hash = '#/konular/' + z.uid; };
   return r;
@@ -60,7 +60,7 @@ export function bugun() {
       <p class="tight"><b>${esc(dz.title)}</b> <span class="pill">${dz.code} · ${esc(dz.ders.ders.split(' ')[0])}</span></p>`;
     const ta = el('textarea', 'note short'); ta.placeholder = 'Bu kazanımı bilmeyen birine anlatır gibi yaz…';
     daily.appendChild(ta);
-    const btn = el('button', 'btn mt10', 'çilek değerlendirsin');
+    const btn = el('button', 'btn mt10', 'değerlendir');
     btn.onclick = () => {
       if (!ta.value.trim()) { ta.focus(); return; }
       btn.remove();
@@ -70,7 +70,7 @@ export function bugun() {
         <div class="rdet">
           ${ev.found.length ? `<p class="okline">değindin: ${ev.found.map(esc).join(', ')}</p>` : ''}
           ${ev.missing.length ? `<p class="missline">hiç değinmedin: ${ev.missing.map(esc).join(', ')}</p>` : '<p class="okline">MEB açıklamasındaki her kavrama değinmişsin.</p>'}
-          <p class="srcline">çilek bu değerlendirmede şunu kullandı: ${ev.sources.map(s => esc(s.name)).join(' · ')} — <a class="mini" href="#/kaynakca">yöntem & kaynakça</a></p>
+          <p class="srcline">değerlendirmede kullanılan kaynak: ${ev.sources.map(s => esc(s.name)).join(' · ')} — <a class="mini" href="#/kaynakca">yöntem & kaynakça</a></p>
         </div>`;
       daily.appendChild(res);
       const rev = el('div', 'aciklama daily');
@@ -82,7 +82,7 @@ export function bugun() {
       ok.onclick = () => { S.status[dz.uid] = 'green'; if (addRep(dz.uid)) bump(); S.dailyGraded = ts; save(); refresh(); };
       no.onclick = () => { S.status[dz.uid] = 'amber'; S.dailyGraded = ts; save(); refresh(); };
       g.appendChild(ok); g.appendChild(no); daily.appendChild(g);
-      daily.appendChild(el('div', 'hint', `çilek önerisi: ${ev.verdict === 'green' ? 'Doğru bildim' : 'Eksik kaldı'} — ama son söz senin.`));
+      daily.appendChild(el('div', 'hint', `öneri: ${ev.verdict === 'green' ? 'Doğru bildim' : 'Eksik kaldı'} — ama son söz senin.`));
     };
     daily.appendChild(btn);
   }
@@ -90,7 +90,7 @@ export function bugun() {
 
   const w = analyzeWeak();
   const coach = el('div', 'coachbox');
-  coach.innerHTML = `<div class="h"><span class="av">${ICON.spark}</span>çilek önerisi</div>
+  coach.innerHTML = `<div class="h"><span class="av">${ICON.spark}</span>bu hafta neye yüklen</div>
     <p>En zayıf dersin <em>${esc(w.ders)}</em> (%${w.pct} yeşil, ${w.remaining} kazanım eksik).
     Sana bu haftaya <em>${w.plan.length} kazanım</em> önerdim — hepsi MEB kazanımına dayalı.
     <span class="pill">verinden hesaplandı</span></p>`;

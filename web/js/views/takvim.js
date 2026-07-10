@@ -82,7 +82,7 @@ export function takvim() {
     cb.onclick = () => { ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
     row.appendChild(cb);
     const txt = el('div', 'ptext');
-    txt.innerHTML = `<div class="title">${esc(z ? z.title : ev.code)}</div><div class="code">${z ? z.code + ' · ' + esc(z.ders.ders.split(' ')[0]) : ''}${ev.author === 'coach' ? ' · çilek ekledi' : ''}</div>`;
+    txt.innerHTML = `<div class="title">${esc(z ? z.title : ev.code)}</div><div class="code">${z ? z.code + ' · ' + esc(z.ders.ders.split(' ')[0]) : ''}${ev.author === 'coach' ? ' · program' : ''}</div>`;
     if (z) txt.onclick = () => { location.hash = '#/konular/' + z.uid; };
     row.appendChild(txt);
     const x = el('button', 'px', '×');
@@ -146,7 +146,7 @@ function tsk(ev) {
   const z = findKaz(ev.code);
   const card = el('div', 'tsk' + (ev.done ? ' done' : '')); card.draggable = true;
   card.innerHTML = `<span class="tdot">${ev.done ? ICON.check : ''}</span><span class="tt">${esc(z ? z.title : ev.code)}</span><span class="tx">×</span>`;
-  card.title = (z ? z.title : ev.code) + '  ·  ' + (ev.author === 'coach' ? 'çilek ekledi' : 'sen ekledin') + (ev.done ? ' · yapıldı' : ' · bekliyor');
+  card.title = (z ? z.title : ev.code) + '  ·  ' + (ev.author === 'coach' ? 'program ekledi' : 'sen ekledin') + (ev.done ? ' · yapıldı' : ' · bekliyor');
   card.ondragstart = e => { e.dataTransfer.setData('text/plain', 'move:' + ev.id); e.dataTransfer.effectAllowed = 'move'; };
   card.onclick = e => { if (e.target.closest('.tx')) return; ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
   card.querySelector('.tx').onclick = e => { e.stopPropagation(); S.events = S.events.filter(x => x.id !== ev.id); save(); refresh(); };

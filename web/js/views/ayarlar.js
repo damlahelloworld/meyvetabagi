@@ -16,7 +16,7 @@ export function ayarlar() {
   const r1 = el('div', 'setrow'); r1.innerHTML = `<div class="lbl"><b>İsim</b><span>uygulama seni böyle çağırır</span></div>`;
   const ni = el('input'); ni.value = u.name; ni.onchange = () => { S.user.name = ni.value.trim() || 'Öğrenci'; save(); refresh(); };
   r1.appendChild(ni); set.appendChild(r1);
-  const r2 = el('div', 'setrow'); r2.innerHTML = `<div class="lbl"><b>Alan</b><span>çilek önerileri ve program önceliğin</span></div>`;
+  const r2 = el('div', 'setrow'); r2.innerHTML = `<div class="lbl"><b>Alan</b><span>öneriler ve program önceliğin</span></div>`;
   const sel = el('select'); ['Sayısal', 'Eşit Ağırlık', 'Sözel', 'Dil'].forEach(o => { const op = el('option', null, o); op.value = o; if (o === u.target) op.selected = true; sel.appendChild(op); });
   sel.onchange = () => { S.user.target = sel.value; save(); refresh(); };
   r2.appendChild(sel); set.appendChild(r2);

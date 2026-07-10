@@ -73,9 +73,9 @@ export function onboard() {
       box.querySelector('#next').onclick = go;
       box.querySelector('#em').onkeydown = e => { if (e.key === 'Enter') go(); };
       setTimeout(() => box.querySelector('#nm').focus(), 30);
-    } else if (step === 2) chooser('target', `${esc(data.name)}, alanın ne?`, 'çilek önerileri ve programın buna göre önceliklenir.', ['Sayısal', 'Eşit Ağırlık', 'Sözel', 'Dil']);
+    } else if (step === 2) chooser('target', `${esc(data.name)}, alanın ne?`, 'öneriler ve programın buna göre önceliklenir.', ['Sayısal', 'Eşit Ağırlık', 'Sözel', 'Dil']);
     else if (step === 3) chooser('grade', 'Hangi seviyedesin?', 'Kazanımları buna göre diziyoruz.', ['9. sınıf', '10. sınıf', '11. sınıf', '12. sınıf', 'Mezun']);
-    else if (step === 4) chooser('hours', 'Günde kaç saat çalışabilirsin?', 'çilek programı günlük bu tempoya göre kurar.', ['2 saat', '4 saat', '6 saat', '8+ saat']);
+    else if (step === 4) chooser('hours', 'Günde kaç saat çalışabilirsin?', 'program günlük bu tempoya göre kurulur.', ['2 saat', '4 saat', '6 saat', '8+ saat']);
     else {
       box.className = 'onbox';
       box.innerHTML = `<div class="logo">m</div><div class="dots">${dots(5)}</div>

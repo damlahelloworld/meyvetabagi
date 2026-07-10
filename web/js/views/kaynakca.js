@@ -6,7 +6,7 @@ import { allKaz } from '../data.js';
 export function kaynakca() {
   const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('h1', null, 'Kaynakça'));
-  d.appendChild(el('p', 'meta', 'meyvetabagi\'ndeki her içeriğin kaynağı ve çilek\'in çalışma yöntemi — MLA biçiminde.'));
+  d.appendChild(el('p', 'meta', 'meyvetabagi içeriğinin kaynağı ve çalışma yöntemi — MLA biçiminde.'));
 
   d.appendChild(el('div', 'seclabel', 'BİRİNCİL KAYNAK — KAZANIMLAR'));
   const k1 = el('div', 'kaynakca wide');
@@ -15,7 +15,7 @@ export function kaynakca() {
     <p class="citenote">Uygulamadaki ${allKaz().length} kazanımın TAMAMI bu resmî belgeden ayrıştırılmıştır — kodlar, başlıklar ve açıklamalar birebir MEB metnidir. Üretilmiş, düzenlenmiş ya da uydurulmuş kazanım yoktur. (Mantık, Sosyoloji, Psikoloji ve İnkılap Tarihi bölümleri belgedeki teknik sorunlar nedeniyle henüz ayrıştırılamadı; eklenince burada belirtilecek.)</p>`;
   d.appendChild(k1);
 
-  d.appendChild(el('div', 'seclabel', 'ÇİLEK NASIL ÇALIŞIR'));
+  d.appendChild(el('div', 'seclabel', 'NASIL ÇALIŞIR'));
   const k2 = el('div', 'kaynakca wide');
   k2.innerHTML = `
     <p class="citenote"><b>Değerlendirme ("anlat bakalım"):</b> yazdığın metin, ilgili kazanımın resmî MEB açıklamasındaki kavramlarla karşılaştırılır (kural tabanlı kapsama analizi, ek toleranslı kök eşleme). Yapay zekâ modeli KULLANILMAZ; metnin internete gönderilmez, hesaplama tarayıcında yapılır. Her değerlendirmenin altında hangi kaynağın kullanıldığı yazar.</p>

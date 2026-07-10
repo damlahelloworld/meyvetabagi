@@ -28,10 +28,10 @@ svg{display:block}
 .nav .count{margin-left:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 #userslot{position:relative;flex:none}
 
-/* page — one centered dense column, gymgyme measure */
+/* page — real app column: centered, comfortable measure (not full-bleed left-jammed) */
 .page{flex:1;overflow-y:auto;background:var(--bg)}
-.pagein{max-width:none;margin:0;padding:10px 26px 50px}
-.page.wide .pagein{max-width:none}
+.pagein{max-width:940px;margin:0 auto;padding:16px 32px 56px;width:100%}
+.page.wide .pagein,.pagein.widepage{max-width:1240px}
 .crumb{display:none}
 .pagein h1{font-size:28px;line-height:1.2;margin:2px 0 2px;letter-spacing:-.01em}
 .pagein h1.sec{font-size:17px;margin-top:16px}
