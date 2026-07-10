@@ -39,6 +39,77 @@ const ALAN_DERS = {
 const PER_DAY = { '2 saat': 1, '4 saat': 2, '6 saat': 3, '8+ saat': 4 };
 const perDay = () => PER_DAY[(S.user && S.user.hours) || ''] || 2;
 
+// ---- prerequisite chains (Damla, 2026-07-10: "bir prerequisite zinciri kur") ----
+// Keys are "grade|unit name" within a ders; a unit is UNLOCKED when every prereq is ≥50% green.
+// Units with no entry have no prereqs (always unlocked). Standard YKS pedagogy, unit level only.
+// Foundational units (many dependents) rank first, dead-ends like Mantık (no dependents) sink —
+// fixes the "sürekli mantık öneriyor" loop.
+const PREREQ = {
+  'Matematik': {
+    '10|Fonksiyonlar': ['9|Kümeler', '9|Denklemler ve Eşitsizlikler'],
+    '10|Polinomlar': ['9|Denklemler ve Eşitsizlikler'],
+    '10|İkinci Dereceden Denklemler': ['10|Polinomlar'],
+    '10|Sayma ve Olasılık': ['9|Kümeler'],
+    '10|Dörtgenler ve Çokgenler': ['9|Üçgenler'],
+    '10|Uzay Geometri': ['10|Dörtgenler ve Çokgenler'],
+    '11|Trigonometri': ['9|Üçgenler', '10|Fonksiyonlar'],
+    '11|Analitik Geometri': ['9|Denklemler ve Eşitsizlikler', '9|Üçgenler'],
+    '11|Fonksiyonlarda Uygulamalar': ['10|Fonksiyonlar', '10|İkinci Dereceden Denklemler'],
+    '11|Denklem ve Eşitsizlik Sistemleri': ['10|İkinci Dereceden Denklemler'],
+    '11|Çember ve Daire': ['9|Üçgenler'],
+    '11|Uzay Geometri': ['10|Uzay Geometri'],
+    '11|Olasılık': ['10|Sayma ve Olasılık'],
+    '12|Üstel ve Logaritmik Fonksiyonlar': ['10|Fonksiyonlar'],
+    '12|Diziler': ['10|Fonksiyonlar'],
+    '12|Trigonometri': ['11|Trigonometri'],
+    '12|Dönüşümler': ['11|Analitik Geometri'],
+    '12|Türev': ['11|Fonksiyonlarda Uygulamalar', '12|Üstel ve Logaritmik Fonksiyonlar'],
+    '12|İntegral': ['12|Türev'],
+    '12|Analitik Geometri': ['11|Analitik Geometri'],
+  },
+  'Fizik': {
+    '9|HAREKET VE KUVVET': ['9|FİZİK BİLİMİNE GİRİŞ'],
+    '9|ENERJİ': ['9|HAREKET VE KUVVET'],
+    '10|ELEKTRİK VE MANYETİZMA': ['9|ELEKTROSTATİK'],
+    '11|KUVVET VE HAREKET': ['9|HAREKET VE KUVVET', '9|ENERJİ'],
+    '11|ELEKTRİK VE MANYETİZMA': ['10|ELEKTRİK VE MANYETİZMA'],
+    '12|ÇEMBERSEL HAREKET': ['11|KUVVET VE HAREKET'],
+    '12|BASİT HARMONİK HAREKET': ['11|KUVVET VE HAREKET'],
+    '12|DALGA MEKANİĞİ': ['10|DALGALAR'],
+    '12|MODERN FİZİK': ['12|ATOM FİZİĞİNE GİRİŞ VE RADYOAKTİVİTE'],
+  },
+};
+
+const ukey = u => `${u.grade || ''}|${u.name}`;
+
+function unitGreenPct(ders, u) {
+  const kz = u.konular.flatMap(k => k.kazanimlar);
+  if (!kz.length) return 100;
+  const green = kz.filter(z => S.status[kuid(ders.ders, z.code)] === 'green').length;
+  return green / kz.length * 100;
+}
+
+// dependents count per unit (how many other units need me) — foundational value
+function dependents(dersName) {
+  const map = PREREQ[dersName] || {};
+  const cnt = {};
+  Object.values(map).forEach(reqs => reqs.forEach(r => { cnt[r] = (cnt[r] || 0) + 1; }));
+  return cnt;
+}
+
+// order a ders's units: unlocked first; among unlocked, more dependents first (foundations),
+// then curriculum order. Locked units wait for their prereqs.
+export function orderedUnits(ders) {
+  const map = PREREQ[ders.ders] || {};
+  const dep = dependents(ders.ders);
+  const pct = {}; ders.units.forEach(u => { pct[ukey(u)] = unitGreenPct(ders, u); });
+  const unlocked = u => (map[ukey(u)] || []).every(r => (pct[r] ?? 100) >= 50);
+  return ders.units
+    .map((u, i) => ({ u, i, open: unlocked(u), dep: dep[ukey(u)] || 0 }))
+    .sort((a, b) => (b.open - a.open) || (b.dep - a.dep) || (a.i - b.i))
+    .map(x => x.u);
+}
+
 export function analyzeWeak() {
   const alan = (S.user && S.user.target) || '';
   const primary = new Set(ALAN_DERS[alan] || DB.dersler.map(d => d.ders));
@@ -52,7 +123,8 @@ export function analyzeWeak() {
   const pool = open.filter(r => r.prim);
   const best = (pool.length ? pool : open.length ? open : rows).sort((a, b) => a.pct - b.pct)[0];
   const scheduled = new Set(S.events.map(e => e.code));
-  const cands = best.dersObj.units.flatMap(u => u.konular.flatMap(k => k.kazanimlar.map(z => ({ ...z, uid: kuid(best.dersObj.ders, z.code) }))))
+  // prerequisite-aware ordering: foundations first, locked units wait (Damla, 2026-07-10)
+  const cands = orderedUnits(best.dersObj).flatMap(u => u.konular.flatMap(k => k.kazanimlar.map(z => ({ ...z, uid: kuid(best.dersObj.ders, z.code) }))))
     .filter(z => (S.status[z.uid] || 'none') !== 'green' && !scheduled.has(z.uid));
   // review-due ambers first (spaced repetition), then untouched ones in curriculum order
   const amber = cands.filter(z => S.status[z.uid] === 'amber');
