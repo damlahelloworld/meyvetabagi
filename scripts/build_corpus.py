@@ -9,7 +9,7 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 KAZ = os.path.join(ROOT, 'web', 'data', 'kazanimlar.json')
 KDIR = os.path.join(ROOT, 'data', 'kitaplar')
 
-DERS_SLUG = {'Biyoloji': 'biyoloji'}
+DERS_SLUG = {'Biyoloji':'biyoloji','Fizik':'fizik','Kimya':'kimya','Matematik':'matematik','Tarih':'tarih','Coğrafya':'cografya','Felsefe':'felsefe'}
 STOP = set('ve veya ile için gibi göre kadar sonra önce bu şu bir iki her tüm bazı diğer aynı olan olarak olduğu açıklar analiz eder değerlendirir belirtilir sağlanır ilişkin ilgili genel özel yer alan üzerinde durulur örneklerle kavramını açıklar'.split())
 
 def words(t):

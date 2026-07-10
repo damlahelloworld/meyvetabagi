@@ -9,12 +9,8 @@ geçilince yeni kitaplar yeniden çekilecek.
 - Her pasaj kazanım uid'sine bağlanır ve kaynağı (kitap, ünite, sayfa) `corpus(uid, source, text)` içinde saklanır.
 - Barındırma değil, işleme: kitaplardan kazanım-başı özet/pasaj çıkarılır; ham kitap dosyası repoya konmaz (boyut + haklar).
 
-## Toplama durumu (ders · sınıf · ünite)
-Biçim: ders | sınıf | kaynak | durum
-- Biyoloji | 11 | OGM Materyal (Ünite 1-2) | ÇEKİLDİ (130 sayfa ~36k kelime) → biyoloji_11.json
-- Biyoloji | 12 | OGM Materyal (Ünite 1-4) | ÇEKİLDİ (197 sayfa ~38k kelime) → biyoloji_12.json
-- corpus.json: 60 biyoloji kazanımı kitap pasajlarına bağlandı (kural tabanlı örtüşme; scripts/build_corpus.py)
-- (diğer ders/sınıflar sırayla eklenecek)
-
-## MLA künye şablonu
-Millî Eğitim Bakanlığı. *<Ders> <Sınıf>. Sınıf Ders Kitabı.* T.C. MEB / OGM Materyal, <yıl>, ogmmateryal.eba.gov.tr.
+## Toplama durumu (10 Tem 2026 — 23 kitap çekildi)
+Biyoloji 9-12, Fizik 9-12, Kimya 9-12, Matematik 10-12, Coğrafya 10-12, Tarih 9-11, Felsefe 10-11.
+Toplam ~4.700 sayfa, ~1,4M kelime. corpus.json: 707 kazanım pasaja bağlı. terimler.json: 503 kazanımda 448 benzersiz terim.
+Eksik: Türk Dili ve Edebiyatı, Din Kültürü, İnkılap Tarihi (OGM slug'ları farklı, sonra eklenecek).
+Not: terim çıkarımı "TERİM: açıklama" kalıbına dayanır — fen dersleri zengin, sözel dersler (tarih/felsefe/coğrafya) daha az terim verir; sözel için ek kalıp gerekecek.

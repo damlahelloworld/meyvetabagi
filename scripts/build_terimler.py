@@ -10,8 +10,8 @@ KDIR = os.path.join(ROOT, 'data', 'kitaplar')
 KAZ = os.path.join(ROOT, 'web', 'data', 'kazanimlar.json')
 OUT = os.path.join(ROOT, 'web', 'data', 'terimler.json')
 
-DERS_NAMES = {'biyoloji': 'Biyoloji'}
-SLUG3 = {'biyoloji': 'biy'}
+DERS_NAMES = {'biyoloji':'Biyoloji','fizik':'Fizik','kimya':'Kimya','matematik':'Matematik','tarih':'Tarih','cografya':'Coğrafya','felsefe':'Felsefe'}
+SLUG3 = {'biyoloji':'biy','fizik':'fiz','kimya':'kim','matematik':'mat','tarih':'tar','cografya':'cog','felsefe':'fel'}
 
 def clean(t):
     return re.sub(r'\s+', ' ', t).strip(' .;:,→')
@@ -73,7 +73,7 @@ def main():
     db = json.load(open(KAZ, encoding='utf-8'))
     result = {}
     for ders in db['dersler']:
-        slug = {'Biyoloji': 'biyoloji'}.get(ders['ders'])
+        slug = {'Biyoloji':'biyoloji','Fizik':'fizik','Kimya':'kimya','Matematik':'matematik','Tarih':'tarih','Coğrafya':'cografya','Felsefe':'felsefe'}.get(ders['ders'])
         if not slug:
             continue
         s3 = SLUG3[slug]
