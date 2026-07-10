@@ -1,0 +1,46 @@
+name: anahtar kelime taramasi
+
+# Damla bir daha elle tarama yapmaz: yeni ders kitabi repoya dustugunde (veya haftalik
+# yedek olarak) terimler + corpus otomatik cikar, degisiklik varsa commit + push.
+# Kitaplar zaten repoda (data/kitaplar/), script'ler sadece stdlib kullanir -> ag gerekmez.
+on:
+  push:
+    paths:
+      - 'data/kitaplar/**'
+      - '!data/kitaplar/corpus.json'   # botun kendi ciktisi tekrar tetiklemesin (sonsuz dongu)
+      - 'scripts/build_terimler.py'
+      - 'scripts/build_corpus.py'
+  schedule:
+    - cron: '0 6 * * 1'                 # her pazartesi 06:00 UTC (yedek)
+  workflow_dispatch:                     # Actions sekmesinden elle calistir
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tarama
+  cancel-in-progress: false
+
+jobs:
+  tara:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: terimleri ve corpusu cikar
+        run: |
+          python3 scripts/build_terimler.py
+          python3 scripts/build_corpus.py
+      - name: degisiklik varsa commitle
+        run: |
+          git config user.name "Damla"
+          git config user.email "damummyphus@gmail.com"
+          if [ -n "$(git status --porcelain web/data/terimler.json data/kitaplar/corpus.json)" ]; then
+            git add web/data/terimler.json data/kitaplar/corpus.json
+            git commit -m "otomatik tarama: anahtar kelimeler guncellendi"
+            git push
+          else
+            echo "degisiklik yok, commit atlaniyor"
+          fi
