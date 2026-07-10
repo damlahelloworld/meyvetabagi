@@ -344,3 +344,24 @@
 .qexp { margin-top: 8px; }
 .qexpl { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
 .qsrc { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* anahtar terimler — calicocat: akan renkli KÜÇÜK harf kelimeler, tıkla → altında açılır */
+.terimler { max-width: 820px; line-height: 1.9; margin-bottom: 8px; }
+.terimwrap { display: inline; }
+.terim { display: inline; background: none; border: none; padding: 0; margin-right: 12px; cursor: pointer;
+  font-size: 15px; font-weight: bold; }
+.terim:hover { text-decoration: underline; }
+.t-red { color: var(--red); } .t-pink { color: var(--pink); } .t-orange { color: var(--orange); }
+.t-yellow { color: var(--yellow); } .t-green { color: var(--green); } .t-blue { color: var(--blue); }
+.t-purple { color: var(--purple); } .t-teal { color: var(--teal); } .t-brown { color: var(--brown); }
+.terimpanel { display: none; }
+.terimwrap.open { display: block; margin: 6px 0 10px; }
+.terimwrap.open .terim { font-size: 17px; }
+.terimwrap.open .terimpanel { display: block; background: var(--panel); border-radius: var(--radius); padding: 12px 14px; margin-top: 6px; max-width: 640px; }
+.tp-q { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.tp-a { font-size: 14px; line-height: 1.55; margin: 2px 0 8px; }
+.tp-img { max-width: 100%; border-radius: var(--radius); margin: 4px 0 8px; display: block; }
+.tp-vid { display: inline-block; font-size: 13px; color: var(--accent-ink); text-decoration: underline; margin-bottom: 8px; }
+.tp-src { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+.tp-add { font-size: 13px; color: var(--accent-ink); text-decoration: underline; background: none; border: none; padding: 0; cursor: pointer; }
+.tp-add:disabled { color: var(--green); text-decoration: none; cursor: default; }

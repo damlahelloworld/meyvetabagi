@@ -1,6 +1,6 @@
 // Konular — MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
-import { S, save, saveSoon, bump, addRep } from '../state.js';
-import { DB, allKaz, findKaz, unitProgress, kuid, sorularFor } from '../data.js';
+import { S, save, saveSoon, bump, addRep, dstr } from '../state.js';
+import { DB, allKaz, findKaz, unitProgress, kuid, sorularFor, terimlerFor } from '../data.js';
 import { el, esc, norm, ICON, page, dersColor } from '../ui.js';
 import { refresh, param } from '../router.js';
 
@@ -155,6 +155,39 @@ function kazDetail(sel) {
   d.appendChild(el('div', 'hint seg', 'Öğrendim tekrar sayacı işletir — aynı kazanım günde en fazla bir tekrar sayılır, yarın yine çalışabilirsin.'));
 
   if (z.aciklama) d.appendChild(el('div', 'aciklama', `<b>MEB açıklaması</b>${esc(z.aciklama)}`));
+
+  // anahtar terimler — kitaptan; calicocat gibi akan renkli küçük harf liste, tıkla → açılır (Damla, 2026-07-10)
+  const terms = terimlerFor(z.uid);
+  if (terms.length) {
+    d.appendChild(el('div', 'seclabel', `anahtar terimler · ${terms.length} (kitaptan)`));
+    const wrap = el('div', 'terimler');
+    const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
+    terms.forEach((t, ti) => {
+      const item = el('span', 'terimwrap');
+      const tm = el('button', 'terim ' + PAL[ti % PAL.length], t.terim.toLocaleLowerCase('tr'));
+      const panel = el('div', 'terimpanel');
+      panel.innerHTML = `
+        <div class="tp-q">ne?</div><div class="tp-a">${esc(t.tanim)}</div>
+        ${t.image ? `<img class="tp-img" src="${esc(t.image)}" alt="">` : ''}
+        ${t.video ? `<a class="tp-vid" href="${esc(t.video)}" target="_blank" rel="noopener">videoyu izle ↗</a>` : ''}
+        <div class="tp-src">kaynak: ${esc(t.source)}</div>`;
+      const add = el('button', 'tp-add', '+ çalışmama ekle');
+      add.onclick = () => {
+        const ts2 = dstr(new Date());
+        S.events.push({ id: 'e' + Date.now() + Math.floor(Math.random() * 999), date: ts2, h: null, code: z.uid, author: 'student', done: false });
+        save(); add.textContent = 'eklendi ✓'; add.disabled = true;
+      };
+      panel.appendChild(add);
+      tm.onclick = () => {
+        const open = item.classList.contains('open');
+        wrap.querySelectorAll('.terimwrap.open').forEach(o => o.classList.remove('open'));
+        if (!open) item.classList.add('open');
+      };
+      item.appendChild(tm); item.appendChild(panel);
+      wrap.appendChild(item);
+    });
+    d.appendChild(wrap);
+  }
 
   const ta = el('textarea', 'note');
   ta.placeholder = 'Kendi notun — formül, sık yaptığın hata, ipucu…';

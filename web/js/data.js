@@ -14,6 +14,7 @@ export const kuid = (dersName, code) => (DERS_SLUG[dersName] || 'x') + ':' + cod
 export let DB = null;
 let _kaz = null, _map = null;
 let _sorular = {};  // uid -> [question objects]
+let _terimler = {}; // uid -> [ {terim, tanim, source} ]
 
 export async function loadDB() {
   const r = await fetch('data/kazanimlar.json');
@@ -26,11 +27,16 @@ export async function loadDB() {
     _sorular = {};
     (sj.sorular || []).forEach(q => { (_sorular[q.uid] = _sorular[q.uid] || []).push(q); });
   } catch { _sorular = {}; }
+  try {
+    const tr = await fetch('data/terimler.json');
+    _terimler = await tr.json();
+  } catch { _terimler = {}; }
   return DB;
 }
 
 export function sorularFor(uid) { return _sorular[uid] || []; }
 export function soruSayisi() { return Object.values(_sorular).reduce((a, b) => a + b.length, 0); }
+export function terimlerFor(uid) { return _terimler[uid] || []; }
 
 export function allKaz() {
   if (_kaz) return _kaz;
