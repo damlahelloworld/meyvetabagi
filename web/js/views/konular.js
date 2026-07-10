@@ -4,14 +4,14 @@ import { DB, allKaz, findKaz, unitProgress, kuid, sorularFor, terimlerFor } from
 import { el, esc, norm, ICON, page, dersColor } from '../ui.js';
 import { refresh, param } from '../router.js';
 
-const FILT = { q: '', status: 'all', ders: 'all', sinif: 'all' };
+const FILT = { q: '', ders: 'all', sinif: 'all' };
 const STATUS = ['red', 'amber', 'green'];
 const STAT_LBL = { red: 'Bilmiyorum', amber: 'Tekrar', green: 'Öğrendim' };
+// sayısalcı önceliğiyle ders sırası (Damla)
+const DERS_ORDER = ['Matematik', 'Fizik', 'Kimya', 'Biyoloji', 'Türk Dili ve Edebiyatı', 'Tarih', 'Coğrafya', 'Din Kültürü ve Ahlak Bilgisi', 'Felsefe'];
+const orderedDersler = () => [...DB.dersler].sort((a, b) => DERS_ORDER.indexOf(a.ders) - DERS_ORDER.indexOf(b.ders));
 
 function matchKaz(z, dersName) {
-  const st = S.status[z.uid || kuid(dersName, z.code)] || 'none';
-  if (FILT.status === 'red' && st !== 'red' && st !== 'none') return false;
-  if (FILT.status !== 'all' && FILT.status !== 'red' && st !== FILT.status) return false;
   const dn = dersName || (z.ders && z.ders.ders);
   if (FILT.ders !== 'all' && dn !== FILT.ders) return false;
   if (FILT.q) { const q = norm(FILT.q); if (!norm(z.title).includes(q) && !z.code.includes(FILT.q)) return false; }
@@ -27,25 +27,21 @@ export function konular() {
   const lpane = d;
   const tools = el('div', 'tools flat'); lpane.appendChild(tools);
   lpane.appendChild(el('div', 'list'));
-  const counts = { all: 0, red: 0, amber: 0, green: 0, none: 0 };
-  allKaz().forEach(z => { counts.all++; counts[S.status[z.uid] || 'none']++; });
+  const total = allKaz().length;
+  const green = allKaz().filter(z => S.status[z.uid] === 'green').length;
+  const pct = Math.round(green / total * 100);
   tools.innerHTML = `
     <div class="search${FILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
       <input placeholder="Kazanım ara — “türev”, “9.1.1.1”…" value="${esc(FILT.q)}">
       <span class="clr">×</span></div>
-    <div class="chips" data-grp="status">
-      <button class="chip${FILT.status === 'all' ? ' on' : ''}" data-v="all">Tümü <span class="c">${counts.all}</span></button>
-      <button class="chip${FILT.status === 'red' ? ' on' : ''}" data-v="red"><span class="d red"></span>Kırmızı <span class="c">${counts.red + counts.none}</span></button>
-      <button class="chip${FILT.status === 'amber' ? ' on' : ''}" data-v="amber"><span class="d amber"></span>Sarı <span class="c">${counts.amber}</span></button>
-      <button class="chip${FILT.status === 'green' ? ' on' : ''}" data-v="green"><span class="d green"></span>Yeşil <span class="c">${counts.green}</span></button>
-    </div>
+    <div class="donerow"><span class="donebar"><i style="width:${pct}%"></i></span><span class="donepct">%${pct} tamamlandı · ${green}/${total}</span></div>
     <div class="chips gap-top" data-grp="sinif">
-      <button class="chip${FILT.sinif === 'all' ? ' on' : ''}" data-v="all">Tüm sınıflar</button>
+      <button class="chip${FILT.sinif === 'all' ? ' on' : ''}" data-v="all">tüm sınıflar</button>
       ${['9', '10', '11', '12'].map(g => `<button class="chip${FILT.sinif === g ? ' on' : ''}" data-v="${g}">${g}. sınıf</button>`).join('')}
     </div>
     <div class="chips gap-top" data-grp="ders">
-      <button class="chip${FILT.ders === 'all' ? ' on' : ''}" data-v="all">Tüm dersler</button>
-      ${DB.dersler.map(d => `<button class="chip dersc dc-${dersColor(d.ders)}${FILT.ders === d.ders ? ' on' : ''}" data-v="${esc(d.ders)}">${esc(d.ders)}</button>`).join('')}
+      <button class="chip${FILT.ders === 'all' ? ' on' : ''}" data-v="all">tüm dersler</button>
+      ${orderedDersler().map(d => `<button class="chip dersc dc-${dersColor(d.ders)}${FILT.ders === d.ders ? ' on' : ''}" data-v="${esc(d.ders)}">${esc(d.ders)}</button>`).join('')}
     </div>
     <div class="res"></div>`;
   const input = tools.querySelector('input');
@@ -79,7 +75,7 @@ export function konular() {
       kz.forEach(z => wrap.appendChild(kazRow(ders, z)));
       return wrap;
     };
-    DB.dersler.forEach(ders => {
+    orderedDersler().forEach(ders => {
       const visUnits = ders.units.filter(u => FILT.sinif === 'all' || String(u.grade) === FILT.sinif);
       const dersKaz = visUnits.flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
       if (!dersKaz.length) return;
@@ -105,9 +101,14 @@ export function konular() {
         // gradeless leftovers of a graded ders (rare) flow full width below
         visUnits.filter(u => !u.grade).forEach(u => { const b = unitBlock(ders, u, false); if (b) list.appendChild(b); });
       } else {
-        // ders without grades (Türk Dili A.x codes): flowing dense columns
-        const flow = el('div', 'kzcols');
-        visUnits.forEach(u => { const b = unitBlock(ders, u, false); if (b) flow.appendChild(b); });
+        // ders without grades (Türk Dili): 4 columns, rows flow freely across them
+        const flow = el('div', 'kzcols4');
+        visUnits.forEach(u => {
+          const kz = u.konular.flatMap(k => k.kazanimlar).filter(z => matchKaz(z, ders.ders));
+          if (!kz.length) return;
+          flow.appendChild(el('div', 'unitrow flowunit', `${esc(u.name)} · %${unitProgress(u, ders.ders)}`));
+          kz.forEach(z => flow.appendChild(kazRow(ders, z)));
+        });
         list.appendChild(flow);
       }
     });
