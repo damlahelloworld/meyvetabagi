@@ -1,10 +1,10 @@
 // Konular — MEB kazanım checklist: search, filters, R/Y/G marking, reps (1/day), notes.
 import { S, save, saveSoon, bump, addRep } from '../state.js';
 import { DB, allKaz, findKaz, unitProgress, kuid } from '../data.js';
-import { el, esc, norm, ICON, page, dersDot } from '../ui.js';
+import { el, esc, norm, ICON, page, dersColor } from '../ui.js';
 import { refresh, param } from '../router.js';
 
-const FILT = { q: '', status: 'all', ders: 'all' };
+const FILT = { q: '', status: 'all', ders: 'all', sinif: 'all' };
 const STATUS = ['red', 'amber', 'green'];
 const STAT_LBL = { red: 'Bilmiyorum', amber: 'Tekrar', green: 'Öğrendim' };
 
@@ -39,9 +39,13 @@ export function konular() {
       <button class="chip${FILT.status === 'amber' ? ' on' : ''}" data-v="amber"><span class="d amber"></span>Sarı <span class="c">${counts.amber}</span></button>
       <button class="chip${FILT.status === 'green' ? ' on' : ''}" data-v="green"><span class="d green"></span>Yeşil <span class="c">${counts.green}</span></button>
     </div>
+    <div class="chips gap-top" data-grp="sinif">
+      <button class="chip${FILT.sinif === 'all' ? ' on' : ''}" data-v="all">Tüm sınıflar</button>
+      ${['9', '10', '11', '12'].map(g => `<button class="chip${FILT.sinif === g ? ' on' : ''}" data-v="${g}">${g}. sınıf</button>`).join('')}
+    </div>
     <div class="chips gap-top" data-grp="ders">
       <button class="chip${FILT.ders === 'all' ? ' on' : ''}" data-v="all">Tüm dersler</button>
-      ${DB.dersler.map(d => `<button class="chip${FILT.ders === d.ders ? ' on' : ''}" data-v="${esc(d.ders)}">${dersDot(d.ders)}${esc(d.ders)}</button>`).join('')}
+      ${DB.dersler.map(d => `<button class="chip dersc dc-${dersColor(d.ders)}${FILT.ders === d.ders ? ' on' : ''}" data-v="${esc(d.ders)}">${esc(d.ders)}</button>`).join('')}
     </div>
     <div class="res"></div>`;
   const input = tools.querySelector('input');
@@ -56,10 +60,12 @@ export function konular() {
     list.innerHTML = '';
     let shown = 0;
     DB.dersler.forEach(ders => {
-      const dersKaz = ders.units.flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
+      const dersKaz = ders.units.filter(u => FILT.sinif === 'all' || String(u.grade) === FILT.sinif)
+        .flatMap(u => u.konular.flatMap(k => k.kazanimlar)).filter(z => matchKaz(z, ders.ders));
       if (!dersKaz.length) return;
-      list.appendChild(el('div', 'dersrow', `${dersDot(ders.ders)} ${esc(ders.ders)}`));
+      list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), esc(ders.ders)));
       ders.units.forEach(u => {
+        if (FILT.sinif !== 'all' && String(u.grade) !== FILT.sinif) return;
         const kz = u.konular.flatMap(k => k.kazanimlar).filter(z => matchKaz(z, ders.ders));
         if (!kz.length) return;
         const pct = unitProgress(u, ders.ders);

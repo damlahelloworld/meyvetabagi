@@ -3,10 +3,10 @@
 // Task chips are grey; the ONLY color is state (done green / not done). Drop targets = whole day.
 import { S, save, bump, unbump, dstr } from '../state.js';
 import { DB, allKaz, findKaz } from '../data.js';
-import { el, esc, norm, ICON, WD_SHORT, WD_LONG, MON_SHORT, HOURS, weekDates, page } from '../ui.js';
+import { el, esc, norm, ICON, WD_SHORT, WD_LONG, MON_SHORT, HOURS, weekDates, page, dersColor } from '../ui.js';
 import { refresh } from '../router.js';
 
-const POOLFILT = { q: '', ders: 'all', only: false };
+const POOLFILT = { q: '', ders: 'all', only: false, sinif: 'all' };
 let WEEK_OFFSET = 0;
 let SEL_DAY = null;  // dstr — day whose program is open; defaults to today
 
@@ -100,7 +100,11 @@ export function takvim() {
     <input placeholder="Havuzda ara…" value="${esc(POOLFILT.q)}"><span class="clr">×</span></div>
     <div class="chips" data-grp="ders">
       <button class="chip${POOLFILT.ders === 'all' ? ' on' : ''}" data-v="all">Tümü</button>
-      ${DB.dersler.map(x => `<button class="chip${POOLFILT.ders === x.ders ? ' on' : ''}" data-v="${esc(x.ders)}">${esc(x.ders.split(' ')[0])}</button>`).join('')}
+      ${DB.dersler.map(x => `<button class="chip dersc dc-${dersColor(x.ders)}${POOLFILT.ders === x.ders ? ' on' : ''}" data-v="${esc(x.ders)}">${esc(x.ders.split(' ')[0])}</button>`).join('')}
+    </div>
+    <div class="chips gap-top" data-grp="sinif">
+      <button class="chip${POOLFILT.sinif === 'all' ? ' on' : ''}" data-v="all">Tüm sınıflar</button>
+      ${['9', '10', '11', '12'].map(g => `<button class="chip${POOLFILT.sinif === g ? ' on' : ''}" data-v="${g}">${g}. sınıf</button>`).join('')}
     </div>
     <div class="chips gap-top">
       <button class="chip${POOLFILT.only ? ' on' : ''}" id="onlyred">Sadece çalışılmamış</button>
@@ -113,6 +117,7 @@ export function takvim() {
     allKaz().forEach(z => {
       const st = S.status[z.uid] || 'none';
       if (POOLFILT.ders !== 'all' && z.ders.ders !== POOLFILT.ders) return;
+      if (POOLFILT.sinif !== 'all' && String(z.unit && z.unit.grade) !== POOLFILT.sinif) return;
       if (POOLFILT.only && (st === 'green')) return;
       if (POOLFILT.q && !norm(z.title).includes(norm(POOLFILT.q)) && !z.code.includes(POOLFILT.q)) return;
       total++;
@@ -132,6 +137,7 @@ export function takvim() {
   tools.querySelector('.clr').onclick = () => { POOLFILT.q = ''; refresh(); };
   tools.querySelector('#onlyred').onclick = () => { POOLFILT.only = !POOLFILT.only; refresh(); };
   tools.querySelector('[data-grp="ders"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.ders = c.dataset.v; refresh(); });
+  tools.querySelector('[data-grp="sinif"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.sinif = c.dataset.v; refresh(); });
   paintPool();
 }
 

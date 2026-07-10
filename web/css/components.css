@@ -261,3 +261,14 @@
   .board { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 4px; }
   .dayc { min-width: 130px; flex: none; }
 }
+
+/* ders filter links: bold, the text itself wears the ders color (no dot) */
+.chip.dersc { font-weight: bold; }
+.chip.dersc.on { color: inherit; }
+.dc-pink { color: var(--pink); } .dc-purple { color: var(--purple); } .dc-blue { color: var(--blue); }
+.dc-teal { color: var(--teal); } .dc-green { color: var(--green); } .dc-orange { color: var(--orange); }
+.dc-yellow { color: var(--yellow); } .dc-brown { color: var(--brown); } .dc-amber { color: var(--amber); }
+.chip.dersc.on.dc-pink { color: var(--pink); } .chip.dersc.on.dc-purple { color: var(--purple); } .chip.dersc.on.dc-blue { color: var(--blue); }
+.chip.dersc.on.dc-teal { color: var(--teal); } .chip.dersc.on.dc-green { color: var(--green); } .chip.dersc.on.dc-orange { color: var(--orange); }
+.chip.dersc.on.dc-yellow { color: var(--yellow); } .chip.dersc.on.dc-brown { color: var(--brown); } .chip.dersc.on.dc-amber { color: var(--amber); }
+.dersrow { font-weight: bold; }
