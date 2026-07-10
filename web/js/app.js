@@ -3,7 +3,7 @@ import { S, save, applyTheme, dstr } from './state.js';
 import { loadDB, totals, findKaz } from './data.js';
 import { rebalance } from './engine.js';
 import { initSupa, signOut, online, currentUser, syncStatus } from './supa.js';
-import { $, el, esc, ICON, animateCounts, setChips } from './ui.js';
+import { $, el, esc, animateCounts, setChips } from './ui.js';
 import { route, setRender, param } from './router.js';
 import { initGlyphs } from './glyphs.js';
 import { bugun } from './views/bugun.js';
@@ -50,23 +50,11 @@ function renderBar() {
   });
   const slot = $('#userslot'); slot.innerHTML = '';
   const u = S.user || { name: 'Misafir' };
-  const initial = (u.name || '?').trim().charAt(0).toLocaleUpperCase('tr');
   const chip = el('div', 'userchip' + (route() === 'profil' ? ' active' : ''));
   chip.innerHTML = `<div class="ui"><b class="uname">${esc((u.name || '').toLocaleLowerCase('tr'))}</b></div>`;
   slot.appendChild(chip);
-  chip.onclick = () => {
-    const old = slot.querySelector('.usermenu');
-    if (old) { old.remove(); return; }
-    const menu = el('div', 'usermenu');
-    // mesajlaşma yok → Mesajlar & Çıkış menüden kalktı (Damla). Çıkış Ayarlar'da.
-    menu.innerHTML = `<button data-a="profil">${ICON.user}Profil</button>
-      <button data-a="ayarlar">${ICON.cog}Ayarlar</button>`;
-    slot.appendChild(menu);
-    menu.querySelector('[data-a="profil"]').onclick = () => { menu.remove(); location.hash = '#/profil'; };
-    menu.querySelector('[data-a="ayarlar"]').onclick = () => { menu.remove(); location.hash = '#/ayarlar'; };
-    const close = e => { if (!menu.contains(e.target) && !chip.contains(e.target)) { menu.remove(); document.removeEventListener('click', close); } };
-    setTimeout(() => document.addEventListener('click', close), 0);
-  };
+  // profil + ayarlar birleşti (Damla): isme tıkla → doğrudan profil, hover menüsü yok
+  chip.onclick = () => { location.hash = '#/profil'; };
 }
 
 // SEO: her sayfa/kazanım için anlamlı <title> (paylaşım + tarayıcı geçmişi + arama)

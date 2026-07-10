@@ -3,16 +3,20 @@
 import { S, streak, dstr } from '../state.js';
 import { totals, allKaz } from '../data.js';
 import { el, esc, page } from '../ui.js';
+import { settingsCard } from './ayarlar.js';
 
 // bitirdiğin kazanımlar - editoryal, dans eden renkli duvar (Damla: spiral mi dans mı süsle)
 function basardiklarim() {
   const done = allKaz().filter(z => S.status[z.uid] === 'green');
   const wrap = el('div', 'basari');
-  if (!done.length) { wrap.appendChild(el('div', 'empty', 'daha yeşile boyadığın kazanım yok - ilk yeşilin burada dans edecek ✿')); return wrap; }
-  const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
+  if (!done.length) { wrap.appendChild(el('div', 'empty', 'daha yeşile boyadığın kazanım yok, ilk yeşilin burada büyür ✿')); return wrap; }
+  // düz akış, virgülle, renk = katı palet döngüsü (mor yasak), boyut sayfa indikçe küçülür
+  const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-teal', 't-brown'];
+  wrap.style.setProperty('--n', done.length);
   done.forEach((z, i) => {
-    const w = el('a', 'basarikelime ' + PAL[i % PAL.length]);   // düz akış, eğik değil; renk = rainbow döngüsü
+    const w = el('a', 'basarikelime ' + PAL[i % PAL.length]);
     w.href = '#/konular/' + z.uid;
+    w.style.setProperty('--i', i);
     w.textContent = z.title.toLocaleLowerCase('tr');
     wrap.appendChild(w);
   });
@@ -43,23 +47,33 @@ function heatmap() {
 
 export function profil() {
   const u = S.user || { name: 'Misafir', target: 'Sayısal' };
-  const initial = (u.name || '?').trim().charAt(0).toLocaleUpperCase('tr');
   const t = totals();
-  const d = el('div', 'pagein'); page().appendChild(d);
+  const d = el('div', 'pagein widepage'); page(true).appendChild(d);
   d.appendChild(el('div', 'crumb', 'PROFİL'));
+
+  // üst blok iki sütun: sol = kimlik + istatistik + aktivite, sağ = ayarlar (Damla: boşluğa ayarları koy)
+  const grid = el('div', 'profgrid');
+  const left = el('div', 'profcol');
   const head = el('div', 'profhead');
-  head.innerHTML = `<div class="bigava">${esc(initial)}</div><div><h1>${esc(u.name)}</h1>
-    <p class="meta">${esc(u.target || 'Sayısal')} · YKS 2026</p></div>`;
-  d.appendChild(head);
+  head.innerHTML = `<h1 class="rainbow">${esc(u.name)}</h1>
+    <p class="meta">${esc(u.target || 'Sayısal')} · YKS 2026</p>`;
+  left.appendChild(head);
 
   const cards = el('div', 'grid cards prof');
   cards.appendChild(el('div', 'card c-teal', `<div class="k">Yeşil kazanım</div><div class="v">%${t.greenPct}<small> · ${t.green}/${t.total}</small></div>`));
   cards.appendChild(el('div', 'card c-blue', `<div class="k">Toplam çalışma</div><div class="v">${Object.values(S.activity).reduce((a, b) => a + b, 0)}</div>`));
   cards.appendChild(el('div', 'card c-pink', `<div class="k">Güncel seri</div><div class="v">${streak()}<small> gün</small></div>`));
-  d.appendChild(cards);
+  left.appendChild(cards);
 
-  d.appendChild(el('div', 'seclabel', 'aktivite'));
-  d.appendChild(heatmap());
+  left.appendChild(el('div', 'seclabel', 'aktivite'));
+  left.appendChild(heatmap());
+
+  const rightc = el('div', 'profcol');
+  rightc.appendChild(el('div', 'seclabel', 'ayarlar'));
+  rightc.appendChild(settingsCard());
+
+  grid.appendChild(left); grid.appendChild(rightc);
+  d.appendChild(grid);
 
   d.appendChild(el('div', 'seclabel', 'başardığın kazanımlar'));
   d.appendChild(basardiklarim());

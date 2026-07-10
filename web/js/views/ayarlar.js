@@ -5,13 +5,9 @@ import { refresh } from '../router.js';
 import { onboard } from './onboard.js';
 import { signOut, online, currentUser, deleteAccount, authErrMsg } from '../supa.js';
 
-export function ayarlar() {
+// reusable so Profil can host it in its right column (Damla: "ayarlar sayfasını profildeki boşluğa koy")
+export function settingsCard() {
   const u = S.user || { name: 'Misafir', target: 'Sayısal' };
-  const d = el('div', 'pagein'); page().appendChild(d);
-  d.appendChild(el('div', 'crumb', 'AYARLAR'));
-  d.appendChild(el('h1', null, 'ayarlar'));
-  d.appendChild(el('p', 'meta', 'Hesap ve uygulama tercihleri'));
-
   const set = el('div', 'setcard');
   const r1 = el('div', 'setrow'); r1.innerHTML = `<div class="lbl"><b>İsim</b><span>uygulama seni böyle çağırır</span></div>`;
   const ni = el('input'); ni.value = u.name; ni.onchange = () => { S.user.name = ni.value.trim() || 'Öğrenci'; save(); refresh(); };
@@ -39,5 +35,13 @@ export function ayarlar() {
     };
     r5.appendChild(del); set.appendChild(r5);
   }
-  d.appendChild(set);
+  return set;
+}
+
+export function ayarlar() {
+  const d = el('div', 'pagein'); page().appendChild(d);
+  d.appendChild(el('div', 'crumb', 'AYARLAR'));
+  d.appendChild(el('h1', null, 'ayarlar'));
+  d.appendChild(el('p', 'meta', 'Hesap ve uygulama tercihleri'));
+  d.appendChild(settingsCard());
 }

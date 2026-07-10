@@ -45,7 +45,8 @@ export function konular() {
     </div>
     <div class="res"></div>`;
   const input = tools.querySelector('input');
-  input.oninput = () => { FILT.q = input.value; tools.querySelector('.search').classList.toggle('has', !!FILT.q); paintList(); };
+  let paintT;
+  input.oninput = () => { FILT.q = input.value; tools.querySelector('.search').classList.toggle('has', !!FILT.q); clearTimeout(paintT); paintT = setTimeout(paintList, 200); };
   tools.querySelector('.clr').onclick = () => { FILT.q = ''; konular(); input.focus(); };
   tools.querySelectorAll('.chips').forEach(grp => grp.querySelectorAll('.chip').forEach(c =>
     c.onclick = () => { FILT[grp.dataset.grp] = c.dataset.v; konular(); }));

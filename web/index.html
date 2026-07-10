@@ -17,72 +17,185 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"meyvetabagi","url":"https://damlahelloworld.github.io/meyvetabagi/web/app.html","applicationCategory":"EducationApplication","operatingSystem":"Web","inLanguage":"tr-TR","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"description":"YKS MEB kazanımları, anahtar kelimeler ve çalışma takvimi. Ücretsiz.","creator":{"@type":"Person","name":"Damla","url":"https://github.com/damlahelloworld"}}
 </script>
 <style>
-:root{--bg:#fff;--ink:#111;--muted:#565656;
+:root{--bg:#fff;--ink:#111;--muted:#3d3d3d;--faint:#666;--line:#eaeaea;--w:780px;
  --pink:#E8619A;--blue:#3B7FC4;--orange:#E07A3E;--green:#4C9A46;--terra:#C0603E;--yellow:#C9A21E;--teal:#2AA79B;--brown:#A97B50;--red:#D9463A}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.42;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
 #sparks{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .spk{position:absolute;top:-6vh;opacity:.5;animation:drift var(--f,60s) linear infinite;animation-delay:var(--d,0s)}
 .spk i{display:inline-block;animation:tw var(--t,7s) ease-in-out infinite;font-style:normal}
 @keyframes drift{to{transform:translateY(118vh)}}
 @keyframes tw{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:.2;transform:scale(.7)}}
-main{position:relative;z-index:1;padding-bottom:60px}
+
+/* rainbow — the ONLY color escalation, reserved for emphasis */
 .rb{background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.top{display:flex;align-items:baseline;justify-content:space-between;padding:20px 0 6px}
-.logo{font-size:22px}
-.tagline{font-size:13.5px;color:var(--muted)}
-.lede{font-size:20px;line-height:1.45;max-width:640px;margin:26px 0 8px}
-.sub{font-size:14px;color:var(--muted);max-width:600px;margin-bottom:22px}
-.sub b{font-weight:bold}
-.cta{display:inline-block;background:var(--pink);color:#fff;font-size:16px;padding:13px 26px;border-radius:3px}
-.cta:hover{filter:brightness(.94)}
-/* the content IS the interface: dense colored ders wall, size = kazanım count */
-.wall{margin:40px 0 10px;line-height:1.35}
-.dw{font-weight:bold;margin-right:18px;white-space:nowrap;display:inline-block}
-.dw small{font-weight:normal;opacity:.6;font-size:.55em}
+
+/* sticky top bar — wordmark + the one CTA */
+.top{position:sticky;top:0;z-index:15;background:var(--bg);border-bottom:1px solid var(--line)}
+.topin{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-size:22px;letter-spacing:-.01em}
+.cta{display:inline-block;background:var(--ink);color:#fff;font-size:14px;padding:9px 19px;border-radius:3px;transition:transform .08s,filter .12s}
+.cta:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.cta:active{transform:translateY(0)}
+
+main{position:relative;z-index:1;padding:28px 0 60px}
+
+/* hero — mostly ink, one word carries the color, size carries the weight */
+.lede{font-size:34px;line-height:1.1;letter-spacing:-.02em}
+.lede .big{font-size:41px}
+.sub{font-size:15px;color:var(--muted);margin:14px 0 10px;line-height:1.5}
+.ctanote{font-size:13px;color:var(--faint)}
+
+/* stat strip — big ink numbers count up, tiny labels */
+.stats{display:flex;flex-wrap:wrap;gap:30px;margin:24px 0 2px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat .v{font-size:29px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.stat .k{font-size:12.5px;color:var(--muted);margin-top:4px}
+.stat.on .v{font-size:18px;margin-top:5px}
+
+/* section label — quiet, lowercase (rainbow reserved for wordmark + hero + signature only) */
+.lab{font-size:13px;letter-spacing:.02em;color:var(--faint);margin:30px 0 11px}
+
+/* founder insight + how-it-works prose */
+.pitch{font-size:22px;line-height:1.35;letter-spacing:-.01em;margin-top:40px}
+.explain{font-size:15px;color:var(--muted);margin-top:20px;line-height:1.55}
+.explain b{color:var(--ink);font-weight:bold}
+/* real app screenshots */
+.shots{margin-top:26px;display:grid;gap:24px}
+.shots figure{margin:0}
+.shots img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:3px}
+.shots figcaption{font-size:13px;color:var(--faint);margin-top:8px}
+
+/* the wall IS the interface — size = kazanım count */
+.wall{line-height:1.22;margin-top:26px}
+.dw{margin-right:16px;white-space:nowrap;display:inline-block}
+.dw small{opacity:.55;font-size:.5em;margin-left:1px}
 .c-pink{color:var(--pink)}.c-blue{color:var(--blue)}.c-orange{color:var(--orange)}.c-green{color:var(--green)}
 .c-terra{color:var(--terra)}.c-yellow{color:var(--yellow)}.c-teal{color:var(--teal)}.c-brown{color:var(--brown)}.c-red{color:var(--red)}
-.wallnote{font-size:13px;color:var(--muted);margin-top:14px;max-width:640px}
-.foot{margin-top:44px;font-size:13px;color:var(--muted)}
-.foot a{color:var(--pink)}
+.wallnote{font-size:14px;color:var(--muted);margin-top:11px;line-height:1.5}
+
+/* three steps — ink, dense, size-led */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:32px}
+.step{min-width:0}
+.step .n{font-size:21px;letter-spacing:-.02em}
+.step h3{font-size:16px;margin:6px 0 4px}
+.step p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* honest + maker */
+.honest{font-size:15px;color:var(--ink);margin-top:32px;line-height:1.52}
+.honest b{font-weight:bold}
+.maker{font-size:15px;color:var(--muted);margin-top:20px;line-height:1.52}
+.maker b{color:var(--ink);font-weight:normal}
+
+/* sticky footer — signature + text */
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--bg);border-top:1px solid var(--line)}
+.footin{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;font-size:13px;color:var(--faint)}
+.sig{font-size:13px}
+.footin a:hover{color:var(--ink)}
+
+@media(max-width:640px){
+  .lede{font-size:27px}.lede .big{font-size:32px}
+  .stats{gap:22px}.stat .v{font-size:24px}
+  .steps{grid-template-columns:1fr;gap:20px}
+  .footin{font-size:12px}
+}
 </style>
 </head>
 <body>
 <div id="sparks"></div>
-<main><div class="wrap">
-  <div class="top">
-    <span class="logo rb">meyvetabagi</span>
-    <span class="tagline">ücretsiz YKS kazanım takibi</span>
-  </div>
 
-  <p class="lede">YKS'de her gün ne çalışacağını bilerek uyan. tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler, çalışma takvimi &mdash; tek yerde, ücretsiz.</p>
-  <p class="sub"><b>954</b> resmi MEB kazanımı · <b>4.537</b> ders kitabı sayfası tarandı · <b>448</b> anahtar kelime çıkarıldı · hepsi kaynaklı, uydurma yok.</p>
+<header class="top"><div class="wrap topin">
+  <span class="logo rb">meyvetabagi</span>
   <a class="cta" href="app.html">kullanmaya başla</a>
+</div></header>
+
+<main><div class="wrap">
+
+  <h1 class="lede">YKS'de <span class="big rb">bilerek</span> çalış.<br>ne çalışacağını bilerek uyan.</h1>
+  <p class="sub">tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi, hepsi tek yerde. kayıt yok, reklam yok, ücret yok.</p>
+  <p class="ctanote">tarayıcıda açılır &middot; hesap gerekmez &middot; verin cihazında kalır</p>
+
+  <div class="stats">
+    <div class="stat"><div class="v" data-n="954">0</div><div class="k">resmi MEB kazanımı</div></div>
+    <div class="stat"><div class="v" data-n="4537">0</div><div class="k">ders kitabı sayfası tarandı</div></div>
+    <div class="stat"><div class="v" data-n="448">0</div><div class="k">anahtar kelime çıkarıldı</div></div>
+    <div class="stat on"><div class="v rb">kaynaklı, uydurma yok</div><div class="k">her şey MEB'e izlenebilir</div></div>
+  </div>
 
   <div class="wall" id="wall">
-    <span class="dw c-pink" style="font-size:41px">matematik <small>130</small></span>
-    <span class="dw c-blue" style="font-size:52px">fizik <small>212</small></span>
-    <span class="dw c-orange" style="font-size:40px">kimya <small>125</small></span>
-    <span class="dw c-green" style="font-size:33px">biyoloji <small>90</small></span>
-    <span class="dw c-terra" style="font-size:32px">türk dili ve edebiyatı <small>83</small></span>
-    <span class="dw c-yellow" style="font-size:30px">tarih <small>75</small></span>
-    <span class="dw c-teal" style="font-size:37px">coğrafya <small>113</small></span>
-    <span class="dw c-brown" style="font-size:32px">din kültürü <small>87</small></span>
-    <span class="dw c-red" style="font-size:24px">felsefe <small>39</small></span>
+    <span class="dw c-pink" style="font-size:39px">matematik <small>130</small></span>
+    <span class="dw c-blue" style="font-size:50px">fizik <small>212</small></span>
+    <span class="dw c-orange" style="font-size:38px">kimya <small>125</small></span>
+    <span class="dw c-green" style="font-size:31px">biyoloji <small>90</small></span>
+    <span class="dw c-terra" style="font-size:30px">türk dili ve edebiyatı <small>83</small></span>
+    <span class="dw c-yellow" style="font-size:29px">tarih <small>75</small></span>
+    <span class="dw c-teal" style="font-size:35px">coğrafya <small>113</small></span>
+    <span class="dw c-brown" style="font-size:30px">din kültürü <small>87</small></span>
+    <span class="dw c-red" style="font-size:23px">felsefe <small>39</small></span>
   </div>
-  <p class="wallnote">her ders o kadar kazanım. tıkla, filtrele, işaretle; her kazanımın altında MEB ders kitabından çıkarılmış anahtar kelimeler ve tanımları &mdash; kaynağıyla. sonra çalışacaklarını takvime koy. kayıt gerekmez, reklam yok, ücret yok.</p>
+  <p class="wallnote">her ders o kadar kazanım. tıkla, filtrele, kırmızı sarı yeşil işaretle. her kazanımın altında MEB ders kitabından çıkarılmış anahtar kelimeler ve tanımları, kaynağıyla.</p>
 
-  <div class="foot">
-    <a class="cta" style="font-size:15px;padding:11px 22px;margin:8px 0 20px" href="app.html">hadi başla</a><br>
-    &copy; 2026 meyvetabagi · <a href="https://github.com/damlahelloworld">@damlahelloworld</a> · <a href="gizlilik.html">gizlilik</a> · <a href="app.html">uygulamaya git</a>
+  <div class="steps">
+    <div class="step">
+      <div class="n">konular</div>
+      <h3>gerçek listeyi gör</h3>
+      <p>9 dersin her sınıf, ünite ve kazanımı önünde. neyi bitirdin, neyi bitirmedin. renk sadece bunu söyler.</p>
+    </div>
+    <div class="step">
+      <div class="n">takvim</div>
+      <h3>çalışacağını yerleştir</h3>
+      <p>kazanımı bir güne bırak. gününe tıkla, program çıksın. eksik kaldıysa ileriye kayar.</p>
+    </div>
+    <div class="step">
+      <div class="n">bugün</div>
+      <h3>her sabah aç</h3>
+      <p>bugün ne var, kaç gün kaldı, biriken emeğin ne kadar. dağınıklık yok, tek ekran.</p>
+    </div>
   </div>
+
+  <p class="honest"><b>resmi kaynak.</b> kazanımlar TTKB'nin 2026 YKS PDF'inden birebir. anahtar kelimeler 23 MEB ders kitabından çıkarıldı, hepsi kaynakça sayfasında. <b>internetteki uydurma kazanım listelerini kullanmadık.</b> verin senkron istersen sende kalır, silmek istersen tek tıkla gider.</p>
+
+  <p class="maker"><b>Damla</b> yaptı. Bilkent bilgisayar mühendisliği öğrencisi, YKS'yi iki kez kazandı. meyvetabagi bir hafta sonu projesi değil, kendi çalıştığı sistemi herkese açması. ürün büyüyecek, ama bugün bile işe yarıyor.</p>
+
+  <p class="pitch">YKS'yi <span class="rb">iki kez</span> kazanmış biri olarak en çok şunu öğrendim: bu oyunun kural kitabını okumak her şeyden önemli. meyvetabagi o kural kitabını, resmi kazanım listesini, olduğu gibi önüne serer.</p>
+
+  <div class="shots">
+    <figure><img src="shot-bugun.png" alt="bugün ekranı" loading="lazy"><figcaption>bugün: ne çalışacağın, kaç gün kaldı, biriken emeğin. tek ekran.</figcaption></figure>
+    <figure><img src="shot-konular.png" alt="konular ekranı" loading="lazy"><figcaption>konular: 9 dersin resmi MEB kazanımları, sınıf sınıf, kırmızı sarı yeşil.</figcaption></figure>
+    <figure><img src="shot-detay.png" alt="kazanım detay ekranı" loading="lazy"><figcaption>her kazanımın altında MEB açıklaması ve kitaptan çıkarılmış anahtar kelimeler.</figcaption></figure>
+    <figure><img src="shot-takvim.png" alt="takvim ekranı" loading="lazy"><figcaption>takvim: çalışacağın konuları günlere yerleştir, program kendiliğinden çıksın.</figcaption></figure>
+    <figure><img src="shot-profil.png" alt="profil ekranı" loading="lazy"><figcaption>profil: başardığın kazanımlar renkli bir duvarda birikir.</figcaption></figure>
+  </div>
+
+  <p class="explain"><b>verini biz tutmuyoruz.</b> işaretlediğin her şey senin tarayıcının hafızasında, localStorage'da kalır. localStorage, bir sitenin senin cihazında küçük bir defter tutması demek: sunucuya gitmez, bizde bir kopyası olmaz. istersen hesap açıp cihazların arasında eşitlersin, açmazsan hiçbir şey cihazından çıkmaz.</p>
+
+  <p class="explain"><b>bu bağlar nasıl kuruldu?</b> kazanımlar TTKB'nin resmi 2026 PDF'inden, anahtar kelimeler 23 MEB ders kitabından çıkarıldı. binlerce sayfayı tarayıp her kazanımın altına doğru terimleri yapay zeka ile bağladık, sonra hepsini kaynağına kadar izlenebilir bıraktık. uydurma yok, hepsi MEB'e dayanıyor.</p>
+
 </div></main>
+
+<footer class="foot"><div class="wrap footin">
+  <a class="sig rb" href="https://github.com/damlahelloworld">@damlahelloworld</a>
+  <span>&copy; 2026 meyvetabagi &middot; <a href="gizlilik.html">gizlilik</a> &middot; <a href="app.html">uygulamaya git</a></span>
+</div></footer>
+
 <script>
+/* dinamik sayaç — count up on load */
+(function(){
+  var els=document.querySelectorAll('.stat .v[data-n]');
+  els.forEach(function(el){
+    var target=+el.getAttribute('data-n'),dur=1000,start=null;
+    function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(e*target).toLocaleString('tr-TR');
+      if(p<1)requestAnimationFrame(step);else el.textContent=target.toLocaleString('tr-TR');}
+    requestAnimationFrame(step);
+  });
+})();
+/* ambient sparks */
 (function(){var G=['✦','✧','·','⋆','✵','˖'],C=['#E9B84A','#E8619A','#E07A3E','#C9A21E','#D9463A'];
 var s=20260710>>>0,f=document.getElementById('sparks');function r(){s=(s*1664525+1013904223)>>>0;return s/4294967296;}
-for(var i=0;i<12;i++){var g=document.createElement('span');g.className='spk';g.style.left=(r()*100).toFixed(1)+'vw';
+for(var i=0;i<12;i++){var g=document.createElement('span');g.className='spk';var lx=r();lx=lx<0.5?lx*30:85+(lx-0.5)*30;g.style.left=lx.toFixed(1)+'vw';
 g.style.fontSize=(8+r()*8).toFixed(0)+'px';g.style.setProperty('--f',(40+r()*40).toFixed(0)+'s');g.style.setProperty('--d',(-r()*60).toFixed(0)+'s');
 g.style.setProperty('--t',(5+r()*4).toFixed(0)+'s');var ic=document.createElement('i');ic.textContent=G[Math.floor(r()*G.length)];
 ic.style.color=C[Math.floor(r()*C.length)];ic.style.setProperty('--t',g.style.getPropertyValue('--t'));g.appendChild(ic);f.appendChild(g);}})();
