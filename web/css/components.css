@@ -121,53 +121,6 @@
 .btn.ghost:hover { color: var(--ink); background: none; }
 .btn.danger { color: var(--red); }
 
-/* ---- takvim: clean week, no boxes (gymgyme calendar spirit) ---- */
-.calbar { display: flex; align-items: baseline; gap: 14px; margin: 0 0 10px; }
-.calbar .wk { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.wkbtn { border: none; background: none; padding: 0 2px; font-size: 14px; color: var(--accent-ink); text-decoration: underline; cursor: pointer; }
-.wkbtn:hover { color: var(--ink); }
-.board { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
-.dayc { display: flex; flex-direction: column; min-height: 64px; }
-.dayc .dh { width: 100%; text-align: left; padding: 0 0 6px; background: none; border: none; display: flex; align-items: baseline; gap: 6px; cursor: pointer; }
-.dayc .dh b { font-size: 13px; }
-.dayc.today .dh b { color: var(--accent); }
-.dayc.sel .dh b { font-size: 17px; color: var(--accent-ink); }
-.dayc .dh span { font-size: 11px; color: var(--muted); }
-.dayc .dh i { margin-left: auto; font-style: normal; font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.dayc.over { background: var(--accent-soft); }
-.dbody { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-.dempty { color: var(--faint); font-size: 11px; padding: 4px 0; }
-.tsk { display: flex; align-items: center; gap: 5px; background: var(--panel); border-radius: var(--radius);
-  padding: 3px 6px; font-size: 11.5px; cursor: grab; color: var(--ink-soft); }
-.tsk .tdot { width: 10px; height: 10px; border-radius: 50%; background: var(--line-soft); flex: none; display: grid; place-items: center; }
-.tsk .tdot svg { width: 7px; height: 7px; color: #fff; }
-.tsk.done { background: var(--green-bg); }
-.tsk.done .tdot { background: var(--green); }
-.tsk.done .tt { text-decoration: line-through; color: var(--muted); }
-.tsk .tt { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tsk .tx { color: var(--muted); padding: 0 1px; line-height: 1; cursor: pointer; }
-.tsk .tx:hover { color: var(--red); }
-.tsk:active { cursor: grabbing; }
-.daypanel { margin: 0 0 16px; max-width: 680px; }
-.daypanel h1.sec { margin: 2px 0 10px; font-size: 19px; }
-.prow { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
-.hsel { border: none; background: var(--panel); color: var(--muted); border-radius: var(--radius); padding: 3px 5px; font-size: 12px; }
-.pcheck { width: 16px; height: 16px; border: none; background: var(--panel); border-radius: 50%; display: grid; place-items: center; flex: none; cursor: pointer; }
-.pcheck svg { width: 9px; height: 9px; color: transparent; }
-.prow.done .pcheck { background: var(--green); }
-.prow.done .pcheck svg { color: #fff; }
-.prow .ptext { flex: 1; min-width: 0; cursor: pointer; }
-.prow .ptext .title { font-size: 13px; }
-.prow.done .ptext .title { text-decoration: line-through; color: var(--muted); }
-.prow .ptext .code { font-size: 10.5px; color: var(--muted); }
-.prow .px { color: var(--muted); font-size: 14px; background: none; border: none; cursor: pointer; }
-.prow .px:hover { color: var(--red); }
-.pool { max-width: 680px; }
-.pool .row { cursor: grab; }
-.pool .row:active { cursor: grabbing; }
-.pool .row.dragging { opacity: .4; }
-.pool .grip { color: var(--faint); font-size: 13px; margin-top: 2px; letter-spacing: -2px; }
-
 /* est (sıra puanı total) — big number, no box */
 .est { margin-top: 14px; display: flex; align-items: baseline; gap: 12px; }
 .est .r { font-size: 32px; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--accent-ink); }
@@ -371,3 +324,43 @@
 .corpusbar { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 28px; font-size: 12.5px; color: var(--muted); }
 .corpusbar .cb b { font-size: 15px; font-variant-numeric: tabular-nums; }
 .untaranmadi { font-size: 13px; color: var(--muted); line-height: 1.5; max-width: 520px; }
+
+/* ---- takvim: real month grid + konu havuzu sidebar (iwantmymtv) ---- */
+.calwrap{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start}
+.monthbar{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px}
+.monthbar h1{font-size:30px;margin:0}
+.monthbar h1 b{font-weight:600}
+.monthbar h1 .yr{color:var(--muted);font-weight:400}
+.mnav{display:flex;align-items:center;gap:14px}
+.mnav button{background:none;border:none;color:var(--accent-ink);font-size:14px;cursor:pointer;font-family:inherit}
+.mnav button:hover{color:var(--ink)}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr)}
+.calhead{border-bottom:1px solid var(--line)}
+.calhead .wd{padding:6px 8px;font-size:11px;color:var(--muted);text-align:left}
+.calbody{border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft)}
+.dcell{min-height:104px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:6px;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:background .1s}
+.dcell:hover{background:var(--panel-2)}
+.dcell.other .dnum{color:var(--faint)}
+.dcell.over{background:var(--accent-soft)}
+.dcell.sel{background:var(--panel)}
+.dnum{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;align-self:flex-start;width:22px;height:22px;display:grid;place-items:center}
+.dcell.today .dnum{background:var(--accent);color:var(--on-accent);border-radius:50%}
+.echip{display:flex;align-items:center;gap:4px;background:var(--panel);border-radius:3px;padding:3px 5px;font-size:10.5px;color:var(--ink-soft);cursor:grab}
+.echip .et{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.echip .ex{color:var(--faint);cursor:pointer}
+.echip .ex:hover{color:var(--red)}
+.echip.done{background:var(--green-bg)}
+.echip.done .et{text-decoration:line-through;color:var(--muted)}
+.echip:active{cursor:grabbing}
+/* sidebar */
+.calside{position:sticky;top:0}
+.sidehead{font-size:16px;font-weight:600;margin-bottom:2px}
+.sidesub{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.calside .pool{max-height:62vh;overflow-y:auto;margin-top:4px}
+.prow2{display:flex;gap:7px;align-items:baseline;padding:4px 0;cursor:grab}
+.prow2:hover .ptitle{color:var(--accent-ink)}
+.prow2 .pcode{font-size:10px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums}
+.prow2 .pcode.cst-red{color:var(--red)}.prow2 .pcode.cst-amber{color:var(--amber)}.prow2 .pcode.cst-green{color:var(--green)}
+.prow2 .ptitle{font-size:12px;line-height:1.3}
+.prow2.dragging{opacity:.4}
+@media(max-width:860px){.calwrap{grid-template-columns:1fr}.dcell{min-height:64px}}
