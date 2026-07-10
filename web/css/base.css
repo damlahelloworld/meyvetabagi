@@ -60,8 +60,8 @@ svg{display:block}
 /* ambient twinkling glyph field — meyvetabagi character (à la vibecodedflopware), behind content */
 #glyphfield{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .app{position:relative;z-index:1}
-.glyph{position:absolute;top:-6vh;user-select:none;opacity:.8;animation:gdrift var(--fall,50s) linear infinite;animation-delay:var(--fd,0s)}
+.glyph{position:absolute;top:-6vh;user-select:none;opacity:.85;text-shadow:0 0 6px currentColor;animation:gdrift var(--fall,50s) linear infinite;animation-delay:var(--fd,0s)}
 .glyph-inner{display:inline-block;animation:gtwinkle var(--tw,7s) ease-in-out infinite}
 @keyframes gdrift{from{transform:translateY(0)}to{transform:translateY(118vh)}}
-@keyframes gtwinkle{0%,100%{opacity:.9;transform:rotate(0deg)}50%{opacity:.35;transform:rotate(12deg)}}
+@keyframes gtwinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.15;transform:scale(.6)}}
 @media(prefers-reduced-motion:reduce){.glyph,.glyph-inner{animation:none;opacity:.35}}
