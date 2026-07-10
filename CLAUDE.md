@@ -119,17 +119,16 @@ Rules kept for you: zero inline styles anywhere, no colored borders, no single-s
 - Damla owns design direction and will redesign (Figma or manual CSS) — that's WHY styles are separated. Big redesigns need a concrete reference from her first. Landing needs a distinctive pass (still generic).
 - Expected-pattern floor (feels wrong without): home = countdown + last net + add-CTA; onboarding = target → days left → hours → level → first plan. Both exist.
 
-> **NEXT SESSION STARTS HERE:** Damla's screenshot-by-screenshot directives SHIPPED (2026-07-10 ~06:30):
-> VIVID palette back (she rejected muted/"gül kurusu" — vivid pink #E8619A accent, no pale tones; Arial + no-bold + 3px stay);
-> topbar taller (76px), small side padding, NO bottom border (stitchu header proportions, no costume);
-> Konular = single full-width page (list ↔ detail via #/konular/<uid>, backlink; "columnlu tasarım" dead);
-> Takvim board = real-calendar look (collapsed borders, panel header strip, selected day = ink header);
-> **Denemeler REMOVED from UI entirely** ("mekaniği konuşmadık henüz") — engine/DB data stays, view deleted;
-> Profil = identity + stat cards + heatmap only (heatmap dots now CIRCLES, columns tight);
-> randevu PARKED (add later, NOT profil); Mesajlar + Ayarlar = own pages via avatar menu (#/mesajlar, #/ayarlar).
-> All 8 routes smoke-tested green in happy-dom (real boot errors now surface on-page since the dailyKaz crash lesson).
-> Damla checks http://localhost:8084/web/app.html — fresh port per CSS change (Safari module cache; 8080-8084 used).
-> Open: her verdict → landing pass with vivid palette → BLOK C rest (deploy gated on ship-check + live test).
+> **NEXT SESSION STARTS HERE — DESIGN FROZEN, DAMLA IS LEARNING FIGMA (2026-07-10 ~06:45).**
+> Five CSS passes failed to land ("anlaşamıyoruz"); Damla will design the app HERSELF in Figma and hand it over —
+> I implement pixel-perfect from her file. **DO NOT touch any CSS until her Figma design arrives.**
+> What survives as her stated baseline: plain Arial page, logo left / links right, no bold, VIVID colors (no pale, no gül kurusu),
+> borders can be SOFTER (her last note: "border yumuşatabilirsin" — likely lighter than pure ink and/or a bit more radius; her call in Figma).
+> Single dev URL forever: **http://localhost:8080/web/app.html** (all stray ports killed; if CSS/JS looks stale → Cmd+Option+R).
+> tokens.css is the Figma bridge: every color/size is a variable there; map her Figma styles onto it when the design lands.
+> Mechanics state (all shipped & pushed): topbar shell, konular single page, day-based calendar-look takvim, denemeler UI removed,
+> profil slim (circles heatmap), mesajlar+ayarlar own pages via avatar menu, randevu parked. 8 routes smoke-tested green.
+> While design waits, buildable non-visual work: stage 16 (rate limits), landing copy skeleton, Blok D groundwork (messages table sync).
 > Previous pointer: repo is LIVE at github.com/damlahelloworld/meyvetabagi (private) — push there from now on; home-dir repo is history. BLOK C remaining: deploy (GATED on rank data + ship-check + live test), domain (Damla buys), OG image + service worker. Previous note: BLOK B done incl. Damla's dashboard steps (2026-07-10 04:30: migration 0003 ran, redirect URL allowed, Resend SMTP configured — sender onboarding@resend.dev, test mode: only mails Damla's own address until domain verified). Stage 7 live two-device test SKIPPED by Damla ("olmuştur büyük ihtimalle") — UNVERIFIED, run it before anything public. Next: stage 16 quick rate-limit look → BLOK C (repo + deploy + domain; at deploy add real domain to redirect URLs + verify domain in Resend). Supabase LIVE; DB password only with Damla.
 
 ## ROADMAP — 68 AŞAMA (ordered; work top to bottom; ☐ open · ☑ done · ⏸ waits on Damla)
