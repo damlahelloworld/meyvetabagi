@@ -9,9 +9,9 @@ import { refresh } from '../router.js';
 export function taskRow(x) {
   const z = findKaz(x.code);
   const r = el('div', 'task' + (x.done ? ' done' : ''));
-  r.innerHTML = `<div class="cb">✓</div><div class="tt">${esc(z ? z.title : x.code)}${z ? ` <span class="pill">${z.code}</span>` : ''}</div>`;
-  r.querySelector('.cb').onclick = e => { e.stopPropagation(); x.done = !x.done; x.done ? bump() : unbump(); save(); refresh(); };
+  r.innerHTML = `<span class="tt">${esc(z ? z.title : x.code)}</span>${z ? ` <span class="tcode">${z.code}</span>` : ''}<button class="tdone">${x.done ? 'geri al' : 'yaptım'}</button>`;
   r.querySelector('.tt').onclick = () => { if (z) location.hash = '#/konular/' + z.uid; };
+  r.querySelector('.tdone').onclick = e => { e.stopPropagation(); x.done = !x.done; x.done ? bump() : unbump(); save(); refresh(); };
   return r;
 }
 
