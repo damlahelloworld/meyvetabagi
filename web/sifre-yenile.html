@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Şifre yenile — meyvetabagi</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E8619A">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<div class="top"><div class="wrap topin">
+  <a class="logo" href="index.html">meyve<u>tabagi</u></a>
+  <div class="links"><a href="index.html">Ana sayfa</a><a href="app.html">Uygulama</a></div>
+</div></div>
+
+<section class="sec"><div class="wrap">
+  <span class="eyebrow">Hesap</span>
+  <h2>Yeni şifreni belirle.</h2>
+
+  <div class="resetform" id="form" hidden>
+    <label for="p1">Yeni şifre</label>
+    <input id="p1" type="password" placeholder="en az 6 karakter" autocomplete="new-password">
+    <label for="p2">Yeni şifre (tekrar)</label>
+    <input id="p2" type="password" placeholder="aynısını yaz" autocomplete="new-password">
+    <p class="formhint" id="err"></p>
+    <button class="btn pink" id="go">Şifreyi güncelle</button>
+  </div>
+
+  <div class="resetform" id="state">
+    <p class="formhint">Bağlantı denetleniyor…</p>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="footbot">
+    <span>© 2026 meyvetabagi · damlahelloworld</span>
+    <a href="index.html">Ana sayfa</a>
+  </div>
+</div></footer>
+
+<script type="module">
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './js/config.js';
+const form = document.getElementById('form'), state = document.getElementById('state'), err = document.getElementById('err');
+const fail = t => { state.innerHTML = `<p class="formhint">${t}</p><p class="formhint"><a href="app.html">Uygulamaya dön</a> ve girişte "Şifremi unuttum" ile yeni bağlantı iste.</p>`; };
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) { fail('Hesap sistemi şu an kapalı.'); }
+else {
+  const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+  const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);  // consumes the #recovery token from the URL
+  // give detectSessionInUrl a moment, then check whether the recovery token produced a session
+  setTimeout(async () => {
+    const { data } = await client.auth.getSession();
+    if (!data.session) { fail('Bağlantı geçersiz ya da süresi dolmuş.'); return; }
+    state.hidden = true; form.hidden = false;
+    document.getElementById('go').onclick = async () => {
+      const p1 = document.getElementById('p1').value, p2 = document.getElementById('p2').value;
+      if (p1.length < 6) { err.textContent = 'Şifre en az 6 karakter olmalı.'; return; }
+      if (p1 !== p2) { err.textContent = 'Şifreler aynı değil.'; return; }
+      err.textContent = '';
+      const { error } = await client.auth.updateUser({ password: p1 });
+      if (error) { err.textContent = 'Olmadı: ' + (error.message || 'tekrar dene'); return; }
+      form.hidden = true; state.hidden = false;
+      state.innerHTML = '<p class="formhint">Şifren güncellendi.</p><p><a class="btn pink" href="app.html">Uygulamaya git</a></p>';
+    };
+  }, 400);
+}
+</script>
+</body>
+</html>

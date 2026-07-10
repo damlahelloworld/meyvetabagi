@@ -1,0 +1,34 @@
+/* Sıra Sende — design tokens. THE file to touch for theming (colors, type, radii).
+   Clean white + Helvetica + pink accent + DARK full-frame borders (--line). No colored edges, no pills.
+   --line = dark (card frames, attitude) · --line-soft/--hair = light (list separators).
+   DEFAULT = white (:root). Dark theme = body.dark. */
+:root{
+  /* clean white — default */
+  --bg:#FFFFFF; --panel:#F7F6F3; --panel-2:#FAFAF8; --card:#FFFFFF;
+  --ink:#1A1A18; --ink-soft:#45443F; --muted:#6B6862; --faint:#A6A29B;
+  --line:#26231F; --line-soft:#E7E4DF; --hair:#EDEBE7;
+  --accent:#E8619A; --accent-ink:#C24C82; --accent-soft:#FDF2F7; --on-accent:#FFFFFF;
+  --pink:#E8619A; --pink-ink:#C24C82; --pink-soft:#FDF2F7;
+  --red:#D9463A; --amber:#CC8A18; --green:#4C9A46;
+  --red-bg:#FBEBE9; --amber-bg:#FAF1DF; --green-bg:#EAF2E9;
+  /* multi-color palette — ders identity and accents (not only pink) */
+  --purple:#7C5CD6; --blue:#3B7FC4; --orange:#E07A3E; --yellow:#C9A21E; --teal:#2AA79B; --brown:#A97B50;
+  --purple-soft:#EFEAFB; --blue-soft:#E7F0FA; --orange-soft:#FBEEE2; --yellow-soft:#FAF3DA; --teal-soft:#E2F4F1; --brown-soft:#F4EBE2;
+  --h1:#F8CFE1; --h2:#F2A6C6; --h3:#EC7DAB; --h4:#E8619A;
+  --radius:2px;
+  --sans:Helvetica,Arial,-apple-system,system-ui,sans-serif;
+  --mono:Helvetica,Arial,-apple-system,system-ui,sans-serif;
+}
+body.dark{
+  /* dark theme (via settings) — pink accent */
+  --bg:#1A1917; --panel:#232220; --panel-2:#1F1E1C; --card:#232220;
+  --ink:#F1EEE9; --ink-soft:#C7C3BC; --muted:#918D87; --faint:#6A665F;
+  --line:#4E4B45; --line-soft:#2E2D2A; --hair:rgba(255,255,255,.07);
+  --accent:#EE85B0; --accent-ink:#EE85B0; --accent-soft:#352730; --on-accent:#1A1917;
+  --pink:#EE85B0; --pink-ink:#EE85B0; --pink-soft:#352730;
+  --red:#E2705F; --amber:#D6A24F; --green:#71B06E;
+  --red-bg:#3A2A28; --amber-bg:#332F1F; --green-bg:#25322A;
+  --purple:#A78BE8; --blue:#6FA8DC; --orange:#E8975E; --yellow:#D6BC5A; --teal:#5BBFB4; --brown:#C29A73;
+  --purple-soft:#2C2735; --blue-soft:#242B33; --orange-soft:#33291F; --yellow-soft:#322E1E; --teal-soft:#1F312E; --brown-soft:#332B22;
+  --h1:#3E2A34; --h2:#5E3247; --h3:#9B4E74; --h4:#EE85B0;
+}

@@ -1,0 +1,13 @@
+{
+  "name": "meyvetabagi",
+  "short_name": "meyvetabagi",
+  "description": "YKS çalışma alanı — resmi MEB kazanımları, plan, deneme, sıralama.",
+  "start_url": "app.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E8619A",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

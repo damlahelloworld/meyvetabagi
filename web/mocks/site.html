@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sıra Sende · web sitesi mock v6</title>
+<style>
+/* LANDING MOCK v6 — app ile aynı dil (beyaz, Helvetica, koyu kenar, altı çizili başlık, pembe vurgu,
+   sivri köşe, pill yok) ama editoryal karakter + hareket: sayaç, oynayan chipler, akordeon. */
+:root{
+  --bg:#fff; --ink:#1A1A18; --soft:#6B6862; --faint:#A6A29B;
+  --line:#E7E4DF; --line-2:#CFCBC4; --edge:#26231F;
+  --pink:#E8619A; --pink-soft:#FDF2F7;
+  --red:#D9463A; --amber:#CC8A18; --green:#4C9A46;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+.u{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:3px;text-decoration-color:var(--pink)}
+
+/* nav */
+.top{border-bottom:1.5px solid var(--edge);position:sticky;top:0;background:var(--bg);z-index:20}
+.topin{display:flex;align-items:center;gap:32px;height:66px}
+.logo{font-size:20px;font-weight:700}
+.logo u{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:var(--pink)}
+.links{display:flex;gap:26px;margin-left:auto;font-size:14.5px;color:var(--soft)}
+.links a:hover{color:var(--ink)}
+.btn{border:1.5px solid var(--edge);background:var(--bg);border-radius:2px;padding:10px 20px;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;display:inline-block;transition:transform .08s,background .12s,color .12s}
+.btn:hover{background:var(--ink);color:var(--bg);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.pink{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn.pink:hover{background:#d64f89}
+.btn.lg{padding:14px 28px;font-size:16px}
+
+/* hero */
+.hero{padding:82px 0 64px;border-bottom:1.5px solid var(--edge)}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.05em;
+  border-bottom:2px solid var(--edge);padding-bottom:3px;margin-bottom:24px}
+.hero h1{font-size:56px;line-height:1.06;font-weight:700;letter-spacing:-.03em;max-width:780px}
+.hero h1 u{text-decoration:underline;text-underline-offset:9px;text-decoration-thickness:5px;text-decoration-color:var(--pink)}
+.hero p{font-size:19px;color:var(--soft);margin:26px 0 34px;max-width:560px}
+.hero .cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.hero .note{font-size:14px;color:var(--faint);margin-top:16px}
+
+/* live status chip demo (oynayan chipler) */
+.demo{display:flex;gap:8px;flex-wrap:wrap;margin-top:40px}
+.dchip{border:1.5px solid var(--edge);border-radius:2px;padding:8px 13px;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:9px;background:var(--bg);transition:.25s}
+.dchip .d{width:9px;height:9px;border-radius:2px;background:var(--line-2);transition:.25s}
+.dchip.red .d{background:var(--red)}.dchip.amber .d{background:var(--amber)}.dchip.green .d{background:var(--green)}
+.dchip.green{color:var(--green)}
+
+/* section */
+.sec{padding:70px 0;border-bottom:1.5px solid var(--edge)}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  border-bottom:2px solid var(--edge);padding-bottom:3px;margin-bottom:26px}
+.sec h2{font-size:34px;font-weight:700;letter-spacing:-.02em;max-width:660px;line-height:1.2}
+.sec .lead{font-size:17px;color:var(--soft);margin-top:16px;max-width:600px}
+
+/* manifesto */
+.mani{padding:76px 0;border-bottom:1.5px solid var(--edge)}
+.mani p{font-size:34px;font-weight:700;line-height:1.32;letter-spacing:-.015em;max-width:900px}
+.mani p .soft{color:var(--faint)}
+.mani p u{text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:4px;text-decoration-color:var(--pink)}
+
+/* old vs new */
+.vs{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--edge);border-radius:2px;margin-top:36px}
+.vs .col{padding:30px 32px}
+.vs .col.old{border-right:1.5px solid var(--edge);background:#FAFAF8}
+.vs .col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:18px}
+.vs .col.old h4{color:var(--faint)}.vs .col.new h4{color:var(--pink)}
+.vs ul{list-style:none;display:grid;gap:13px}
+.vs li{font-size:15.5px;display:flex;gap:11px;align-items:flex-start;color:var(--soft)}
+.vs .new li{color:var(--ink)}
+.vs li .m{flex:none;width:16px;font-weight:700;text-align:center}
+.vs .old li .m{color:var(--faint)}.vs .new li .m{color:var(--green)}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--edge);border-radius:2px;margin-top:36px}
+.num{padding:26px 24px;border-right:1.5px solid var(--edge)}
+.num:last-child{border-right:none}
+.num .v{font-size:38px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.num.accent .v{color:var(--pink)}
+.num .k{font-size:13.5px;color:var(--soft);margin-top:6px}
+
+/* daily loop steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--edge);border-radius:2px;margin-top:36px}
+.step{padding:26px 24px;border-right:1.5px solid var(--edge)}
+.step:last-child{border-right:none}
+.step .n{font-size:30px;font-weight:700;color:var(--pink);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.step h4{font-size:16px;font-weight:700;margin:12px 0 7px}
+.step p{font-size:14px;color:var(--soft);line-height:1.55}
+
+/* features */
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--edge);border-radius:2px;margin-top:36px}
+.feat{padding:30px;border-right:1.5px solid var(--edge);border-bottom:1.5px solid var(--edge);transition:background .15s}
+.feat:hover{background:#FAFAF8}
+.feat:nth-child(2n){border-right:none}
+.feat:nth-last-child(-n+2){border-bottom:none}
+.feat .fn{font-size:13px;font-weight:700;color:var(--pink);font-variant-numeric:tabular-nums;margin-bottom:12px}
+.feat h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.feat p{font-size:15px;color:var(--soft);line-height:1.6}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
+.trust .t{border:1.5px solid var(--edge);border-radius:2px;padding:22px 24px}
+.trust .t b{display:block;font-size:16px;margin-bottom:5px}
+.trust .t span{font-size:14.5px;color:var(--soft)}
+
+/* founder */
+.founder{display:grid;grid-template-columns:120px 1fr;gap:30px;align-items:start;margin-top:20px}
+.founder .fava{width:120px;height:120px;border:1.5px solid var(--edge);border-radius:2px;background:var(--pink-soft);color:var(--pink);display:grid;place-items:center;font-size:52px;font-weight:700}
+.founder blockquote{font-size:22px;line-height:1.5;font-weight:700;letter-spacing:-.01em;max-width:680px}
+.founder .by{font-size:14.5px;color:var(--soft);margin-top:18px}
+.founder .by b{color:var(--ink)}
+
+/* pricing */
+.price{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--edge);border-radius:2px;margin-top:36px}
+.plan{padding:34px 32px;border-right:1.5px solid var(--edge)}
+.plan:last-child{border-right:none}
+.plan.pro{background:var(--pink-soft)}
+.plan .pn{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--soft)}
+.plan.pro .pn{color:var(--pink)}
+.plan .pp{font-size:36px;font-weight:700;letter-spacing:-.02em;margin:12px 0 4px}
+.plan .pp small{font-size:15px;color:var(--soft);font-weight:400}
+.plan .pd{font-size:14px;color:var(--soft);margin-bottom:20px}
+.plan ul{list-style:none;display:grid;gap:11px;margin-bottom:24px}
+.plan li{font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
+.plan li svg{width:16px;height:16px;color:var(--green);flex:none;margin-top:2px}
+.plan .btn{width:100%;text-align:center}
+.scar{margin-top:22px;font-size:14.5px;color:var(--ink);border-top:1.5px solid var(--edge);padding-top:18px}
+.scar b{color:var(--pink)}
+
+/* FAQ accordion */
+.faq{margin-top:30px;border-top:1.5px solid var(--edge)}
+.qa{border-bottom:1.5px solid var(--edge)}
+.qa .q{width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:18px;font-weight:700;color:var(--ink);
+  padding:22px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.qa .q .pm{color:var(--pink);font-size:24px;font-weight:400;flex:none;transition:transform .2s}
+.qa.open .q .pm{transform:rotate(45deg)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .28s ease}
+.qa .a p{font-size:15.5px;color:var(--soft);line-height:1.65;padding:0 0 22px;max-width:720px}
+
+/* cta band */
+.band{padding:82px 0;text-align:center;border-bottom:1.5px solid var(--edge)}
+.band h2{font-size:44px;font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+.band h2 u{text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:5px;text-decoration-color:var(--pink)}
+.band p{font-size:17px;color:var(--soft);margin-bottom:30px}
+
+/* footer — inc feel, columns */
+.foot{padding:56px 0 30px}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding-bottom:40px;border-bottom:1.5px solid var(--edge)}
+.footgrid .logo{font-size:19px;margin-bottom:12px}
+.footgrid p{font-size:14px;color:var(--soft);max-width:240px}
+.footcol h5{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);margin-bottom:14px}
+.footcol a{display:block;font-size:14.5px;color:var(--soft);padding:5px 0}
+.footcol a:hover{color:var(--ink)}
+.footbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;font-size:13px;color:var(--faint)}
+.mock-note{text-align:center;font-size:12.5px;color:var(--faint);padding:6px 0 40px}
+
+@media(max-width:820px){
+  .hero h1{font-size:40px}.mani p{font-size:26px}
+  .nums,.steps{grid-template-columns:1fr 1fr}.feats,.price,.vs{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr}.founder{grid-template-columns:1fr}.footgrid{grid-template-columns:1fr 1fr}
+  .links{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap topin">
+  <span class="logo">sıra <u>sende</u></span>
+  <div class="links"><a href="#nasil">Nasıl çalışır</a><a href="#ozellik">Özellikler</a><a href="#hikaye">Hikaye</a><a href="#fiyat">Fiyat</a><a href="#sss">SSS</a></div>
+  <a class="btn pink">Ücretsiz başla</a>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="tag">YKS 2026 · 2027</span>
+  <h1>Her sabah <u>ne çalışacağını</u> bilerek uyan.</h1>
+  <p>Resmi MEB kazanımları tek listede. İşaretle, notunu al, planını kur, denemeni gir, sıralamanı gör. Dağınık değil — hepsi bir yerde, hepsi gerçek.</p>
+  <div class="cta">
+    <a class="btn pink lg">Ücretsiz başla</a>
+    <a class="btn lg" href="#nasil">Nasıl çalışır?</a>
+  </div>
+  <p class="note">Kart yok, taahhüt yok. İlk 400 öğrenci tamamen ücretsiz.</p>
+
+  <div class="demo" id="demo">
+    <span class="dchip red"><span class="d"></span>Türev</span>
+    <span class="dchip amber"><span class="d"></span>Limit</span>
+    <span class="dchip green"><span class="d"></span>Önermeler</span>
+    <span class="dchip red"><span class="d"></span>Paragraf</span>
+    <span class="dchip amber"><span class="d"></span>Kuvvet</span>
+    <span class="dchip green"><span class="d"></span>Periyodik sistem</span>
+    <span class="dchip red"><span class="d"></span>Hücre</span>
+  </div>
+</div></header>
+
+<section class="mani"><div class="wrap">
+  <p>YKS bir bilgi sınavı değil, bir <u>takip</u> sınavı. <span class="soft">Neyi bildiğini, neyi unuttuğunu, neye kaç kez döndüğünü bilmeden</span> bir yıl karanlıkta çalışıyorsun. Sıra Sende o karanlığı kapatır.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <span class="eyebrow">Eski yol / Sıra Sende</span>
+  <h2>Onlarca defter, uygulama, ekran şipşak yerine bir tane.</h2>
+  <div class="vs">
+    <div class="col old">
+      <h4>Eskiden</h4>
+      <ul>
+        <li><span class="m">×</span>Konu listesi bir defterde, notlar başka yerde</li>
+        <li><span class="m">×</span>Hangi konuya kaç kez döndüğünü hatırlamıyorsun</li>
+        <li><span class="m">×</span>Deneme netini elle hesaplıyorsun</li>
+        <li><span class="m">×</span>Sıralama tahmini için forum forum geziyorsun</li>
+        <li><span class="m">×</span>Bu hafta ne çalışacağına her sabah sıfırdan karar</li>
+      </ul>
+    </div>
+    <div class="col new">
+      <h4>Sıra Sende'yle</h4>
+      <ul>
+        <li><span class="m">✓</span>955 kazanım + notların tek yerde</li>
+        <li><span class="m">✓</span>Her tekrar sayılır, ilerlemen ısı haritasında</li>
+        <li><span class="m">✓</span>D/Y gir, net anında çıksın</li>
+        <li><span class="m">✓</span>Dürüst, aralıklı sıralama tahmini</li>
+        <li><span class="m">✓</span>Zayıfına göre hazır haftalık plan</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="nasil"><div class="wrap">
+  <span class="eyebrow">Tek omurga</span>
+  <h2>Her şey resmi MEB kazanım listesine bağlı.</h2>
+  <p class="lead">Dört ayrı uygulama değil — tek bir liste, dört işe yarıyor. O yüzden hem tutarlı hem güvenilir: uydurma konu yok, her şey resmi kaynaktan.</p>
+  <div class="nums" id="nums">
+    <div class="num accent"><div class="v" data-to="955">0</div><div class="k">MEB kazanımı</div></div>
+    <div class="num"><div class="v" data-to="9">0</div><div class="k">ders</div></div>
+    <div class="num"><div class="v">TYT+AYT</div><div class="k">tek yerde</div></div>
+    <div class="num"><div class="v" data-to="100" data-suf="%">0</div><div class="k">resmi kaynak</div></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <span class="eyebrow">Günlük döngü</span>
+  <h2>Sabah aç, akşam kapat. Arada dört adım.</h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h4>Bak</h4><p>Bugün ne çalışacağın hazır: sınava kalan gün, son netin, bugünkü görevlerin.</p></div>
+    <div class="step"><div class="n">02</div><h4>Anlat</h4><p>Günün kazanımını kendi cümlelerinle yaz, resmi açıklamayla karşılaştır.</p></div>
+    <div class="step"><div class="n">03</div><h4>İşaretle</h4><p>Kırmızı / sarı / yeşil. Her tekrar sayılır, ısı haritan dolar.</p></div>
+    <div class="step"><div class="n">04</div><h4>Ölç</h4><p>Denemeni gir, netini ve tahmini sıralamanı gör. Yarın plan buna göre.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="ozellik"><div class="wrap">
+  <span class="eyebrow">Özellikler</span>
+  <h2>Dağınık defterleri, onlarca uygulamayı bırak.</h2>
+  <div class="feats">
+    <div class="feat"><div class="fn">01</div><h3>Konu takibi</h3><p>Her kazanımı kırmızı / sarı / yeşil işaretle. İlerlemen tek bakışta görünür, altında kendi notun durur.</p></div>
+    <div class="feat"><div class="fn">02</div><h3>Günün kazanımı</h3><p>Her gün bir kazanımı kendi cümlelerinle anlat, resmi MEB açıklamasıyla karşılaştır. Aktif hatırlama, ezber değil.</p></div>
+    <div class="feat"><div class="fn">03</div><h3>Takvim & plan</h3><p>Kazanımları günlere sürükle. Zayıf dersine göre haftalık plan çıkar, temposu senin çalışma saatine göre.</p></div>
+    <div class="feat"><div class="fn">04</div><h3>Deneme & sıralama</h3><p>D/Y gir, netin anında çıksın. Geçmiş ÖSYM verisine dayalı, dürüst bir aralıkla tahmini sıralaman.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <span class="eyebrow">Neden güvenilir</span>
+  <h2>Sana doğruyu söyleyen tek yer.</h2>
+  <div class="trust">
+    <div class="t"><b>Uydurma yok</b><span>Kazanımlar resmi MEB belgesinden. İnternetteki yapay listeler değil.</span></div>
+    <div class="t"><b>Dürüst sıralama</b><span>Sonuç hep "tahmini" ve bir aralık — sahte kesinlik yok.</span></div>
+    <div class="t"><b>Doğru müfredat</b><span>2026 & 2027 için geçerli müfredat. Yanlış yılın konusuyla vaktini harcamazsın.</span></div>
+  </div>
+</div></section>
+
+<section class="sec" id="hikaye"><div class="wrap">
+  <span class="eyebrow">Hikaye</span>
+  <h2>Bu sistemi, sınava iki kez giren biri kurdu.</h2>
+  <div class="founder">
+    <div class="fava">D</div>
+    <div>
+      <blockquote>"Ben de bu karmaşayı yaşadım. Ne çalıştığımı değil, ne çalışmam gerektiğini bilmek istiyordum. Sıra Sende, keşke o zaman elimde olsun dediğim şey."</blockquote>
+      <p class="by"><b>Damla</b> — kurucu · Bilkent Bilgisayar Mühendisliği</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="fiyat"><div class="wrap">
+  <span class="eyebrow">Fiyat</span>
+  <h2>Ücretsiz başla. Hazır olunca yükselt.</h2>
+  <p class="lead">Ucuz-çirkin araçlarla pahalı kurumsal koçluğun arasındaki boşluk: kaliteli ama erişilebilir.</p>
+  <div class="price">
+    <div class="plan">
+      <div class="pn">Ücretsiz</div>
+      <div class="pp">0<small> TL</small></div>
+      <div class="pd">Çekirdek her zaman ücretsiz — gerçekten işine yarasın.</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Konu takibi + notlar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Günün kazanımı</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Deneme & net hesabı</li>
+      </ul>
+      <a class="btn">Ücretsiz başla</a>
+    </div>
+    <div class="plan pro">
+      <div class="pn">Premium</div>
+      <div class="pp">₺₺₺<small> / ay</small></div>
+      <div class="pd">Kişisel program, sıralama ve yarış — tam potansiyel.</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Kişiye özel haftalık plan</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Detaylı sıralama tahmini</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>Sıralama tablosu & ligler</li>
+      </ul>
+      <a class="btn pink">Premium'a geç</a>
+    </div>
+  </div>
+  <div class="scar"><b>İlk 400 öğrenci ücretsiz.</b> Erken katılanlar premium'u bir dönem bedava kullanır — sayaç dolunca fiyat devreye girer.</div>
+</div></section>
+
+<section class="sec" id="sss"><div class="wrap">
+  <span class="eyebrow">Sık sorulanlar</span>
+  <h2>Aklına takılanlar.</h2>
+  <div class="faq" id="faq">
+    <div class="qa"><button class="q">Kazanımlar gerçekten resmi mi?<span class="pm">+</span></button><div class="a"><p>Evet. Tümü MEB'in yayımladığı resmi "2026 YKS konu ve kazanımlar" belgesinden alındı. İnternette dolaşan yapay zekâ üretimi listeleri kullanmıyoruz — onlar hatalı ve güveni bitiriyor.</p></div></div>
+    <div class="qa"><button class="q">Sıralama tahmini ne kadar doğru?<span class="pm">+</span></button><div class="a"><p>Geçmiş ÖSYM verisine dayanır ve her zaman bir aralık olarak, "tahmini" etiketiyle gösterilir. Sana sahte bir kesinlik ("42.318. olacaksın") vermeyiz — dürüst bir bant veririz.</p></div></div>
+    <div class="qa"><button class="q">Ücretsiz sürüm gerçekten yeterli mi?<span class="pm">+</span></button><div class="a"><p>Konu takibi, notlar, günün kazanımı ve deneme/net hesabı hep ücretsiz. Çoğu öğrenci için çekirdek döngü zaten burada. Premium; kişisel plan, detaylı sıralama ve yarış katmanını açar.</p></div></div>
+    <div class="qa"><button class="q">Telefonda da var mı?<span class="pm">+</span></button><div class="a"><p>Web, iOS ve Android — aynı hesap, her yerde senkron. Sabah telefonda bak, akşam bilgisayarda plan yap.</p></div></div>
+    <div class="qa"><button class="q">Verilerim güvende mi?<span class="pm">+</span></button><div class="a"><p>KVKK'ya uygun. Verini sadece sana daha iyi bir çalışma deneyimi sunmak için kullanırız, istediğin an silebilirsin.</p></div></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>Bu sene <u>sıra sende</u>.</h2>
+  <p>Dağınıklığı bırak, ilk günden ne çalışacağını bil.</p>
+  <a class="btn pink lg">Ücretsiz başla</a>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="footgrid">
+    <div>
+      <div class="logo">sıra <u>sende</u></div>
+      <p>YKS çalışma alanı. Resmi MEB kazanımları, dürüst sıralama, kişisel plan — tek yerde.</p>
+    </div>
+    <div class="footcol"><h5>Ürün</h5><a href="#ozellik">Özellikler</a><a href="#nasil">Nasıl çalışır</a><a href="#fiyat">Fiyat</a><a href="#">Giriş</a></div>
+    <div class="footcol"><h5>Şirket</h5><a href="#hikaye">Hikaye</a><a href="#">İletişim</a><a href="#">Kariyer</a></div>
+    <div class="footcol"><h5>Yasal</h5><a href="#">Gizlilik</a><a href="#">KVKK</a><a href="#">Kullanım şartları</a></div>
+  </div>
+  <div class="footbot">
+    <span>© 2026 Sıra Sende · damlahelloworld</span>
+    <span>Türkiye'de tasarlandı ve kodlandı</span>
+  </div>
+</div></footer>
+<p class="mock-note">landing mock v6 · app ile aynı tasarım dili · sayaç + oynayan chip + akordeon canlı · "premium" fiyatı ve "koç/plan" adı geçici</p>
+
+<script>
+// sayaç — bölüm her görünür olduğunda baştan saysın (kaydırınca tekrar oynar)
+const nums=document.getElementById('nums');
+function runCount(){
+  document.querySelectorAll('#nums .v[data-to]').forEach(el=>{
+    const to=+el.dataset.to, suf=el.dataset.suf||'', dur=1100; let s=null;
+    function step(t){if(!s)s=t;const p=Math.min((t-s)/dur,1);const e=1-Math.pow(1-p,3);
+      el.textContent=suf+Math.round(to*e);if(p<1)requestAnimationFrame(step);else el.textContent=suf+to;}
+    requestAnimationFrame(step);
+  });
+}
+new IntersectionObserver((es)=>{es.forEach(e=>{
+  if(e.isIntersecting)runCount();
+  else document.querySelectorAll('#nums .v[data-to]').forEach(el=>el.textContent=(el.dataset.suf||'')+'0');
+})},{threshold:.5}).observe(nums);
+
+// oynayan chipler — kırmızı→sarı→yeşil döngüsü, sırayla
+const chips=[...document.querySelectorAll('#demo .dchip')];
+const order=['red','amber','green'];
+let ci=0;
+setInterval(()=>{
+  const chip=chips[ci%chips.length];
+  const cur=order.findIndex(o=>chip.classList.contains(o));
+  const next=order[(cur+1)%3];
+  order.forEach(o=>chip.classList.remove(o)); chip.classList.add(next);
+  ci++;
+},900);
+
+// FAQ akordeon
+document.querySelectorAll('#faq .qa').forEach(qa=>{
+  qa.querySelector('.q').onclick=()=>{
+    const open=qa.classList.contains('open');
+    document.querySelectorAll('#faq .qa').forEach(x=>{x.classList.remove('open');x.querySelector('.a').style.maxHeight=null;});
+    if(!open){qa.classList.add('open');const a=qa.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px';}
+  };
+});
+</script>
+</body>
+</html>

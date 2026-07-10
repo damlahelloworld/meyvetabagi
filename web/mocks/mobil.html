@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sıra Sende · mobil mock v5 (iOS + Android)</title>
+<style>
+/* MOCK v5 — mobil. Beyaz sade (göz yormaz), v3 karakteri korunur ama simsiyah border modernize:
+   ince açık gri çizgi, yumuşak mürekkep, sivri köşe. Helvetica · tek vurgu pembe · pill yok · gölge yok.
+   iOS ve Android aynı (Expo tek kod). Üç ekran: Bugün · Konular · Profil. */
+:root{
+  --bg:#fff; --ink:#1A1A18; --soft:#6B6862; --faint:#A6A29B;
+  --line:#E7E4DF; --line-2:#CFCBC4; --edge:#26231F;
+  --pink:#E8619A; --pink-soft:#FDF2F7;
+  --red:#D9463A; --amber:#CC8A18; --green:#4C9A46;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Helvetica,Arial,sans-serif;background:#ECEAE6;color:var(--ink);font-size:15px;line-height:1.5;
+  display:flex;gap:40px;justify-content:center;align-items:flex-start;padding:50px 20px;flex-wrap:wrap;min-height:100vh}
+svg{display:block}
+.wrap{text-align:center}
+.wrap>.cap{font-size:12.5px;font-weight:700;color:var(--soft);margin-bottom:14px;display:block;letter-spacing:.04em;text-transform:uppercase}
+
+/* telefon çerçevesi (donanım) */
+.phone{width:370px;height:770px;background:var(--bg);border-radius:44px;box-shadow:0 26px 70px rgba(60,55,48,.22), inset 0 0 0 9px #1c1a17;
+  overflow:hidden;display:flex;flex-direction:column;text-align:left}
+.status{display:flex;justify-content:space-between;padding:22px 30px 8px;font-size:12.5px;font-weight:700;color:var(--soft)}
+.scroll{flex:1;overflow:hidden;padding:12px 20px 0}
+
+/* bugün */
+.hello{font-size:25px;font-weight:700;letter-spacing:-.02em;margin-top:8px;display:inline-block;border-bottom:3px solid var(--edge);padding-bottom:3px}
+.sub{color:var(--soft);font-size:13.5px;margin:10px 0 18px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;border:1.5px solid var(--edge);border-radius:2px;margin-bottom:16px}
+.stat{padding:13px;border-right:1.5px solid var(--edge)}
+.stat:last-child{border-right:none}
+
+.stat .k{font-size:10.5px;color:var(--faint)}
+.stat .v{font-size:22px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat.accent{background:var(--pink-soft)}
+.stat.accent .v{color:var(--pink)}
+
+.box{border:1.5px solid var(--edge);border-radius:2px;padding:16px 18px;margin-bottom:16px}
+.box .k{font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;display:inline-block}
+.box h2{font-size:15px;font-weight:700;line-height:1.5}
+.box .code{font-size:12px;color:var(--faint);margin:4px 0 14px}
+.btn{border:1px solid var(--pink);background:var(--pink);color:#fff;border-radius:2px;padding:11px 18px;font-family:inherit;font-size:13.5px;font-weight:700}
+
+.seclabel{font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin:8px 0 6px;display:inline-block;border-bottom:2px solid var(--edge);padding-bottom:3px}
+.task{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line)}
+.task .cb{width:20px;height:20px;border:1.6px solid var(--line-2);border-radius:2px;flex:none;display:grid;place-items:center;color:#fff}
+.task.done .cb{background:var(--green);border-color:var(--green)}
+.task.done .tt{color:var(--faint);text-decoration:line-through}
+.task .cb svg{width:12px;height:12px}
+.task .tt{flex:1;font-size:13px;line-height:1.4}
+.task .who{font-size:11.5px;color:var(--soft)}
+.task .who.p{color:var(--pink);font-weight:700}
+
+/* tab bar */
+.tabs{display:flex;justify-content:space-around;border-top:1.5px solid var(--edge);background:var(--bg);padding:12px 6px 24px}
+.tab{font-size:12.5px;color:var(--faint)}
+.tab.on{color:var(--pink);font-weight:700}
+
+/* konular */
+.k-head{font-size:23px;font-weight:700;margin-top:8px;letter-spacing:-.02em;display:inline-block;border-bottom:3px solid var(--edge);padding-bottom:3px}
+.k-sub{color:var(--soft);font-size:12.5px;margin:10px 0 14px}
+.search{border:1px solid var(--line-2);border-radius:2px;background:#FCFCFB;display:flex;align-items:center;gap:9px;padding:11px 14px;margin-bottom:12px;color:var(--faint);font-size:13.5px}
+.search svg{width:15px;height:15px}
+.fchips{display:flex;gap:6px;margin-bottom:6px}
+.fchip{font-size:12px;font-weight:700;border:1px solid var(--line-2);border-radius:2px;padding:6px 12px;color:var(--soft);background:var(--bg)}
+.fchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fchip .d{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px}
+.d.red{background:var(--red)}.d.amber{background:var(--amber)}.d.green{background:var(--green)}
+
+.ders{font-size:14.5px;font-weight:700;margin:16px 2px 2px;display:flex;align-items:center;gap:10px}
+.ders .pct{font-size:11.5px;font-weight:400;color:var(--soft);font-variant-numeric:tabular-nums}
+.ders .bar{flex:1;height:5px;border-radius:2px;background:var(--line);overflow:hidden}
+.ders .bar i{display:block;height:100%;background:var(--green)}
+.kaz{display:flex;align-items:flex-start;gap:11px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.kaz .st{width:9px;height:9px;border-radius:2px;flex:none;margin-top:5px;border:1.6px solid var(--line-2)}
+.kaz .st.green{background:var(--green);border-color:var(--green)}
+.kaz .st.amber{background:var(--amber);border-color:var(--amber)}
+.kaz .st.red{background:var(--red);border-color:var(--red)}
+.kaz .code{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.kaz .tt{font-size:13px;line-height:1.4;margin-top:1px}
+.kaz .note{font-size:11.5px;color:var(--soft);margin-top:3px}
+
+/* profil */
+.phead{display:flex;align-items:center;gap:14px;margin:10px 0 18px}
+.phead .pava{width:54px;height:54px;border-radius:2px;display:grid;place-items:center;font-size:22px;font-weight:700;background:var(--pink-soft);color:var(--pink);flex:none}
+.pname{font-size:22px;font-weight:700;letter-spacing:-.02em;display:inline-block;border-bottom:3px solid var(--edge);padding-bottom:2px}
+.pmeta{color:var(--soft);font-size:12.5px;margin-top:6px}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,10px);gap:2px}
+.heat i{width:10px;height:10px;border-radius:2px;background:#F1EFEC}
+.heat i.l1{background:#F8CFE1}.heat i.l2{background:#F2A6C6}.heat i.l3{background:#EC7DAB}.heat i.l4{background:var(--pink)}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.setrow .l b{display:block;font-size:14px}
+.setrow .l span{font-size:11.5px;color:var(--soft)}
+.setrow .val{font-size:13px;color:var(--soft)}
+.setrow.out b{color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <span class="cap">bugün</span>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>sıra sende</span></div>
+    <div class="scroll">
+      <h1 class="hello">Merhaba Damla</h1>
+      <p class="sub">bugün ne çalışacağın hazır — sıra sende.</p>
+
+      <div class="stats">
+        <div class="stat accent"><div class="k">sınava kalan</div><div class="v">346</div></div>
+        <div class="stat"><div class="k">son net</div><div class="v">78,5</div></div>
+        <div class="stat"><div class="k">yeşil</div><div class="v">%24</div></div>
+      </div>
+
+      <div class="box">
+        <span class="k">günün kazanımı</span>
+        <h2>Önermeyi, önermenin doğruluk değerini ve önermenin değilini açıklar.</h2>
+        <div class="code">Matematik · 9.1.1.1</div>
+        <button class="btn">kendi cümlelerinle anlat</button>
+      </div>
+
+      <div class="seclabel">günün görevleri</div>
+      <div class="task done">
+        <span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg></span>
+        <span class="tt">Metinde geçen kelime gruplarının anlamlarını tespit eder.</span><span class="who p">plan</span>
+      </div>
+      <div class="task">
+        <span class="cb"></span>
+        <span class="tt">Bileşik önermeyi örneklerle açıklar.</span><span class="who p">plan</span>
+      </div>
+      <div class="task">
+        <span class="cb"></span>
+        <span class="tt">Fizik biliminin önemini açıklar.</span><span class="who">sen</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <span class="tab on">Bugün</span><span class="tab">Konular</span><span class="tab">Takvim</span><span class="tab">Plan</span><span class="tab">Profil</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <span class="cap">konular</span>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>sıra sende</span></div>
+    <div class="scroll">
+      <h1 class="k-head">Konular</h1>
+      <p class="k-sub">955 MEB kazanımı · ara, filtrele, işaretle</p>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>türev, 9.1.1.1…</div>
+      <div class="fchips">
+        <span class="fchip on">tümü</span>
+        <span class="fchip"><span class="d red"></span>kırmızı</span>
+        <span class="fchip"><span class="d amber"></span>sarı</span>
+        <span class="fchip"><span class="d green"></span>yeşil</span>
+      </div>
+
+      <div class="ders">Matematik <span class="bar"><i style="width:34%"></i></span><span class="pct">%34</span></div>
+      <div class="kaz"><span class="st green"></span><div><div class="code">9.1.1.1</div><div class="tt">Önermeyi, önermenin doğruluk değerini ve önermenin değilini açıklar.</div><div class="note">notum: doğruluk tablosunu ezberle</div></div></div>
+      <div class="kaz"><span class="st amber"></span><div><div class="code">9.1.1.2</div><div class="tt">Bileşik önermeyi örneklerle açıklar; ve, veya, ya da bağlaçları.</div></div></div>
+      <div class="kaz"><span class="st"></span><div><div class="code">9.1.1.3</div><div class="tt">Koşullu önermeyi ve iki yönlü koşullu önermeyi açıklar.</div></div></div>
+
+      <div class="ders">Fizik <span class="bar"><i style="width:9%"></i></span><span class="pct">%9</span></div>
+      <div class="kaz"><span class="st red"></span><div><div class="code">9.1.1.1</div><div class="tt">Evrendeki olayların anlaşılmasında fizik biliminin önemini açıklar.</div></div></div>
+      <div class="kaz"><span class="st"></span><div><div class="code">9.1.2.1</div><div class="tt">Fiziğin uygulama alanlarını, alt dalları ve diğer disiplinlerle ilişkilendirir.</div></div></div>
+    </div>
+    <div class="tabs">
+      <span class="tab">Bugün</span><span class="tab on">Konular</span><span class="tab">Takvim</span><span class="tab">Plan</span><span class="tab">Profil</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <span class="cap">profil · ayarlar</span>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>sıra sende</span></div>
+    <div class="scroll">
+      <div class="phead">
+        <span class="pava">D</span>
+        <div><div class="pname">Damla</div><div class="pmeta">Sayısal · YKS 2026</div></div>
+      </div>
+
+      <div class="stats" style="margin-bottom:16px">
+        <div class="stat accent"><div class="k">seri</div><div class="v">12</div></div>
+        <div class="stat"><div class="k">çalışma</div><div class="v">312</div></div>
+        <div class="stat"><div class="k">yeşil</div><div class="v">%24</div></div>
+      </div>
+
+      <div class="seclabel">aktivite</div>
+      <div class="box" style="padding:14px"><div class="heat" id="heat"></div></div>
+
+      <div class="seclabel">ayarlar</div>
+      <div class="setrow"><div class="l"><b>İsim</b><span>seni böyle çağırır</span></div><span class="val">Damla ›</span></div>
+      <div class="setrow"><div class="l"><b>Alan</b><span>plan önceliğin</span></div><span class="val">Sayısal ›</span></div>
+      <div class="setrow"><div class="l"><b>Tema</b><span>koyu / açık</span></div><span class="val">Koyu ›</span></div>
+      <div class="setrow"><div class="l"><b>Bildirimler</b><span>günlük hatırlatma</span></div><span class="val">Açık ›</span></div>
+      <div class="setrow out"><div class="l"><b>Çıkış yap</b></div><span class="val">›</span></div>
+    </div>
+    <div class="tabs">
+      <span class="tab">Bugün</span><span class="tab">Konular</span><span class="tab">Takvim</span><span class="tab">Plan</span><span class="tab on">Profil</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const h=document.getElementById('heat');
+const pat=[0,1,0,2,3,1,0,4,2,1,0,0,3,4,2,1,0,1,2,3,4,4,2,0,1,0,3,2,1,0,4,3,2,1,1,0,2,3,4,2,0,1,3,2,4,1,0,2,3,4,1,0,2,1,3,4,2,0,1,3,2,4,1,0,2,3,4,1,2,0,3,2,1,4,3,2,0,1,2,3,4,1,0,2];
+if(h){for(let i=0;i<84;i++){const c=document.createElement('i');const l=pat[i];if(l)c.className='l'+l;h.appendChild(c);}}
+
+// tıklanır checkbox
+document.querySelectorAll('.task .cb').forEach(cb=>{
+  cb.onclick=()=>{const t=cb.closest('.task');t.classList.toggle('done');
+    cb.innerHTML=t.classList.contains('done')?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M5 12.5l4 4L19 7"/></svg>':'';};
+});
+// tıklanır durum noktası — kırmızı→sarı→yeşil→boş döngüsü
+const cyc=['','red','amber','green'];
+document.querySelectorAll('.kaz .st').forEach(st=>{
+  st.style.cursor='pointer';
+  st.onclick=()=>{const cur=cyc.findIndex(c=>c&&st.classList.contains(c));const nx=cyc[(cur+1)%4];cyc.forEach(c=>c&&st.classList.remove(c));if(nx)st.classList.add(nx);};
+});
+</script>
+</body>
+</html>
