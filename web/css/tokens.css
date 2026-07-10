@@ -21,8 +21,8 @@
   --h1:#F8CFE1; --h2:#F2A6C6; --h3:#EC7DAB; --h4:#E8619A;
 
   --radius:3px;
-  --sans:Arial,Helvetica,sans-serif;
-  --mono:Arial,Helvetica,sans-serif;
+  --sans:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 body.dark{
   --bg:#1A1917; --panel:#232220; --panel-2:#1F1E1C; --card:#232220;
