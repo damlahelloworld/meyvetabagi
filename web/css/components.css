@@ -137,8 +137,6 @@
 
 /* ---- drag-drop week calendar (Google Calendar-like) ---- */
 /* ---- takvim: day-based week board (grey cards, color = state only) ---- */
-.split.pool-narrow{grid-template-columns:340px 1fr}
-.rpane.cal{display:flex;flex-direction:column;gap:16px;padding:24px 26px}
 .board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
 .dayc{border-right:1px solid var(--line-soft);background:var(--card);display:flex;flex-direction:column;min-height:240px;transition:background .1s}
 .dayc:last-child{border-right:none}
@@ -293,3 +291,11 @@
 .tools.flat{padding:0 0 8px;max-width:640px}
 .backlink{display:inline-block;font-size:13px;color:var(--muted);margin-bottom:14px}
 .backlink:hover{color:var(--ink)}
+
+/* takvim in-page week nav */
+.calbar{display:flex;align-items:center;gap:8px;margin:2px 0 18px}
+.calbar .wk{font-size:13px;color:var(--muted);margin-left:8px;font-variant-numeric:tabular-nums}
+.wkbtn{min-width:32px;height:32px;padding:0 12px;border:1px solid var(--line-soft);border-radius:3px;background:var(--bg);color:var(--ink-soft);font-size:14px;display:grid;place-items:center}
+.wkbtn:hover{border-color:var(--ink);color:var(--ink)}
+.daypanel{margin-top:16px}
+.pool{margin-top:4px;max-width:760px}

@@ -1,9 +1,9 @@
-// Takvim — day-based week board (Damla, 2026-07-10): kazanım drops onto a DAY, not an hour.
-// Cards are grey; the ONLY color is state (done / not done). Click a day → detailed daily program,
-// hours live there (optional per task). Pool: search + ders + unstudied filters, tap adds to selected day.
+// Takvim — one self-contained full-width page (Damla, 2026-07-10: no side panes anywhere).
+// Order: week nav → 7-day calendar board → günlük program (selected day, hours optional) → kazanım havuzu.
+// Task chips are grey; the ONLY color is state (done green / not done). Drop targets = whole day.
 import { S, save, bump, unbump, dstr } from '../state.js';
 import { DB, allKaz, findKaz } from '../data.js';
-import { el, esc, norm, ICON, WD_SHORT, WD_LONG, MON_SHORT, HOURS, weekDates, page, setChips, dersDot } from '../ui.js';
+import { el, esc, norm, ICON, WD_SHORT, WD_LONG, MON_SHORT, HOURS, weekDates, page } from '../ui.js';
 import { refresh } from '../router.js';
 
 const POOLFILT = { q: '', ders: 'all', only: false };
@@ -26,64 +26,19 @@ export function takvim() {
   if (!SEL_DAY) SEL_DAY = tstr;
   const dates = weekDates(WEEK_OFFSET);
 
-  // ---- topbar chips: week navigation lives with the page ----
-  const chips = el('div', 'chips');
+  const d = el('div', 'pagein'); page(true).appendChild(d);
+
+  // week nav — lives in the page, not the topbar
   const label = WEEK_OFFSET === 0 ? 'Bu hafta' : WEEK_OFFSET === -1 ? 'Geçen hafta' : WEEK_OFFSET === 1 ? 'Gelecek hafta' : `${WEEK_OFFSET > 0 ? '+' : ''}${WEEK_OFFSET} hafta`;
-  chips.innerHTML = `<button class="chip" id="wprev">‹</button>
-    <button class="chip" id="wtoday">Bugün</button>
-    <button class="chip" id="wnext">›</button>
+  const bar = el('div', 'calbar');
+  bar.innerHTML = `<button class="wkbtn" id="wprev">‹</button><button class="wkbtn" id="wtoday">Bugün</button><button class="wkbtn" id="wnext">›</button>
     <span class="wk">${label} · ${dates[0].getDate()} ${MON_SHORT[dates[0].getMonth()]} – ${dates[6].getDate()} ${MON_SHORT[dates[6].getMonth()]}</span>`;
-  chips.querySelector('#wprev').onclick = () => { WEEK_OFFSET--; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
-  chips.querySelector('#wnext').onclick = () => { WEEK_OFFSET++; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
-  chips.querySelector('#wtoday').onclick = () => { WEEK_OFFSET = 0; SEL_DAY = tstr; refresh(); };
-  setChips(chips);
+  bar.querySelector('#wprev').onclick = () => { WEEK_OFFSET--; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
+  bar.querySelector('#wnext').onclick = () => { WEEK_OFFSET++; SEL_DAY = dstr(weekDates(WEEK_OFFSET)[0]); refresh(); };
+  bar.querySelector('#wtoday').onclick = () => { WEEK_OFFSET = 0; SEL_DAY = tstr; refresh(); };
+  d.appendChild(bar);
 
-  // ---- layout: pool (left) + board & day program (right) ----
-  const split = el('div', 'split pool-narrow'); page(true).appendChild(split);
-  const lpane = el('div', 'lpane'); split.appendChild(lpane);
-  lpane.innerHTML = `<div class="head"><h2>Kazanım havuzu</h2><p>Sürükle ya da dokun — seçili güne eklenir</p></div>`;
-  const tools = el('div', 'tools');
-  tools.innerHTML = `<div class="search${POOLFILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
-    <input placeholder="Havuzda ara…" value="${esc(POOLFILT.q)}"><span class="clr">×</span></div>
-    <div class="chips" data-grp="ders">
-      <button class="chip${POOLFILT.ders === 'all' ? ' on' : ''}" data-v="all">Tümü</button>
-      ${DB.dersler.map(x => `<button class="chip${POOLFILT.ders === x.ders ? ' on' : ''}" data-v="${esc(x.ders)}">${dersDot(x.ders)}${esc(x.ders.split(' ')[0])}</button>`).join('')}
-    </div>
-    <div class="chips gap-top">
-      <button class="chip${POOLFILT.only ? ' on' : ''}" id="onlyred">Sadece çalışılmamış</button>
-    </div>`;
-  lpane.appendChild(tools);
-  const list = el('div', 'list pool'); lpane.appendChild(list);
-  function paintPool() {
-    list.innerHTML = '';
-    let n = 0, total = 0;
-    allKaz().forEach(z => {
-      const st = S.status[z.uid] || 'none';
-      if (POOLFILT.ders !== 'all' && z.ders.ders !== POOLFILT.ders) return;
-      if (POOLFILT.only && (st === 'green')) return;
-      if (POOLFILT.q && !norm(z.title).includes(norm(POOLFILT.q)) && !z.code.includes(POOLFILT.q)) return;
-      total++;
-      if (n++ > 150) return;
-      const row = el('div', 'row'); row.draggable = true;
-      row.innerHTML = `<span class="grip">⠿</span><span class="stat ${st === 'none' ? '' : st}"></span>
-        <div class="rtext"><div class="code">${z.code} · ${esc(z.ders.ders.split(' ')[0])}</div><div class="title">${esc(z.title)}</div></div>`;
-      row.ondragstart = e => { e.dataTransfer.setData('text/plain', 'pool:' + z.uid); e.dataTransfer.effectAllowed = 'copy'; row.classList.add('dragging'); };
-      row.ondragend = () => row.classList.remove('dragging');
-      row.onclick = () => addToDay(z.uid, SEL_DAY);   // touch has no HTML5 drag: tap → selected day
-      list.appendChild(row);
-    });
-    if (total > 150) list.appendChild(el('div', 'hint', `${total} kazanım · ilk 150 gösteriliyor, aramayla daralt`));
-    if (!total) list.appendChild(el('div', 'empty', 'Eşleşen kazanım yok'));
-  }
-  tools.querySelector('input').oninput = e => { POOLFILT.q = e.target.value; tools.querySelector('.search').classList.toggle('has', !!POOLFILT.q); paintPool(); };
-  tools.querySelector('.clr').onclick = () => { POOLFILT.q = ''; refresh(); };
-  tools.querySelector('#onlyred').onclick = () => { POOLFILT.only = !POOLFILT.only; refresh(); };
-  tools.querySelector('[data-grp="ders"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.ders = c.dataset.v; refresh(); });
-  paintPool();
-
-  const rpane = el('div', 'rpane cal'); split.appendChild(rpane);
-
-  // ---- week board: 7 day cards, whole card is the drop target ----
+  // ---- week board: 7 day cells, whole cell is the drop target ----
   const board = el('div', 'board');
   dates.forEach((dt, i) => {
     const ds = dstr(dt);
@@ -106,16 +61,16 @@ export function takvim() {
     };
     board.appendChild(card);
   });
-  rpane.appendChild(board);
+  d.appendChild(board);
 
-  // ---- daily program: the selected day in detail, hours live HERE ----
+  // ---- günlük program: the selected day in detail, hours live HERE ----
   const [sy, sm, sday] = SEL_DAY.split('-').map(Number);
   const sd = new Date(sy, sm - 1, sday);  // local-time parse; new Date('YYYY-MM-DD') would be UTC
   const sevs = dayEvents(SEL_DAY);
   const panel = el('div', 'daypanel');
   panel.appendChild(el('div', 'seclabel', 'GÜNLÜK PROGRAM'));
   panel.appendChild(el('h1', 'sec', `${WD_LONG[(sd.getDay() + 6) % 7]} · ${sd.getDate()} ${MON_SHORT[sd.getMonth()]}`));
-  if (!sevs.length) panel.appendChild(el('div', 'empty', 'Bu güne henüz kazanım eklemedin — havuzdan seç.'));
+  if (!sevs.length) panel.appendChild(el('div', 'empty', 'Bu güne henüz kazanım eklemedin — aşağıdaki havuzdan seç.'));
   sevs.forEach(ev => {
     const z = findKaz(ev.code);
     const row = el('div', 'prow' + (ev.done ? ' done' : ''));
@@ -135,8 +90,49 @@ export function takvim() {
     row.appendChild(x);
     panel.appendChild(row);
   });
-  rpane.appendChild(panel);
-  rpane.appendChild(el('div', 'hint', 'Kazanım güne eklenir; saat istersen günlük programda seçilir. Kart sürükle = gün değiştir · ✓ = yapıldı · × = kaldır.'));
+  d.appendChild(panel);
+
+  // ---- kazanım havuzu: inside the page, feeds the selected day ----
+  d.appendChild(el('div', 'seclabel gap-top', 'KAZANIM HAVUZU'));
+  d.appendChild(el('p', 'meta', `Dokun → seçili güne eklenir (${sd.getDate()} ${MON_SHORT[sd.getMonth()]}) · sürükleyip herhangi bir güne bırakabilirsin`));
+  const tools = el('div', 'tools flat');
+  tools.innerHTML = `<div class="search${POOLFILT.q ? ' has' : ''}"><span class="mag">${ICON.mag}</span>
+    <input placeholder="Havuzda ara…" value="${esc(POOLFILT.q)}"><span class="clr">×</span></div>
+    <div class="chips" data-grp="ders">
+      <button class="chip${POOLFILT.ders === 'all' ? ' on' : ''}" data-v="all">Tümü</button>
+      ${DB.dersler.map(x => `<button class="chip${POOLFILT.ders === x.ders ? ' on' : ''}" data-v="${esc(x.ders)}">${esc(x.ders.split(' ')[0])}</button>`).join('')}
+    </div>
+    <div class="chips gap-top">
+      <button class="chip${POOLFILT.only ? ' on' : ''}" id="onlyred">Sadece çalışılmamış</button>
+    </div>`;
+  d.appendChild(tools);
+  const list = el('div', 'list pool'); d.appendChild(list);
+  function paintPool() {
+    list.innerHTML = '';
+    let n = 0, total = 0;
+    allKaz().forEach(z => {
+      const st = S.status[z.uid] || 'none';
+      if (POOLFILT.ders !== 'all' && z.ders.ders !== POOLFILT.ders) return;
+      if (POOLFILT.only && (st === 'green')) return;
+      if (POOLFILT.q && !norm(z.title).includes(norm(POOLFILT.q)) && !z.code.includes(POOLFILT.q)) return;
+      total++;
+      if (n++ > 60) return;
+      const row = el('div', 'row'); row.draggable = true;
+      row.innerHTML = `<span class="grip">⠿</span><span class="stat ${st === 'none' ? '' : st}"></span>
+        <div class="rtext"><div class="code">${z.code} · ${esc(z.ders.ders.split(' ')[0])}</div><div class="title">${esc(z.title)}</div></div>`;
+      row.ondragstart = e => { e.dataTransfer.setData('text/plain', 'pool:' + z.uid); e.dataTransfer.effectAllowed = 'copy'; row.classList.add('dragging'); };
+      row.ondragend = () => row.classList.remove('dragging');
+      row.onclick = () => addToDay(z.uid, SEL_DAY);   // touch has no HTML5 drag: tap → selected day
+      list.appendChild(row);
+    });
+    if (total > 60) list.appendChild(el('div', 'hint', `${total} kazanım · ilk 60 gösteriliyor, aramayla daralt`));
+    if (!total) list.appendChild(el('div', 'empty', 'Eşleşen kazanım yok'));
+  }
+  tools.querySelector('input').oninput = e => { POOLFILT.q = e.target.value; tools.querySelector('.search').classList.toggle('has', !!POOLFILT.q); paintPool(); };
+  tools.querySelector('.clr').onclick = () => { POOLFILT.q = ''; refresh(); };
+  tools.querySelector('#onlyred').onclick = () => { POOLFILT.only = !POOLFILT.only; refresh(); };
+  tools.querySelector('[data-grp="ders"]').querySelectorAll('.chip').forEach(c => c.onclick = () => { POOLFILT.ders = c.dataset.v; refresh(); });
+  paintPool();
 }
 
 // grey task chip on the board — color only means state (done / pending)

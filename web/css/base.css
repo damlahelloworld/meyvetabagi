@@ -17,14 +17,16 @@ svg{display:block}
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .topbar{display:flex;align-items:center;gap:18px;padding:0 16px;height:76px;flex:none;background:var(--bg)}
 .brand{display:flex;align-items:center;flex:none}
-.brand b{font-size:17px;font-weight:400;letter-spacing:.01em;line-height:1;color:var(--accent-ink)}
-.pagechips{display:flex;align-items:center;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
-.pagechips::-webkit-scrollbar{display:none}
-#nav{display:flex;align-items:center;gap:4px;margin-left:auto;flex:none}
-.nav{padding:7px 12px;border-radius:3px;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;transition:background .1s,color .1s}
-.nav:hover{color:var(--ink);background:var(--panel)}
-.nav.active{color:var(--accent-ink);background:var(--accent-soft)}
-.nav .count{margin-left:6px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+/* the ONE flourish: chromatic Arial wordmark (fruit gradient), everything else plain */
+.brand b{font-size:18px;font-weight:400;letter-spacing:.01em;line-height:1.2;
+  background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.pagechips{display:none}
+#nav{display:flex;align-items:center;gap:22px;margin-left:auto;flex:none}
+.nav{padding:4px 0;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;transition:color .1s}
+.nav:hover{color:var(--ink)}
+.nav.active{color:var(--ink)}
+.nav .count{margin-left:5px;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
 #userslot{position:relative;flex:none}
 
 /* page */
