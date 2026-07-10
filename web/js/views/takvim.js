@@ -47,8 +47,12 @@ export function takvim() {
     const ds = dstr(dt);
     const other = dt.getMonth() !== VIEW.m;
     const cell = el('div', 'dcell' + (other ? ' other' : '') + (ds === tstr ? ' today' : '') + (ds === SEL_DAY ? ' sel' : ''));
-    cell.appendChild(el('div', 'dnum', String(dt.getDate())));
-    dayEvents(ds).forEach(ev => cell.appendChild(evChip(ev)));
+    const num = el('div', 'dnum', String(dt.getDate()));
+    if (ds === tstr) { num.title = 'bugüne git'; num.onclick = e => { e.stopPropagation(); location.hash = '#/bugun'; }; }  // bugüne tıkla → bugün sayfası
+    cell.appendChild(num);
+    const evs = dayEvents(ds);
+    evs.slice(0, 3).forEach(ev => cell.appendChild(evChip(ev)));
+    if (evs.length > 3) cell.appendChild(el('div', 'dmore', `+${evs.length - 3} daha`));
     cell.onclick = e => { if (e.target.closest('.echip')) return; SEL_DAY = ds; refresh(); };
     cell.ondragover = e => { e.preventDefault(); cell.classList.add('over'); };
     cell.ondragleave = () => cell.classList.remove('over');
@@ -64,6 +68,23 @@ export function takvim() {
 
   const parts = SEL_DAY.split('-').map(Number);
   const selLbl = `${parts[2]} ${MON_LONG[parts[1] - 1]}`;
+
+  // seçili günün konuları — güne tıklayınca yanda görünür
+  const selEvs = dayEvents(SEL_DAY);
+  const box = el('div', 'seldaybox');
+  box.appendChild(el('h4', null, `${esc(selLbl)}${SEL_DAY === tstr ? ' · bugün' : ''}`));
+  if (!selEvs.length) box.appendChild(el('div', 'seldayempty', 'bu güne konu eklenmedi'));
+  selEvs.forEach(ev => {
+    const z = findKaz(ev.code);
+    const row = el('div', 'seldayrow' + (ev.done ? ' done' : ''));
+    row.innerHTML = `<span class="st2">${esc(z ? z.title : ev.code)}</span><button class="dn">${ev.done ? '↺' : '✓'}</button><button class="dx">×</button>`;
+    row.querySelector('.st2').onclick = () => { if (z) location.hash = '#/konular/' + z.uid; };
+    row.querySelector('.dn').onclick = () => { ev.done = !ev.done; ev.done ? bump() : unbump(); save(); refresh(); };
+    row.querySelector('.dx').onclick = () => { S.events = S.events.filter(x => x.id !== ev.id); save(); refresh(); };
+    box.appendChild(row);
+  });
+  side.appendChild(box);
+
   side.appendChild(el('div', 'sidehead', 'konu havuzu'));
   side.appendChild(el('div', 'sidesub', `dokun → <b>${esc(selLbl)}</b> gününe eklenir · ya da güne sürükle`));
 
