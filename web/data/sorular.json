@@ -3,6 +3,214 @@
   "sorular": [
     {
       "uid": "biy:11.1.1.1",
+      "stem": "Bir nöronda impulsun (uyartının) yönü genellikle nasıldır?",
+      "choices": ["Akson ucundan dendrite doğru", "Dendritten akson ucuna doğru", "İki yönlü olarak eş zamanlı", "Hücre gövdesinden dendrite doğru"],
+      "answer": 1,
+      "explanation": "Kitaba göre bir nöronda impulsun yönü genellikle dendritten akson ucuna doğrudur. Nöronlar arasında ise bir nöronun akson ucundan diğerinin dendritine doğrudur.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.10"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Bir nöronda impuls oluşturan en küçük uyarı şiddetine ne ad verilir?",
+      "choices": ["Eşik değer", "Sinaps", "Refleks yayı", "Nörotransmitter"],
+      "answer": 0,
+      "explanation": "Kitapta impuls oluşturan en küçük uyarı şiddetine eşik değer (eşik şiddeti) denildiği belirtilir; nöron eşik değerden küçük uyarılara cevap vermez.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.10"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Nöronun, eşik değer ve üzerindeki uyarılara her seferinde aynı şiddette cevap vermesi hangi prensiple açıklanır?",
+      "choices": ["Ya hep ya hiç prensibi", "Geri bildirim mekanizması", "Difüzyon prensibi", "Homeostasi"],
+      "answer": 0,
+      "explanation": "Kitaba göre eşik değer ve daha büyük şiddetteki uyarılara nöron aynı şiddette cevap verir; buna 'ya hep ya hiç prensibi' denir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.10"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "İki nöron arasındaki bağlantı noktasına ve buradaki boşluğa sırasıyla ne ad verilir?",
+      "choices": ["Gangliyon – akson", "Sinaps – sinaptik boşluk", "Dendrit – miyelin", "Reseptör – impuls"],
+      "answer": 1,
+      "explanation": "Kitapta aksonların sinaptik ucunun başka bir nörona, salgı bezine ya da kasa yaptığı bağlantı noktasına sinaps, buradaki boşluğa ise sinaptik boşluk denildiği belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.11"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Aşağıdakilerden hangisi kitapta sayılan nörotransmitter maddelerden biri DEĞİLDİR?",
+      "choices": ["Asetilkolin", "Dopamin", "İnsülin", "Serotonin"],
+      "answer": 2,
+      "explanation": "Kitapta nörotransmitter maddeler olarak asetilkolin, serotonin, noradrenalin, dopamin ve histamin sayılır. İnsülin ise pankreastan salgılanan bir hormondur.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.11"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Sinir sistemi hangi iki ana bölümden oluşur?",
+      "choices": ["Merkezî ve çevresel sinir sistemi", "Somatik ve otonom sinir sistemi", "Duyu ve motor sinir sistemi", "Ön beyin ve arka beyin"],
+      "answer": 0,
+      "explanation": "Kitaba göre sinir sistemi merkezî sinir sistemi ve çevresel sinir sistemi olmak üzere iki bölümden oluşur.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.12"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Merkezî sinir sistemini oluşturan yapılar aşağıdakilerden hangisidir?",
+      "choices": ["Beyin ve omurilik", "Beyin ve gangliyonlar", "Omurilik ve çevresel sinirler", "Duyu ve motor nöronlar"],
+      "answer": 0,
+      "explanation": "Kitapta merkezî sinir sisteminin beyin ve omurilikten oluştuğu belirtilir. Duyu ve motor nöronlar ise çevresel sinir sisteminin yapısını oluşturur.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.13"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Beyin ve omuriliği saran üç zar dıştan içe doğru hangi sırayla dizilir?",
+      "choices": ["İnce zar – örümceksi zar – sert zar", "Sert zar – örümceksi zar – ince zar", "Örümceksi zar – sert zar – ince zar", "Sert zar – ince zar – örümceksi zar"],
+      "answer": 1,
+      "explanation": "Kitaba göre bu zarlar dıştan içe doğru sert zar, örümceksi zar ve ince zar olmak üzere üç bölümde incelenir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.14"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Beyin omurilik sıvısının (BOS) görevlerinden biri aşağıdakilerden hangisidir?",
+      "choices": ["Hormon salgılamak", "Beyni basınç ve travmaya karşı korumak", "Kas kasılmasını başlatmak", "Kanı temizlemek"],
+      "answer": 1,
+      "explanation": "Kitapta BOS'un merkezî sinir sisteminin iyon dengesini kontrol ettiği, beyni basınca ve travmaya karşı koruduğu, nöronlar ile kan arasında madde alışverişini düzenlediği belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.14"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Beynin sol yarım küresi vücudun hangi tarafından gelen uyarıları kontrol eder?",
+      "choices": ["Sağ tarafından", "Sol tarafından", "Her iki tarafından", "Sadece baş bölgesinden"],
+      "answer": 0,
+      "explanation": "Kitaba göre büyük ölçüde sol yarım küre vücudun sağ tarafından gelen uyarıları, sağ yarım küre ise sol tarafından gelen uyarıları alır ve kontrol eder (çapraz denetim).",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.15"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Beynin ön lobu ile yan lobunu ayıran enine girintiye ne ad verilir?",
+      "choices": ["Nasırlı cisim", "Rolando yarığı", "Beyin üçgeni", "Sinaptik boşluk"],
+      "answer": 1,
+      "explanation": "Kitapta ön lob ile yan lobu ayıran enine girintiye Rolando yarığı denildiği; bu yarığın ön kısmında motor, arka kısmında duyu nöronları bulunduğu belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.15"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Görme ve işitme reflekslerinin merkezi, göz bebeği refleksi ve vücut duruşunun ayarlanması beynin hangi bölümünde denetlenir?",
+      "choices": ["Uç beyin", "Ara beyin", "Orta beyin", "Omurilik soğanı"],
+      "answer": 2,
+      "explanation": "Kitaba göre orta beyin görme ve işitme reflekslerinin merkezidir; göz bebeği refleksi, kas tonusu ve vücut duruşunun ayarlanması orta beyinde denetlenir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.18"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Arka beyin hangi üç bölümden oluşur?",
+      "choices": ["Pons, beyincik ve omurilik soğanı", "Uç beyin, ara beyin ve orta beyin", "Talamus, hipotalamus ve epitalamus", "Ön beyin, orta beyin ve omurilik"],
+      "answer": 0,
+      "explanation": "Kitapta arka beynin pons, beyincik ve omurilik soğanı olmak üzere üç bölümden oluştuğu belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.18"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Solunum merkezini denetleyen, yutma, kusma gibi bilinçaltı faaliyetleri düzenleyen yapı aşağıdakilerden hangisidir?",
+      "choices": ["Pons", "Beyincik", "Omurilik soğanı", "Talamus"],
+      "answer": 2,
+      "explanation": "Kitaba göre omurilik soğanı solunum merkezini denetler; yutma, kusma, sindirim gibi bilinçaltı faaliyetleri düzenler.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.18"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Uyarılara karşı istemsiz ve aniden oluşturulan tepkilere ne ad verilir?",
+      "choices": ["Refleks", "İmpuls", "Sinaps", "Homeostasi"],
+      "answer": 0,
+      "explanation": "Kitapta uyarılara karşı istemsiz ve aniden oluşturulan tepkilere refleks denildiği; çoğunlukla istemli kontrol edilemedikleri belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.19"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Aşağıdakilerden hangisi doğuştan gelen (kalıtsal) bir reflekstir?",
+      "choices": ["Limon görünce ağzın sulanması", "Diz kapağı refleksi", "Bisiklet sürme", "Yazı yazma"],
+      "answer": 1,
+      "explanation": "Kitaba göre diz kapağı refleksi ve emme refleksi doğuştan gelen reflekslerdir. Limon görünce ağzın sulanması ise sonradan öğrenilen (kazanılmış) reflekse örnektir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.19"
+    },
+    {
+      "uid": "biy:11.1.1.1",
+      "stem": "Omurilikten çıkan sinirler kaç çifttir ve omuriliğin arka kökünden hangi sinir girer?",
+      "choices": ["12 çift – motor sinir", "31 çift – duyu siniri", "31 çift – motor sinir", "12 çift – duyu siniri"],
+      "answer": 1,
+      "explanation": "Kitapta omurilikten çıkan sinirlerin otuz bir (31) çift olduğu; omuriliğin arka kökünden duyu siniri girdiği, ön kökünden motor sinir çıktığı belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.20"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Endokrin bezler salgıladıkları hormonları nasıl iletir?",
+      "choices": ["Bir kanal aracılığıyla organlara", "Kanal olmaksızın doğrudan kana", "Sinir telleriyle", "Sindirim sistemiyle"],
+      "answer": 1,
+      "explanation": "Kitaba göre endokrin bezler (iç salgı bezleri) salgıladıkları hormonları bir kanal olmaksızın doğrudan kana verir; hormonlar kan yoluyla hedef hücrelere taşınır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.22"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Geceleri karanlıkta salgılanan ve biyolojik saatin düzenlenmesinde rol oynayan hormon hangisidir?",
+      "choices": ["Tiroksin", "Melatonin", "İnsülin", "Adrenalin"],
+      "answer": 1,
+      "explanation": "Kitapta epifiz bezinden geceleri karanlıkta salgılanan melatonin hormonunun biyolojik saatin düzenlenmesinde rol oynadığı belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.23"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Diğer endokrin bezleri yöneten ve vücuttaki çoğu hormonal faaliyeti etkileyen bez hangisidir?",
+      "choices": ["Tiroit bezi", "Hipofiz bezi", "Timüs", "Pankreas"],
+      "answer": 1,
+      "explanation": "Kitaba göre hipofiz bezi diğer endokrin bezleri yönetir; ön ve arka lob olmak üzere iki lobdur ve vücuttaki çoğu hormonal faaliyeti etkiler.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.24"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "FSH ve LH hormonları gonadları (yumurtalık ve testisleri) uyardıkları için ne olarak adlandırılır?",
+      "choices": ["Gonadotropinler", "Nörotransmitterler", "Kortikoitler", "Katekolaminler"],
+      "answer": 0,
+      "explanation": "Kitapta FSH ve LH'nin gonadları (yumurtalık ve testisleri) uyardığından gonadotropinler olarak isimlendirildiği belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.25"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Tiroit bezinden salgılanan ve yapısında iyot bulunan, metabolizmayı hızlandıran hormon hangisidir?",
+      "choices": ["Kalsitonin", "Tiroksin", "Prolaktin", "Oksitosin"],
+      "answer": 1,
+      "explanation": "Kitaba göre tiroksinin yapısında iyot bulunur; tüm hücrelerde tüketilen oksijen miktarını artırarak metabolizmayı hızlandırır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.26"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Tiroksin hormonunun çocukluk dönemindeki eksikliği hangi hastalığa yol açar?",
+      "choices": ["Guatr", "Kretenizm", "Diyabet", "Obezite"],
+      "answer": 1,
+      "explanation": "Kitapta tiroksinin çocukluk dönemindeki eksikliğinin zekâ geriliği ve boy kısalığına yol açtığı, bu hastalığa kretenizm denildiği; yetişkinlikteki eksikliğinin ise guatra yol açtığı belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.26"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Timüs bezinin salgıladığı timozin hormonu özellikle neyin olgunlaşmasında etkilidir?",
+      "choices": ["Alyuvarların", "T lenfositlerin", "Kas hücrelerinin", "Sinir hücrelerinin"],
+      "answer": 1,
+      "explanation": "Kitaba göre timüsün salgısı olan timozin bağışıklık sisteminde rol oynar ve özellikle T lenfositlerin olgunlaşmasında etkilidir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.27"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Böbrek üstü bezinin öz (medulla) bölgesinden salgılanan, stres anında 'savaş ya da kaç' yanıtını başlatan hormon hangisidir?",
+      "choices": ["Kortizol", "Aldosteron", "Adrenalin", "Melatonin"],
+      "answer": 2,
+      "explanation": "Kitapta böbrek üstü bezinin öz bölgesinden adrenalin ve noradrenalin salgılandığı; adrenalinin stresle kalp atımını hızlandırdığı, kan basıncını yükselttiği ve bunun 'savaş ya da kaç' yanıtı olduğu belirtilir.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.28"
+    },
+    {
+      "uid": "biy:11.1.1.2",
+      "stem": "Hormonların çalışmasındaki geri bildirim mekanizmaları hangi dengeyi sağlar?",
+      "choices": ["Homeostasi (iç denge)", "İmpuls iletimi", "Kas kasılması", "Sindirim"],
+      "answer": 0,
+      "explanation": "Kitaba göre endokrin bezlerin çalışması geri bildirimli olarak denetlenir; böylece homeostasi sağlanır. Negatif geri bildirimde salgı baskılanır, pozitifte artırılır.",
+      "source": "Biyoloji 11. Sınıf · Ünite 1 · s.30"
+    },
+    {
+      "uid": "biy:11.1.1.1",
       "stem": "Çevresel sinir sisteminin bir parçası olan 10. beyin siniri (vagus), aşağıdaki organlardan hangisine giden sinirlerle ilişkilidir?",
       "choices": ["Kalp ve akciğer", "Göz merceği", "Diz eklemi", "Saç kökleri"],
       "answer": 0,
