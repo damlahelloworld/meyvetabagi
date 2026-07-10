@@ -1,6 +1,6 @@
 /* meyvetabagi — design tokens. THE file to touch for theming.
    WHITE ground + vivid fruit palette + a FEW gold sparkles (Damla, 2026-07-10). No purple (AI tell).
-   IBM Plex Mono, 3px corners. */
+   Arial, 3px corners. */
 :root{
   /* paper & ink */
   --bg:#FFFFFF; --panel:#F6F6F6; --panel-2:#FAFAFA; --card:#FFFFFF;
@@ -22,8 +22,8 @@
   --h1:#F8CFE1; --h2:#F2A6C6; --h3:#EC7DAB; --h4:#E8619A;
 
   --radius:3px;
-  --sans:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --sans:Arial,Helvetica,sans-serif;
+  --mono:Arial,Helvetica,sans-serif;
 }
 body.dark{
   --bg:#1A1917; --panel:#232220; --panel-2:#1F1E1C; --card:#232220;
