@@ -22,7 +22,7 @@ export function konular() {
   // single full-width page (Damla: "columnlu tasarımı bırak"): list page ↔ detail page via hash param
   const sel0 = param();
   if (sel0) return kazDetail(sel0);
-  const d = el('div', 'pagein'); page().appendChild(d);
+  const d = el('div', 'pagein widepage'); page(true).appendChild(d);
   d.innerHTML = `<div class="crumb">KONULAR</div><h1>Konular</h1><p class="meta">${allKaz().length} MEB kazanımı · ara, filtrele, işaretle</p>`;
   const lpane = d;
   const tools = el('div', 'tools flat'); lpane.appendChild(tools);

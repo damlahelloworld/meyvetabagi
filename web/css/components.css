@@ -21,7 +21,7 @@
 .search .clr { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 19px; height: 19px;
   display: none; place-items: center; font-size: 15px; line-height: 1; cursor: pointer; }
 .search.has .clr { display: grid; }
-.chips { display: block; line-height: 2.15; margin: 2px 0; }
+.chips { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin: 3px 0; }
 .chips.gap-top { margin-top: 2px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: none; background: none;
   font-size: 13.5px; color: var(--accent-ink); margin-right: 16px; cursor: pointer; }
@@ -94,12 +94,12 @@
 .metric.m-pink { color: var(--pink); } .metric.m-orange { color: var(--orange); } .metric.m-green { color: var(--green); } .metric.m-blue { color: var(--blue); }
 
 /* today's tasks — clean text lines, no bead */
-.task { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; }
+.task { display: flex; align-items: baseline; gap: 9px; padding: 4px 0; }
+.task .chk { width: 16px; height: 16px; flex:none; border: 1.5px solid var(--faint); border-radius: 3px; background: none; cursor: pointer; font-size: 11px; line-height: 1; color: var(--green); align-self: center; display:grid; place-items:center; padding:0 }
+.task.done .chk { border-color: var(--green); }
 .task .tt { font-size: 15px; cursor: pointer; }
 .task .tt:hover { color: var(--accent-ink); }
 .task .tcode { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.task .tdone { margin-left: auto; font-size: 12px; color: var(--accent-ink); background: none; border: none; text-decoration: underline; cursor: pointer; }
-.task .tdone:hover { color: var(--ink); }
 .task.done .tt { color: var(--muted); text-decoration: line-through; }
 /* çilek / daily boxes -> plain sections */
 .coachbox { padding: 0; margin-bottom: 18px; max-width: 680px; }
@@ -335,14 +335,14 @@
 .calhead{border-bottom:1px solid var(--line)}
 .calhead .wd{padding:6px 8px;font-size:11px;color:var(--muted);text-align:left}
 .calbody{border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft)}
-.dcell{min-height:104px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:6px;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:background .1s}
+.dcell{height:104px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:6px;display:flex;flex-direction:column;gap:3px;cursor:pointer;overflow:hidden;transition:background .1s}
 .dcell:hover{background:var(--panel-2)}
 .dcell.other .dnum{color:var(--faint)}
 .dcell.over{background:var(--accent-soft)}
 .dcell.sel{background:var(--panel)}
 .dnum{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;align-self:flex-start;width:22px;height:22px;display:grid;place-items:center}
 .dcell.today .dnum{background:var(--accent);color:var(--on-accent);border-radius:50%}
-.echip{display:flex;align-items:center;gap:4px;background:var(--panel);border-radius:3px;padding:3px 5px;font-size:10.5px;color:var(--ink-soft);cursor:grab}
+.echip{display:flex;align-items:center;gap:4px;background:var(--panel);border-radius:3px;padding:2px 5px;font-size:10px;color:var(--ink-soft);cursor:grab;flex:none}
 .echip .et{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .echip .ex{color:var(--faint);cursor:pointer}
 .echip .ex:hover{color:var(--red)}
@@ -366,6 +366,10 @@
 .homefeed{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;margin:14px 0 30px}
 .hstat{display:flex;flex-direction:column;gap:2px}
 .hstat b{font-size:30px;font-variant-numeric:tabular-nums;line-height:1}
+.homefeed .hstat:nth-child(1) b{color:var(--orange)}
+.homefeed .hstat:nth-child(2) b{color:var(--green)}
+.homefeed .hstat:nth-child(3) b{color:var(--blue)}
+.homefeed .hstat:nth-child(4) b{color:var(--pink)}
 .hstat span{font-size:12px;color:var(--muted)}
 a.hstat:hover b{text-decoration:underline}
 .homeempty{font-size:14px;color:var(--muted);padding:4px 0 8px}
@@ -377,3 +381,16 @@ a.hstat:hover b{text-decoration:underline}
 .door b{display:block;font-size:17px;margin-bottom:3px}
 .door span{font-size:12.5px;color:var(--muted);line-height:1.4}
 @media(max-width:700px){.homedoors{grid-template-columns:1fr}}
+
+/* fazla-görev göstergesi + seçili gün paneli (yan) */
+.dmore{font-size:10px;color:var(--accent-ink);margin-top:auto}
+.seldaybox{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.seldaybox h4{font-size:14px;margin-bottom:6px}
+.seldayrow{display:flex;align-items:baseline;gap:6px;padding:3px 0;font-size:12.5px}
+.seldayrow.done .st2{text-decoration:line-through;color:var(--muted)}
+.seldayrow .st2{flex:1;cursor:pointer}
+.seldayrow .st2:hover{color:var(--accent-ink)}
+.seldayrow .dn{color:var(--accent-ink);cursor:pointer;font-size:11px}
+.seldayrow .dx{color:var(--faint);cursor:pointer}
+.seldayrow .dx:hover{color:var(--red)}
+.seldayempty{font-size:12px;color:var(--muted);margin-bottom:14px}

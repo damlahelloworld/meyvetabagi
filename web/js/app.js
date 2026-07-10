@@ -52,7 +52,7 @@ function renderBar() {
   const u = S.user || { name: 'Misafir' };
   const initial = (u.name || '?').trim().charAt(0).toLocaleUpperCase('tr');
   const chip = el('div', 'userchip' + (route() === 'profil' ? ' active' : ''));
-  chip.innerHTML = `<span class="ava">${esc(initial)}</span><div class="ui"><b>${esc(u.name)}</b><span class="syncsub">${syncLabel()}</span></div>`;
+  chip.innerHTML = `<div class="ui"><b>${esc((u.name || '').toLocaleLowerCase('tr'))}</b><span class="syncsub">${syncLabel()}</span></div>`;
   slot.appendChild(chip);
   chip.onclick = () => {
     const old = slot.querySelector('.usermenu');

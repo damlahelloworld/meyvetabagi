@@ -14,18 +14,27 @@ svg{display:block}
 
 /* ---- shell: plain header + single page ---- */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-.topbar{display:flex;align-items:center;gap:16px;padding:12px 20px 2px;flex:none;background:var(--bg)}
-.brand{display:flex;align-items:center;flex:none}
+.topbar{display:flex;align-items:flex-start;gap:16px;padding:14px 26px 10px;flex:none;background:var(--bg)}
+.brandcol{flex:none}
+.brand{display:inline-flex;align-items:center}
 /* the ONE flourish: chromatic Arial wordmark (fruit gradient) */
-.brand b{font-size:22px;font-weight:400;letter-spacing:.01em;line-height:1.2;
+.brand b{font-size:22px;font-weight:400;letter-spacing:.01em;line-height:1.1;
   background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));
   -webkit-background-clip:text;background-clip:text;color:transparent}
+.brandsub{display:flex;gap:12px;margin-top:2px;align-items:baseline}
+.kaynaklink{font-size:12px;color:var(--accent-ink);text-decoration:underline}
+.kaynaklink:hover{color:var(--ink)}
+.sig{font-size:11px;color:var(--muted)}
+.sig:hover{color:var(--accent-ink)}
 .pagechips{display:none}
-#nav{display:flex;align-items:baseline;gap:14px;margin-left:auto;flex:none}
-.nav{padding:0;color:var(--accent-ink);font-size:13.5px;white-space:nowrap}
-.nav:hover{color:var(--ink)}
-.nav.active{color:var(--ink);font-size:17px}
-.nav .count{margin-left:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+#nav{display:flex;align-items:baseline;gap:16px;margin-left:auto;flex:none}
+/* nav links: all same size, rainbow gradient like the wordmark */
+.nav{padding:0 0 2px;font-size:15px;white-space:nowrap;border-bottom:2px solid transparent;
+  background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.nav.active{border-bottom-color:var(--accent)}
+.nav:hover{border-bottom-color:var(--line-soft)}
+.nav .count{margin-left:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;-webkit-text-fill-color:var(--muted)}
 #userslot{position:relative;flex:none}
 
 /* page — real app column: centered, comfortable measure (not full-bleed left-jammed) */

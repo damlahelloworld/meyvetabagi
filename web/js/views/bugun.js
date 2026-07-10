@@ -9,9 +9,11 @@ import { refresh } from '../router.js';
 export function taskRow(x) {
   const z = findKaz(x.code);
   const r = el('div', 'task' + (x.done ? ' done' : ''));
-  r.innerHTML = `<span class="tt">${esc(z ? z.title : x.code)}</span>${z ? ` <span class="tcode">${z.code}</span>` : ''}<button class="tdone">${x.done ? 'geri al' : 'yaptım'}</button>`;
+  // checkbox toggles done; text opens the kazanım (SEO: ders + code makes each unique)
+  const ders = z ? z.ders.ders.split(' ')[0].toLocaleLowerCase('tr') : '';
+  r.innerHTML = `<button class="chk">${x.done ? '✓' : ''}</button><span class="tt">${esc(z ? z.title : x.code)}</span>${z ? ` <span class="tcode">${ders} ${z.code}</span>` : ''}`;
+  r.querySelector('.chk').onclick = e => { e.stopPropagation(); x.done = !x.done; x.done ? bump() : unbump(); save(); refresh(); };
   r.querySelector('.tt').onclick = () => { if (z) location.hash = '#/konular/' + z.uid; };
-  r.querySelector('.tdone').onclick = e => { e.stopPropagation(); x.done = !x.done; x.done ? bump() : unbump(); save(); refresh(); };
   return r;
 }
 
