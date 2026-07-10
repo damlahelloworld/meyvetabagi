@@ -48,7 +48,7 @@ export const todayKey = () => dstr(new Date());
 export function bump() { const k = todayKey(); S.activity[k] = (S.activity[k] || 0) + 1; }
 export function unbump() { const k = todayKey(); S.activity[k] = Math.max(0, (S.activity[k] || 0) - 1); }
 
-// reps: at most one per kazanım per day (Sıra Puanı can't be click-farmed); returns whether it counted
+// reps: at most one per kazanım per day; returns whether it counted
 export function addRep(code) {
   const t = todayKey();
   if (S.repDay[code] === t) return false;

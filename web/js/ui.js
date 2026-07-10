@@ -23,7 +23,6 @@ export const ICON = {
   konular: SVG('<path d="M4 6.5l1.5 1.5L8 5.5"/><path d="M4 12l1.5 1.5L8 11"/><path d="M4 17.5l1.5 1.5L8 16.5"/><line x1="11" y1="6.5" x2="20" y2="6.5"/><line x1="11" y1="12" x2="20" y2="12"/><line x1="11" y1="17.5" x2="20" y2="17.5"/>'),
   takvim: SVG('<rect x="3" y="4.5" width="18" height="16.5" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/>'),
   denemeler: SVG('<path d="M4 20h16"/><path d="M6 20v-6"/><path d="M12 20V7"/><path d="M18 20v-9"/>'),
-  siralama: SVG('<path d="M4 20.5h16"/><rect x="5.5" y="12" width="3.5" height="8"/><rect x="10.25" y="7" width="3.5" height="13"/><rect x="15" y="14" width="3.5" height="6"/>'),
   check: SVG('<path d="M5 12.5l4 4L19 7"/>'),
   mag: SVG('<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/>'),
   spark: SVG('<path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/>'),

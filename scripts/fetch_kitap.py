@@ -49,21 +49,32 @@ def fetch_book(book, grade, units):
     uniteler = []
     for u in units:
         pages = fetch_unit(book, grade, u)
-        print(f'  {book} {grade} ünite{u}: {len(pages)} sayfa metin')
-        uniteler.append({'unite': u, 'pages': pages})
+        if pages:
+            uniteler.append({'unite': u, 'pages': pages})
+    if not uniteler:
+        return
     os.makedirs(OUT, exist_ok=True)
     path = os.path.join(OUT, f'{book}_{grade}.json')
     total = sum(len(u['pages']) for u in uniteler)
     words = sum(len(p['text'].split()) for u in uniteler for p in u['pages'])
     json.dump({'ders': book, 'sinif': grade, 'kaynak': 'OGM Materyal / EBA', 'uniteler': uniteler},
               open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    print(f'→ {path}  ({total} sayfa, ~{words} kelime)')
+    print(f'→ {book} {grade}. sınıf: {len(uniteler)} ünite, {total} sayfa, ~{words} kelime')
 
-JOBS = {  # book: {grade: [units]}
-    'biyoloji': {11: [1, 2], 12: [1, 2, 3, 4]},
+# tüm YKS dersleri (eski 2018 programı) — OGM Materyal'de bulunan sınıflar, ünite 1-8 taranır
+JOBS = {
+    'biyoloji': [9, 10, 11, 12],
+    'fizik': [9, 10, 11, 12],
+    'kimya': [9, 10, 11, 12],
+    'matematik': [9, 10, 11, 12],
+    'cografya': [9, 10, 11, 12],
+    'tarih': [9, 10, 11, 12],
+    'felsefe': [10, 11],
 }
+UNITS = list(range(1, 9))
 
 if __name__ == '__main__':
     for book, grades in JOBS.items():
-        for g, units in grades.items():
-            fetch_book(book, g, units)
+        for g in grades:
+            fetch_book(book, g, UNITS)
+    print('bitti.')
