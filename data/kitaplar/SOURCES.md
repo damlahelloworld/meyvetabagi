@@ -11,7 +11,9 @@ geçilince yeni kitaplar yeniden çekilecek.
 
 ## Toplama durumu (ders · sınıf · ünite)
 Biçim: ders | sınıf | kaynak | durum
-- Biyoloji | 12 | OGM Materyal etkileşimli kitap (Genden Proteine · Enerji Dönüşümleri · Bitki Biyolojisi · Canlılar ve Çevre) | KAYNAK BULUNDU, çekim bekliyor
+- Biyoloji | 11 | OGM Materyal (Ünite 1-2) | ÇEKİLDİ (130 sayfa ~36k kelime) → biyoloji_11.json
+- Biyoloji | 12 | OGM Materyal (Ünite 1-4) | ÇEKİLDİ (197 sayfa ~38k kelime) → biyoloji_12.json
+- corpus.json: 60 biyoloji kazanımı kitap pasajlarına bağlandı (kural tabanlı örtüşme; scripts/build_corpus.py)
 - (diğer ders/sınıflar sırayla eklenecek)
 
 ## MLA künye şablonu

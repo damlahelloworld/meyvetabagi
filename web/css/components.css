@@ -329,3 +329,5 @@
 .kaynakca.wide { max-width: 760px; }
 
 .kaynakca .badge { font-size: 10.5px; color: var(--amber); margin-left: 4px; }
+
+.kaynakca .badge.ok { color: var(--green); }

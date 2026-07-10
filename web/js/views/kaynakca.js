@@ -27,7 +27,8 @@ export function kaynakca() {
   const kb = el('div', 'kaynakca wide');
   kb.innerHTML = `
     <p class="citenote">Tek meşru kitap kaynağı: <b>OGM Materyal / EBA</b> (T.C. MEB'in resmî ortaöğretim ders kitapları, ogmmateryal.eba.gov.tr). 2026/2027 YKS eski 2018 programına dayandığı için o programın kitapları kullanılır. Özel yayınevi kaynağı ya da çıkmış ÖSYM sorusu asla barındırılmaz.</p>
-    <p class="cite">Millî Eğitim Bakanlığı. <i>Biyoloji 12. Sınıf Ders Kitabı</i> (Genden Proteine · Canlılarda Enerji Dönüşümleri · Bitki Biyolojisi · Canlılar ve Çevre). T.C. MEB / OGM Materyal, ogmmateryal.eba.gov.tr. <span class="badge">kaynak bulundu · işleniyor</span></p>
+    <p class="cite">Millî Eğitim Bakanlığı. <i>Biyoloji 11. Sınıf Ders Kitabı.</i> T.C. MEB / OGM Materyal, ogmmateryal.eba.gov.tr. <span class="badge ok">çekildi · 130 sayfa · kazanımlara bağlandı</span></p>
+    <p class="cite">Millî Eğitim Bakanlığı. <i>Biyoloji 12. Sınıf Ders Kitabı</i> (Genden Proteine · Canlılarda Enerji Dönüşümleri · Bitki Biyolojisi · Canlılar ve Çevre). T.C. MEB / OGM Materyal, ogmmateryal.eba.gov.tr. <span class="badge ok">çekildi · 197 sayfa · kazanımlara bağlandı</span></p>
     <p class="citenote">Her kitap işlendikçe MLA künyesi ve hangi kazanımda hangi pasajın kullanıldığı buraya tek tek eklenecek. Künyesi burada olmayan hiçbir içerik üründe yer almaz.</p>`;
   d.appendChild(kb);
 
