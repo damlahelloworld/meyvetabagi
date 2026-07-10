@@ -8,25 +8,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 input,textarea{font-family:inherit}
 ::selection{background:var(--accent-soft)}
 .page::-webkit-scrollbar,.list::-webkit-scrollbar,.daypanel::-webkit-scrollbar{width:10px}
-.page::-webkit-scrollbar-thumb,.list::-webkit-scrollbar-thumb,.daypanel::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px;border:3px solid var(--bg)}
+.page::-webkit-scrollbar-thumb,.list::-webkit-scrollbar-thumb,.daypanel::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px;border:3px solid var(--bg)}
 svg{display:block}
 /* Throxy signature: mono uppercase micro-labels */
 .crumb,.seclabel,.card .k,.est .l,.tools .res,.row .code,.unitrow,.who,.dayc .dh{font-family:var(--mono);letter-spacing:.03em}
 
-/* ---- shell: topbar + single page (stitchu header language) ---- */
+/* ---- shell: topbar + single page ---- */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .topbar{display:flex;align-items:center;gap:18px;padding:0 26px;height:58px;flex:none;
   border-bottom:1px solid var(--line);background:var(--bg)}
-.brand{display:flex;flex-direction:column;gap:3px;flex:none}
-.brand b{font-size:17px;font-weight:400;letter-spacing:.01em;line-height:1}
-.brand .stitch{display:block}
+.brand{display:flex;align-items:center;flex:none}
+.brand b{font-size:17px;font-weight:400;letter-spacing:.01em;line-height:1;color:var(--accent-ink)}
 .pagechips{display:flex;align-items:center;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
 .pagechips::-webkit-scrollbar{display:none}
-#nav{display:flex;align-items:center;gap:18px;margin-left:auto;flex:none}
-.nav{padding:4px 0;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;
-  border-bottom:1px dashed transparent;transition:color .1s}
-.nav:hover{color:var(--ink)}
-.nav.active{color:var(--ink);border-bottom-color:var(--accent)}
+#nav{display:flex;align-items:center;gap:4px;margin-left:auto;flex:none}
+.nav{padding:7px 12px;border-radius:3px;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;transition:background .1s,color .1s}
+.nav:hover{color:var(--ink);background:var(--panel)}
+.nav.active{color:var(--accent-ink);background:var(--accent-soft)}
 .nav .count{margin-left:6px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 #userslot{position:relative;flex:none}
 

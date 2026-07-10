@@ -24,7 +24,7 @@
   /* heatmap ramp (activity) */
   --h1:#F2E3E4; --h2:#E3BFC2; --h3:#D49BA0; --h4:#C4767B;
 
-  --radius:2px;
+  --radius:3px;
   --seam:1px dashed var(--ink);
   --sans:Arial,Helvetica,sans-serif;
   --mono:Arial,Helvetica,sans-serif;
