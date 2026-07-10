@@ -28,10 +28,10 @@ a{color:inherit;text-decoration:none}
 main{position:relative;z-index:1}
 .top{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px}
 .logo{font-size:22px;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
-.top a.enter{font-size:14px;color:var(--pink);text-decoration:underline}
+.top a.enter{font-size:14px;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .hero{padding:48px 0 30px}
 .hero h1{font-size:44px;line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
-.hero h1 u{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:5px}
+.hero h1 u{text-decoration:none}
 .hero p{font-size:18px;color:var(--muted);max-width:600px;margin-bottom:26px}
 .cta{display:inline-block;background:var(--pink);color:#fff;font-size:16px;padding:14px 28px;border-radius:3px}
 .cta:hover{background:#c24c82}
@@ -40,13 +40,14 @@ main{position:relative;z-index:1}
 .stat b{display:block;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--muted)}
 .s1 b{color:var(--orange)}.s2 b{color:var(--green)}.s3 b{color:var(--blue)}.s4 b{color:var(--pink)}
-.how{margin:40px 0}.how h2{font-size:24px;margin-bottom:16px}
+.how{margin:40px 0}.how h2{font-size:24px;margin-bottom:16px;display:inline-block;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
 .step .n{font-size:13px;color:var(--muted)}.step h3{font-size:16px;margin:4px 0}.step p{font-size:14px;color:var(--muted)}
 .trust{margin:40px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
 .trust b{display:block;margin-bottom:3px}.trust span{font-size:14px;color:var(--muted)}
-.foot{border-top:1px solid #eee;margin-top:50px;padding:22px 0 40px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot{border-top:1px solid #eee;margin-top:20px;padding:22px 0 40px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .foot a{color:var(--pink)}
+.rb{background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 @media(max-width:640px){.hero h1{font-size:32px}}
 </style>
 <script type="application/ld+json">
@@ -75,7 +76,7 @@ main{position:relative;z-index:1}
     <a class="enter" href="app.html">kullanmaya başla →</a>
   </div>
   <section class="hero">
-    <h1>YKS'de her gün <u>ne çalışacağını</u> bilerek uyan.</h1>
+    <h1>YKS'de her gün <span class="rb">ne çalışacağını</span> bilerek uyan.</h1>
     <p>Tüm derslerin resmi MEB kazanımları, ders kitaplarından çıkarılan anahtar kelimeler ve çalışma takvimi - tek yerde, tamamen ücretsiz.</p>
     <a class="cta" href="app.html">kullanmaya başla</a>
     <p class="note">Kayıt gerekmez, reklam yok, ücret yok. Verin senin cihazında.</p>
@@ -95,9 +96,14 @@ main{position:relative;z-index:1}
     </div>
   </section>
   <section class="trust">
-    <div><b>uydurma yok</b><span>Kazanımlar resmi MEB belgesinden, anahtar kelimeler resmi ders kitaplarından. Her şey kaynaklı.</span></div>
-    <div><b>doğru müfredat</b><span>2026 & 2027 için geçerli eski program. Yanlış yılın konusuyla vakit harcatmaz.</span></div>
-    <div><b>ücretsiz, hep</b><span>Reklam yok, izleme yok, ücret yok. Amme hizmeti.</span></div>
+    <div><b class="rb">uydurma yok</b><span>Kazanımlar resmi MEB belgesinden, anahtar kelimeler resmi ders kitaplarından. Her şey kaynaklı.</span></div>
+    <div><b class="rb">doğru müfredat</b><span>2026 & 2027 için geçerli eski program. Yanlış yılın konusuyla vakit harcatmaz.</span></div>
+    <div><b class="rb">ücretsiz, hep</b><span>Reklam yok, izleme yok, ücret yok. Amme hizmeti.</span></div>
+  </section>
+  <section style="text-align:center;padding:56px 0 20px">
+    <h2 style="font-size:34px;margin-bottom:10px;display:inline-block;background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent">bu sene ne çalışacağını bil.</h2>
+    <p style="color:var(--muted);font-size:16px;margin-bottom:22px">954 kazanım, kaynaklı anahtar kelimeler, çalışma takvimi. ücretsiz.</p>
+    <a class="cta" style="font-size:18px;padding:16px 34px" href="app.html">kullanmaya başla</a>
   </section>
   <div class="foot">
     <span>© 2026 meyvetabagi · <a href="https://github.com/damlahelloworld">@damlahelloworld</a></span>
