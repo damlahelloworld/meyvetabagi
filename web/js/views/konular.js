@@ -125,6 +125,31 @@ export function konular() {
 
 }
 
+// terim detayını ekranın ortasında bir kutuda aç (Damla: altında değil, message on screen)
+function openTerim(t, z) {
+  document.querySelectorAll('.termov').forEach(o => o.remove());
+  const ov = el('div', 'termov');
+  const box = el('div', 'termbox');
+  box.innerHTML = `
+    <button class="termx">×</button>
+    <h3>${esc(t.terim.toLocaleLowerCase('tr'))}</h3>
+    <div class="tp-q">ne?</div><div class="tp-a">${esc(t.tanim)}</div>
+    ${t.image ? `<img class="tp-img" src="${esc(t.image)}" alt="">` : ''}
+    ${t.video ? `<a class="tp-vid" href="${esc(t.video)}" target="_blank" rel="noopener">videoyu izle ↗</a>` : ''}
+    <div class="tp-src">kaynak: ${esc(t.source)}</div>`;
+  const add = el('button', 'tp-add', '+ çalışmama ekle');
+  add.onclick = () => {
+    S.events.push({ id: 'e' + Date.now() + Math.floor(Math.random() * 999), date: dstr(new Date()), h: null, code: z.uid, author: 'student', done: false });
+    save(); add.textContent = 'eklendi ✓'; add.disabled = true;
+  };
+  box.appendChild(add);
+  ov.appendChild(box);
+  box.querySelector('.termx').onclick = () => ov.remove();
+  ov.onclick = e => { if (e.target === ov) ov.remove(); };
+  document.addEventListener('keydown', function esc2(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc2); } });
+  document.body.appendChild(ov);
+}
+
 function kazDetail(sel) {
   const z = findKaz(sel);
   const d = el('div', 'pagein'); page().appendChild(d);
@@ -163,28 +188,9 @@ function kazDetail(sel) {
     const wrap = el('div', 'terimler');
     const PAL = ['t-red', 't-pink', 't-orange', 't-yellow', 't-green', 't-blue', 't-purple', 't-teal', 't-brown'];
     terms.forEach((t, ti) => {
-      const item = el('span', 'terimwrap');
       const tm = el('button', 'terim ' + PAL[ti % PAL.length], t.terim.toLocaleLowerCase('tr'));
-      const panel = el('div', 'terimpanel');
-      panel.innerHTML = `
-        <div class="tp-q">ne?</div><div class="tp-a">${esc(t.tanim)}</div>
-        ${t.image ? `<img class="tp-img" src="${esc(t.image)}" alt="">` : ''}
-        ${t.video ? `<a class="tp-vid" href="${esc(t.video)}" target="_blank" rel="noopener">videoyu izle ↗</a>` : ''}
-        <div class="tp-src">kaynak: ${esc(t.source)}</div>`;
-      const add = el('button', 'tp-add', '+ çalışmama ekle');
-      add.onclick = () => {
-        const ts2 = dstr(new Date());
-        S.events.push({ id: 'e' + Date.now() + Math.floor(Math.random() * 999), date: ts2, h: null, code: z.uid, author: 'student', done: false });
-        save(); add.textContent = 'eklendi ✓'; add.disabled = true;
-      };
-      panel.appendChild(add);
-      tm.onclick = () => {
-        const open = item.classList.contains('open');
-        wrap.querySelectorAll('.terimwrap.open').forEach(o => o.classList.remove('open'));
-        if (!open) item.classList.add('open');
-      };
-      item.appendChild(tm); item.appendChild(panel);
-      wrap.appendChild(item);
+      tm.onclick = () => openTerim(t, z);
+      wrap.appendChild(tm);
     });
     d.appendChild(wrap);
   }
