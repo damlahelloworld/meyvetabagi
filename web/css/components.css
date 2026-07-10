@@ -274,7 +274,7 @@
 .dersrow { font-weight: bold; }
 
 /* konular: two dense columns; ders progress bar spans the full page */
-.kzcols { columns: 2 320px; column-gap: 40px; }
+.kzcols { columns: 4 260px; column-gap: 34px; }
 .kzcols .dersrow, .kzcols .dersbar { column-span: all; }
 .kzcols .row, .kzcols .unitrow { break-inside: avoid; }
 .kzcols .row { padding: 0 0 1px; gap: 7px; }
@@ -291,4 +291,5 @@
 .db-pink { background: var(--pink); } .db-purple { background: var(--purple); } .db-blue { background: var(--blue); }
 .db-teal { background: var(--teal); } .db-green { background: var(--green); } .db-orange { background: var(--orange); }
 .db-yellow { background: var(--yellow); } .db-brown { background: var(--brown); } .db-amber { background: var(--amber); }
+@media (max-width: 1100px) { .kzcols { columns: 2 260px; } }
 @media (max-width: 700px) { .kzcols { columns: 1; } }
