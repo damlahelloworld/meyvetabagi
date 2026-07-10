@@ -2,7 +2,7 @@
 // Deterministic seeded positions (no layout jump), fruit-toned, drifts + twinkles, behind everything.
 // Honours prefers-reduced-motion. Pure decoration; zero effect on content or state.
 const GLYPHS = ['✦', '✧', '·', '◦', '⋆', '✵', '✷', '˖', '⁺'];
-const COLORS = ['--gold', '--rose', '--gold', '--amber', '--pink', '--gold'];  // champagne sparkle dominant
+const COLORS = ['--gold', '--coral', '--gold', '--rose', '--amber', '--gold'];  // warm showgirl sparkle
 
 // tiny seeded PRNG so positions are stable across reloads (Math.random would jump every paint)
 function seeded(seed) {

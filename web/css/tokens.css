@@ -1,27 +1,27 @@
 /* meyvetabagi — design tokens. THE file to touch for theming.
-   GLAM "simli" direction (Damla, 2026-07-10, Fate of Ophelia / showgirl): deep jewel ground,
-   champagne-gold + rose accents, gold sparkle field. IBM Plex Mono, 3px corners. */
+   GLAM "simli" (Damla, 2026-07-10, Taylor Swift · Life of a Showgirl): WARM ground — deep espresso/wine,
+   hot gold + coral + rose glitter. NO PURPLE (AI tell, hard ban). IBM Plex Mono, 3px corners. */
 :root{
-  /* deep jewel ground + champagne ink */
-  --bg:#17101D; --panel:#20182A; --panel-2:#1B1424; --card:#20182A;
-  --ink:#F3E9DC; --ink-soft:#D6C6CE; --muted:#9E8DA6; --faint:#5A4C66;
-  --line:#F3E9DC; --line-soft:#332543; --hair:#271C34;
+  /* deep warm ground + champagne ink */
+  --bg:#1A100B; --panel:#241710; --panel-2:#1E130D; --card:#241710;
+  --ink:#F6E7D2; --ink-soft:#E0C9AE; --muted:#A88D74; --faint:#63503E;
+  --line:#F6E7D2; --line-soft:#3A281C; --hair:#2C1E14;
 
-  /* jewel-bright fruit palette on dark */
-  --cilek:#F08A78;
-  --pink:#F08DB0; --pink-ink:#F5A8C4; --pink-soft:#2C1C29;
-  --orange:#F0A25E; --yellow:#EBD06A; --green:#86C98A; --blue:#86AEE0;
-  --red:#F08A78; --amber:#E9C46A;
-  --red-bg:#2E1B1E; --amber-bg:#2C2418; --green-bg:#1B2A20;
-  --purple:#C4A0F0; --teal:#6FD0C4; --brown:#D2A87E;
-  --purple-soft:#241C33; --blue-soft:#1B2230; --orange-soft:#2C2117; --yellow-soft:#2A2618; --teal-soft:#152A28; --brown-soft:#2A2018;
+  /* warm showgirl palette on dark — gold, coral, rose, amber, warm greens/blues */
+  --cilek:#F27A55;
+  --pink:#F48FA6; --pink-ink:#F7A9BB; --pink-soft:#2E1A1B;
+  --orange:#F2924B; --yellow:#EDC65A; --green:#B7C46A; --blue:#7FB0C4;
+  --red:#F27A55; --amber:#E9B84A;
+  --red-bg:#2E1A14; --amber-bg:#2C2415; --green-bg:#242817;
+  --purple:#D98F7A; --teal:#6FC4B2; --brown:#D2A16E;   /* "purple" slot repurposed warm — no violet anywhere */
+  --purple-soft:#2A1A15; --blue-soft:#1B2429; --orange-soft:#2C1E12; --yellow-soft:#2A2413; --teal-soft:#152825; --brown-soft:#2A1E12;
 
-  /* accent = champagne gold, showgirl shimmer */
-  --accent:#E9C46A; --accent-ink:#F0D081; --accent-soft:#2A2033; --on-accent:#17101D;
-  --gold:#E9C46A; --rose:#F0A2B4;
+  /* accent = hot showgirl gold */
+  --accent:#E9B84A; --accent-ink:#F2CA63; --accent-soft:#2C2013; --on-accent:#1A100B;
+  --gold:#E9B84A; --rose:#F2A0A8; --coral:#F27A55;
 
-  /* heatmap ramp — rose→gold */
-  --h1:#2A2033; --h2:#5E4738; --h3:#A67C4E; --h4:#E9C46A;
+  /* heatmap ramp — coral→gold */
+  --h1:#2C2013; --h2:#6B4A2A; --h3:#B98A3E; --h4:#E9B84A;
 
   --radius:3px;
   --sans:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
