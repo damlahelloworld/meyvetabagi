@@ -90,7 +90,7 @@
 .card.c-orange{background:var(--orange-soft)}.card.c-orange .v{color:var(--orange)}
 .metric.m-pink{color:var(--pink-ink)}.metric.m-orange{color:var(--orange)}.metric.m-green{color:var(--green)}.metric.m-blue{color:var(--blue)}
 
-.task{display:flex;align-items:center;gap:12px;padding:11px 0}
+.task{display:flex;align-items:center;gap:10px;padding:5px 0}
 .task .cb{width:18px;height:18px;border-radius:3px;border:1.6px solid var(--faint);flex:none;display:grid;place-items:center;transition:.12s}
 .task .cb svg{width:11px;height:11px;color:#fff;opacity:0}
 .task.done .cb{background:var(--green);border-color:var(--green)}
@@ -301,7 +301,7 @@
 .pool{margin-top:4px;max-width:760px}
 
 /* bugün: stacked plain-Arial stats, chromatic values, no boxes */
-.statlines{margin:6px 0 34px;display:flex;flex-direction:column;gap:14px}
-.statline{display:flex;align-items:baseline;gap:12px}
+.statlines{margin:6px 0 30px;display:flex;flex-direction:column;gap:8px}
+.statline{display:flex;align-items:baseline;gap:10px}
 .statline .v{font-size:34px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .statline .k{font-size:13px;color:var(--muted)}
