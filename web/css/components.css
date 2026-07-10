@@ -48,8 +48,8 @@
 .unitrow .pct{color:var(--muted);font-variant-numeric:tabular-nums}
 
 /* status segments (kazanım detail) */
-.segs{display:inline-flex;border:1px solid var(--line);border-radius:3px;margin-bottom:24px}
-.segs button{padding:6px 14px;font-size:13px;color:var(--muted);font-weight:400;transition:.1s;border-right:1px solid var(--line-soft)}
+.segs{display:inline-flex;border:1px solid var(--line-soft);border-radius:3px;margin-bottom:24px}
+.segs button{padding:6px 14px;font-size:13px;color:var(--muted);font-weight:400;transition:.1s}
 .segs button:last-child{border-right:none}
 .segs button.on{background:var(--ink);color:var(--bg)}
 .segs button.on.red{background:var(--red);color:#fff} .segs button.on.amber{background:var(--amber);color:#fff} .segs button.on.green{background:var(--green);color:#fff}
@@ -58,12 +58,12 @@
 .repminus:hover{border-color:var(--ink);color:var(--ink)}
 
 /* notes */
-.note{width:100%;min-height:220px;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;
+.note{width:100%;min-height:220px;border:1px solid var(--line-soft);border-radius:var(--radius);padding:18px 20px;
   font-size:15px;line-height:1.7;color:var(--ink);background:var(--card);resize:vertical}
 .note.short{min-height:92px}
-.note:focus{outline:none;border-color:var(--faint)}
+.note:focus{outline:none;border-color:var(--ink)}
 .note::placeholder{color:var(--faint)}
-.aciklama{border:1.5px solid var(--line);border-radius:var(--radius);padding:16px 18px;font-size:13.5px;color:var(--muted);margin-bottom:24px;line-height:1.6}
+.aciklama{padding:0;font-size:13.5px;color:var(--muted);margin-bottom:24px;line-height:1.6}
 .aciklama.daily{margin:14px 0}
 .aciklama b{color:var(--ink-soft);font-weight:400;display:block;margin-bottom:5px;font-size:10.5px;text-transform:uppercase;letter-spacing:.07em}
 
@@ -75,10 +75,10 @@
 .dd-yellow{background:var(--yellow)}.dd-brown{background:var(--brown)}.dd-amber{background:var(--amber)}
 
 /* cards / today */
-.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.grid{display:grid;gap:22px}
 .cards{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 .cards.prof{margin:8px 0 26px}
-.card{background:var(--card);padding:18px 20px}
+.card{padding:0}
 .card .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:400}
 .card .v{font-size:30px;font-weight:400;margin-top:7px;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.02em}
 .card .v small{font-size:13px;color:var(--muted);font-weight:400}
@@ -90,7 +90,7 @@
 .card.c-orange{background:var(--orange-soft)}.card.c-orange .v{color:var(--orange)}
 .metric.m-pink{color:var(--pink-ink)}.metric.m-orange{color:var(--orange)}.metric.m-green{color:var(--green)}.metric.m-blue{color:var(--blue)}
 
-.task{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:3px;background:var(--card);margin-bottom:8px}
+.task{display:flex;align-items:center;gap:12px;padding:11px 0}
 .task .cb{width:18px;height:18px;border-radius:3px;border:1.6px solid var(--faint);flex:none;display:grid;place-items:center;transition:.12s}
 .task .cb svg{width:11px;height:11px;color:#fff;opacity:0}
 .task.done .cb{background:var(--green);border-color:var(--green)}
@@ -105,9 +105,9 @@
   border-bottom:1px solid var(--hair);display:flex;gap:9px;align-items:center;font-weight:400}
 .day h3 .tag{font-size:10px;color:var(--accent-ink);border:1px solid var(--line-soft);padding:2px 8px;border-radius:3px;letter-spacing:0;text-transform:none;font-weight:400}
 
-.coachbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:26px}
+.coachbox{padding:0;margin-bottom:34px}
 .coachbox .h{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:400;margin-bottom:7px}
-.coachbox .h .av{width:22px;height:22px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-ink)}
+.coachbox .h .av{display:none}
 .coachbox .h .av svg{width:13px;height:13px}
 .coachbox p{font-size:14px;color:var(--ink-soft);line-height:1.6}
 .coachbox p.tight{margin-bottom:12px}
@@ -124,8 +124,8 @@
 .dyrow .net{text-align:center;font-weight:400;font-variant-numeric:tabular-nums}
 .btn{background:var(--accent);color:var(--on-accent);border:none;padding:10px 20px;border-radius:3px;font-weight:400;font-size:14px;transition:filter .12s}
 .btn:hover{filter:brightness(.94)}
-.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
-.btn.ghost:hover{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn.ghost{background:transparent;color:var(--muted);padding-left:0;padding-right:0}
+.btn.ghost:hover{color:var(--ink);background:transparent}
 .btn.danger{color:var(--red)}
 
 .rank{display:flex;align-items:center;gap:14px;padding:13px 15px;border:1px solid var(--line);border-radius:3px;background:var(--card);margin-bottom:8px}
@@ -137,7 +137,7 @@
 
 /* ---- drag-drop week calendar (Google Calendar-like) ---- */
 /* ---- takvim: day-based week board (grey cards, color = state only) ---- */
-.board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+.board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;background:var(--card)}
 .dayc{border-right:1px solid var(--line-soft);background:var(--card);display:flex;flex-direction:column;min-height:240px;transition:background .1s}
 .dayc:last-child{border-right:none}
 .dayc.today .dh b{color:var(--accent)}
@@ -151,7 +151,7 @@
 .dayc .dh i{margin-left:auto;font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
 .dbody{padding:6px;display:flex;flex-direction:column;gap:4px;flex:1}
 .dempty{color:var(--faint);font-size:11px;text-align:center;padding:14px 0}
-.tsk{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);border-radius:3px;padding:4px 6px;font-size:11.5px;cursor:grab;color:var(--ink-soft)}
+.tsk{display:flex;align-items:center;gap:6px;background:var(--panel);border-radius:3px;padding:4px 6px;font-size:11.5px;cursor:grab;color:var(--ink-soft)}
 .tsk .tdot{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--faint);flex:none;display:grid;place-items:center}
 .tsk .tdot svg{width:8px;height:8px;color:#fff}
 .tsk.done{border-color:var(--green);background:var(--green-bg);opacity:.85}
@@ -162,7 +162,7 @@
 .tsk .tx:hover{color:var(--red)}
 .tsk:active{cursor:grabbing}
 /* daily program panel */
-.daypanel{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:18px 20px}
+.daypanel{padding:0}
 .daypanel h1.sec{margin:2px 0 12px;font-size:17px;font-weight:400}
 .prow{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid var(--hair)}
 .prow:last-child{border-bottom:none}
@@ -193,15 +193,15 @@
 .pool .row.dragging{opacity:.4}
 .pool .grip{color:var(--faint);font-size:13px;margin-top:2px;letter-spacing:-2px}
 
-.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:3px;border:1px solid var(--line-soft);color:var(--muted);font-weight:400}
-.est{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;margin-top:18px}
+.pill{display:inline-block;font-size:11px;color:var(--muted);font-weight:400}
+.est{padding:0;margin-top:26px}
 .est .r{font-size:26px;font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .est .l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:400}
 .est .l.gap{margin-top:10px}
 
 /* ---- living universe: onboarding, user, profile, activity ---- */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:grid;place-items:center;z-index:9999;padding:20px}
-.onbox{position:relative;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:38px 36px;max-width:430px;width:100%}
+.onbox{position:relative;background:var(--card);border-radius:3px;padding:38px 36px;max-width:430px;width:100%}
 .onbox .logo{width:42px;height:42px;border-radius:3px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:400;font-size:21px;margin-bottom:20px}
 .onbox h2{font-size:23px;font-weight:400;margin-bottom:7px;letter-spacing:-.01em}
 .onbox p{color:var(--muted);font-size:14.5px;margin-bottom:22px;line-height:1.5}
@@ -213,7 +213,7 @@
 .onbox .dots i{width:22px;height:4px;border-radius:3px;background:var(--line-soft)}
 .onbox .dots i.on{background:var(--accent)}
 .onbox .opts{display:grid;gap:9px;margin-bottom:20px}
-.onbox .opt{padding:13px 15px;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:14.5px;font-weight:400;transition:.1s}
+.onbox .opt{padding:13px 15px;border:1px solid var(--line-soft);border-radius:3px;cursor:pointer;font-size:14.5px;font-weight:400;transition:.1s}
 .onbox .opt:hover{border-color:var(--faint)}
 .onbox .opt.sel{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent)}
 .onbox.welcome{text-align:center}
@@ -233,7 +233,7 @@
 .userchip .ui b{font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;max-width:130px}
 .userchip .ui span{font-size:11px;color:var(--muted)}
 .userchip .cog{color:var(--faint)}.userchip .cog svg{width:15px;height:15px}
-.usermenu{position:absolute;top:46px;right:0;width:200px;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:5px;z-index:60}
+.usermenu{position:absolute;top:46px;right:0;width:200px;background:var(--card);border:1px solid var(--line-soft);border-radius:3px;padding:5px;z-index:60}
 .usermenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 11px;border-radius:3px;font-size:13.5px;color:var(--ink-soft);text-align:left}
 .usermenu button:hover{background:var(--line-soft);color:var(--ink)}
 .usermenu button svg{width:15px;height:15px;color:var(--muted)}
@@ -242,7 +242,7 @@
 .profhead{display:flex;align-items:center;gap:18px;margin-bottom:8px}
 .profhead .bigava{width:62px;height:62px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:400;font-size:26px;flex:none}
 .profhead h1{margin:0}
-.setcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:4px 18px;margin-bottom:24px}
+.setcard{margin-bottom:24px}
 .setcard.gap-top{margin-top:18px}
 .setrow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--hair)}
 .setrow:last-child{border-bottom:none}
@@ -252,7 +252,7 @@
 .setrow select{padding:8px 12px;border:1px solid var(--line-soft);border-radius:3px;background:var(--bg);color:var(--ink);font-size:14px}
 .setrow .danger{color:var(--red);font-weight:400;font-size:13.5px}
 
-.heatwrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:24px;overflow-x:auto}
+.heatwrap{margin-bottom:24px;overflow-x:auto}
 .heatwrap .ht{font-size:13px;color:var(--muted);margin-bottom:14px}
 .heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,14px);gap:3px;justify-content:start}
 .heat i{width:14px;height:14px;border-radius:50%;background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--line-soft)}
@@ -263,7 +263,7 @@
 
 /* ---- coach appointment booking ---- */
 .rvwrap{display:grid;gap:8px;margin-bottom:24px}
-.rvday{display:flex;align-items:center;gap:14px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.rvday{display:flex;align-items:center;gap:14px;padding:10px 0}
 .rvd{font-size:13.5px;font-weight:400;min-width:120px}
 .slots{display:flex;gap:7px;flex-wrap:wrap}
 .slot{padding:6px 14px;border-radius:3px;border:1px solid var(--line-soft);background:transparent;color:var(--ink);font-size:13px;font-weight:400;transition:.1s}
@@ -271,7 +271,7 @@
 .slot.taken{background:transparent;color:var(--faint);text-decoration:line-through;cursor:default}
 
 /* ---- coach chat ---- */
-.chat{border:1px solid var(--line);border-radius:3px;background:var(--card);margin-bottom:24px;overflow:hidden}
+.chat{margin-bottom:24px}
 .thread{max-height:300px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
 .msg{display:flex}
 .msg.coach{justify-content:flex-start}.msg.student{justify-content:flex-end}
@@ -299,3 +299,9 @@
 .wkbtn:hover{border-color:var(--ink);color:var(--ink)}
 .daypanel{margin-top:16px}
 .pool{margin-top:4px;max-width:760px}
+
+/* bugün: stacked plain-Arial stats, chromatic values, no boxes */
+.statlines{margin:6px 0 34px;display:flex;flex-direction:column;gap:14px}
+.statline{display:flex;align-items:baseline;gap:12px}
+.statline .v{font-size:34px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.statline .k{font-size:13px;color:var(--muted)}

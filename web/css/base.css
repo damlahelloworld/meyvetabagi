@@ -22,7 +22,7 @@ svg{display:block}
   background:linear-gradient(90deg,var(--red),var(--pink),var(--orange),var(--yellow),var(--green),var(--blue));
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .pagechips{display:none}
-#nav{display:flex;align-items:center;gap:22px;margin-left:auto;flex:none}
+#nav{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}
 .nav{padding:4px 0;color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;transition:color .1s}
 .nav:hover{color:var(--ink)}
 .nav.active{color:var(--ink)}

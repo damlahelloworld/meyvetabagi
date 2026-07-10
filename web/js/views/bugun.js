@@ -31,11 +31,13 @@ export function bugun() {
   if (S.rebalanced && S.rebalanced.date === ts && S.rebalanced.n > 0)
     d.appendChild(el('div', 'hint', `Kaçan ${S.rebalanced.n} görev bugünden itibaren yeniden dağıtıldı.`));
 
-  const cards = el('div', 'grid cards mb26');
-  cards.appendChild(el('div', 'card c-pink', `<div class="k">Sınava kalan</div><div class="v">${cnt(days)}<small> gün</small></div>`));
-  cards.appendChild(el('div', 'card c-purple', `<div class="k">Son net (${last ? last.type : 'TYT'})</div><div class="v">${last ? cnt(last.net) : '—'}</div>`));
-  cards.appendChild(el('div', 'card c-teal', `<div class="k">Yeşil kazanım</div><div class="v">%${cnt(t.greenPct)}<small> · ${t.green}/${t.total}</small></div>`));
-  d.appendChild(cards);
+  // plain Arial, stacked, chromatic values like the wordmark — no boxes (Damla, 2026-07-10)
+  const stats = el('div', 'statlines');
+  stats.innerHTML = `
+    <div class="statline"><span class="v" style="color:var(--pink)">${cnt(days)} gün</span><span class="k">sınava kalan</span></div>
+    <div class="statline"><span class="v" style="color:var(--purple)">${last ? cnt(last.net) : '—'}</span><span class="k">son net${last ? ' (' + last.type + ')' : ''}</span></div>
+    <div class="statline"><span class="v" style="color:var(--teal)">%${cnt(t.greenPct)}</span><span class="k">yeşil kazanım · ${t.green}/${t.total}</span></div>`;
+  d.appendChild(stats);
 
   // günün kazanımı — açıkla (aktif hatırlama, MEB açıklamasıyla karşılaştır)
   const dz = dailyKaz();
