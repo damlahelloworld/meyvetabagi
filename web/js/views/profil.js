@@ -43,6 +43,6 @@ export function profil() {
   cards.appendChild(el('div', 'card c-pink', `<div class="k">Güncel seri</div><div class="v">${streak()}<small> gün</small></div>`));
   d.appendChild(cards);
 
-  d.appendChild(el('div', 'seclabel', 'Aktivite'));
+  d.appendChild(el('div', 'seclabel', 'aktivite'));
   d.appendChild(heatmap());
 }

@@ -6,7 +6,7 @@ import { refresh } from '../router.js';
 export function mesajlar() {
   const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('div', 'crumb', 'MESAJLAR'));
-  d.appendChild(el('h1', null, 'Mesajlar'));
+  d.appendChild(el('h1', null, 'mesajlar'));
   d.appendChild(el('p', 'meta', 'Takıldığın yeri yaz - şimdilik bu tarayıcıda saklanır, canlı bağlantı yakında.'));
 
   const chat = el('div', 'chat');

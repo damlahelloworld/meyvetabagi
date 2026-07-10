@@ -9,7 +9,7 @@ export function ayarlar() {
   const u = S.user || { name: 'Misafir', target: 'Sayısal' };
   const d = el('div', 'pagein'); page().appendChild(d);
   d.appendChild(el('div', 'crumb', 'AYARLAR'));
-  d.appendChild(el('h1', null, 'Ayarlar'));
+  d.appendChild(el('h1', null, 'ayarlar'));
   d.appendChild(el('p', 'meta', 'Hesap ve uygulama tercihleri'));
 
   const set = el('div', 'setcard');
