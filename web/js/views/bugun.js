@@ -29,13 +29,15 @@ export function bugun() {
   d.appendChild(el('h1', null, nm ? `merhaba ${esc(nm.toLocaleLowerCase('tr'))}` : 'merhaba'));
   d.appendChild(el('p', 'meta', `resmi MEB kazanımları ve ders kitaplarından çıkarılan anahtar kelimeler — tek yerde, ücretsiz. sınava ${days} gün.`));
 
-  // büyüyen corpus sayaçları — ürünün kalbi, hepsi gerçek
+  // büyüyen corpus sayaçları — ürünün kalbi, hepsi gerçek. renk explicit hex + text-fill (var/inherit ezmesine karşı)
+  const nn = v => v.toLocaleString('tr-TR');
+  const cstat = (c, val, lbl, href) => `<${href ? 'a' : 'div'} class="hstat"${href ? ` href="${href}"` : ''}><b style="color:${c};-webkit-text-fill-color:${c}">${nn(val)}</b><span>${lbl}</span></${href ? 'a' : 'div'}>`;
   const feed = el('div', 'homefeed');
-  feed.innerHTML = `
-    <a class="hstat" href="#/konular"><b style="color:var(--orange)">${cnt(cs.kazanim)}</b><span>MEB kazanımı</span></a>
-    <div class="hstat"><b style="color:var(--green)">${cnt(cs.sayfa)}</b><span>kitap sayfası tarandı</span></div>
-    <div class="hstat"><b style="color:var(--blue)">${cnt(cs.terim)}</b><span>anahtar kelime çıkarıldı</span></div>
-    <div class="hstat"><b style="color:var(--pink)">${cnt(cs.taranan)}</b><span>konu işlendi · artıyor</span></div>`;
+  feed.innerHTML =
+    cstat('#E07A3E', cs.kazanim, 'MEB kazanımı', '#/konular') +
+    cstat('#4C9A46', cs.sayfa, 'kitap sayfası tarandı') +
+    cstat('#3B7FC4', cs.terim, 'anahtar kelime çıkarıldı') +
+    cstat('#E8619A', cs.taranan, 'konu işlendi · artıyor');
   d.appendChild(feed);
 
   // bugünün takvim konuları
