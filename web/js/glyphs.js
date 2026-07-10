@@ -2,7 +2,7 @@
 // Deterministic seeded positions (no layout jump), fruit-toned, drifts + twinkles, behind everything.
 // Honours prefers-reduced-motion. Pure decoration; zero effect on content or state.
 const GLYPHS = ['✦', '✧', '·', '◦', '⋆', '✵', '✷', '˖', '⁺'];
-const COLORS = ['--gold', '--coral', '--gold', '--rose', '--amber', '--gold'];  // warm showgirl sparkle
+const COLORS = ['--gold', '--rose', '--coral', '--amber', '--pink'];  // few warm sparkles on white
 
 // tiny seeded PRNG so positions are stable across reloads (Math.random would jump every paint)
 function seeded(seed) {
@@ -16,14 +16,14 @@ export function initGlyphs() {
   field.id = 'glyphfield';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const rnd = seeded(20260710);
-  const N = reduce ? 34 : 80;
+  const N = reduce ? 6 : 12;
   for (let i = 0; i < N; i++) {
     const g = document.createElement('span');
     g.className = 'glyph';
     g.textContent = GLYPHS[Math.floor(rnd() * GLYPHS.length)];
     g.style.left = (rnd() * 100).toFixed(2) + 'vw';
     g.style.color = `var(${COLORS[Math.floor(rnd() * COLORS.length)]})`;
-    g.style.fontSize = (6 + rnd() * 9).toFixed(1) + 'px';
+    g.style.fontSize = (9 + rnd() * 8).toFixed(1) + 'px';
     g.style.setProperty('--fall', (36 + rnd() * 48).toFixed(1) + 's');
     g.style.setProperty('--fd', (-rnd() * 60).toFixed(1) + 's');
     g.style.setProperty('--tw', (5 + rnd() * 5).toFixed(1) + 's');
