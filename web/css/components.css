@@ -34,8 +34,8 @@
 
 /* list rows — dense text lines */
 .row { padding: 5px 0; cursor: pointer; display: flex; gap: 10px; align-items: flex-start; }
-.row:hover .title { color: var(--accent-ink); }
-.row.active .title { color: var(--accent-ink); }
+.row:hover .title { color: var(--ink); font-weight: bold; }
+.row.active .title { font-weight: bold; }
 .row .stat { width: 9px; height: 9px; border-radius: 50%; flex: none; margin-top: 5px; background: var(--line-soft); }
 .stat.red { background: var(--red); } .stat.amber { background: var(--amber); } .stat.green { background: var(--green); }
 .row .rtext { min-width: 0; flex: 1; }
@@ -313,3 +313,17 @@
 .cilekres .missline { font-size: 12.5px; color: var(--red); margin-bottom: 2px; }
 .cilekres .srcline { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
 .coachbox .h .mini { margin-left: 8px; }
+
+/* kazanım rows: ZERO gap, no dot — status lives in the code color */
+.ublock .row { padding: 0; gap: 6px; }
+.ublock .row .rtext { display: flex; gap: 6px; align-items: baseline; min-width: 0; }
+.ublock .row .code { flex: none; font-size: 10px; }
+.ublock .row .title { font-size: 12.5px; line-height: 1.3; }
+.ublock .unitrow { padding: 6px 0 0; }
+.ublock { margin-bottom: 6px; }
+.cst-none { color: var(--muted); }
+.cst-red { color: var(--red); } .cst-amber { color: var(--amber); } .cst-green { color: var(--green); font-weight: bold; }
+/* kaynakça link next to the wordmark; full page cites */
+.kaynaklink { font-size: 12px; color: var(--accent-ink); text-decoration: underline; }
+.kaynaklink:hover { color: var(--ink); }
+.kaynakca.wide { max-width: 760px; }

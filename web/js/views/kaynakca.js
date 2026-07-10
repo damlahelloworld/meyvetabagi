@@ -1,0 +1,44 @@
+// Kaynakça — full sources page (MLA), linked from the wordmark. Damla, 2026-07-10:
+// heavy sourcing or it reads as made-up. Everything the product's content and çilek rest on, cited.
+import { el, page } from '../ui.js';
+import { allKaz } from '../data.js';
+
+export function kaynakca() {
+  const d = el('div', 'pagein'); page().appendChild(d);
+  d.appendChild(el('h1', null, 'Kaynakça'));
+  d.appendChild(el('p', 'meta', 'meyvetabagi\'ndeki her içeriğin kaynağı ve çilek\'in çalışma yöntemi — MLA biçiminde.'));
+
+  d.appendChild(el('div', 'seclabel', 'BİRİNCİL KAYNAK — KAZANIMLAR'));
+  const k1 = el('div', 'kaynakca wide');
+  k1.innerHTML = `
+    <p class="cite">Millî Eğitim Bakanlığı, Talim ve Terbiye Kurulu Başkanlığı. <i>2026 Yükseköğretim Kurumları Sınavına Esas Konu ve Kazanımlar.</i> T.C. Millî Eğitim Bakanlığı, 2025, ttkb.meb.gov.tr.</p>
+    <p class="citenote">Uygulamadaki ${allKaz().length} kazanımın TAMAMI bu resmî belgeden ayrıştırılmıştır — kodlar, başlıklar ve açıklamalar birebir MEB metnidir. Üretilmiş, düzenlenmiş ya da uydurulmuş kazanım yoktur. (Mantık, Sosyoloji, Psikoloji ve İnkılap Tarihi bölümleri belgedeki teknik sorunlar nedeniyle henüz ayrıştırılamadı; eklenince burada belirtilecek.)</p>`;
+  d.appendChild(k1);
+
+  d.appendChild(el('div', 'seclabel', 'ÇİLEK NASIL ÇALIŞIR'));
+  const k2 = el('div', 'kaynakca wide');
+  k2.innerHTML = `
+    <p class="citenote"><b>Değerlendirme ("anlat bakalım"):</b> yazdığın metin, ilgili kazanımın resmî MEB açıklamasındaki kavramlarla karşılaştırılır (kural tabanlı kapsama analizi, ek toleranslı kök eşleme). Yapay zekâ modeli KULLANILMAZ; metnin internete gönderilmez, hesaplama tarayıcında yapılır. Her değerlendirmenin altında hangi kaynağın kullanıldığı yazar.</p>
+    <p class="citenote"><b>Öneri ve haftalık plan:</b> kendi işaretlerinden (kırmızı/sarı/yeşil, tekrarlar, netler) hesaplanan kural tabanlı bir motordur; ünite öncelikleri ön şart zincirine göre belirlenir. Veri kaynağı yalnızca senin çalışman + resmî kazanım listesidir.</p>
+    <p class="citenote"><b>Sıralama:</b> kaynaklı gerçek ÖSYM verisi eklenene kadar tahminî sıralama GÖSTERİLMEZ — uydurma kesinlik satmıyoruz.</p>`;
+  d.appendChild(k2);
+
+  d.appendChild(el('div', 'seclabel', 'KİTAPLAR'));
+  const kb = el('div', 'kaynakca wide');
+  kb.innerHTML = `
+    <p class="citenote">Uygulamada şu an kitap içeriği KULLANILMIYOR — tek içerik kaynağı yukarıdaki resmî kazanım belgesi. MEB ders kitapları eklendiğinde her kitabın MLA künyesi (ders, yazar kurulu, yayınevi, yıl) ve hangi kazanımda hangi pasajın kullanıldığı bu bölümde tek tek listelenecek. Burada künyesi olmayan hiçbir içerik üründe yer almaz.</p>`;
+  d.appendChild(kb);
+
+  d.appendChild(el('div', 'seclabel', 'YOLDA — HENÜZ UYGULAMADA DEĞİL'));
+  const k3 = el('div', 'kaynakca wide');
+  k3.innerHTML = `
+    <p class="citenote"><b>MEB ders kitapları:</b> soru üretimi için kazanım başına resmî ders kitabı pasajları eklenecek; her pasaj kaynağıyla yukarıdaki KİTAPLAR bölümüne girecek.</p>
+    <p class="citenote"><b>Çıkmış sorular:</b> telif hakları nedeniyle uygulamada asla barındırılmaz; yalnızca soru kalitesini ayarlamak için stil referansı olarak kullanılacak ve bu da burada açıkça yazacak.</p>`;
+  d.appendChild(k3);
+
+  d.appendChild(el('div', 'seclabel', 'UYGULAMANIN KENDİSİ'));
+  const k4 = el('div', 'kaynakca wide');
+  k4.innerHTML = `
+    <p class="citenote"><b>Yazılım:</b> meyvetabagi, damlahelloworld tarafından geliştirilir. Hesap ve eşitleme altyapısı: Supabase (Frankfurt/AB veri merkezi). Yazı tipi: Arial (sistem yazı tipi). Analitik, reklam ve izleme aracı kullanılmaz — ayrıntı için <a href="gizlilik.html">gizlilik sayfası</a>.</p>`;
+  d.appendChild(k4);
+}

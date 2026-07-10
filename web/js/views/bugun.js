@@ -42,25 +42,12 @@ export function bugun() {
   // günün kazanımı — anlat bakalım: çilek kural-tabanlı değerlendirir, HER ŞEY kaynaklı (MLA)
   const dz = dailyKaz();
   const daily = el('div', 'coachbox');
-  const kaynakca = () => {
-    const k = el('div', 'kaynakca');
-    k.innerHTML = `<b>KAYNAKÇA (MLA)</b>
-      <p class="cite">Millî Eğitim Bakanlığı, Talim ve Terbiye Kurulu Başkanlığı. <i>2026 Yükseköğretim Kurumları Sınavına Esas Konu ve Kazanımlar.</i> T.C. Millî Eğitim Bakanlığı, 2025, ttkb.meb.gov.tr.</p>
-      <p class="cite">Millî Eğitim Bakanlığı. "Kazanım ${esc(dz.code)}: ${esc(dz.title)}." <i>2026 YKS'ye Esas Konu ve Kazanımlar,</i> T.C. MEB, 2025.</p>
-      <p class="citenote">çilek'in yöntemi: resmî MEB açıklamasındaki kavramların metninde kapsanma analizi (kural tabanlı, ek toleranslı kök eşleme). Yapay zekâ modeli kullanılmaz; hiçbir veri internete gönderilmez, hesaplama tarayıcında yapılır. Uygulamadaki 955 kazanımın tamamı yukarıdaki resmî PDF'ten ayrıştırılmıştır — üretilmiş/uydurma kazanım yoktur.</p>`;
-    return k;
-  };
-  const kbtn = el('button', 'mini', 'kaynakça');
-  let kopen = null;
-  kbtn.onclick = () => { if (kopen) { kopen.remove(); kopen = null; } else { kopen = kaynakca(); daily.insertBefore(kopen, daily.children[1]); } };
   if (S.dailyGraded === ts) {
     daily.innerHTML = `<div class="h">Günün kazanımı</div>
       <p>Bugünkü kazanımı açıkladın — yarın yenisi gelir. <span class="pill">${dz.code}</span></p>`;
-    daily.querySelector('.h').appendChild(kbtn);
   } else {
     daily.innerHTML = `<div class="h">Günün kazanımı · anlat bakalım</div>
       <p class="tight"><b>${esc(dz.title)}</b> <span class="pill">${dz.code} · ${esc(dz.ders.ders.split(' ')[0])}</span></p>`;
-    daily.querySelector('.h').appendChild(kbtn);
     const ta = el('textarea', 'note short'); ta.placeholder = 'Bu kazanımı bilmeyen birine anlatır gibi yaz…';
     daily.appendChild(ta);
     const btn = el('button', 'btn mt10', 'çilek değerlendirsin');
@@ -73,10 +60,9 @@ export function bugun() {
         <div class="rdet">
           ${ev.found.length ? `<p class="okline">değindin: ${ev.found.map(esc).join(', ')}</p>` : ''}
           ${ev.missing.length ? `<p class="missline">hiç değinmedin: ${ev.missing.map(esc).join(', ')}</p>` : '<p class="okline">MEB açıklamasındaki her kavrama değinmişsin.</p>'}
-          <p class="srcline">çilek bu değerlendirmede şunu kullandı: ${ev.sources.map(s => esc(s.name)).join(' · ')} — <button class="mini" id="evk">yöntem & kaynak</button></p>
+          <p class="srcline">çilek bu değerlendirmede şunu kullandı: ${ev.sources.map(s => esc(s.name)).join(' · ')} — <a class="mini" href="#/kaynakca">yöntem & kaynakça</a></p>
         </div>`;
       daily.appendChild(res);
-      res.querySelector('#evk').onclick = () => { if (!kopen) kbtn.click(); };
       const rev = el('div', 'aciklama daily');
       rev.innerHTML = `<b>MEB açıklaması · doğrusu</b>${esc(dz.aciklama || dz.title)}`;
       daily.appendChild(rev);

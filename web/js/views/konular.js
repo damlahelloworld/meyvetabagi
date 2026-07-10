@@ -64,8 +64,8 @@ export function konular() {
       const uid = kuid(ders.ders, z.code);
       const st = S.status[uid] || 'none';
       const row = el('div', 'row' + (uid === sel ? ' active' : ''));
-      row.innerHTML = `<span class="stat ${st === 'none' ? '' : st}"></span>
-        <div class="rtext"><div class="code">${z.code}</div><div class="title">${hl(z.title)}</div></div>`;
+      // no dot (Damla): the status colors the code itself
+      row.innerHTML = `<div class="rtext"><div class="code cst-${st}">${z.code}</div><div class="title">${hl(z.title)}</div></div>`;
       row.onclick = () => { location.hash = '#/konular/' + uid; };
       return row;
     };
@@ -88,7 +88,7 @@ export function konular() {
       const dersPct = allDers.length ? Math.round(dersGreen / allDers.length * 100) : 0;
       list.appendChild(el('div', 'dersrow dc-' + dersColor(ders.ders), `${esc(ders.ders)} <span class="dpct">%${dersPct}</span>`));
       list.appendChild(el('div', 'dersbar', `<i class="db-${dersColor(ders.ders)}" style="width:${dersPct}%"></i>`));
-      const grades = [...new Set(visUnits.map(u => u.grade).filter(Boolean))].sort();
+      const grades = [...new Set(visUnits.map(u => u.grade).filter(Boolean))].sort((a, b) => Number(a) - Number(b));
       if (grades.length) {
         // columns ARE the grades: 9 | 10 | 11 | 12 (Damla, 2026-07-10)
         const gg = el('div', 'gradegrid');

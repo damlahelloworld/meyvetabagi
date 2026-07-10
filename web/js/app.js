@@ -12,6 +12,7 @@ import { siralama } from './views/siralama.js';
 import { profil } from './views/profil.js';
 import { mesajlar } from './views/mesajlar.js';
 import { ayarlar } from './views/ayarlar.js';
+import { kaynakca } from './views/kaynakca.js';
 import { onboard } from './views/onboard.js';
 
 // deneme mechanic REMOVED from UI (Damla, 2026-07-10: "konuşmadık henüz") — data stays in state/DB
@@ -21,7 +22,7 @@ const NAV = [
   { id: 'takvim', label: 'takvim' },
   { id: 'siralama', label: 'sıra puanı' },
 ];
-const VIEWS = { bugun, konular, takvim, siralama, profil, mesajlar, ayarlar };
+const VIEWS = { bugun, konular, takvim, siralama, profil, mesajlar, ayarlar, kaynakca };
 
 // sync indicator: local mode says Öğrenci; with an account it reflects push state
 function syncLabel() {
