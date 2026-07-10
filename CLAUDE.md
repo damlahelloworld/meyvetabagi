@@ -119,7 +119,7 @@ Rules kept for you: zero inline styles anywhere, no colored borders, no single-s
 - Damla owns design direction and will redesign (Figma or manual CSS) — that's WHY styles are separated. Big redesigns need a concrete reference from her first. Landing needs a distinctive pass (still generic).
 - Expected-pattern floor (feels wrong without): home = countdown + last net + add-CTA; onboarding = target → days left → hours → level → first plan. Both exist.
 
-> **NEXT SESSION STARTS HERE:** BLOK B done incl. Damla's dashboard steps (2026-07-10 04:30: migration 0003 ran, redirect URL allowed, Resend SMTP configured — sender onboarding@resend.dev, test mode: only mails Damla's own address until domain verified). Stage 7 live two-device test SKIPPED by Damla ("olmuştur büyük ihtimalle") — UNVERIFIED, run it before anything public. Next: stage 16 quick rate-limit look → BLOK C (repo + deploy + domain; at deploy add real domain to redirect URLs + verify domain in Resend). Supabase LIVE; DB password only with Damla.
+> **NEXT SESSION STARTS HERE:** repo is LIVE at github.com/damlahelloworld/meyvetabagi (private) — push there from now on; home-dir repo is history. BLOK C remaining: deploy (GATED on rank data + ship-check + live test), domain (Damla buys), OG image + service worker. Previous note: BLOK B done incl. Damla's dashboard steps (2026-07-10 04:30: migration 0003 ran, redirect URL allowed, Resend SMTP configured — sender onboarding@resend.dev, test mode: only mails Damla's own address until domain verified). Stage 7 live two-device test SKIPPED by Damla ("olmuştur büyük ihtimalle") — UNVERIFIED, run it before anything public. Next: stage 16 quick rate-limit look → BLOK C (repo + deploy + domain; at deploy add real domain to redirect URLs + verify domain in Resend). Supabase LIVE; DB password only with Damla.
 
 ## ROADMAP — 68 AŞAMA (ordered; work top to bottom; ☐ open · ☑ done · ⏸ waits on Damla)
 
@@ -147,10 +147,10 @@ Rules kept for you: zero inline styles anywhere, no colored borders, no single-s
 19. ☑ gizlilik.html rewritten for live backend (2026-07-10) — re-check at every new data-touching feature.
 
 ### BLOK C — repo, deploy, publish
-20. ☐ Create `meyvetabagi` repo under damlahelloworld org; move project out of home-dir repo with history-clean start; .gitignore.
-21. ☐ Deploy web/ as site root → GitHub Pages (pure static, works) or Vercel; decide with Damla.
+20. ☑ Repo live (2026-07-10): **github.com/damlahelloworld/meyvetabagi** — PRIVATE for now (flip to public = Damla's one click; GitHub Pages free tier needs public). History-clean single initial commit, own .git nested over the home-dir repo, .gitignore added. Only the anon key is in the repo (public by design, RLS guards).
+21. ⏸ Deploy — GATED: sıralama RANK_ANCHORS still KAYNAK YOK (launch blocker, trust rule 3) + stage 25 ship-check + stage 7 live test must pass first. Then decide Pages vs Vercel with Damla (Pages needs repo public).
 22. ☐ Custom domain (meyvetabagi.com / .app — Damla buys, I wire DNS + HTTPS).
-23. ☐ Favicon + OG image + manifest.json (PWA installable: icon, theme color, offline shell).
+23. ◐ Favicon (svg + png 192/512 + apple-touch) + manifest.json + theme-color wired into all 4 pages (2026-07-10) — placeholder pink 'm' glyph until Damla's wordmark (stage 6). Open: OG image (needs her design), service-worker offline shell.
 24. ☐ Landing final copy from Damla (founder quote placeholder still empty); fiyat section stays absent until money model decided.
 25. ☐ Pre-publish FULL ship-check (~/.claude/docs/ship-check.md) — blockers zero before the link goes public.
 
