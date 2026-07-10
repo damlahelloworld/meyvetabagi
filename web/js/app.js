@@ -5,6 +5,7 @@ import { rebalance } from './engine.js';
 import { initSupa, signOut, online, currentUser, syncStatus } from './supa.js';
 import { $, el, esc, ICON, animateCounts, setChips } from './ui.js';
 import { route, setRender } from './router.js';
+import { initGlyphs } from './glyphs.js';
 import { bugun } from './views/bugun.js';
 import { konular } from './views/konular.js';
 import { takvim } from './views/takvim.js';
@@ -80,6 +81,7 @@ setRender(render);
 
 // ---- boot ----
 applyTheme();
+initGlyphs();
 Promise.all([loadDB(), initSupa().catch(() => null)])
   .then(() => { rebalance(); render(); animateCounts(); if (!S.user) onboard(); })
   .catch(err => {

@@ -56,3 +56,12 @@ svg{display:block}
 
 /* spacing utilities */
 .mt0{margin-top:0}.mt10{margin-top:10px}.mt12{margin-top:12px}.mt18{margin-top:18px}.mb26{margin-bottom:26px}
+
+/* ambient twinkling glyph field — meyvetabagi character (à la vibecodedflopware), behind content */
+#glyphfield{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.app{position:relative;z-index:1}
+.glyph{position:absolute;top:-6vh;user-select:none;opacity:.5;animation:gdrift var(--fall,50s) linear infinite;animation-delay:var(--fd,0s)}
+.glyph-inner{display:inline-block;animation:gtwinkle var(--tw,7s) ease-in-out infinite}
+@keyframes gdrift{from{transform:translateY(0)}to{transform:translateY(118vh)}}
+@keyframes gtwinkle{0%,100%{opacity:.75;transform:rotate(0deg)}50%{opacity:.2;transform:rotate(12deg)}}
+@media(prefers-reduced-motion:reduce){.glyph,.glyph-inner{animation:none;opacity:.35}}
