@@ -2,3 +2,5 @@
 backups/
 *.dump
 node_modules/
+CLAUDE.md
+CLAUDE.context.md
