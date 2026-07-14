@@ -2,7 +2,7 @@
 
 *a fruit bowl for YKS study: track every kazanım, plan every day, let çilek nudge you along.*
 
-### live: https://damlahelloworld.github.io/meyvetabagi/
+### live: https://nosey-dewdrop.github.io/meyvetabagi/
 
 ## what is this?
 a free study companion for the YKS (Turkish university entrance exam). the whole curriculum lives inside as kazanımlar — you mark what you know, plan your days, and çilek (the strawberry of the bowl) suggests what to study next based on where you actually stand.

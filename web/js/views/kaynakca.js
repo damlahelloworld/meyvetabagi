@@ -42,6 +42,6 @@ export function kaynakca() {
   d.appendChild(el('div', 'seclabel', 'uygulamanın kendisi'));
   const k4 = el('div', 'kaynakca wide');
   k4.innerHTML = `
-    <p class="citenote"><b>Yazılım:</b> meyvetabagi, damlahelloworld tarafından geliştirilir. Hesap ve eşitleme altyapısı: Supabase (Frankfurt/AB veri merkezi). Yazı tipi: Arial (sistem yazı tipi). Analitik, reklam ve izleme aracı kullanılmaz - ayrıntı için <a href="gizlilik.html">gizlilik sayfası</a>.</p>`;
+    <p class="citenote"><b>Yazılım:</b> meyvetabagi, nosey-dewdrop tarafından geliştirilir. Hesap ve eşitleme altyapısı: Supabase (Frankfurt/AB veri merkezi). Yazı tipi: Arial (sistem yazı tipi). Analitik, reklam ve izleme aracı kullanılmaz - ayrıntı için <a href="gizlilik.html">gizlilik sayfası</a>.</p>`;
   d.appendChild(k4);
 }

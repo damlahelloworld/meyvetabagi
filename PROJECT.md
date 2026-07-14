@@ -1,7 +1,7 @@
 # meyvetabagi — PROJECT
 
 Name: **meyvetabagi** (locked). Amme-hizmeti YKS tool, ücretsiz, no coaching/ranking/paywall.
-Status: **CANLI YAYINDA** https://damlahelloworld.github.io/meyvetabagi/ (2026-07-10). Design style law + product shape + content pipeline all shipped — see CLAUDE.md "NEXT SESSION STARTS HERE" for current state and open items.
+Status: **CANLI YAYINDA** https://nosey-dewdrop.github.io/meyvetabagi/ (2026-07-10). Design style law + product shape + content pipeline all shipped — see CLAUDE.md "NEXT SESSION STARTS HERE" for current state and open items.
 
 Last session (2026-07-10, marathon): rebrand meyvetabagi, coaching removed, Blok B backend hardened, own public repo, 23 MEB books + 448 key terms, month-grid takvim, full-width konular, design language settled (white+vivid+Arial+rainbow+sparkle, NO purple), SEO (meta/JSON-LD/sitemap), security pass clean, DEPLOYED live to GitHub Pages, fresh landing page.
 Open: live 2-device test, Search Console sitemap submit, sozel ders book terms, deeper per-kazanim SEO + question bank (parked).
