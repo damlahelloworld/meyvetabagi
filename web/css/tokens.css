@@ -8,7 +8,7 @@
   --line:#111111; --line-soft:#E4E4E4; --hair:#ECECEC;
 
   /* vivid fruit palette */
-  --cilek:#D9463A;
+  --accentred:#D9463A;
   --pink:#E8619A; --pink-ink:#C24C82; --pink-soft:#FDF2F7;
   --orange:#E07A3E; --yellow:#C9A21E; --green:#4C9A46; --blue:#3B7FC4;
   --red:#D9463A; --amber:#CC8A18;
@@ -30,7 +30,7 @@ body.dark{
   --ink:#F1EEE9; --ink-soft:#C7C3BC; --muted:#918D87; --faint:#6A665F;
   --line:#4E4B45; --line-soft:#2E2D2A; --hair:rgba(255,255,255,.07);
 
-  --cilek:#E2705F;
+  --accentred:#E2705F;
   --pink:#EE85B0; --pink-ink:#EE85B0; --pink-soft:#352730;
   --orange:#E8975E; --yellow:#D6BC5A; --green:#71B06E; --blue:#6FA8DC;
   --red:#E2705F; --amber:#D6A24F;

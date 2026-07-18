@@ -1,17 +1,17 @@
 # inkbee
 
-*a fruit bowl for YKS study: track every kazanım, plan every day, let çilek nudge you along.*
+*track every kazanım, plan every day, let the AI nudge you along.*
 
 ### live: https://nosey-dewdrop.github.io/inkbee/
 
 ## what is this?
-a free study companion for the YKS (Turkish university entrance exam). the whole curriculum lives inside as kazanımlar — you mark what you know, plan your days, and çilek (the strawberry of the bowl) suggests what to study next based on where you actually stand.
+a free study companion for the YKS (Turkish university entrance exam). the whole curriculum lives inside as kazanımlar — you mark what you know, plan your days, and the AI suggests what to study next based on where you actually stand.
 
 ## features
 - full kazanım map of the YKS curriculum, tracked topic by topic
 - bugün: a daily plan that meets you where you are
 - calendar view of your study life
-- çilek: suggestions and evaluation against the kazanım map
+- AI: suggestions and evaluation against the kazanım map
 - account sync across devices, with offline support and retry
 - password reset, account deletion — your data is yours
 - KVKK-compliant privacy page

@@ -1,5 +1,5 @@
 // Kaynakça - full sources page (MLA), linked from the wordmark. Damla, 2026-07-10:
-// heavy sourcing or it reads as made-up. Everything the product's content and çilek rest on, cited.
+// heavy sourcing or it reads as made-up. Everything the product's content and AI rest on, cited.
 import { el, page } from '../ui.js';
 import { allKaz } from '../data.js';
 

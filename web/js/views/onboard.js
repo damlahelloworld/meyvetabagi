@@ -1,4 +1,4 @@
-// Onboarding - welcome → sign up → alan/sınıf/saat → ready. Answers FEED the çilek engine
+// Onboarding - welcome → sign up → alan/sınıf/saat → ready. Answers FEED the AI engine
 // (alan → ders priority, saat → plan pacing). Local-only until the backend brings real accounts.
 import { S, save } from '../state.js';
 import { el, esc } from '../ui.js';

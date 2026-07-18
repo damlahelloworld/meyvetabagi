@@ -11,8 +11,8 @@ Open: live 2-device test, Search Console sitemap submit, sozel ders book terms, 
 ## Brand & positioning (Damla, 2026-07-10)
 
 - Single brand **inkbee** for the whole YKS universe; the earlier name "Sıra Sende" was retired 2026-07-10.
-- The word **"koç" is BANNED in product copy**. The AI that suggests and evaluates against kazanımlar is named **çilek** (the strawberry in the fruit bowl — more fruits/AIs will join later, e.g. elma). Internal DB role names ('coach') stay — only user-facing copy is affected.
-- **KOÇLUK REMOVED ENTIRELY:** no coaching system, no mentors, no invite codes — "ai ve motorumuz çok güçlü olacak, o yeter de artar". The ONLY human in the product is Damla herself: 1-1 randevu with her stays possible, messages come from her. Guidance = çilek + engine. Koç nav tab deleted; chat + randevu live in Profil under "Damla ile birebir".
+- The word **"koç" is BANNED in product copy**. The AI that suggests and evaluates against kazanımlar has NO persona name (the old "çilek" fruit persona was removed with the inkbee rebrand, 19 Jul 2026); copy refers to it neutrally as the AI / the engine. Internal DB role names ('coach') stay — only user-facing copy is affected.
+- **KOÇLUK REMOVED ENTIRELY:** no coaching system, no mentors, no invite codes — "ai ve motorumuz çok güçlü olacak, o yeter de artar". The ONLY human in the product is Damla herself: 1-1 randevu with her stays possible, messages come from her. Guidance = AI + engine. Koç nav tab deleted; chat + randevu live in Profil under "Damla ile birebir".
 - Positioning (why this wins): market is split — ugly-cheap tools (~12 TL, Pandorina/Konu Takip) vs corporate coaching (Kopilot ~3.800 TL/ay, Tonguç 8–13k). The ~200–300 TL/ay band is EMPTY. No whimsy YKS app exists (design = genre-first differentiator). Kazanım granularity is the moat: no competitor exposes the official MEB list as the working surface. **Damla = the only human in the product** (Bilkent CS + Medipol Tıp, cracked YKS twice — her story IS the trust brand). Beat Baykuş as a product, not a coach marketplace.
 
 ## Revenue model (parked — paywall dropped globally 2026-07-13; kept for reference)
@@ -104,8 +104,8 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 
 ### BLOK A — rebrand to inkbee (decided 2026-07-10)
 1. ☑ Rename app shell: titles, brand logo ("m" + inkbee), onboarding welcome; "sıra sende" retired (mocks/ kept as history; localStorage key = 'inkbee.v1', old local data dropped).
-2. ☑ Koç purged from ALL user-facing copy: Koç nav tab DELETED (koc.js removed), chat + randevu moved to Profil "Damla ile birebir"; "Koç önerisi"→çilek önerisi; who-labels, hints, legend, gizlilik. (DB role 'coach' stays internal.)
-3. ☑ AI named çilek in product: suggestion box, plan copy, onboarding subs. Daily-explain feedback speaks as çilek when Edge AI lands (stage 38).
+2. ☑ Koç purged from ALL user-facing copy: Koç nav tab DELETED (koc.js removed), chat + randevu moved to Profil "Damla ile birebir"; "Koç önerisi"→AI önerisi; who-labels, hints, legend, gizlilik. (DB role 'coach' stays internal.)
+3. ☑ AI named AI in product: suggestion box, plan copy, onboarding subs. Daily-explain feedback speaks as AI when Edge AI lands (stage 38).
 4. ◐ Landing skeleton swapped to inkbee + meta/OG; band headline placeholder "Bu sene bilerek çalış." — wording pass = Damla (with stage 24).
 5. ☑ gizlilik.html brand swap + koç-link sentence removed.
 6. ⏸ Damla: final wordmark/typography direction for "inkbee".
@@ -142,16 +142,16 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 31. ☐ Capacity guard: randevu slots scarce by design (prestige), booked-out honest.
 32-36. ~~mentor onboarding, invite redeem RPC, mentor dashboard, mentor CRUD, second-mentor isolation~~ — cancelled with koçluk (multi-tenant RLS stays as foundation).
 
-### BLOK E — çilek AI on Edge Functions (FAZ 2: hidden API)
-37. ☐ Edge Function skeleton `cilek`: ANTHROPIC_API_KEY in function env only; input = student snapshot + intent; JSON-schema output validation.
-38. ☐ Job 1 — daily-explain grading: yazılı açıklama vs MEB açıklaması → geri bildirim + önerilen R/S/Y; UI'da çilek konuşur.
-39. ☐ Job 2 — weekly plan generation: çilek yazıyor (service-role scoped writes, author='coach' flagged as çilek in copy).
+### BLOK E — AI AI on Edge Functions (FAZ 2: hidden API)
+37. ☐ Edge Function skeleton `ai`: ANTHROPIC_API_KEY in function env only; input = student snapshot + intent; JSON-schema output validation.
+38. ☐ Job 1 — daily-explain grading: yazılı açıklama vs MEB açıklaması → geri bildirim + önerilen R/S/Y; UI'da AI konuşur.
+39. ☐ Job 2 — weekly plan generation: AI yazıyor (service-role scoped writes, author='coach' flagged as AI in copy).
 40. ☐ Job 3 — wrong-answer pattern analysis (needs stage 44).
 41. ☐ Grounding contract: prompt = official kazanım rows + student's own data ONLY; must cite kazanım uid; refuse-on-uncertainty.
 42. ☐ Cost control: per-user daily quota table checked in-function; same-input daily cache; token usage log.
 43. ☐ Prompt-injection defense: student free text wrapped as data never instructions; output schema-checked before DB.
-44. ☐ Deneme detailed mode UI: after save → "yanlışlarını işaretle" → kazanım seç per wrong → auto sarı/kırmızı → feeds plan + çilek.
-45. ☐ çilek voice/persona yazımı — Damla'nın kalemi.
+44. ☐ Deneme detailed mode UI: after save → "yanlışlarını işaretle" → kazanım seç per wrong → auto sarı/kırmızı → feeds plan + AI.
+45. ☐ AI voice/persona yazımı — Damla'nın kalemi.
 
 ### BLOK F — question engine (FAZ 3: "kesin üretelim")
 46. ☐ Corpus: MEB ders kitapları PDF'leri, kazanım-başı pasaj → `corpus(uid, source, text)`; izlenebilir.
@@ -185,7 +185,7 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 68. ☐ Parity backlog + polish: kronometre/study-time, optik form, seviye tespit, accessibility (kontrast/klavye), konular virtualization, Deneme Kulübü, events.hour drop-not-null migration, old-CSS sweep after Damla's design pass.
 
 ### DAMLA'S OPEN DECISIONS (gate stages: 6, 24, 45, 54, 60, 65)
-1. inkbee wordmark/görsel yön (6) · 2. landing metinleri + founder sözü (24) · 3. çilek'in sesi (45) · 4. sosyal mekanik tasarımı (54) · 5. sıralama verisi göster/gizle (60) · 6. para modeli (65).
+1. inkbee wordmark/görsel yön (6) · 2. landing metinleri + founder sözü (24) · 3. AI'in sesi (45) · 4. sosyal mekanik tasarımı (54) · 5. sıralama verisi göster/gizle (60) · 6. para modeli (65).
 
 ### LEARNING MAP — what Damla learns per block (application-layer depth)
 Working mode: Claude writes the code, Damla makes the architecture calls — every block Claude opens the design (schema / prompt contract / trade-off) and explains WHY first; a one-paragraph "what we learned" note goes to Damla's Obsidian roadmap at each block's end.
@@ -195,7 +195,7 @@ Working mode: Claude writes the code, Damla makes the architecture calls — eve
 | B (harden) | Auth lifecycle (JWT, refresh, revocation), password reset, KVKK deletion as engineering, offline-first sync + retry/backoff, backup discipline | "How do you handle a revoked session / lost connectivity without losing user data?" |
 | C (deploy) | Static hosting vs serverless trade-offs, DNS/HTTPS, PWA manifest, pre-launch audit | shipping checklist ownership |
 | D (mentor) | Multi-tenant authorization with RLS (live-tested 6/6), security-definer RPCs, realtime websockets, invite-code linking | "Design authorization so tenant A can never read tenant B" — with working SQL |
-| E (çilek) | The application-layer LLM stack: RAG (chunking per kazanım → retrieval → grounded prompt), structured output validation, prompt-injection defense, cost/latency engineering | "Did you build RAG / write evals / control LLM cost in production?" |
+| E (AI) | The application-layer LLM stack: RAG (chunking per kazanım → retrieval → grounded prompt), structured output validation, prompt-injection defense, cost/latency engineering | "Did you build RAG / write evals / control LLM cost in production?" |
 | F (questions) | Eval harness design: generator + blind independent verifier + human review queue; calibration sets without hosting rights problems | "How do you stop an LLM from shipping a wrong answer key?" |
 | G (social) | Server-computed aggregates, anti-cheat heuristics, verification flows, incentive design | gameability analysis of ranking metrics |
 | H (mobile) | Cross-platform (Expo) reuse of one backend, conflict-safe merge, push notification infra | multi-device state reconciliation story |

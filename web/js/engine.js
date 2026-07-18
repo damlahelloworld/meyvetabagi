@@ -1,4 +1,4 @@
-// inkbee - çilek engine (rule-based) + exam math. Grounded in the student's real data, no fabrication.
+// inkbee - AI engine (rule-based) + exam math. Grounded in the student's real data, no fabrication.
 import { S, save, dstr, todayKey, streak } from './state.js';
 import { DB, allKaz, findKaz, totals, kuid } from './data.js';
 
@@ -28,7 +28,7 @@ export const DENEME = {
   AYT: [['Türk Dili ve Edebiyatı - Sosyal 1', 40], ['Sosyal Bilimler 2', 40], ['Matematik', 40], ['Fen Bilimleri', 40]],
 };
 
-// which dersler matter for each alan (onboarding answer drives çilek)
+// which dersler matter for each alan (onboarding answer drives AI)
 const ALAN_DERS = {
   'Sayısal': ['Matematik', 'Fizik', 'Kimya', 'Biyoloji'],
   'Eşit Ağırlık': ['Matematik', 'Türk Dili ve Edebiyatı', 'Tarih', 'Coğrafya'],
@@ -179,7 +179,7 @@ export function rebalance() {
   return missed.length;
 }
 
-// ---- çilek explain-evaluation (Damla: "oha" tool, zero API) ----
+// ---- AI explain-evaluation (Damla: "oha" tool, zero API) ----
 // HONEST METHOD, heavily sourced: rule-based concept-coverage against the OFFICIAL MEB açıklama
 // of the kazanım - no LLM, no fabrication. Key concepts = content words of the MEB text;
 // coverage = does the student's text mention them (Turkish-suffix-tolerant stem match).
@@ -187,7 +187,7 @@ const STOP = new Set(('ve veya ile için gibi göre kadar sonra önce üzerinde 
 const stem = w => { const n = (w || '').toLocaleLowerCase('tr').replace(/[^a-zçğıöşü]/g, ''); return n.slice(0, Math.max(4, Math.min(6, n.length))); };
 const contentWords = t => (t || '').split(/[\s,;.:()'" -  - -]+/).map(w => w.toLocaleLowerCase('tr')).filter(w => w.length > 3 && !STOP.has(w));
 
-export function cilekEvaluate(studentText, kaz) {
+export function aiEvaluate(studentText, kaz) {
   const src = (kaz.aciklama || kaz.title || '');
   const terms = [...new Map(contentWords(src).map(w => [stem(w), w])).values()].slice(0, 18);
   const studentStems = new Set(contentWords(studentText).map(stem));
