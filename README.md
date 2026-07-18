@@ -22,4 +22,4 @@ a free study companion for the YKS (Turkish university entrance exam). the whole
 - static hosting on GitHub Pages
 
 ## where this is going
-more fruits will join the bowl. the tool stays free while the bowl grows.
+the tool stays free as it grows.

@@ -81,7 +81,7 @@ Where to touch what (for Damla): colors/fonts/radius/theme (app-wide) → `web/c
 
 ## Design
 
-- Current style law (2026-07-10, do NOT redo): white ground + ink, VIVID fruit palette, Arial only, no bold-as-decor, 3px corners, borders soft/light not ink-thick. RAINBOW gradient on: wordmark, nav links (equal size), section labels (lowercase), "damla" name, @damlahelloworld signature (fixed bottom-left). A FEW ambient gold/rose sparkles (~12). **PURPLE IS BANNED** (AI tell; the Taylor Swift "showgirl" dark-glam pass was rejected hard). Grays darkened for readability. tokens.css = the theme bridge.
+- Current style law (2026-07-10, do NOT redo): white ground + ink, VIVID palette, Arial only, no bold-as-decor, 3px corners, borders soft/light not ink-thick. RAINBOW gradient on: wordmark, nav links (equal size), section labels (lowercase), "damla" name, @damlahelloworld signature (fixed bottom-left). A FEW ambient gold/rose sparkles (~12). **PURPLE IS BANNED** (AI tell; the Taylor Swift "showgirl" dark-glam pass was rejected hard). Grays darkened for readability. tokens.css = the theme bridge.
 - Damla owns design direction and will redesign (Figma or manual CSS) — that's WHY styles are separated. Big redesigns need a concrete reference from her first. Landing still needs a distinctive pass (still generic).
 - Expected-pattern floor: home = countdown + last net + add-CTA; onboarding = target → days left → hours → level → first plan. Both exist.
 - Kept rules: zero inline styles anywhere, no colored borders, no single-side accent edges, no pills.
@@ -216,7 +216,7 @@ Working mode: Claude writes the code, Damla makes the architecture calls — eve
 
 ### Status 2026-07-10 (rebrand session)
 - inkbee rebrand shipped in app + landing + gizlilik (stages 1-3, 5; 4 = skeleton only).
-- Damla's calls: koçluk removed entirely; only human = Damla; Koç tab deleted, chat + randevu now in Profil "Damla ile birebir"; fruits will multiply.
+- Damla's calls: koçluk removed entirely; only human = Damla; Koç tab deleted, chat + randevu now in Profil "Damla ile birebir".
 - Verified: node --check clean, zero "koç"/"sıra sende" in js/ + html. localStorage key renamed to inkbee.v1 (old data dropped).
 - BLOK B hardening shipped same session (stages 8, 9, 11-15, 17). Open on Damla: redirect URL allowlist (8), migration run (9), SMTP account (10), live two-device test (7).
 
