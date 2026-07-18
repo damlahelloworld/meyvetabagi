@@ -1,6 +1,6 @@
 {
-  "name": "meyvetabagi",
-  "short_name": "meyvetabagi",
+  "name": "inkbee",
+  "short_name": "inkbee",
   "description": "YKS çalışma alanı — resmi MEB kazanımları, plan, deneme, sıralama.",
   "start_url": "app.html",
   "display": "standalone",

@@ -1,5 +1,5 @@
-// meyvetabagi - localStorage state: load/save, migrations, activity, streak, theme.
-const KEY = 'meyvetabagi.v1';
+// inkbee - localStorage state: load/save, migrations, activity, streak, theme.
+const KEY = 'inkbee.v1';
 
 export let S = load();
 function load() {

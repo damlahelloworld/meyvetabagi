@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# meyvetabagi — kitap metnini KAZANIMLARA bağla: her kazanım için en ilgili kitap pasajlarını seç.
+# inkbee — kitap metnini KAZANIMLARA bağla: her kazanım için en ilgili kitap pasajlarını seç.
 # Yöntem: kazanım başlığı+açıklamasının içerik kelimeleri ile sayfa metni arasında örtüşme skoru
 # (kural tabanlı, AI yok). Soru üretimi buradan beslenir (o adım Edge/LLM — burada üretilmez).
 # ÇIKTI: data/kitaplar/corpus.json  [{ uid, ders, kazanim, passages:[{source, page, text, score}] }]

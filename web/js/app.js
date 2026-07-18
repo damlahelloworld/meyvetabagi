@@ -1,4 +1,4 @@
-// meyvetabagi - boot + topbar shell render. Views live in views/, logic in engine.js, state in state.js.
+// inkbee - boot + topbar shell render. Views live in views/, logic in engine.js, state in state.js.
 import { S, save, applyTheme, dstr } from './state.js';
 import { loadDB, totals, findKaz } from './data.js';
 import { rebalance } from './engine.js';
@@ -62,10 +62,10 @@ function seoTitle() {
   const r = route(), p = param();
   if (r === 'konular' && p) {
     const z = findKazSeo(p);
-    if (z) return `${z.title} - ${z.ders.ders} ${z.code} - meyvetabagi`;
+    if (z) return `${z.title} - ${z.ders.ders} ${z.code} - inkbee`;
   }
   const map = { bugun: 'Bugün', konular: 'Konular - 954 MEB kazanımı', takvim: 'Takvim', profil: 'Profil', ayarlar: 'Ayarlar', kaynakca: 'Kaynakça' };
-  return `${map[r] || 'meyvetabagi'} - meyvetabagi`;
+  return `${map[r] || 'inkbee'} - inkbee`;
 }
 function findKazSeo(uid) { try { return findKaz(uid); } catch { return null; } }
 

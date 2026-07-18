@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# meyvetabagi — resmî OGM Materyal / EBA ders kitaplarından kazanım corpus'u için ham metin çekimi.
+# inkbee — resmî OGM Materyal / EBA ders kitaplarından kazanım corpus'u için ham metin çekimi.
 # Kaynak: ogmmateryal.eba.gov.tr etkileşimli kitap → basic-html metin fallback'i (sayfa sayfa).
 # ÇIKTI: data/kitaplar/<ders>_<sinif>.json  { ders, sinif, uniteler:[{ unite, pages:[{p, text}] }] }
 # Ham kitap dosyası repoya konmaz — yalnızca temizlenmiş metin. Hiçbir soru/çeldirici üretilmez (o Edge'de).

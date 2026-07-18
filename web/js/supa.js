@@ -1,4 +1,4 @@
-// meyvetabagi - Supabase layer: auth + two-way sync.
+// inkbee - Supabase layer: auth + two-way sync.
 // Inactive when config.js is empty (app stays local). Server wins on login;
 // guest data migrates to the account on signUp. Debounced push after every save().
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';

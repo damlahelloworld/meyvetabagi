@@ -1,4 +1,4 @@
-// meyvetabagi - DOM helpers, icons, date/label constants. No app state here.
+// inkbee - DOM helpers, icons, date/label constants. No app state here.
 export const $ = (s, r = document) => r.querySelector(s);
 export const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 export const esc = s => (s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));

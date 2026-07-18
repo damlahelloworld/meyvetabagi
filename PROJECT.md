@@ -1,16 +1,16 @@
-# meyvetabagi — PROJECT
+# inkbee — PROJECT
 
-Name: **meyvetabagi** (locked). Amme-hizmeti YKS tool, ücretsiz, no coaching/ranking/paywall.
-Status: **CANLI YAYINDA** https://nosey-dewdrop.github.io/meyvetabagi/ (2026-07-10). Design style law + product shape + content pipeline all shipped.
+Name: **inkbee** (locked). Amme-hizmeti YKS tool, ücretsiz, no coaching/ranking/paywall.
+Status: **CANLI YAYINDA** https://nosey-dewdrop.github.io/inkbee/ (2026-07-10). Design style law + product shape + content pipeline all shipped.
 
-Last session (2026-07-10, marathon): rebrand meyvetabagi, coaching removed, Blok B backend hardened, own public repo, 23 MEB books + 448 key terms, month-grid takvim, full-width konular, design language settled (white+vivid+Arial+rainbow+sparkle, NO purple), SEO (meta/JSON-LD/sitemap), security pass clean, DEPLOYED live to GitHub Pages, fresh landing page.
+Last session (2026-07-10, marathon): rebrand inkbee, coaching removed, Blok B backend hardened, own public repo, 23 MEB books + 448 key terms, month-grid takvim, full-width konular, design language settled (white+vivid+Arial+rainbow+sparkle, NO purple), SEO (meta/JSON-LD/sitemap), security pass clean, DEPLOYED live to GitHub Pages, fresh landing page.
 Open: live 2-device test, Search Console sitemap submit, sozel ders book terms, deeper per-kazanim SEO + question bank (parked).
 
 ---
 
 ## Brand & positioning (Damla, 2026-07-10)
 
-- Single brand **meyvetabagi** for the whole YKS universe; the earlier name "Sıra Sende" was retired 2026-07-10.
+- Single brand **inkbee** for the whole YKS universe; the earlier name "Sıra Sende" was retired 2026-07-10.
 - The word **"koç" is BANNED in product copy**. The AI that suggests and evaluates against kazanımlar is named **çilek** (the strawberry in the fruit bowl — more fruits/AIs will join later, e.g. elma). Internal DB role names ('coach') stay — only user-facing copy is affected.
 - **KOÇLUK REMOVED ENTIRELY:** no coaching system, no mentors, no invite codes — "ai ve motorumuz çok güçlü olacak, o yeter de artar". The ONLY human in the product is Damla herself: 1-1 randevu with her stays possible, messages come from her. Guidance = çilek + engine. Koç nav tab deleted; chat + randevu live in Profil under "Damla ile birebir".
 - Positioning (why this wins): market is split — ugly-cheap tools (~12 TL, Pandorina/Konu Takip) vs corporate coaching (Kopilot ~3.800 TL/ay, Tonguç 8–13k). The ~200–300 TL/ay band is EMPTY. No whimsy YKS app exists (design = genre-first differentiator). Kazanım granularity is the moat: no competitor exposes the official MEB list as the working surface. **Damla = the only human in the product** (Bilkent CS + Medipol Tıp, cracked YKS twice — her story IS the trust brand). Beat Baykuş as a product, not a coach marketplace.
@@ -102,13 +102,13 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 
 ## ROADMAP — 68 AŞAMA (ordered; ☐ open · ☑ done · ⏸ waits on Damla)
 
-### BLOK A — rebrand to meyvetabagi (decided 2026-07-10)
-1. ☑ Rename app shell: titles, brand logo ("m" + meyvetabagi), onboarding welcome; "sıra sende" retired (mocks/ kept as history; localStorage key = 'meyvetabagi.v1', old local data dropped).
+### BLOK A — rebrand to inkbee (decided 2026-07-10)
+1. ☑ Rename app shell: titles, brand logo ("m" + inkbee), onboarding welcome; "sıra sende" retired (mocks/ kept as history; localStorage key = 'inkbee.v1', old local data dropped).
 2. ☑ Koç purged from ALL user-facing copy: Koç nav tab DELETED (koc.js removed), chat + randevu moved to Profil "Damla ile birebir"; "Koç önerisi"→çilek önerisi; who-labels, hints, legend, gizlilik. (DB role 'coach' stays internal.)
 3. ☑ AI named çilek in product: suggestion box, plan copy, onboarding subs. Daily-explain feedback speaks as çilek when Edge AI lands (stage 38).
-4. ◐ Landing skeleton swapped to meyvetabagi + meta/OG; band headline placeholder "Bu sene bilerek çalış." — wording pass = Damla (with stage 24).
+4. ◐ Landing skeleton swapped to inkbee + meta/OG; band headline placeholder "Bu sene bilerek çalış." — wording pass = Damla (with stage 24).
 5. ☑ gizlilik.html brand swap + koç-link sentence removed.
-6. ⏸ Damla: final wordmark/typography direction for "meyvetabagi".
+6. ⏸ Damla: final wordmark/typography direction for "inkbee".
 
 ### BLOK B — harden the live backend (FAZ 0)
 7. ☐ Damla live-validates: sign up, mark kazanım, open second browser, same data appears; try "Şifremi unuttum" (tests SMTP). Still the first thing to do before going public.
@@ -126,9 +126,9 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 19. ☑ gizlilik.html rewritten for live backend — re-check at every new data-touching feature.
 
 ### BLOK C — repo, deploy, publish
-20. ☑ Repo live: github.com/damlahelloworld/meyvetabagi (now public, GitHub Pages). History-clean, .gitignore, only anon key in repo.
+20. ☑ Repo live: github.com/damlahelloworld/inkbee (now public, GitHub Pages). History-clean, .gitignore, only anon key in repo.
 21. ⏸ Deploy — GATED: RANK_ANCHORS still KAYNAK YOK (blocker) + stage 25 ship-check + stage 7 live test first.
-22. ☐ Custom domain (meyvetabagi.com / .app — Damla buys, wire DNS + HTTPS).
+22. ☐ Custom domain (inkbee.com / .app — Damla buys, wire DNS + HTTPS).
 23. ◐ Favicon + manifest.json + theme-color wired into all 4 pages (placeholder pink 'm' until stage 6). Open: OG image, service-worker offline shell.
 24. ☐ Landing final copy from Damla (founder quote placeholder empty); fiyat section stays absent until money model decided.
 25. ☐ Pre-publish FULL ship-check — blockers zero before the link goes public.
@@ -185,7 +185,7 @@ Client: `js/config.js` (empty = local mode) + `js/supa.js` (auth, pull-on-login 
 68. ☐ Parity backlog + polish: kronometre/study-time, optik form, seviye tespit, accessibility (kontrast/klavye), konular virtualization, Deneme Kulübü, events.hour drop-not-null migration, old-CSS sweep after Damla's design pass.
 
 ### DAMLA'S OPEN DECISIONS (gate stages: 6, 24, 45, 54, 60, 65)
-1. meyvetabagi wordmark/görsel yön (6) · 2. landing metinleri + founder sözü (24) · 3. çilek'in sesi (45) · 4. sosyal mekanik tasarımı (54) · 5. sıralama verisi göster/gizle (60) · 6. para modeli (65).
+1. inkbee wordmark/görsel yön (6) · 2. landing metinleri + founder sözü (24) · 3. çilek'in sesi (45) · 4. sosyal mekanik tasarımı (54) · 5. sıralama verisi göster/gizle (60) · 6. para modeli (65).
 
 ### LEARNING MAP — what Damla learns per block (application-layer depth)
 Working mode: Claude writes the code, Damla makes the architecture calls — every block Claude opens the design (schema / prompt contract / trade-off) and explains WHY first; a one-paragraph "what we learned" note goes to Damla's Obsidian roadmap at each block's end.
@@ -215,9 +215,9 @@ Working mode: Claude writes the code, Damla makes the architecture calls — eve
 - Verified: node --check clean ×15, no stale #mid/#detail/setMid refs.
 
 ### Status 2026-07-10 (rebrand session)
-- meyvetabagi rebrand shipped in app + landing + gizlilik (stages 1-3, 5; 4 = skeleton only).
+- inkbee rebrand shipped in app + landing + gizlilik (stages 1-3, 5; 4 = skeleton only).
 - Damla's calls: koçluk removed entirely; only human = Damla; Koç tab deleted, chat + randevu now in Profil "Damla ile birebir"; fruits will multiply.
-- Verified: node --check clean, zero "koç"/"sıra sende" in js/ + html. localStorage key renamed to meyvetabagi.v1 (old data dropped).
+- Verified: node --check clean, zero "koç"/"sıra sende" in js/ + html. localStorage key renamed to inkbee.v1 (old data dropped).
 - BLOK B hardening shipped same session (stages 8, 9, 11-15, 17). Open on Damla: redirect URL allowlist (8), migration run (9), SMTP account (10), live two-device test (7).
 
 ### Status 2026-07-09, late night — BACKEND STARTED

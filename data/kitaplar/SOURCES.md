@@ -1,4 +1,4 @@
-# meyvetabagi — ders kitabı corpus kaynakları
+# inkbee — ders kitabı corpus kaynakları
 
 Tek meşru kaynak: **OGM Materyal / EBA** (ogmmateryal.eba.gov.tr) — MEB'in resmî ortaöğretim
 ders kitapları, ders × sınıf × ünite. 2026/2027 YKS = ESKİ 2018 programı; 2028'de Maarif Modeli'ne

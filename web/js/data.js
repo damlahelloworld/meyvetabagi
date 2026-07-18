@@ -1,4 +1,4 @@
-// meyvetabagi - MEB kazanım DB (official 2026 YKS PDF parse) + lookups. Read-only master list.
+// inkbee - MEB kazanım DB (official 2026 YKS PDF parse) + lookups. Read-only master list.
 // IMPORTANT: raw MEB codes are per-ders and COLLIDE across dersler (367/955 duplicates,
 // e.g. Matematik 9.1.1.1 vs Fizik 9.1.1.1). The canonical key everywhere is the UID
 // 'slug:code' (e.g. 'mat:9.1.1.1'); bare codes are display-only.

@@ -1,4 +1,4 @@
-/* meyvetabagi — reset, typography, shell. gymgyme language: no borders, whitespace separates,
+/* inkbee — reset, typography, shell. gymgyme language: no borders, whitespace separates,
    size IS hierarchy, Arial dense. Chromatic wordmark is the one flourish. */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -66,7 +66,7 @@ svg{display:block}
 /* spacing utilities */
 .mt0{margin-top:0}.mt10{margin-top:10px}.mt12{margin-top:12px}.mt18{margin-top:18px}.mb26{margin-bottom:26px}
 
-/* ambient twinkling glyph field — meyvetabagi character (à la vibecodedflopware), behind content */
+/* ambient twinkling glyph field — inkbee character (à la vibecodedflopware), behind content */
 #glyphfield{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .app{position:relative;z-index:1}
 .glyph{position:absolute;top:-6vh;user-select:none;opacity:.55;animation:gdrift var(--fall,60s) linear infinite;animation-delay:var(--fd,0s)}

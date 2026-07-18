@@ -1,4 +1,4 @@
-// meyvetabagi - çilek engine (rule-based) + exam math. Grounded in the student's real data, no fabrication.
+// inkbee - çilek engine (rule-based) + exam math. Grounded in the student's real data, no fabrication.
 import { S, save, dstr, todayKey, streak } from './state.js';
 import { DB, allKaz, findKaz, totals, kuid } from './data.js';
 

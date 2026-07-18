@@ -24,7 +24,7 @@ export function onboard() {
   function draw() {
     if (step === 0) {
       box.className = 'onbox welcome';
-      box.innerHTML = `<div class="biglogo">m</div><h1>meyvetabagi</h1>
+      box.innerHTML = `<div class="biglogo">m</div><h1>inkbee</h1>
         <p class="tag">Sabah kalkınca ne çalışacağını bilen yer. Resmi MEB kazanımları, tek yerde.</p>
         <button class="btn" id="signup">Ücretsiz üye ol</button>
         <button class="linkbtn" id="login">Zaten hesabım var</button>`;

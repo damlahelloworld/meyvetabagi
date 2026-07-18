@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# meyvetabagi — MEB kitabından ANAHTAR TERİM + TANIM çıkar (uydurma yok, hepsi kitap metninden).
+# inkbee — MEB kitabından ANAHTAR TERİM + TANIM çıkar (uydurma yok, hepsi kitap metninden).
 # Kalıplar: "<TERİM>: açıklama" ve "... <TERİM> denir/adı verilir".
 # Terimler ÜNİTE bazında kazanımlara bağlanır (ünite = konu kapsamı).
 # ÇIKTI: web/data/terimler.json  { uid: [ {terim, tanim, source} ] }

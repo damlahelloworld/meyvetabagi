@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# meyvetabagi dev server — no-store cache headers so Safari NEVER shows stale CSS/JS modules.
+# inkbee dev server — no-store cache headers so Safari NEVER shows stale CSS/JS modules.
 import http.server, os
 
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
